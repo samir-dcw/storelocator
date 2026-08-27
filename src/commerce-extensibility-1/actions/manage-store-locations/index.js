@@ -13,6 +13,21 @@ function parseInput(params) {
   return params.body || params.query || params.data || {};
 }
 
+function normalizeStoreInput(input) {
+  return {
+    id: String(input.id),
+    name: String(input.name),
+    source_code: input.source_code || input.sourceCode || String(input.id),
+    latitude: input.latitude ?? input.lat ?? null,
+    longitude: input.longitude ?? input.lng ?? null,
+    address: input.address || '',
+    hours: input.hours || '',
+    phone: input.phone || '',
+    amenities: Array.isArray(input.amenities) ? input.amenities : [],
+    enabled: input.enabled !== false,
+  };
+}
+
 export async function main(params) {
   const logger = createLogger({ action: 'manage-store-locations', requestId: params.requestId });
   try {
@@ -29,18 +44,7 @@ export async function main(params) {
       if (!input.id || !input.name) {
         return json(400, { error: 'id and name are required' });
       }
-      const saved = await repo.upsert({
-        id: String(input.id),
-        name: String(input.name),
-        source_code: input.source_code || input.sourceCode || String(input.id),
-        latitude: input.latitude ?? input.lat ?? null,
-        longitude: input.longitude ?? input.lng ?? null,
-        address: input.address || '',
-        hours: input.hours || '',
-        phone: input.phone || '',
-        amenities: Array.isArray(input.amenities) ? input.amenities : [],
-        enabled: input.enabled !== false,
-      });
+      const saved = await repo.upsert(normalizeStoreInput(input));
       return json(200, { saved });
     }
 
