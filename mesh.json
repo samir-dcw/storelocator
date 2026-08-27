@@ -1,0 +1,21 @@
+{
+  "$schema": "https://developer.adobe.com/graphql-mesh-gateway/schemas/v1.0.0/mesh.schema.json",
+  "sources": [
+    {
+      "name": "commerce",
+      "handler": {
+        "graphql": {
+          "endpoint": "${COMMERCE_GRAPHQL_ENDPOINT}"
+        }
+      }
+    },
+    {
+      "name": "magazine",
+      "handler": {
+        "graphql": {
+          "endpoint": "${MAGAZINE_GRAPHQL_ENDPOINT}"
+        }
+      }
+    }
+  ]
+}

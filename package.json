@@ -1,5 +1,5 @@
 {
-  "name": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
+  "name": "digital-magazine-editorial-hub",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -8,7 +8,7 @@
     "@adobe/aio-commerce-sdk": "^1.4.2",
     "@ljharb/tsconfig": "^0.2.3"
   },
-  "description": "Commerce App Builder application",
+  "description": "Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.",
   "scripts": {
     "postinstall": "npx aio-commerce-lib-app hooks postinstall"
   }
