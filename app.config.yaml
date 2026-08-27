@@ -1,7 +1,13 @@
 extensions:
   commerce/extensibility/1:
     $include: src/commerce-extensibility-1/ext.config.yaml
-
-  # This extension is required for business configuration. Do not remove.
-  commerce/configuration/1:
-    $include: src/commerce-configuration-1/ext.config.yaml
+  commerce/backend-ui/2:
+    operations:
+      adminBlogGrid:
+        - type: web
+          path: /admin/blog-grid
+    menu:
+      label: Magazine Hub
+      parent: Content
+    acl:
+      resource: magazine-editorial-hub/admin

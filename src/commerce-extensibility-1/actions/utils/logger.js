@@ -1,28 +1,13 @@
-export function createLogger(context = {}) {
-  const base = {
-    requestId: context.requestId || context.id || undefined,
-    action: context.action || undefined,
-  };
-
-  const format = (level, message, details = {}) => {
-    const payload = {
-      level,
-      message,
-      ...base,
-      ...details,
-    };
-    return JSON.stringify(payload);
-  };
-
+export function createLogger(name) {
   return {
-    info(message, details) {
-      console.log(format('info', message, details));
+    info(message, context = {}) {
+      console.log(JSON.stringify({ level: 'info', name, message, ...context }));
     },
-    warn(message, details) {
-      console.warn(format('warn', message, details));
+    warn(message, context = {}) {
+      console.warn(JSON.stringify({ level: 'warn', name, message, ...context }));
     },
-    error(message, details) {
-      console.error(format('error', message, details));
+    error(message, context = {}) {
+      console.error(JSON.stringify({ level: 'error', name, message, ...context }));
     },
   };
 }

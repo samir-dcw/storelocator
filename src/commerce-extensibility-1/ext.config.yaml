@@ -2,11 +2,27 @@
 hooks:
   pre-app-build: EXTENSION=extensibility/1 npx aio-commerce-lib-app hooks pre-app-build
 
+events:
+  registrations:
+    Magazine product refresh consumer:
+      description: Refresh magazine shoppable product cache on Commerce product save events
+      events_of_interest:
+        - provider_metadata: dx_commerce_events
+          event_codes:
+            - com.adobe.commerce.magazine_editorial_hub.observer.catalog_product_save_commit_after
+      runtime_action: magazine/sync-shoppable-product
+
 operations:
   # These worker processes definitions are auto-generated. Do not remove or manually edit.
   workerProcess:
     - type: action
       impl: app-management/app-config
+    - type: action
+      impl: magazine/get-magazine-articles
+    - type: action
+      impl: magazine/sync-master-data
+    - type: action
+      impl: magazine/sync-shoppable-product
 
 runtimeManifest:
   packages:
@@ -23,47 +39,34 @@ runtimeManifest:
           annotations:
             require-adobe-auth: true
             final: true
-    store-locator-actions:
+
+    magazine:
       license: Apache-2.0
       actions:
-        get-stores:
-          function: actions/get-stores/index.js
+        get-magazine-articles:
+          function: actions/get-magazine-articles/index.js
           web: yes
           runtime: nodejs:22
           inputs:
             LOG_LEVEL: $LOG_LEVEL
             IO_STATE_KEY: $IO_STATE_KEY
-            MAPS_API_KEY: $MAPS_API_KEY
-            enable_store_locator: $enable_store_locator
+            MESH_ENDPOINT: $MESH_ENDPOINT
           annotations:
             require-adobe-auth: false
             final: true
-        check-stock:
-          function: actions/check-stock/index.js
-          web: yes
+        sync-master-data:
+          function: actions/sync-master-data/index.js
+          web: no
           runtime: nodejs:22
           inputs:
             LOG_LEVEL: $LOG_LEVEL
-            COMMERCE_GRAPHQL_ENDPOINT: $COMMERCE_GRAPHQL_ENDPOINT
             IO_STATE_KEY: $IO_STATE_KEY
-            enable_store_locator: $enable_store_locator
-          annotations:
-            require-adobe-auth: false
-            final: true
-        sync-store-locations:
-          function: actions/sync-store-locations/index.js
-          web: yes
-          runtime: nodejs:22
-          inputs:
-            LOG_LEVEL: $LOG_LEVEL
-            PIM_API_ENDPOINT: $PIM_API_ENDPOINT
-            PIM_API_KEY: $PIM_API_KEY
-            IO_STATE_KEY: $IO_STATE_KEY
+            MESH_ENDPOINT: $MESH_ENDPOINT
           annotations:
             require-adobe-auth: true
             final: true
-        invalidate-stock-cache:
-          function: actions/invalidate-stock-cache/index.js
+        sync-shoppable-product:
+          function: actions/sync-shoppable-product/index.js
           web: no
           runtime: nodejs:22
           inputs:
@@ -72,32 +75,25 @@ runtimeManifest:
           annotations:
             require-adobe-auth: true
             final: true
-        manage-store-locations:
-          function: actions/manage-store-locations/index.js
+        admin-list-articles:
+          function: actions/admin-list-articles/index.js
           web: yes
           runtime: nodejs:22
           inputs:
             LOG_LEVEL: $LOG_LEVEL
             IO_STATE_KEY: $IO_STATE_KEY
+            MESH_ENDPOINT: $MESH_ENDPOINT
           annotations:
             require-adobe-auth: true
             final: true
-        list-enabled-stores:
-          function: actions/list-enabled-stores/index.js
+        admin-save-article:
+          function: actions/admin-save-article/index.js
           web: yes
           runtime: nodejs:22
           inputs:
             LOG_LEVEL: $LOG_LEVEL
             IO_STATE_KEY: $IO_STATE_KEY
+            MESH_ENDPOINT: $MESH_ENDPOINT
           annotations:
-            require-adobe-auth: false
+            require-adobe-auth: true
             final: true
-  events:
-    registrations:
-      stock-cache-invalidator:
-        description: Invalidate stock cache when Commerce stock changes
-        events_of_interest:
-          - provider_metadata: dx_commerce_events
-            event_codes:
-              - observer.cataloginventory_stock_item_save_commit_after
-        runtime_action: store-locator-actions/invalidate-stock-cache
