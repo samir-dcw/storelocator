@@ -34,6 +34,7 @@ runtimeManifest:
             LOG_LEVEL: $LOG_LEVEL
             IO_STATE_KEY: $IO_STATE_KEY
             MAPS_API_KEY: $MAPS_API_KEY
+            enable_store_locator: $enable_store_locator
           annotations:
             require-adobe-auth: false
             final: true
@@ -45,6 +46,7 @@ runtimeManifest:
             LOG_LEVEL: $LOG_LEVEL
             COMMERCE_GRAPHQL_ENDPOINT: $COMMERCE_GRAPHQL_ENDPOINT
             IO_STATE_KEY: $IO_STATE_KEY
+            enable_store_locator: $enable_store_locator
           annotations:
             require-adobe-auth: false
             final: true
@@ -69,6 +71,26 @@ runtimeManifest:
             IO_STATE_KEY: $IO_STATE_KEY
           annotations:
             require-adobe-auth: true
+            final: true
+        manage-store-locations:
+          function: actions/manage-store-locations/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+        list-enabled-stores:
+          function: actions/list-enabled-stores/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: false
             final: true
   events:
     registrations:
