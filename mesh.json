@@ -1,0 +1,105 @@
+{
+  "sources": [
+    {
+      "name": "magazineCms",
+      "handler": {
+        "graphql": {
+          "endpoint": "$MAGAZINE_CMS_ENDPOINT"
+        }
+      }
+    },
+    {
+      "name": "commerce",
+      "handler": {
+        "graphql": {
+          "endpoint": "$COMMERCE_GRAPHQL_ENDPOINT"
+        }
+      }
+    }
+  ],
+  "documents": {
+    "Query": {
+      "magazineHub": {
+        "selectionSet": "{ magazineIssues { items { id title categories articles { id title sku enabled body heroImage { url alt } } } } }",
+        "type": "magazineHub"
+      },
+      "productBySku": {
+        "selectionSet": "{ products(filter: { sku: { eq: $sku } }) { items { sku name price url_key stock_status image { url label } } } }",
+        "type": "commerceProductLookup"
+      }
+    },
+    "magazineHub": {
+      "source": "magazineCms",
+      "fields": {
+        "magazineIssues": {
+          "type": "MagazineIssueConnection"
+        }
+      }
+    },
+    "MagazineIssueConnection": {
+      "source": "magazineCms",
+      "fields": {
+        "items": {
+          "type": "[MagazineIssue]"
+        }
+      }
+    },
+    "MagazineIssue": {
+      "source": "magazineCms",
+      "fields": {
+        "id": { "type": "ID" },
+        "title": { "type": "String" },
+        "categories": { "type": "[String]" },
+        "articles": { "type": "[MagazineArticle]" }
+      }
+    },
+    "MagazineArticle": {
+      "source": "magazineCms",
+      "fields": {
+        "id": { "type": "ID" },
+        "title": { "type": "String" },
+        "sku": { "type": "String" },
+        "enabled": { "type": "Boolean" },
+        "body": { "type": "String" },
+        "heroImage": { "type": "MagazineImage" }
+      }
+    },
+    "MagazineImage": {
+      "source": "magazineCms",
+      "fields": {
+        "url": { "type": "String" },
+        "alt": { "type": "String" }
+      }
+    },
+    "commerceProductLookup": {
+      "source": "commerce",
+      "fields": {
+        "products": { "type": "ProductConnection" }
+      }
+    },
+    "ProductConnection": {
+      "source": "commerce",
+      "fields": {
+        "items": { "type": "[Product]" }
+      }
+    },
+    "Product": {
+      "source": "commerce",
+      "fields": {
+        "sku": { "type": "String" },
+        "name": { "type": "String" },
+        "price": { "type": "Float" },
+        "url_key": { "type": "String" },
+        "stock_status": { "type": "String" },
+        "image": { "type": "ProductImage" }
+      }
+    },
+    "ProductImage": {
+      "source": "commerce",
+      "fields": {
+        "url": { "type": "String" },
+        "label": { "type": "String" }
+      }
+    }
+  }
+}
