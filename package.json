@@ -1,15 +1,14 @@
 {
-  "name": "magazine-editorial-hub",
+  "name": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@adobe/aio-commerce-lib-app": "^1.6.0",
-    "@adobe/aio-commerce-lib-config": "^1.5.0",
+    "@adobe/aio-commerce-lib-config": "^1.6.1",
     "@adobe/aio-commerce-sdk": "^1.4.2",
-    "@adobe/aio-lib-state": "^3.0.0",
     "@ljharb/tsconfig": "^0.2.3"
   },
-  "description": "Magazine only ACCS Page Builder hub that aggregates editions, categories, and shoppable articles with Commerce product enrichment.",
+  "description": "Commerce App Builder application",
   "scripts": {
     "postinstall": "npx aio-commerce-lib-app hooks postinstall"
   }
