@@ -13,7 +13,7 @@
       "name": "magazine",
       "handler": {
         "graphql": {
-          "endpoint": "${MAGAZINE_GRAPHQL_ENDPOINT}"
+          "endpoint": "${MAGAZINE_CMS_ENDPOINT}"
         }
       }
     }

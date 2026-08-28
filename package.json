@@ -11,5 +11,8 @@
   "description": "Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.",
   "scripts": {
     "postinstall": "npx aio-commerce-lib-app hooks postinstall"
+  },
+  "imports": {
+    "#app.commerce.config": "./src/commerce-extensibility-1/.generated/app.commerce.config.js"
   }
 }
