@@ -18,7 +18,7 @@ export default defineConfig({
       },
       {
         name: 'MAPS_API_KEY',
-        type: 'password',
+        type: 'text',
         label: 'Maps API Key',
         description: 'Google Maps / geocoding API key used by the locator UI.',
         default: '',
@@ -32,7 +32,7 @@ export default defineConfig({
       },
       {
         name: 'PIM_API_KEY',
-        type: 'password',
+        type: 'text',
         label: 'PIM API Key',
         description: 'Secret used by the admin sync worker to authenticate to the PIM.',
         default: '',

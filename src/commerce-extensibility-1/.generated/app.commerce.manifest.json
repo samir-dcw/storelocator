@@ -13,7 +13,7 @@
         "description": "Google Maps / geocoding API key used by the locator UI.",
         "label": "Maps API Key",
         "name": "MAPS_API_KEY",
-        "type": "password"
+        "type": "text"
       },
       {
         "default": "",
@@ -27,7 +27,7 @@
         "description": "Secret used by the admin sync worker to authenticate to the PIM.",
         "label": "PIM API Key",
         "name": "PIM_API_KEY",
-        "type": "password"
+        "type": "text"
       },
       {
         "default": "",
