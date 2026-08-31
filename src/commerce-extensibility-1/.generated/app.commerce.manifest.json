@@ -1,4 +1,21 @@
 {
+  "adminUiSdk": {
+    "registration": {
+      "menuItems": [
+        {
+          "id": "store_locator::apps",
+          "isSection": true,
+          "title": "Store Locator"
+        },
+        {
+          "id": "store_locator::store_locator",
+          "parent": "store_locator::apps",
+          "sortOrder": 1,
+          "title": "Store Locator"
+        }
+      ]
+    }
+  },
   "businessConfig": {
     "schema": [
       {
@@ -21,13 +38,40 @@
         "label": "IO State Key",
         "name": "IO_STATE_KEY",
         "type": "text"
+      },
+      {
+        "default": true,
+        "description": "Turn the store locator UI and availability calls on or off.",
+        "label": "Enable Store Locator",
+        "name": "enable_store_locator",
+        "type": "boolean"
+      },
+      {
+        "default": "",
+        "description": "Google Maps / geocoding API key used by the locator UI.",
+        "label": "Maps API Key",
+        "name": "MAPS_API_KEY",
+        "type": "text"
+      },
+      {
+        "default": "",
+        "description": "Secret used by the admin sync worker to authenticate to the PIM.",
+        "label": "PIM API Key",
+        "name": "PIM_API_KEY",
+        "type": "password"
+      },
+      {
+        "default": "",
+        "description": "Source endpoint used by the store-location sync worker.",
+        "label": "PIM API Endpoint",
+        "name": "PIM_API_ENDPOINT",
+        "type": "url"
       }
     ]
   },
-  "eventing": {},
   "metadata": {
-    "description": "Commerce App Builder application",
-    "displayName": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
+    "description": "Store locator application for Adobe Commerce",
+    "displayName": "Store Locator",
     "id": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
     "version": "1.0.0"
   }

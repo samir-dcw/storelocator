@@ -7,6 +7,8 @@ operations:
   workerProcess:
     - type: action
       impl: app-management/app-config
+    - type: action
+      impl: app-management/installation
 
 runtimeManifest:
   packages:
@@ -23,6 +25,24 @@ runtimeManifest:
           annotations:
             require-adobe-auth: true
             final: true
+        installation:
+          function: .generated/actions/app-management/installation.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            AIO_COMMERCE_AUTH_IMS_CLIENT_ID: $AIO_COMMERCE_AUTH_IMS_CLIENT_ID
+            AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS: $AIO_COMMERCE_AUTH_IMS_CLIENT_SECRETS
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_ID
+            AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL: $AIO_COMMERCE_AUTH_IMS_TECHNICAL_ACCOUNT_EMAIL
+            AIO_COMMERCE_AUTH_IMS_ORG_ID: $AIO_COMMERCE_AUTH_IMS_ORG_ID
+            AIO_COMMERCE_AUTH_IMS_SCOPES: $AIO_COMMERCE_AUTH_IMS_SCOPES
+            AIO_COMMERCE_CONFIG_ENCRYPTION_KEY: $AIO_COMMERCE_CONFIG_ENCRYPTION_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+          limits:
+            timeout: 600000
     store-locator-actions:
       license: Apache-2.0
       actions:

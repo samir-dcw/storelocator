@@ -1,0 +1,26 @@
+web: web-src
+
+# The [pre-app-build] hooks are auto-generated. Do not remove or manually edit.
+hooks:
+  pre-app-build: EXTENSION=backend-ui/1 npx aio-commerce-lib-app hooks pre-app-build
+
+operations:
+  view:
+    - type: web
+      impl: index.html
+
+runtimeManifest:
+  packages:
+    # This package definition is auto-generated. Do not remove or manually edit.
+    admin-ui-sdk:
+      license: Apache-2.0
+      actions:
+        registration:
+          function: .generated/actions/registration/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+          annotations:
+            require-adobe-auth: true
+            final: true

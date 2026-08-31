@@ -4,3 +4,6 @@ extensions:
 
   # This extension is required for business configuration. Do not remove.
   - extensionPointId: commerce/configuration/1
+
+  # This extension is required for Admin UI SDK. Do not remove.
+  - extensionPointId: commerce/backend-ui/1

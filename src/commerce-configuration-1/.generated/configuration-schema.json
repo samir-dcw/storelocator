@@ -19,5 +19,33 @@
     "label": "IO State Key",
     "name": "IO_STATE_KEY",
     "type": "text"
+  },
+  {
+    "default": true,
+    "description": "Turn the store locator UI and availability calls on or off.",
+    "label": "Enable Store Locator",
+    "name": "enable_store_locator",
+    "type": "boolean"
+  },
+  {
+    "default": "",
+    "description": "Google Maps / geocoding API key used by the locator UI.",
+    "label": "Maps API Key",
+    "name": "MAPS_API_KEY",
+    "type": "text"
+  },
+  {
+    "default": "",
+    "description": "Secret used by the admin sync worker to authenticate to the PIM.",
+    "label": "PIM API Key",
+    "name": "PIM_API_KEY",
+    "type": "password"
+  },
+  {
+    "default": "",
+    "description": "Source endpoint used by the store-location sync worker.",
+    "label": "PIM API Endpoint",
+    "name": "PIM_API_ENDPOINT",
+    "type": "url"
   }
 ]
