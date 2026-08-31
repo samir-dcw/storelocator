@@ -870,7 +870,7 @@ const saveFile = (file, obj, format) => {
 }
 
 module.exports = {
-  ...void (mkdirp),
+  mkdirp,
   getValue,
   setValue,
   merge,
@@ -1055,8 +1055,8 @@ const AioCoreSDKError = __webpack_require__(18407)
 const AioCoreSDKErrorWrapper = __webpack_require__(68560)
 
 module.exports = {
-  ...void (AioCoreSDKError),
-  y: AioCoreSDKErrorWrapper
+  AioCoreSDKError,
+  AioCoreSDKErrorWrapper
 }
 
 
@@ -2562,7 +2562,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
 
 const codes = {}
 const messages = new Map()
@@ -2597,7 +2597,7 @@ const E = ErrorWrapper(
 
 module.exports = {
   codes,
-  ...void (messages)
+  messages
 }
 
 // Define your error codes with the wrapper
@@ -2627,10 +2627,10 @@ const { createFetch, getProxyOptionsFromConfig, parseRetryAfterHeader } = __webp
 
 module.exports = {
   HttpExponentialBackoff,
-  ...void (ProxyFetch),
-  ...void (createFetch),
-  ...void (getProxyOptionsFromConfig),
-  ...void (parseRetryAfterHeader)
+  ProxyFetch,
+  createFetch,
+  getProxyOptionsFromConfig,
+  parseRetryAfterHeader
 }
 
 
@@ -3241,7 +3241,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-core-tvm', { provider: 'debug' })
 
 // TODO find a better way to jsdoc error types
@@ -3287,7 +3287,7 @@ function logAndThrow (e) {
 
 module.exports = {
   codes,
-  ...void (messages),
+  messages,
   logAndThrow
 }
 
@@ -3367,9 +3367,9 @@ function setCliEnv (envValue) {
 
 module.exports = {
   getCliEnv,
-  ...void (setCliEnv),
-  ...void (SUPPORTED_ENVS),
-  ...void (DEFAULT_ENV),
+  setCliEnv,
+  SUPPORTED_ENVS,
+  DEFAULT_ENV,
   PROD_ENV,
   STAGE_ENV
 }
@@ -3401,7 +3401,7 @@ const logger = __webpack_require__(65586)('@adobe/aio-lib-files', { provider: 'd
 
 const { codes, logAndThrow } = __webpack_require__(59303)
 
-0 // for VS Code autocomplete
+__webpack_require__(13990) // for VS Code autocomplete
 /* global RemotePathString, RemoteFileProperties */ // for linter
 
 // eslint-disable-next-line jsdoc/require-jsdoc
@@ -4276,7 +4276,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-files', { provider: 'debug' })
 
 const codes = {}
@@ -4318,7 +4318,7 @@ E('ERROR_INIT_FAILURE', '%s')
 
 module.exports = {
   codes,
-  ...void (messages),
+  messages,
   logAndThrow
 }
 
@@ -4356,7 +4356,7 @@ const utils = __webpack_require__(30423)
 const { Files, FilePermissions, UrlType } = __webpack_require__(6721)
 const { codes, logAndThrow } = __webpack_require__(59303)
 
-0 // for VS Code autocomplete
+__webpack_require__(13990) // for VS Code autocomplete
 
 const STREAM_BUFFER_SIZE = 4 * 1024 * 1024 // 4 MB
 const STREAM_MAX_CONCURRENCY = 10
@@ -5028,7 +5028,7 @@ const utils = __webpack_require__(30423)
 const { AzureBlobFiles } = __webpack_require__(8654)
 const { Files, FilePermissions, UrlType } = __webpack_require__(6721)
 
-0 // for VS Code autocomplete
+__webpack_require__(13990) // for VS Code autocomplete
 /* global OpenWhiskCredentials, AzureCredentialsAccount, AzureCredentialsSAS */ // for linter
 
 /**
@@ -5084,7 +5084,106 @@ async function init (config = {}) {
   }
 }
 
-module.exports = { Ts: init, ...void (FilePermissions), ...void (UrlType) }
+module.exports = { init, FilePermissions, UrlType }
+
+
+/***/ },
+
+/***/ 13990
+() {
+
+/*
+Copyright 2019 Adobe. All rights reserved.
+This file is licensed to you under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License. You may obtain a copy
+of the License at http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under
+the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+OF ANY KIND, either express or implied. See the License for the specific language
+governing permissions and limitations under the License.
+*/
+
+/* istanbul ignore file */
+
+/**
+ * An object holding the OpenWhisk credentials
+ *
+ * @typedef OpenWhiskCredentials
+ * @type {object}
+ * @property {string} namespace user namespace
+ * @property {string} auth auth key
+ */
+
+/**
+ * SAS Azure credentials. The sdk needs two SAS credentials to allow access to
+ * two already existing containers, a private and a public one (with access=`blob`).
+ *
+ * @typedef AzureCredentialsSAS
+ * @type {object}
+ * @property {string} sasURLPrivate sas url to existing private azure blob
+ * container
+ * @property {string} sasURLPublic sas url to existing public (with
+ * access=`blob`) azure blob container
+ */
+
+/**
+ * Azure account credentials. Must have the permission to create containers.
+ *
+ * @typedef AzureCredentialsAccount
+ * @type {object}
+ * @property {string} storageAccount name of azure storage account
+ * @property {string} storageAccessKey access key for azure storage account
+ * @property {string} containerName name of container to store files.
+ * Another `${containerName}-public` will also be used for public files.
+ * @property {string} [hostName] custom domain for returned URLs
+ */
+/**
+ * @typedef RemotePathString
+ * @type {string}
+ * @description a string to the remote path. If the path ends with a `/` it will
+ * be treated as a directory, if not it will be treated as a file.
+ */
+
+/**
+ * @typedef RemoteFileProperties
+ * @description File properties
+ * @type {object}
+ * @property {string} name - unique name of this file, it is the full path
+ * @property {string} creationTime - utc datetime string when file was created
+ * @property {string} lastModified - utc datetime string when file last modified
+ * @property {string} etag - unique ( per modification ) etag for the asset
+ * @property {number} contentLength - size, in bytes
+ * @property {string} contentType - mime/type
+ * @property {boolean} isDirectory true if file is a directory
+ * @property {boolean} isPublic true if file is public
+ * @property {string} url remote file URL with URI encoded path, use decodeURIComponent to decode the URL.
+ * @property {string} internalUrl remote file URL which allows file access only from Adobe I/O Runtime actions.
+ */
+
+/**
+ * @typedef FilesLibError
+ * @type {Error}
+ */
+
+/**
+ * Files lib custom errors.
+ *
+ * `e.sdkDetails` provides additional context for each error (e.g. function parameter)
+ *
+ * @typedef FilesLibErrors
+ * @type {object}
+ * @property {FilesLibError} ERROR_BAD_ARGUMENT this error is thrown when an argument is missing or has invalid type
+ * @property {FilesLibError} ERROR_NOT_IMPLEMENTED this error is thrown when a method is not implemented or when calling
+ * methods directly on the abstract class (Files).
+ * @property {FilesLibError} ERROR_BAD_CREDENTIALS this error is thrown when the supplied init credentials are invalid.
+ * @property {FilesLibError} ERROR_INTERNAL this error is thrown when an unknown error is thrown by the underlying
+ * provider or TVM server for credential exchange. More details can be found in `e.sdkDetails._internal`.
+ * @property {FilesLibError} ERROR_FILE_NOT_EXISTS this error is thrown when the filePath does not exists for operations
+ * that need the file to exists (e.g. read)
+ * @property {FilesLibError} ERROR_BAD_FILE_TYPE this error is thrown when the filePath is not the expected type for
+ * operations that need the file to be of a specific type, e.g. write on a dir would fail
+ */
 
 
 /***/ },
@@ -5801,7 +5900,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-state', { provider: 'debug' })
 
 /**
@@ -5861,7 +5960,7 @@ function logAndThrow (e) {
 
 module.exports = {
   codes,
-  ...void (messages),
+  messages,
   logAndThrow
 }
 
@@ -5931,18 +6030,18 @@ module.exports = {
   ALLOWED_STAGE_REGION,
   ENDPOINTS,
   CUSTOM_ENDPOINT,
-  ...void (MAX_KEY_SIZE),
+  MAX_KEY_SIZE,
   MAX_TTL_SECONDS,
-  ...void (REGEX_PATTERN_STORE_NAMESPACE),
+  REGEX_PATTERN_STORE_NAMESPACE,
   REGEX_PATTERN_STORE_KEY,
   HEADER_KEY_EXPIRES,
   REGEX_PATTERN_MATCH_KEY,
   REQUEST_ID_HEADER,
   // for testing only
-  ...void (ENDPOINT_PROD),
-  ...void (ENDPOINT_PROD_INTERNAL),
-  ...void (ENDPOINT_STAGE),
-  ...void (ENDPOINT_STAGE_INTERNAL)
+  ENDPOINT_PROD,
+  ENDPOINT_PROD_INTERNAL,
+  ENDPOINT_STAGE,
+  ENDPOINT_STAGE_INTERNAL
 }
 
 
@@ -6196,7 +6295,7 @@ var ansiStyles = colors.styles = __webpack_require__(68692);
 var defineProps = Object.defineProperties;
 var newLineRegex = new RegExp(/[\r\n]+/g);
 
-colors.supportsColor = (__webpack_require__(17419)/* .supportsColor */ .WI);
+colors.supportsColor = (__webpack_require__(17419).supportsColor);
 
 if (typeof colors.enabled === 'undefined') {
   colors.enabled = colors.supportsColor() !== false;
@@ -6903,9 +7002,9 @@ function getSupportLevel(stream) {
 }
 
 module.exports = {
-  WI: getSupportLevel,
-  ...void (getSupportLevel(process.stdout)),
-  ...void (getSupportLevel(process.stderr)),
+  supportsColor: getSupportLevel,
+  stdout: getSupportLevel(process.stdout),
+  stderr: getSupportLevel(process.stderr),
 };
 
 
@@ -19667,7 +19766,7 @@ module.exports = function name(fn) {
 const fs = __webpack_require__(63735)
 const path = __webpack_require__(16928)
 const mkdirsSync = (__webpack_require__(63798).mkdirsSync)
-const utimesMillisSync = (__webpack_require__(47211)/* .utimesMillisSync */ .n)
+const utimesMillisSync = (__webpack_require__(47211).utimesMillisSync)
 const stat = __webpack_require__(66462)
 
 function copySync (src, dest, opts) {
@@ -21377,7 +21476,7 @@ function utimesMillisSync (path, atime, mtime) {
 
 module.exports = {
   utimesMillis: u(utimesMillis),
-  n: utimesMillisSync
+  utimesMillisSync
 }
 
 
@@ -23875,15 +23974,15 @@ module.exports={
   parse: parse,
   stringify: stringify,
 
-  ...(/* unused pure expression */ null && (function() { return common.EOL; })),
-  ...(/* unused pure expression */ null && (function(eol) {
+  endOfLine: function() { return common.EOL; },
+  setEndOfLine: function(eol) {
     if (eol === '\n' || eol === '\r\n') common.EOL = eol;
-  })),
+  },
 
-  ...(/* unused pure expression */ null && (version)),
+  version: version,
 
   // round trip shortcut
-  ...(/* unused pure expression */ null && ({
+  rt: {
     parse: function(text, options) {
       (options=options||{}).keepWsc=true;
       return parse(text, options);
@@ -23892,11 +23991,11 @@ module.exports={
       (options=options||{}).keepWsc=true;
       return stringify(value, options);
     },
-  })),
+  },
 
-  ...(/* unused pure expression */ null && (comments)),
+  comments: comments,
 
-  ...void (dsf.std),
+  dsf: dsf.std,
 
 };
 
@@ -43911,7 +44010,7 @@ FetchError.prototype.name = 'FetchError';
 
 let convert;
 try {
-	convert = Object(function webpackMissingModule() { const e = new Error("Cannot find module 'encoding'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+	convert = Object(function webpackMissingModule() { var e = new Error("Cannot find module 'encoding'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 } catch (e) {}
 
 const INTERNALS = Symbol('Body internals');
@@ -53301,6 +53400,7 @@ function configure (options) {
 /***/ 5031
 (__unused_webpack_module, exports) {
 
+var __webpack_unused_export__;
 exports.get = function(belowFn) {
   var oldLimit = Error.stackTraceLimit;
   Error.stackTraceLimit = Infinity;
@@ -53434,7 +53534,7 @@ boolProperties.forEach(function (property) {
   }
 });
 
-exports._createParsedCallSite = function(properties) {
+__webpack_unused_export__ = function(properties) {
   return new CallSite(properties);
 };
 
@@ -53954,19 +54054,25 @@ exports.colors = {
  * Export config set for the CLI.
  * @type {Object}
  */
-Object.defineProperty(exports, "cli", { value: (__webpack_require__(22204)) });
+Object.defineProperty(exports, "cli", ({
+  value: __webpack_require__(22204)
+}));
 
 /**
  * Export config set for npm.
  * @type {Object}
  */
-Object.defineProperty(exports, "npm", { value: (__webpack_require__(17767)) });
+Object.defineProperty(exports, "npm", ({
+  value: __webpack_require__(17767)
+}));
 
 /**
  * Export config set for the syslog.
  * @type {Object}
  */
-Object.defineProperty(exports, "syslog", { value: (__webpack_require__(90589)) });
+Object.defineProperty(exports, "syslog", ({
+  value: __webpack_require__(90589)
+}));
 
 
 /***/ },
@@ -54108,7 +54214,9 @@ Object.defineProperty(exports, "SPLAT", ({
  *
  * @type {Object}
  */
-Object.defineProperty(exports, "configs", { value: (__webpack_require__(35146)) });
+Object.defineProperty(exports, "configs", ({
+  value: __webpack_require__(35146)
+}));
 
 
 /***/ },
@@ -57996,25 +58104,49 @@ module.exports = class Http extends TransportStream {
  * TODO: add property description.
  * @type {Console}
  */
-Object.defineProperty(exports, "Console", { enumerable: true, get: () => (__webpack_require__(77522)) });
+Object.defineProperty(exports, "Console", ({
+  configurable: true,
+  enumerable: true,
+  get() {
+    return __webpack_require__(77522);
+  }
+}));
 
 /**
  * TODO: add property description.
  * @type {File}
  */
-Object.defineProperty(exports, "File", { enumerable: true, get: () => (__webpack_require__(94873)) });
+Object.defineProperty(exports, "File", ({
+  configurable: true,
+  enumerable: true,
+  get() {
+    return __webpack_require__(94873);
+  }
+}));
 
 /**
  * TODO: add property description.
  * @type {Http}
  */
-Object.defineProperty(exports, "Http", { enumerable: true, get: () => (__webpack_require__(45071)) });
+Object.defineProperty(exports, "Http", ({
+  configurable: true,
+  enumerable: true,
+  get() {
+    return __webpack_require__(45071);
+  }
+}));
 
 /**
  * TODO: add property description.
  * @type {Stream}
  */
-Object.defineProperty(exports, "Stream", { enumerable: true, get: () => (__webpack_require__(55767)) });
+Object.defineProperty(exports, "Stream", ({
+  configurable: true,
+  enumerable: true,
+  get() {
+    return __webpack_require__(55767);
+  }
+}));
 
 
 /***/ },
@@ -58131,7 +58263,7 @@ module.exports = isStream;
 
 module.exports = {
 
-  c: function(value) {
+  isArray: function(value) {
     if (Array.isArray) {
       return Array.isArray(value);
     }
@@ -58156,9 +58288,9 @@ var json2xml = __webpack_require__(38433);
 
 module.exports = {
   xml2js: xml2js,
-  ...(/* unused pure expression */ null && (xml2json)),
-  ...(/* unused pure expression */ null && (js2xml)),
-  ...(/* unused pure expression */ null && (json2xml))
+  xml2json: xml2json,
+  js2xml: js2xml,
+  json2xml: json2xml
 };
 
 
@@ -58168,7 +58300,7 @@ module.exports = {
 (module, __unused_webpack_exports, __webpack_require__) {
 
 var helper = __webpack_require__(45193);
-var isArray = (__webpack_require__(59740)/* .isArray */ .c);
+var isArray = (__webpack_require__(59740).isArray);
 
 var currentElement, currentElementName;
 
@@ -58519,7 +58651,7 @@ module.exports = function (json, options) {
 /***/ 45193
 (module, __unused_webpack_exports, __webpack_require__) {
 
-var isArray = (__webpack_require__(59740)/* .isArray */ .c);
+var isArray = (__webpack_require__(59740).isArray);
 
 module.exports = {
 
@@ -58572,7 +58704,7 @@ module.exports = {
 var sax = __webpack_require__(64043);
 var expat /*= require('node-expat');*/ = { on: function () { }, parse: function () { } };
 var helper = __webpack_require__(45193);
-var isArray = (__webpack_require__(59740)/* .isArray */ .c);
+var isArray = (__webpack_require__(59740).isArray);
 
 var options;
 var pureJsParser = true;
@@ -108068,9 +108200,9 @@ function getSchemeHandler (scheme) {
 }
 
 module.exports = {
-  ...void (wsIsSecure),
+  wsIsSecure,
   SCHEMES,
-  ...void (isValidSchemeName),
+  isValidSchemeName,
   getSchemeHandler,
 }
 
@@ -108811,15 +108943,15 @@ module.exports = {
   normalizePathEncoding,
   serializePathEncoding,
   normalizeQueryFragmentEncoding,
-  ...void (encodeUserinfo),
+  encodeUserinfo,
   encodeQuery,
   encodeFragment,
-  ...void (escapePreservingEscapes),
+  escapePreservingEscapes,
   removeDotSegments,
   isIPv4,
   isUUID,
   normalizeIPv6,
-  ...void (stringArrayToHexStripped)
+  stringArrayToHexStripped
 }
 
 
@@ -109305,17 +109437,17 @@ module.exports = {"version":"3.19.0"};
 /******/ 	});
 /************************************************************************/
 /******/ 	// The module cache
-/******/ 	const __webpack_module_cache__ = {};
+/******/ 	var __webpack_module_cache__ = {};
 /******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		const cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
-/******/ 		const module = __webpack_module_cache__[moduleId] = {
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
 /******/ 			id: moduleId,
 /******/ 			loaded: false,
 /******/ 			exports: {}
@@ -109333,34 +109465,44 @@ module.exports = {"version":"3.19.0"};
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	// define getter/value functions for harmony exports
-/******/ 	__webpack_require__.d = (exports, definition) => {
-/******/ 		for(var key in definition) {
-/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
 /******/ 			}
-/******/ 		}
-/******/ 	};
+/******/ 		};
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop));
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = (exports) => {
-/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
-/******/ 	__webpack_require__.nmd = (module) => {
-/******/ 		module.paths = [];
-/******/ 		if (!module.children) module.children = [];
-/******/ 		return module;
-/******/ 	};
+/******/ 	(() => {
+/******/ 		__webpack_require__.nmd = (module) => {
+/******/ 			module.paths = [];
+/******/ 			if (!module.children) module.children = [];
+/******/ 			return module;
+/******/ 		};
+/******/ 	})();
 /******/ 	
 /************************************************************************/
-let __webpack_exports__ = {};
+var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
@@ -118451,7 +118593,7 @@ async function getSharedState() {
 * @returns Promise resolving to the shared Files instance
 */
 async function getSharedFiles() {
-	if (!__sharedFiles) __sharedFiles = await (0,init/* init */.Ts)();
+	if (!__sharedFiles) __sharedFiles = await (0,init.init)();
 	return __sharedFiles;
 }
 
@@ -120550,7 +120692,7 @@ const configRuntimeAction = ({ configSchema }) => async (params) => {
 //#endregion
 
 ;// ./src/commerce-configuration-1/.generated/configuration-schema.json
-const configuration_schema_namespaceObject = /*#__PURE__*/JSON.parse('[{"default":true,"description":"Turn the store locator UI and availability calls on or off.","label":"Enable Store Locator","name":"enable_store_locator","type":"boolean"},{"default":"","description":"Google Maps / geocoding API key used by the locator UI.","label":"Maps API Key","name":"MAPS_API_KEY","type":"text"},{"default":"","description":"Endpoint used to query Adobe Commerce stock data.","label":"Commerce GraphQL Endpoint","name":"COMMERCE_GRAPHQL_ENDPOINT","type":"url"},{"default":"","description":"Secret used by the admin sync worker to authenticate to the PIM.","label":"PIM API Key","name":"PIM_API_KEY","type":"text"},{"default":"","description":"Source endpoint used by the store-location sync worker.","label":"PIM API Endpoint","name":"PIM_API_ENDPOINT","type":"url"}]');
+const configuration_schema_namespaceObject = /*#__PURE__*/JSON.parse('[{"default":"","description":"GraphQL endpoint used by get-magazine-products and related enrichment actions.","label":"Commerce GraphQL Endpoint","name":"COMMERCE_GRAPHQL_ENDPOINT","type":"url"},{"default":"","description":"ACCS Page Builder CMS endpoint used by sync-magazine-content.","label":"Magazine CMS Endpoint","name":"MAGAZINE_CMS_ENDPOINT","type":"url"},{"default":"","description":"Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.","label":"IO State Key","name":"IO_STATE_KEY","type":"text"},{"default":true,"description":"Turn the store locator UI and availability calls on or off.","label":"Enable Store Locator","name":"enable_store_locator","type":"boolean"},{"default":"","description":"Google Maps / geocoding API key used by the locator UI.","label":"Maps API Key","name":"MAPS_API_KEY","type":"text"},{"default":"","description":"Secret used by the admin sync worker to authenticate to the PIM.","label":"PIM API Key","name":"PIM_API_KEY","type":"password"},{"default":"","description":"Source endpoint used by the store-location sync worker.","label":"PIM API Endpoint","name":"PIM_API_ENDPOINT","type":"url"}]');
 ;// ./src/commerce-configuration-1/.generated/actions/app-management/config.js
 /*
  * Copyright 2026 Adobe. All rights reserved.

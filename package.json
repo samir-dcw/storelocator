@@ -7,6 +7,7 @@
     "@adobe/aio-commerce-lib-config": "^1.6.1",
     "@adobe/aio-commerce-sdk": "^1.4.2",
     "@adobe/aio-lib-ims": "^8.1.2",
+    "@adobe/uix-guest": "^1.1.11",
     "@azure/storage-common": "^12.5.0",
     "@hapi/hoek": "^11.0.7",
     "@ljharb/tsconfig": "^0.2.3",
@@ -27,8 +28,5 @@
   "description": "Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.",
   "scripts": {
     "postinstall": "npx aio-commerce-lib-app hooks postinstall"
-  },
-  "imports": {
-    "#app.commerce.config": "./src/commerce-extensibility-1/.generated/app.commerce.config.js"
   }
 }

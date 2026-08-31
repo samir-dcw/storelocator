@@ -6,6 +6,10 @@ extensions:
   commerce/configuration/1:
     $include: src/commerce-configuration-1/ext.config.yaml
 
+  # This extension is required for Admin UI SDK. Do not remove.
+  commerce/backend-ui/1:
+    $include: src/commerce-backend-ui-1/ext.config.yaml
+
 schedules:
   - action: sync-magazine-content
     description: Periodic sync of ACCS Page Builder content into magazine storage.

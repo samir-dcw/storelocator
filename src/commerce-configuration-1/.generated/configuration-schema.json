@@ -1,5 +1,26 @@
 [
   {
+    "default": "",
+    "description": "GraphQL endpoint used by get-magazine-products and related enrichment actions.",
+    "label": "Commerce GraphQL Endpoint",
+    "name": "COMMERCE_GRAPHQL_ENDPOINT",
+    "type": "url"
+  },
+  {
+    "default": "",
+    "description": "ACCS Page Builder CMS endpoint used by sync-magazine-content.",
+    "label": "Magazine CMS Endpoint",
+    "name": "MAGAZINE_CMS_ENDPOINT",
+    "type": "url"
+  },
+  {
+    "default": "",
+    "description": "Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.",
+    "label": "IO State Key",
+    "name": "IO_STATE_KEY",
+    "type": "text"
+  },
+  {
     "default": true,
     "description": "Turn the store locator UI and availability calls on or off.",
     "label": "Enable Store Locator",
@@ -15,17 +36,10 @@
   },
   {
     "default": "",
-    "description": "Endpoint used to query Adobe Commerce stock data.",
-    "label": "Commerce GraphQL Endpoint",
-    "name": "COMMERCE_GRAPHQL_ENDPOINT",
-    "type": "url"
-  },
-  {
-    "default": "",
     "description": "Secret used by the admin sync worker to authenticate to the PIM.",
     "label": "PIM API Key",
     "name": "PIM_API_KEY",
-    "type": "text"
+    "type": "password"
   },
   {
     "default": "",

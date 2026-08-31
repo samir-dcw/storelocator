@@ -10,7 +10,21 @@ function json(statusCode, body) {
 }
 
 function parseInput(params) {
-  return params.body || params.query || params.data || {};
+  const raw = params.body ?? params.query ?? params.data;
+
+  if (typeof raw === 'string' && raw.trim()) {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      // Fall through to params when the body is not valid JSON.
+    }
+  }
+
+  if (raw && typeof raw === 'object' && Object.keys(raw).length > 0) {
+    return raw;
+  }
+
+  return params;
 }
 
 function asArray(value) {

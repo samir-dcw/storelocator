@@ -1,6 +1,44 @@
 {
+  "adminUiSdk": {
+    "registration": {
+      "menuItems": [
+        {
+          "id": "store_locator::apps",
+          "isSection": true,
+          "title": "Store Locator"
+        },
+        {
+          "id": "store_locator::store_locator",
+          "parent": "store_locator::apps",
+          "sortOrder": 1,
+          "title": "Store Locator"
+        }
+      ]
+    }
+  },
   "businessConfig": {
     "schema": [
+      {
+        "default": "",
+        "description": "GraphQL endpoint used by get-magazine-products and related enrichment actions.",
+        "label": "Commerce GraphQL Endpoint",
+        "name": "COMMERCE_GRAPHQL_ENDPOINT",
+        "type": "url"
+      },
+      {
+        "default": "",
+        "description": "ACCS Page Builder CMS endpoint used by sync-magazine-content.",
+        "label": "Magazine CMS Endpoint",
+        "name": "MAGAZINE_CMS_ENDPOINT",
+        "type": "url"
+      },
+      {
+        "default": "",
+        "description": "Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.",
+        "label": "IO State Key",
+        "name": "IO_STATE_KEY",
+        "type": "text"
+      },
       {
         "default": true,
         "description": "Turn the store locator UI and availability calls on or off.",
@@ -17,17 +55,10 @@
       },
       {
         "default": "",
-        "description": "Endpoint used to query Adobe Commerce stock data.",
-        "label": "Commerce GraphQL Endpoint",
-        "name": "COMMERCE_GRAPHQL_ENDPOINT",
-        "type": "url"
-      },
-      {
-        "default": "",
         "description": "Secret used by the admin sync worker to authenticate to the PIM.",
         "label": "PIM API Key",
         "name": "PIM_API_KEY",
-        "type": "text"
+        "type": "password"
       },
       {
         "default": "",
@@ -38,10 +69,9 @@
       }
     ]
   },
-  "eventing": {},
   "metadata": {
-    "description": "Commerce App Builder application",
-    "displayName": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
+    "description": "Store locator application for Adobe Commerce",
+    "displayName": "Store Locator",
     "id": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
     "version": "1.0.0"
   }
