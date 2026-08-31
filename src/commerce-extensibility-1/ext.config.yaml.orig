@@ -7,10 +7,15 @@ operations:
   workerProcess:
     - type: action
       impl: app-management/app-config
+    - type: action
+      impl: app-management/association
 
 runtimeManifest:
   packages:
+<<<<<<< HEAD
     # These package definitions are auto-generated. Do not remove or manually edit.
+=======
+>>>>>>> 42514958b0d19d1aea890fc9f3d56d21abbea2c4
     app-management:
       license: Apache-2.0
       actions:
@@ -21,23 +26,27 @@ runtimeManifest:
           inputs:
             LOG_LEVEL: $LOG_LEVEL
           annotations:
-            require-adobe-auth: true
             final: true
-    store-locator-actions:
-      license: Apache-2.0
-      actions:
-        get-stores:
-          function: actions/get-stores/index.js
+            require-adobe-auth: true
+        association:
+          function: .generated/actions/app-management/association.js
           web: yes
-          runtime: nodejs:22
+          runtime: nodejs:24
           inputs:
             LOG_LEVEL: $LOG_LEVEL
-            IO_STATE_KEY: $IO_STATE_KEY
-            MAPS_API_KEY: $MAPS_API_KEY
-            enable_store_locator: $enable_store_locator
           annotations:
-            require-adobe-auth: false
             final: true
+            require-adobe-auth: true
+    admin-ui:
+      license: Apache-2.0
+      actions:
+        admin-ui:
+          function: admin/main.jsx
+          web: yes
+          runtime: nodejs:22
+          annotations:
+            final: true
+<<<<<<< HEAD
         check-stock:
           function: actions/check-stock/index.js
           web: yes
@@ -111,3 +120,5 @@ runtimeManifest:
             event_codes:
               - observer.cataloginventory_stock_item_save_commit_after
         runtime_action: store-locator-actions/invalidate-stock-cache
+=======
+>>>>>>> 42514958b0d19d1aea890fc9f3d56d21abbea2c4
