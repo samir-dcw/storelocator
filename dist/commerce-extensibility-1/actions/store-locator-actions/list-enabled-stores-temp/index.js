@@ -1,3 +1,70 @@
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	// The require scope
+/******/ 	const __webpack_require__ = {};
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	// define getter/value functions for harmony exports
+/******/ 	__webpack_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop));
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ 	
+/************************************************************************/
+let __webpack_exports__ = {};
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  main: () => (/* binding */ main)
+});
+
+;// ./src/commerce-extensibility-1/actions/utils/logger.js
+function createLogger(context = {}) {
+  const base = {
+    requestId: context.requestId || context.id || undefined,
+    action: context.action || undefined,
+  };
+
+  const format = (level, message, details = {}) => {
+    const payload = {
+      level,
+      message,
+      ...base,
+      ...details,
+    };
+    return JSON.stringify(payload);
+  };
+
+  return {
+    info(message, details) {
+      console.log(format('info', message, details));
+    },
+    warn(message, details) {
+      console.warn(format('warn', message, details));
+    },
+    error(message, details) {
+      console.error(format('error', message, details));
+    },
+  };
+}
+
+;// ./src/commerce-extensibility-1/actions/utils/store-repository.js
 function memoryStore() {
   if (!globalThis.__storeLocatorMemoryState) {
     globalThis.__storeLocatorMemoryState = new Map();
@@ -56,7 +123,7 @@ function normalizeStore(store) {
   };
 }
 
-export function createStoreRepository(params = {}, logger = console) {
+function createStoreRepository(params = {}, logger = console) {
   const namespace = params.IO_STATE_KEY || process.env.IO_STATE_KEY || 'store-locator';
   const collection = 'store-locations';
   const key = stateKey(namespace, collection);
@@ -110,4 +177,32 @@ export function createStoreRepository(params = {}, logger = console) {
   return { getAll, setAll, upsert, remove, getEnabled, getById };
 }
 
-export { normalizeStore };
+
+
+;// ./src/commerce-extensibility-1/actions/list-enabled-stores/index.js
+
+
+
+function json(statusCode, body) {
+  return {
+    statusCode,
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify(body),
+  };
+}
+
+async function main(params) {
+  const logger = createLogger({ action: 'list-enabled-stores', requestId: params.requestId });
+  try {
+    const repo = createStoreRepository(params, logger);
+    const items = await repo.getEnabled();
+    return json(200, { items });
+  } catch (error) {
+    logger.error('list-enabled-stores.failed', { error: error.message });
+    return json(500, { error: 'Unable to list enabled store locations' });
+  }
+}
+
+module.exports = __webpack_exports__;
+/******/ })()
+;

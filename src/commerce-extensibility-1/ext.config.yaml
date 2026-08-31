@@ -12,6 +12,7 @@ operations:
 
 runtimeManifest:
   packages:
+    # These package definitions are auto-generated. Do not remove or manually edit.
     app-management:
       license: Apache-2.0
       actions:
@@ -24,21 +25,92 @@ runtimeManifest:
           annotations:
             final: true
             require-adobe-auth: true
-        association:
-          function: .generated/actions/app-management/association.js
-          web: yes
-          runtime: nodejs:24
-          inputs:
-            LOG_LEVEL: $LOG_LEVEL
-          annotations:
             final: true
-            require-adobe-auth: true
-    admin-ui:
+    store-locator-actions:
       license: Apache-2.0
       actions:
-        admin-ui:
-          function: admin/main.jsx
+        get-stores:
+          function: actions/get-stores/index.js
           web: yes
           runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+            MAPS_API_KEY: $MAPS_API_KEY
+            enable_store_locator: $enable_store_locator
           annotations:
+            require-adobe-auth: false
             final: true
+        check-stock:
+          function: actions/check-stock/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            COMMERCE_GRAPHQL_ENDPOINT: $COMMERCE_GRAPHQL_ENDPOINT
+            IO_STATE_KEY: $IO_STATE_KEY
+            enable_store_locator: $enable_store_locator
+          annotations:
+            require-adobe-auth: false
+            final: true
+        sync-store-locations:
+          function: actions/sync-store-locations/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            PIM_API_ENDPOINT: $PIM_API_ENDPOINT
+            PIM_API_KEY: $PIM_API_KEY
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+        invalidate-stock-cache:
+          function: actions/invalidate-stock-cache/index.js
+          web: no
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+        manage-store-locations:
+          function: actions/manage-store-locations/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+        list-enabled-stores:
+          function: actions/list-enabled-stores/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: false
+            final: true
+        admin-store-api:
+          function: actions/admin-store-api/index.js
+          web: yes
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: $LOG_LEVEL
+            IO_STATE_KEY: $IO_STATE_KEY
+          annotations:
+            require-adobe-auth: true
+            final: true
+  events:
+    registrations:
+      stock-cache-invalidator:
+        description: Invalidate stock cache when Commerce stock changes
+        events_of_interest:
+          - provider_metadata: dx_commerce_events
+            event_codes:
+              - observer.cataloginventory_stock_item_save_commit_after
+        runtime_action: store-locator-actions/invalidate-stock-cache

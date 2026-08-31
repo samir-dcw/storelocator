@@ -14,13 +14,11 @@ function parseInput(params) {
 }
 
 function asArray(value) {
-  if (Array.isArray(value)) {
-    return value;
-  }
+  if (Array.isArray(value)) return value;
   if (typeof value === 'string' && value.trim()) {
     try {
       const parsed = JSON.parse(value);
-      return Array.isArray(parsed) ? parsed : [];
+      if (Array.isArray(parsed)) return parsed;
     } catch {
       return value.split(',').map((item) => item.trim()).filter(Boolean);
     }
@@ -28,23 +26,8 @@ function asArray(value) {
   return [];
 }
 
-function toStoreInput(input) {
-  return normalizeStore({
-    id: input.id,
-    name: input.name,
-    source_code: input.source_code || input.sourceCode,
-    latitude: input.latitude ?? input.lat,
-    longitude: input.longitude ?? input.lng,
-    address: input.address,
-    hours: input.hours,
-    phone: input.phone,
-    amenities: asArray(input.amenities),
-    enabled: input.enabled,
-  });
-}
-
 export async function main(params) {
-  const logger = createLogger({ action: 'manage-store-locations', requestId: params.requestId });
+  const logger = createLogger({ action: 'admin-store-api', requestId: params.requestId });
   try {
     const input = parseInput(params);
     const repo = createStoreRepository(params, logger);
@@ -59,8 +42,8 @@ export async function main(params) {
       if (!input.id || !input.name) {
         return json(400, { error: 'id and name are required' });
       }
-      const saved = await repo.upsert(toStoreInput(input));
-      return json(200, { saved });
+      const saved = await repo.upsert(normalizeStore({ ...input, amenities: asArray(input.amenities) }));
+      return json(201, { saved });
     }
 
     if (method === 'put' || method === 'patch') {
@@ -71,7 +54,7 @@ export async function main(params) {
       if (!existing) {
         return json(404, { error: 'Store not found' });
       }
-      const saved = await repo.upsert({ ...existing, ...input, amenities: asArray(input.amenities) });
+      const saved = await repo.upsert(normalizeStore({ ...existing, ...input, amenities: asArray(input.amenities) }));
       return json(200, { saved });
     }
 
@@ -79,13 +62,13 @@ export async function main(params) {
       if (!input.id) {
         return json(400, { error: 'id is required' });
       }
-      const removed = await repo.remove(String(input.id));
+      const removed = await repo.remove(input.id);
       return removed ? json(200, { removed: true }) : json(404, { removed: false, error: 'Store not found' });
     }
 
     return json(405, { error: 'Method not allowed' });
   } catch (error) {
-    logger.error('manage-store-locations.failed', { error: error.message });
-    return json(500, { error: 'Unable to manage store locations' });
+    logger.error('admin-store-api.failed', { error: error.message });
+    return json(500, { error: 'Unable to process store API request' });
   }
 }
