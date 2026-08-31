@@ -9,6 +9,13 @@ export default defineConfig({
   },
   businessConfig: {
     schema: [
+      { name: 'COMMERCE_GRAPHQL_ENDPOINT', type: 'url', label: 'Commerce GraphQL Endpoint', description: 'GraphQL endpoint used by get-magazine-products and related enrichment actions.' },
+      { name: 'MAGAZINE_CMS_ENDPOINT', type: 'url', label: 'Magazine CMS Endpoint', description: 'ACCS Page Builder CMS endpoint used by sync-magazine-content.' },
+      { name: 'IO_STATE_KEY', type: 'text', label: 'IO State Key', description: 'Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.' },
+    ],
+  },
+  eventing: {
+    subscriptions: [
       {
         name: 'enable_store_locator',
         type: 'boolean',

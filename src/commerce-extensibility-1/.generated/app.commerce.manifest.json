@@ -38,6 +38,7 @@
       }
     ]
   },
+  "eventing": {},
   "metadata": {
     "description": "Commerce App Builder application",
     "displayName": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",

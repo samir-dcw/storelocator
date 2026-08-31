@@ -1,5 +1,5 @@
 {
-  "name": "proj-5a3228b8-c9f3-4684-895b-480e4de85cc7",
+  "name": "digital-magazine-editorial-hub",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -24,8 +24,11 @@
     "proxy-from-env": "^2.1.0",
     "whatwg-url": "^17.1.0"
   },
-  "description": "Commerce App Builder application",
+  "description": "Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.",
   "scripts": {
     "postinstall": "npx aio-commerce-lib-app hooks postinstall"
+  },
+  "imports": {
+    "#app.commerce.config": "./src/commerce-extensibility-1/.generated/app.commerce.config.js"
   }
 }

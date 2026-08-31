@@ -7,6 +7,8 @@ operations:
   workerProcess:
     - type: action
       impl: app-management/app-config
+    - type: action
+      impl: app-management/association
 
 runtimeManifest:
   packages:
@@ -21,6 +23,7 @@ runtimeManifest:
           inputs:
             LOG_LEVEL: $LOG_LEVEL
           annotations:
+            final: true
             require-adobe-auth: true
             final: true
     store-locator-actions:
