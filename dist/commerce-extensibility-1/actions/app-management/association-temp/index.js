@@ -4260,7 +4260,7 @@ async function init (config = {}) {
   }
 }
 
-module.exports = { ...void (init), ...void (FilePermissions), ...void (UrlType) }
+module.exports = { Ts: init, ...void (FilePermissions), ...void (UrlType) }
 
 
 /***/ },
@@ -4316,7 +4316,6 @@ module.exports = {
 /***/ 57168
 (module, __unused_webpack_exports, __webpack_require__) {
 
-var __webpack_unused_export__;
 /*
 Copyright 2024 Adobe. All rights reserved.
 This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -4331,13 +4330,13 @@ governing permissions and limitations under the License.
 const { MAX_TTL_SECONDS } = __webpack_require__(5633)
 __webpack_require__(72130)
 
-/* unused reexport */ __webpack_require__(38148)
+module.exports = __webpack_require__(38148)
 
 /**
  * Max supported TTL, 365 days in seconds
  * @type {number}
  */
-__webpack_unused_export__ = MAX_TTL_SECONDS
+module.exports.y = MAX_TTL_SECONDS
 
 
 /***/ },
@@ -5193,7 +5192,7 @@ async function init (config = {}) {
   })
 }
 
-module.exports = { ...void (init) }
+module.exports = { init }
 
 
 /***/ },
@@ -106270,14 +106269,6 @@ function randomUUID() {
 
 /***/ },
 
-/***/ 56795
-(module) {
-
-let e,{defineProperty:r,getPrototypeOf:t,setPrototypeOf:n,create:o,keys:l}=Object,i="",{round:f,max:s}=Math,u=e=>{let r=/([a-f\d]{3,6})/i.exec(e)?.[0],t=r?.length,n="0x"+(6^t?3^t?"0":r[0]+r[0]+r[1]+r[1]+r[2]+r[2]:r)|0;return[n>>16,n>>8&255,255&n]},a=e=>{if(8>e)return 30+e;if(16>e)return 82+e;if(e>231)return e>243?37:30;let r=(e-=16)%36,t=e/36|0,n=r/6|0,o=r%6;return 30+(t>2|(n>2)<<1|(o>2)<<2)+(s(t,n,o)>4?60:0)},c={open:i,close:i},g=(e,{open:r="",close:o="",f:l})=>{let f=(e.open||i)+r,s=o+(e.close||i),u=(e,...t)=>{if(!e){if(!o)return r;if((e??i)===i)return i}let n,a=l?l(e,...t):e.raw?String.raw({raw:e},...t):i+e,c=u;if(a.includes(""))for(;c=c.p;){let{t:e,o:r}=c,t=r.length,o=i,l=0;if(t)for(;~(n=a.indexOf(r,l));l=n+t)o+=a.slice(l,n)+e;a=o+a.slice(l)}return f+(a.includes("\n")?a.replace(/(\r?\n)/g,s+"$1"+f):a)+s};return n(u,t(e)).p={t:r,o,p:e.p},u.open=f,u.close=s,u};const d=new function t(s=globalThis){let d="number"==typeof s?s:(r=>{let t=r.process??{},n=t.argv??[],o=t.env??{},i=0;try{i=((r,t,n)=>(e=t.TERM,{"24bit":3,truecolor:3,ansi256:2,ansi:1}[t.COLORTERM]||(t.CI?/,GITHUB/.test(n)?3:1:(t.PM2_HOME||/edge/.test(t.NEXT_RUNTIME)||r.stdout?.isTTY)&&"dumb"!==e?"win32"===r.platform?3:/-256/.test(e)?2:1:0)))(t,o,","+l(o).join(","))}catch(e){o={}}let f,s=i||1,u="FORCE_COLOR",a={false:0,0:0,1:1,2:2,3:3}[o[u]]??s,c=-1;for(f of n)/^--color=?(true|always)?$/.test(f)&&(c=s),/^--(no-color|color=(false|never))$/.test(f)&&(c=0);return r.window?.chrome?3:u in o?a:~c?c:o.NO_COLOR?0:i})(s),b={},p={Ansis:t,level:d,isSupported:()=>m,strip:e=>e.replace(/][^]*|[][[()#;?]*(?:\d+(?:;\d*)*)?[\dA-ORZcf-nqry=><]/g,i),extend(e){for(let r in e){let t=e[r];"s"===(typeof t)[0]&&(h(w(r),A(...u(t))),t=P(...u(t))),h(r,t)}return n(p,o({},b))}},h=(e,t)=>{b[e]={get(){return r(this,e,{value:t.call?(...e)=>g(this,t(...e)):g(this,t)})[e]}}},y=1^d,$=d>2,m=d>0,O=(e,r)=>m?{open:`[${e}m`,close:r?`[${r}m`:i}:c,w=e=>"bg"+e[0].toUpperCase()+e.slice(1),v=e=>r=>e(...u(r)),x=(e,r)=>(t,n,o)=>O(`${e}8;2;${t};${n};${o}`,r),_=e=>(r,t,n)=>e(((e,r,t)=>e^r|r^t?16+36*f(e/51)+6*f(r/51)+f(t/51):8>e?16:e>248?231:f(24*(e-8)/247)+232)(r,t,n)),k=e=>O(y?"38;5;"+e:a(e),39),R=e=>O(y?"48;5;"+e:a(e)+10,49),P=$?x(3,39):_(k),A=$?x(4,49):_(R),B={fg:k,bg:R,rgb:P,bgRgb:A,hex:v(P),bgHex:v(A),visible:c,reset:O(0,i),bold:O(1,22),dim:O(2,22),italic:O(3,23),underline:O(4,24),inverse:O(7,27),hidden:O(8,28),strikethrough:O(9,29),link:{f:(e,r=e)=>m?`]8;;${e}${r}]8;;`:r!=e?r+` (​${e}​)`:e}},C=(e,r)=>{B[e]=O(r,39),B[w(e)]=O(r+10,49)};return"gray,black,red,green,yellow,blue,magenta,cyan,white".split(",").map(((e,r)=>{r?C(e+"Bright",89+r):r=61,C(e,29+r)})),p.extend(B)};module.exports=d.default=d;
-
-
-/***/ },
-
 /***/ 48343
 (module, __unused_webpack_exports, __webpack_require__) {
 
@@ -108472,652 +108463,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, {
   main: () => (/* binding */ main)
 });
-
-;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/responses/index.mjs
-/**
- * @license
- *
- * Copyright 2026 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
-//#region source/responses/helpers.ts
-/**
-* Creates a standardized error response for runtime actions
-* @see https://developer.adobe.com/app-builder/docs/guides/runtime_guides/creating-actions#unsuccessful-response
-*
-* @template TBody - Additional error body properties beyond the required message field
-* @template THeaders - Custom response headers
-*
-* @param statusCode - HTTP status code (e.g., 400, 404, 500)
-* @param payload - Error response configuration
-* @param payload.message - Human-readable error message (required)
-* @param payload.body - Optional additional error details to include in the response body
-* @param payload.headers - Optional custom response headers
-*
-* @returns Standardized error response object with type discriminator
-*
-* @example
-* ```typescript
-* // Simple error with just a message
-* const error = buildErrorResponse(404, {
-*   message: 'Resource not found'
-* });
-*
-* // Error with additional body data
-* const error = buildErrorResponse(400, {
-*   message: 'Invalid request',
-*   body: { field: 'email', code: 'INVALID_FORMAT' }
-* });
-*
-* // Error with custom headers
-* const error = buildErrorResponse(429, {
-*   message: 'Rate limit exceeded',
-*   headers: { 'Retry-After': '60' }
-* });
-* ```
-*/
-function buildErrorResponse(statusCode, payload) {
-	return {
-		type: "error",
-		error: {
-			...payload?.headers && { headers: payload.headers },
-			statusCode,
-			body: payload.body
-		}
-	};
-}
-/**
-* Creates a standardized success response for runtime actions
-* @see https://developer.adobe.com/app-builder/docs/guides/runtime_guides/creating-actions#successful-response
-*
-* @template TBody - Response body properties
-* @template THeaders - Custom response headers
-*
-* @param statusCode - HTTP status code (typically 200, 201, 204, etc.)
-* @param payload - Success response configuration
-* @param payload.message - Human-readable success message (required)
-* @param payload.body - Optional additional response data to include in the response body
-* @param payload.headers - Optional custom response headers
-*
-* @returns Standardized success response object with type discriminator
-*
-* @example
-* ```typescript
-* // Simple success response
-* const response = buildSuccessResponse(200, {
-*   message: 'Operation successful'
-* });
-*
-* // Success with additional body data
-* const response = buildSuccessResponse(201, {
-*   message: 'Resource created',
-*   body: { id: '456', created: true },
-*   headers: { 'Location': '/api/resources/456' }
-* });
-* ```
-*/
-function buildSuccessResponse(statusCode, payload) {
-	return {
-		type: "success",
-		statusCode,
-		...payload?.headers && { headers: payload.headers },
-		...payload?.body && { body: payload.body }
-	};
-}
-
-//#endregion
-//#region source/responses/presets.ts
-const HTTP_OK = 200;
-const HTTP_CREATED = 201;
-const HTTP_ACCEPTED = 202;
-const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
-const HTTP_NO_CONTENT = 204;
-const HTTP_BAD_REQUEST = 400;
-const HTTP_UNAUTHORIZED = 401;
-const HTTP_FORBIDDEN = 403;
-const HTTP_NOT_FOUND = 404;
-const HTTP_METHOD_NOT_ALLOWED = 405;
-const HTTP_CONFLICT = 409;
-const HTTP_INTERNAL_SERVER_ERROR = 500;
-function curryBuildSuccessResponse(code) {
-	return (payload) => buildSuccessResponse(code, typeof payload === "string" ? { body: { message: payload } } : payload);
-}
-function curryBuildErrorResponse(code) {
-	return (payload) => buildErrorResponse(code, typeof payload === "string" ? { body: { message: payload } } : payload);
-}
-/**
-* Creates a success response with the HTTP status code 200.
-* See {@link buildSuccessResponse} for details on the response payload.
-*/
-const ok = curryBuildSuccessResponse(200);
-/**
-* Creates a success response with the HTTP status code 201.
-* See {@link buildSuccessResponse} for details on the response payload.
-*/
-const created = curryBuildSuccessResponse(201);
-/**
-* Creates a success response with the HTTP status code 202.
-* See {@link buildSuccessResponse} for details on the response payload.
-*/
-const accepted = curryBuildSuccessResponse(202);
-/**
-* Creates a success response with the HTTP status code 203.
-* See {@link buildSuccessResponse} for details on the response payload.
-*/
-const nonAuthoritativeInformation = curryBuildSuccessResponse(203);
-/**
-* Creates a success response with the HTTP status code 204 (No Content).
-* This response has no body.
-*/
-const noContent = () => buildSuccessResponse(204);
-/**
-* Creates an error response with the HTTP status code 400.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const badRequest = curryBuildErrorResponse(400);
-/**
-* Creates an error response with the HTTP status code 401.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const unauthorized = curryBuildErrorResponse(401);
-/**
-* Creates an error response with the HTTP status code 403.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const forbidden = curryBuildErrorResponse(403);
-/**
-* Creates an error response with the HTTP status code 404.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const notFound = curryBuildErrorResponse(404);
-/**
-* Creates an error response with the HTTP status code 405.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const methodNotAllowed = curryBuildErrorResponse(405);
-/**
-* Creates an error response with the HTTP status code 409.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const conflict = curryBuildErrorResponse(409);
-/**
-* Creates an error response with the HTTP status code 500.
-* See {@link buildErrorResponse} for details on the response payload.
-*/
-const internalServerError = curryBuildErrorResponse(500);
-
-//#endregion
-
-// EXTERNAL MODULE: ./node_modules/@adobe/aio-lib-core-logging/src/AioLogger.js
-var AioLogger = __webpack_require__(65586);
-;// ./node_modules/regexparam/dist/index.mjs
-/**
- * @param {string|RegExp} input The route pattern
- * @param {boolean} [loose] Allow open-ended matching. Ignored with `RegExp` input.
- */
-function parse(input, loose) {
-	if (input instanceof RegExp) return { keys:false, pattern:input };
-	var c, o, tmp, ext, keys=[], pattern='', arr = input.split('/');
-	arr[0] || arr.shift();
-
-	while (tmp = arr.shift()) {
-		c = tmp[0];
-		if (c === '*') {
-			keys.push(c);
-			pattern += tmp[1] === '?' ? '(?:/(.*))?' : '/(.*)';
-		} else if (c === ':') {
-			o = tmp.indexOf('?', 1);
-			ext = tmp.indexOf('.', 1);
-			keys.push( tmp.substring(1, !!~o ? o : !!~ext ? ext : tmp.length) );
-			pattern += !!~o && !~ext ? '(?:/([^/]+?))?' : '/([^/]+?)';
-			if (!!~ext) pattern += (!!~o ? '?' : '') + '\\' + tmp.substring(ext);
-		} else {
-			pattern += '/' + tmp;
-		}
-	}
-
-	return {
-		keys: keys,
-		pattern: new RegExp('^' + pattern + (loose ? '(?=$|\/)' : '\/?$'), 'i')
-	};
-}
-
-var RGX = /(\/|^)([:*][^/]*?)(\?)?(?=[/.]|$)/g;
-
-// error if key missing?
-function inject(route, values) {
-	return route.replace(RGX, (x, lead, key, optional) => {
-		x = values[key=='*' ? key : key.substring(1)];
-		return x ? '/'+x : (optional || key=='*') ? '' : '/' + key;
-	});
-}
-
-;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/router-D58JJHHA.mjs
-/**
- * @license
- *
- * Copyright 2026 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
-
-
-
-
-//#region ../../packages-private/common-utils/source/actions/http/middleware/logger.ts
-/**
-* Creates a logger middleware that adds logging capabilities to the context.
-*
-* @example
-* ```typescript
-* router.use(logger({ level: "debug", name: () => "my-logger-name" }));
-*
-* router.get("/test", {
-*   handler: (req, ctx) => {
-*     ctx.logger.info("Hello world");
-*     return ok({ body: {} });
-*   },
-* });
-* ```
-*/
-function logger({ name, ...restOptions } = {}) {
-	return (ctx) => {
-		const params = ctx.rawParams;
-		return { logger: AioLogger(`${params.__ow_method}-${name?.(ctx) ?? process.env.__OW_ACTION_NAME}`, {
-			level: `${params.LOG_LEVEL ?? "info"}`,
-			...restOptions
-		}) };
-	};
-}
-
-//#endregion
-//#region ../../packages-private/common-utils/source/actions/http/utils.ts
-/**
-* Validates input against a Standard Schema and returns a result.
-*
-* @template TInput - The input type expected by the schema
-* @template TOutput - The output type produced by the schema
-* @param schema - A Standard Schema v1 compliant schema
-* @param input - The input data to validate
-* @returns A promise resolving to either success with validated data or failure with issues
-*
-* @example
-* ```typescript
-* const result = await validateSchema(mySchema, userInput);
-* if (result.success) {
-*   console.log(result.data); // Typed as TOutput
-* } else {
-*   console.error(result.issues); // Validation errors
-* }
-* ```
-*/
-async function validateSchema(schema, input) {
-	const result = await schema["~standard"].validate(input);
-	if (result.issues) return {
-		success: false,
-		issues: result.issues.map((issue) => ({
-			message: issue.message,
-			path: issue.path?.map((segment) => typeof segment === "object" && segment !== null && "key" in segment ? segment.key : segment)
-		}))
-	};
-	return {
-		success: true,
-		data: result.value
-	};
-}
-/**
-* Parses a request body from OpenWhisk/Runtime.
-* Handles multiple formats:
-* - Base64-encoded strings (__ow_body)
-* - Already-parsed objects
-* - Body properties mixed into args (web actions with JSON content-type)
-*
-* @param owBody - Body from __ow_body (base64 string, JSON string, or object)
-* @param args - Full args object to extract body from if __ow_body is not present
-*
-* @example
-* ```typescript
-* const body = parseRequestBody(params.__ow_body, params);
-* ```
-*/
-function parseRequestBody(owBody, args) {
-	if (owBody) {
-		if (typeof owBody === "object") return owBody;
-		if (typeof owBody === "string") {
-			try {
-				return JSON.parse(owBody);
-			} catch {}
-			try {
-				const decoded = Buffer.from(owBody, "base64").toString();
-				return JSON.parse(decoded);
-			} catch {}
-		}
-	}
-	if (args && typeof args === "object") {
-		const body = {};
-		for (const [key, value] of Object.entries(args)) if (!key.startsWith("__ow_")) body[key] = value;
-		return body;
-	}
-	return {};
-}
-/**
-* Parses query parameters from OpenWhisk/Runtime format.
-*
-* @param queryString - Query string from __ow_query
-* @param fallbackParams - Fallback params object (used when __ow_query is not present)
-* @returns Parsed query parameters as a record
-*
-* @example
-* ```typescript
-* const query = parseQueryParams(params.__ow_query, params);
-* ```
-*/
-function parseQueryParams(queryString, fallbackParams) {
-	if (queryString) return Object.fromEntries(new URLSearchParams(queryString));
-	if (fallbackParams) {
-		const { __ow_method, __ow_path, __ow_headers, __ow_body, __ow_query, ...rest } = fallbackParams;
-		return rest;
-	}
-	return {};
-}
-
-//#endregion
-//#region ../../packages-private/common-utils/source/actions/http/router.ts
-/**
-* HTTP router for Adobe I/O Runtime actions.
-* Provides type-safe routing with schema validation and OpenWhisk integration.
-*
-* @example
-* ```typescript
-* const router = new HttpActionRouter();
-*
-* router.get("/users/:id", {
-*   handler: (req) => ok({ id: req.params.id, context: req.context })
-* });
-*
-* // Add context builders
-* router.use(async (base) => ({
-*   user: await getUser(base.rawParams.__ow_headers?.authorization),
-* }));
-*
-* export const main = router.handler();
-* ```
-*/
-var HttpActionRouter = class {
-	constructor() {
-		this.routes = [];
-		this.contextBuilders = [];
-	}
-	/**
-	* Internal method to add a route to the router.
-	*/
-	addRoute(method, path, config) {
-		const { pattern, keys } = parse(path);
-		this.routes.push({
-			method,
-			pattern,
-			keys,
-			params: config.params,
-			body: config.body,
-			query: config.query,
-			handler: config.handler
-		});
-		return this;
-	}
-	/**
-	* Register a GET route.
-	*
-	* @example
-	* ```typescript
-	* router.get("/users/:id", {
-	*   handler: (req) => ok({ id: req.params.id })
-	* });
-	* ```
-	*/
-	get(path, config) {
-		return this.addRoute("GET", path, config);
-	}
-	/**
-	* Register a POST route.
-	*
-	* @example
-	* ```typescript
-	* router.post("/users", {
-	*   body: userSchema,
-	*   handler: (req) => created(req.body)
-	* });
-	* ```
-	*/
-	post(path, config) {
-		return this.addRoute("POST", path, config);
-	}
-	/**
-	* Register a PUT route.
-	*
-	* @example
-	* ```typescript
-	* router.put("/users/:id", {
-	*   body: userSchema,
-	*   handler: (req) => ok(req.body)
-	* });
-	* ```
-	*/
-	put(path, config) {
-		return this.addRoute("PUT", path, config);
-	}
-	/**
-	* Register a PATCH route.
-	*
-	* @example
-	* ```typescript
-	* router.patch("/users/:id", {
-	*   body: partialUserSchema,
-	*   handler: (req) => ok(req.body)
-	* });
-	* ```
-	*/
-	patch(path, config) {
-		return this.addRoute("PATCH", path, config);
-	}
-	/**
-	* Register a DELETE route.
-	*
-	* @example
-	* ```typescript
-	* router.delete("/users/:id", {
-	*   handler: (req) => noContent()
-	* });
-	* ```
-	*/
-	delete(path, config) {
-		return this.addRoute("DELETE", path, config);
-	}
-	/**
-	* Register a context builder that runs before route handlers.
-	* Context builders can add properties to the request context.
-	* Multiple builders are executed in order and their results are merged.
-	*
-	* The returned router has an updated context type that includes the new properties,
-	* enabling type-safe access in route handlers.
-	*
-	* @param builder - Function that receives base context and returns additional context
-	* @returns The router instance with updated context type for chaining
-	*
-	* @example
-	* ```typescript
-	* const router = new HttpActionRouter()
-	*   .use(logger()) // HttpActionRouter<BaseContext & { logger: Logger }>
-	*   .use(auth());  // HttpActionRouter<BaseContext & { logger: Logger } & { user: User }>
-	*
-	* router.get("/me", {
-	*   handler: (req, ctx) => {
-	*     ctx.logger.info("Hello"); // ✅ typed
-	*     return ok({ body: ctx.user }); // ✅ typed
-	*   },
-	* });
-	* ```
-	*/
-	use(builder) {
-		this.contextBuilders.push(builder);
-		return this;
-	}
-	/**
-	* Builds the full context by running all context builders.
-	*/
-	async buildContext(args) {
-		let context = { rawParams: args };
-		for (const builder of this.contextBuilders) {
-			const result = await builder(context);
-			if (result) context = {
-				...context,
-				...result
-			};
-		}
-		return context;
-	}
-	/**
-	* Validates and extracts route parameters.
-	*/
-	async validateParams(route, params) {
-		if (!route.params) return {
-			success: true,
-			data: params
-		};
-		const result = await validateSchema(route.params, params);
-		if (!result.success) return {
-			success: false,
-			issues: result.issues
-		};
-		return {
-			success: true,
-			data: result.data
-		};
-	}
-	/**
-	* Validates request body.
-	*/
-	async validateBody(route, body) {
-		if (!route.body) return {
-			success: true,
-			data: body
-		};
-		const result = await validateSchema(route.body, body);
-		if (!result.success) return {
-			success: false,
-			issues: result.issues
-		};
-		return {
-			success: true,
-			data: result.data
-		};
-	}
-	/**
-	* Validates query parameters.
-	*/
-	async validateQuery(route, query) {
-		if (!route.query) return {
-			success: true,
-			data: query
-		};
-		const result = await validateSchema(route.query, query);
-		if (!result.success) return {
-			success: false,
-			issues: result.issues
-		};
-		return {
-			success: true,
-			data: result.data
-		};
-	}
-	/** Handles a matched route by validating inputs and calling the handler. */
-	async handleRoute(route, match, body, query, headers, method, path, context) {
-		const params = {};
-		route.keys.forEach((key, i) => {
-			params[key] = decodeURIComponent(match[i + 1] || "");
-		});
-		const paramsResult = await this.validateParams(route, params);
-		if (!paramsResult.success) return badRequest({ body: {
-			message: "Invalid route parameters",
-			issues: paramsResult.issues
-		} });
-		const bodyResult = await this.validateBody(route, body);
-		if (!bodyResult.success) return badRequest({ body: {
-			message: "Invalid request body",
-			issues: bodyResult.issues
-		} });
-		const queryResult = await this.validateQuery(route, query);
-		if (!queryResult.success) return badRequest({ body: {
-			message: "Invalid query parameters",
-			issues: queryResult.issues
-		} });
-		try {
-			return await route.handler({
-				params: paramsResult.data,
-				body: bodyResult.data,
-				query: queryResult.data,
-				headers,
-				method,
-				path
-			}, context);
-		} catch (err) {
-			console.error("Handler error:", err);
-			return internalServerError({ body: {
-				message: "Internal server error",
-				error: err instanceof Error ? err.message : "Unknown error"
-			} });
-		}
-	}
-	/**
-	* Creates an OpenWhisk/Runtime action handler from the registered routes.
-	*
-	* @example
-	* ```typescript
-	* const router = new HttpActionRouter();
-	* router.get("/hello", { handler: () => ok({ message: "Hello!" }) });
-	*
-	* export const main = router.handler();
-	* ```
-	*/
-	handler() {
-		return async (args) => {
-			const method = (args.__ow_method ?? "get").toUpperCase();
-			const rawPath = args.__ow_path ?? "/";
-			const path = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
-			const headers = args.__ow_headers ?? {};
-			const body = parseRequestBody(args.__ow_body, args);
-			const query = parseQueryParams(args.__ow_query, args);
-			const context = await this.buildContext(args);
-			const matchedMethods = [];
-			for (const route of this.routes) {
-				const match = route.pattern.exec(path);
-				if (!match) continue;
-				matchedMethods.push(route.method);
-				if (route.method !== method) continue;
-				const response = await this.handleRoute(route, match, body, query, headers, method, path, context);
-				if (response) return response;
-			}
-			if (matchedMethods.length > 0) return methodNotAllowed(`Method ${method} not allowed`);
-			return notFound(`No route matches ${path}`);
-		};
-	}
-};
-
-//#endregion
 
 ;// ./node_modules/valibot/dist/index.mjs
 //#region src/storages/globalConfig/globalConfig.ts
@@ -116502,7 +115847,7 @@ function omit(schema, keys) {
 *
 * @returns The parsed input.
 */
-function dist_parse(schema, input, config$1) {
+function parse(schema, input, config$1) {
 	const dataset = schema["~run"]({ value: input }, /* @__PURE__ */ getGlobalConfig(config$1));
 	if (dataset.issues) throw new ValiError(dataset.issues);
 	return dataset.value;
@@ -116529,7 +115874,7 @@ async function parseAsync(schema, input, config$1) {
 //#region src/methods/parser/parser.ts
 /* @__NO_SIDE_EFFECTS__ */
 function parser(schema, config$1) {
-	const func = (input) => dist_parse(schema, input, config$1);
+	const func = (input) => parse(schema, input, config$1);
 	func.schema = schema;
 	func.config = config$1;
 	return func;
@@ -116783,7 +116128,7 @@ function unwrap(schema) {
 
 //#endregion
 
-;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/schemas-hRovglBF.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/commerce/index.mjs
 /**
  * @license
  *
@@ -116800,701 +116145,19 @@ function unwrap(schema) {
 
 
 
-//#region ../../packages-private/common-utils/source/valibot/schemas.ts
-const ALPHANUMERIC_OR_HYPHEN_REGEX = {
-	any: /^[a-zA-Z0-9-]+$/,
-	lowercase: /^[a-z0-9-]+$/,
-	uppercase: /^[A-Z0-9-]+$/
-};
+//#region source/commerce/env.ts
+/** The list of supported Commerce environments an item can be scoped to. */
+const COMMERCE_ENVS = ["paas", "saas"];
+/** Schema for a single Commerce environment an item can be scoped to. */
+const CommerceEnvSchema = picklist(COMMERCE_ENVS, `Expected one of: ${COMMERCE_ENVS.map((e) => `"${e}"`).join(", ")}`);
 /**
-* A schema for a number value.
-* @param name The name of the field this schema refers to.
-*/
-function numberValueSchema(name) {
-	return number(`Expected a number value for '${name}'`);
-}
-/**
-* A schema for a positive number value (including zero).
-* @param name The name of the field this schema refers to.
-*/
-function positiveNumberValueSchema(name) {
-	return pipe(numberValueSchema(name), minValue(0, `The value of ${name} must be a non-negative number`));
-}
-/**
-* A schema for a string value.
-* @param name The name of the field this schema refers to.
-*/
-function stringValueSchema(name) {
-	return string(`Expected a string value for '${name}'`);
-}
-/**
-* A schema for a non-empty string value.
-* @param name The name of the field this schema refers to.
-*/
-function nonEmptyStringValueSchema(name) {
-	return pipe(stringValueSchema(name), nonEmpty(`The value of "${name}" must not be empty`));
-}
-/**
-* A schema for a boolean value.
-* @param name The name of the field this schema refers to.
-*/
-function booleanValueSchema(name) {
-	return dist_boolean(`Expected a boolean value for '${name}'`);
-}
-/**
-* A schema for a string that only contains alphanumeric characters and hyphens.
-* @param name The name of the field this schema refers to.
-* @param casing The allowed casing for the string (default: "any").
-*/
-function alphaNumericOrHyphenSchema(name, casing = "any") {
-	const casingLabel = casing === "any" ? "" : ` (${casing} only)`;
-	return pipe(stringValueSchema(name), regex(ALPHANUMERIC_OR_HYPHEN_REGEX[casing], `Only alphanumeric characters and hyphens are allowed in string value of "${name}"${casingLabel}`));
-}
-
-//#endregion
-
-;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/webhooks-B5oq9ULL.mjs
-/**
- * @license
- *
- * Copyright 2026 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
-
-
-
-//#region source/config/schema/admin-ui-sdk.ts
-const SANDBOX_VALUES = [
-	"allow-downloads",
-	"allow-modals",
-	"allow-popups"
-];
-function isSandboxValue(value) {
-	return SANDBOX_VALUES.includes(value);
-}
-const SandboxSchema = pipe(string("Expected a string value for \"sandbox\""), check((val) => val.split(" ").every(isSandboxValue), `sandbox must contain only single-space-separated values from: ${SANDBOX_VALUES.map((t) => `"${t}"`).join(", ")}`));
-const ColumnTypeSchema = picklist([
-	"boolean",
-	"date",
-	"float",
-	"integer",
-	"string"
-]);
-const ColumnAlignSchema = picklist([
-	"left",
-	"right",
-	"center"
-]);
-const ViewButtonLevelSchema = picklist([
-	-1,
-	0,
-	1
-]);
-const MassActionConfirmSchema = object({
-	title: optional(nonEmptyStringValueSchema("confirm title")),
-	message: optional(nonEmptyStringValueSchema("confirm message"))
-});
-const ViewButtonConfirmSchema = object({ message: optional(nonEmptyStringValueSchema("confirm message")) });
-const iframeActionEntries = {
-	displayIframe: optional(booleanValueSchema("displayIframe")),
-	timeout: optional(positiveNumberValueSchema("timeout")),
-	sandbox: optional(SandboxSchema)
-};
-const GridColumnPropertySchema = object({
-	label: nonEmptyStringValueSchema("column label"),
-	columnId: nonEmptyStringValueSchema("column ID"),
-	type: ColumnTypeSchema,
-	align: ColumnAlignSchema
-});
-const GridColumnsSchema = object({
-	data: object({ meshId: nonEmptyStringValueSchema("mesh ID") }),
-	properties: pipe(array(GridColumnPropertySchema), minLength(1, "At least one grid column property is required"))
-});
-const massActionBaseEntries = {
-	actionId: nonEmptyStringValueSchema("mass action ID"),
-	label: nonEmptyStringValueSchema("mass action label"),
-	title: optional(nonEmptyStringValueSchema("mass action page title")),
-	confirm: optional(MassActionConfirmSchema),
-	path: nonEmptyStringValueSchema("mass action path"),
-	...iframeActionEntries
-};
-const sandboxDisplayIframeCheck = forward(partialCheck([["sandbox"], ["displayIframe"]], (input) => input.sandbox === void 0 || input.displayIframe === true, "sandbox is only relevant when displayIframe is set to true"), ["sandbox"]);
-function withSandboxDisplayIframeCheck(schema) {
-	return pipe(schema, sandboxDisplayIframeCheck);
-}
-function createMassActionSchema(variantEntries) {
-	return withSandboxDisplayIframeCheck(strictObject({
-		...massActionBaseEntries,
-		...variantEntries
-	}));
-}
-const OrderMassActionSchema = createMassActionSchema({ selectionLimit: optional(positiveNumberValueSchema("selectionLimit")) });
-const ProductMassActionSchema = createMassActionSchema({ productSelectLimit: optional(positiveNumberValueSchema("productSelectLimit")) });
-const CustomerMassActionSchema = createMassActionSchema({ customerSelectLimit: optional(positiveNumberValueSchema("customerSelectLimit")) });
-const OrderViewButtonSchema = withSandboxDisplayIframeCheck(object({
-	buttonId: nonEmptyStringValueSchema("view button ID"),
-	label: nonEmptyStringValueSchema("view button label"),
-	confirm: optional(ViewButtonConfirmSchema),
-	path: nonEmptyStringValueSchema("view button path"),
-	level: optional(ViewButtonLevelSchema),
-	sortOrder: optional(positiveNumberValueSchema("sortOrder")),
-	...iframeActionEntries
-}));
-const CustomFeeSchema = object({
-	id: nonEmptyStringValueSchema("custom fee ID"),
-	label: nonEmptyStringValueSchema("custom fee label"),
-	value: number("Custom fee value must be a number"),
-	orderMinimumAmount: optional(number("orderMinimumAmount must be a number")),
-	applyFeeOnLastInvoice: optional(booleanValueSchema("applyFeeOnLastInvoice")),
-	applyFeeOnLastCreditMemo: optional(booleanValueSchema("applyFeeOnLastCreditMemo"))
-});
-const OrderExtensionPointsSchema = object({
-	massActions: optional(array(OrderMassActionSchema)),
-	gridColumns: optional(GridColumnsSchema),
-	viewButtons: optional(array(OrderViewButtonSchema)),
-	customFees: optional(array(CustomFeeSchema))
-});
-const ProductExtensionPointsSchema = object({
-	massActions: optional(array(ProductMassActionSchema)),
-	gridColumns: optional(GridColumnsSchema)
-});
-const CustomerExtensionPointsSchema = object({
-	massActions: optional(array(CustomerMassActionSchema)),
-	gridColumns: optional(GridColumnsSchema)
-});
-const MassActionBannerSchema = object({
-	actionId: nonEmptyStringValueSchema("mass action ID"),
-	successMessage: optional(nonEmptyStringValueSchema("success message")),
-	errorMessage: optional(nonEmptyStringValueSchema("error message"))
-});
-const OrderViewButtonBannerSchema = object({
-	buttonId: nonEmptyStringValueSchema("view button ID"),
-	successMessage: optional(nonEmptyStringValueSchema("success message")),
-	errorMessage: optional(nonEmptyStringValueSchema("error message"))
-});
-const BannerNotificationSchema = object({
-	massActions: optional(object({
-		order: optional(array(MassActionBannerSchema)),
-		product: optional(array(MassActionBannerSchema)),
-		customer: optional(array(MassActionBannerSchema))
-	})),
-	orderViewButtons: optional(array(OrderViewButtonBannerSchema))
-});
-const MenuItemSchema = object({
-	id: nonEmptyStringValueSchema("menu item ID"),
-	title: optional(nonEmptyStringValueSchema("menu item title")),
-	parent: optional(nonEmptyStringValueSchema("menu item parent")),
-	sortOrder: optional(number()),
-	isSection: optional(booleanValueSchema("isSection")),
-	sandbox: optional(SandboxSchema)
-});
-/**
-* Schema for the Admin UI SDK registration parameters (for the `adminUiSdk.registration` config section).
-* @see https://developer.adobe.com/commerce/extensibility/admin-ui-sdk/extension-points/ for more details.
-*/
-const AdminUiSdkRegistrationSchema = object({
-	menuItems: optional(array(MenuItemSchema)),
-	order: optional(OrderExtensionPointsSchema),
-	product: optional(ProductExtensionPointsSchema),
-	customer: optional(CustomerExtensionPointsSchema),
-	bannerNotification: optional(BannerNotificationSchema)
-});
-/**
-* Schema for Admin UI SDK configuration.
-* @experimental
-*/
-const AdminUiSdkSchema = object({ registration: AdminUiSdkRegistrationSchema });
-/**
-* Check if config has Admin UI SDK registration configuration.
-* @experimental
-*/
-function hasAdminUiSdk(config) {
-	return config.adminUiSdk !== void 0 && config.adminUiSdk.registration !== void 0;
-}
-
-//#endregion
-//#region source/config/schema/eventing.ts
-const MAX_DESCRIPTION_LENGTH$1 = 255;
-const MAX_LABEL_LENGTH = 100;
-const MAX_KEY_LENGTH = 50;
-const MAX_EVENT_NAME_LENGTH = 180;
-/**
-* Regex for Commerce event names that must start with "plugin." or "observer."
-* followed by one or more dot-separated lowercase segments containing letters
-* and underscores only.
-* Examples: "observer.order_placed", "plugin.sales.api.order_management.place"
-*/
-const COMMERCE_EVENT_NAME_REGEX = /^(?:plugin|observer)\.[a-z_]+(?:\.[a-z_]+)*$/;
-/**
-* Regex for external event names.
-* Allows word characters (letters, digits, underscore), hyphens, underscores, and dots.
-* Examples: "external_event", "webhook.received", "my-event_123"
-*/
-const EXTERNAL_EVENT_NAME_REGEX = /^[\w\-_.]+$/;
-/**
-* Regex for field names according to XSD fieldName pattern.
-* Field name can either contain only [a-zA-Z0-9_\-\.\[\]] or be set to *.
-*/
-const FIELD_NAME_REGEX = /^([a-zA-Z0-9_\-.[\]]+|\*)$/;
-/**
-* Regex for Adobe I/O Events API text fields (label, description).
-* Valid characters per API: letters, numbers, spaces, underscores, hyphens,
-* dots, colons, parentheses, commas, @, and /.
-*/
-const IO_EVENTS_TEXT_REGEX = /^[a-zA-Z0-9 _.:()\-,@/]+$/;
-/**
-* Schema for Commerce event names.
-* Validates that the event name starts with "plugin." or "observer."
-* followed by one or more dot-separated lowercase segments containing letters
-* and underscores only.
-*/
-function commerceEventNameSchema() {
-	return pipe(nonEmptyStringValueSchema("event name"), regex(COMMERCE_EVENT_NAME_REGEX, "Event name must start with \"plugin.\" or \"observer.\" followed by one or more dot-separated lowercase segments containing letters and underscores only (e.g., \"observer.order_placed\", \"plugin.sales.api.order_management.place\")"), maxLength(MAX_EVENT_NAME_LENGTH, `The event name must not be longer than ${MAX_EVENT_NAME_LENGTH} characters`));
-}
-/**
-* Schema for external event names.
-* Validates that the event name contains only word characters (letters, digits, underscore),
-* hyphens, underscores, and dots.
-*/
-function externalEventNameSchema() {
-	return pipe(nonEmptyStringValueSchema("event name"), regex(EXTERNAL_EVENT_NAME_REGEX, "Event name must contain only letters, digits, underscores, hyphens, and dots (e.g., \"external_event\", \"webhook.received\", \"my-event_123\")"), maxLength(MAX_EVENT_NAME_LENGTH, `The event name must not be longer than ${MAX_EVENT_NAME_LENGTH} characters`));
-}
-/**
-* Schema for field names.
-* Validates that the field name matches the XSD fieldName pattern:
-* can either contain only [a-zA-Z0-9_\-\.\[\]] or be set to *.
-*/
-function fieldNameSchema() {
-	return pipe(nonEmptyStringValueSchema("field name"), regex(FIELD_NAME_REGEX, "Field name must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), dashes (-), dots (.), and square brackets ([, ]), or be exactly \"*\""));
-}
-/** Validates that a text field contains only characters accepted by the Adobe I/O Events API. */
-function ioEventsTextSchema(name) {
-	return regex(IO_EVENTS_TEXT_REGEX, `${name} can only contain letters, numbers, spaces, underscores, hyphens, dots, colons, parentheses, commas, @, and /`);
-}
-/**
-* Schema for field objects in Commerce events.
-* Each field has a required name and an optional source.
-*/
-function commerceEventFieldSchema() {
-	return object({
-		name: fieldNameSchema(),
-		source: optional(stringValueSchema("field source"))
-	});
-}
-/** Schema for event provider configuration */
-const ProviderSchema = object({
-	label: pipe(nonEmptyStringValueSchema("provider label"), ioEventsTextSchema("Provider label"), maxLength(MAX_LABEL_LENGTH, `The provider label must not be longer than ${MAX_LABEL_LENGTH} characters`)),
-	description: pipe(nonEmptyStringValueSchema("provider description"), ioEventsTextSchema("Provider description"), maxLength(MAX_DESCRIPTION_LENGTH$1, `The provider description must not be longer than ${MAX_DESCRIPTION_LENGTH$1} characters`)),
-	key: optional(pipe(alphaNumericOrHyphenSchema("provider key"), maxLength(MAX_KEY_LENGTH, `The provider key must not be longer than ${MAX_KEY_LENGTH} characters`)))
-});
-/** Schema for base shared properties between event types. */
-const BaseEventSchema = object({
-	label: pipe(nonEmptyStringValueSchema("event label"), ioEventsTextSchema("Event label"), maxLength(MAX_LABEL_LENGTH, `The event label must not be longer than ${MAX_LABEL_LENGTH} characters`)),
-	description: pipe(nonEmptyStringValueSchema("event description"), ioEventsTextSchema("Event description"), maxLength(MAX_DESCRIPTION_LENGTH$1, `The event description must not be longer than ${MAX_DESCRIPTION_LENGTH$1} characters`)),
-	runtimeActions: array(pipe(nonEmptyStringValueSchema("runtime action"), regex(/^[a-z0-9-]+\/[a-z0-9-]+$/i, "Runtime action must be in the format \"<package>/<action>\" (e.g., \"my-package/my-action\")")), "Expected an array of runtime actions in the format <package>/<action>")
-});
-/**
-* Schema for rule operator values.
-* Valid operators for Commerce event filtering rules.
-*/
-const OPERATORS = [
-	"greaterThan",
-	"lessThan",
-	"equal",
-	"regex",
-	"in",
-	"onChange"
-];
-const ruleOperatorSchema = union(OPERATORS.map((op) => literal(op)), `Operator must be one of: ${OPERATORS.join(", ")}`);
-/** Schema for Commerce event rule configuration */
-const CommerceEventRuleSchema = object({
-	field: nonEmptyStringValueSchema("rule field"),
-	operator: ruleOperatorSchema,
-	value: nonEmptyStringValueSchema("rule value")
-});
-/** Schema for Commerce event configuration */
-const CommerceEventSchema = object({
-	...BaseEventSchema.entries,
-	name: commerceEventNameSchema(),
-	fields: pipe(array(commerceEventFieldSchema(), "Expected an array of event field objects with a 'name' property"), minLength(1, "The Commerce event configuration must define at least one field")),
-	rules: optional(array(CommerceEventRuleSchema, "Expected an array of event rules with field, operator, and value")),
-	destination: optional(nonEmptyStringValueSchema("destination")),
-	hipaa_audit_required: optional(booleanValueSchema("hipaa_audit_required")),
-	priority: optional(booleanValueSchema("priority")),
-	force: optional(booleanValueSchema("force"))
-});
-/** Schema for external event configuration */
-const ExternalEventSchema = object({
-	...BaseEventSchema.entries,
-	name: externalEventNameSchema()
-});
-/** Schema for Commerce event source configuration */
-const CommerceEventSourceSchema = object({
-	provider: ProviderSchema,
-	events: array(CommerceEventSchema, "Expected an array of Commerce events")
-});
-/** Schema for external event source configuration */
-const ExternalEventSourceSchema = object({
-	provider: ProviderSchema,
-	events: array(ExternalEventSchema, "Expected an array of external events")
-});
-/** Schema for eventing configuration with separate commerce and external arrays */
-const EventingSchema = object({
-	commerce: optional(pipe(array(CommerceEventSourceSchema, "Expected an array of Commerce event sources"), check((sources) => new Set(sources.map((s) => s.provider.label)).size === sources.length, "Commerce provider labels must be unique"))),
-	external: optional(pipe(array(ExternalEventSourceSchema, "Expected an array of external event sources"), check((sources) => new Set(sources.map((s) => s.provider.label)).size === sources.length, "External provider labels must be unique")))
-});
-/**
-* Check if config has commerce event sources.
-* @param config - The configuration to check.
-*/
-function hasCommerceEvents(config) {
-	return Array.isArray(config?.eventing?.commerce) && config.eventing.commerce.length > 0;
-}
-/**
-* Check if config has external event sources.
-* @param config - The configuration to check.
-*/
-function hasExternalEvents(config) {
-	return Array.isArray(config?.eventing?.external) && config.eventing.external.length > 0;
-}
-/**
-* Check if config has any eventing configuration.
-* @param config - The configuration to check.
-*/
-function hasEventing(config) {
-	return config.eventing !== void 0;
-}
-
-//#endregion
-//#region source/config/schema/installation.ts
-const MAX_DESCRIPTION_LENGTH = 255;
-const MAX_NAME_LENGTH = 255;
-const MAX_MESSAGE_LENGTH = 1e3;
-/**
-* Regex for script paths that can be relative or absolute.
-* Must end with .js extension
-* Examples:
-*   - "./scripts/setup.js"
-*   - "./setup.js"
-*   - "../../scripts/setup.js"
-*/
-const SCRIPT_PATH_REGEX = /^(?:\.{0,2}\/)*[\w-/]*[\w-]+\.js$/;
-/**
-* Schema for custom installation step configuration
-*/
-const CustomInstallationStepSchema = object({
-	script: pipe(nonEmptyStringValueSchema("script path"), regex(SCRIPT_PATH_REGEX, "Script path must end with .js (e.g., \"./setup.js\", \"./scripts/setup.js\", or \"../../scripts/setup.js\")")),
-	name: pipe(nonEmptyStringValueSchema("step name"), maxLength(MAX_NAME_LENGTH, `The step name must not be longer than ${MAX_NAME_LENGTH} characters`)),
-	description: pipe(nonEmptyStringValueSchema("step description"), maxLength(MAX_DESCRIPTION_LENGTH, `The step description must not be longer than ${MAX_DESCRIPTION_LENGTH} characters`))
-});
-/**
-* Schema for installation messages configuration
-*/
-const MessagesSchema = object({
-	preInstallation: optional(pipe(nonEmptyStringValueSchema("preInstallation message"), maxLength(MAX_MESSAGE_LENGTH, `The preInstallation message must not be longer than ${MAX_MESSAGE_LENGTH} characters`))),
-	postInstallation: optional(pipe(nonEmptyStringValueSchema("postInstallation message"), maxLength(MAX_MESSAGE_LENGTH, `The postInstallation message must not be longer than ${MAX_MESSAGE_LENGTH} characters`)))
-});
-/**
-* Schema for installation configuration
-*/
-const InstallationSchema = object({
-	messages: optional(MessagesSchema),
-	customInstallationSteps: pipe(optional(array(CustomInstallationStepSchema, "Expected an array of custom installation steps")), check((input) => {
-		const steps = input || [];
-		return new Set(steps.map((step) => step.name)).size === steps.length;
-	}, "Duplicate step names detected in custom installation steps. Each step must have a unique name."))
-});
-/**
-* Check if config has custom installation settings.
-* @param config - The configuration to check.
-*/
-function hasCustomInstallation(config) {
-	return config.installation !== void 0;
-}
-/**
-* Check if config has custom installation steps.
-* @param config - The configuration to check.
-*/
-function hasCustomInstallationSteps(config) {
-	return Array.isArray(config?.installation?.customInstallationSteps) && config.installation.customInstallationSteps.length > 0;
-}
-
-//#endregion
-//#region source/config/schema/webhooks.ts
-/** Schema for webhook field configuration (name and optional source). */
-const WebhookFieldSchema = object({
-	name: nonEmptyStringValueSchema("field name"),
-	source: optional(stringValueSchema("field source"))
-});
-/** Schema for webhook rule configuration (field, operator, value). */
-const WebhookRuleSchema = object({
-	field: nonEmptyStringValueSchema("rule field"),
-	operator: nonEmptyStringValueSchema("rule operator"),
-	value: nonEmptyStringValueSchema("rule value")
-});
-/** Schema for webhook header configuration (name, value). */
-const WebhookHeaderSchema = object({
-	name: nonEmptyStringValueSchema("header name"),
-	value: nonEmptyStringValueSchema("header value")
-});
-/** batch_name and hook_name must contain only letters, numbers, and underscores. */
-const WEBHOOK_IDENTIFIER_REGEX = /^[a-zA-Z0-9_]+$/;
-/** Category for conflict detection: validation, append, or modification. */
-const CATEGORIES = [
-	"validation",
-	"append",
-	"modification"
-];
-const CategorySchema = picklist(CATEGORIES, `Webhook category must be one of: ${CATEGORIES.join(", ")}`);
-/** Schema for the nested webhook payload without url — used when runtimeAction resolves the URL at runtime. */
-const WebhookDefinitionBaseSchema = object({
-	webhook_method: nonEmptyStringValueSchema("webhook_method"),
-	webhook_type: nonEmptyStringValueSchema("webhook_type"),
-	batch_name: pipe(nonEmptyStringValueSchema("batch_name"), regex(WEBHOOK_IDENTIFIER_REGEX, "batch_name must contain only letters, numbers, and underscores")),
-	batch_order: optional(positiveNumberValueSchema("batch_order")),
-	hook_name: pipe(nonEmptyStringValueSchema("hook_name"), regex(WEBHOOK_IDENTIFIER_REGEX, "hook_name must contain only letters, numbers, and underscores")),
-	priority: optional(positiveNumberValueSchema("priority")),
-	required: optional(booleanValueSchema("required")),
-	soft_timeout: optional(positiveNumberValueSchema("soft_timeout")),
-	timeout: optional(positiveNumberValueSchema("timeout")),
-	method: nonEmptyStringValueSchema("HTTP method"),
-	fallback_error_message: optional(stringValueSchema("fallback_error_message")),
-	ttl: optional(positiveNumberValueSchema("ttl")),
-	fields: optional(array(WebhookFieldSchema, "Expected an array of webhook field objects")),
-	rules: optional(array(WebhookRuleSchema, "Expected an array of webhook rule objects")),
-	headers: optional(array(WebhookHeaderSchema, "Expected an array of webhook header objects"))
-});
-/** Schema for the nested webhook payload with a required url. */
-const WebhookDefinitionWithUrlSchema = object({
-	...WebhookDefinitionBaseSchema.entries,
-	url: pipe(stringValueSchema("webhook URL"), url("The 'url' field must be a valid absolute URL (e.g., 'https://example.com/webhook')"))
-});
-/** Schema for a webhook entry that resolves its URL from a runtime action. */
-const WebhookEntryWithRuntimeActionSchema = object({
-	label: nonEmptyStringValueSchema("webhook label"),
-	description: nonEmptyStringValueSchema("webhook description"),
-	category: optional(CategorySchema),
-	runtimeAction: nonEmptyStringValueSchema("runtimeAction"),
-	requireAdobeAuth: optional(booleanValueSchema("requireAdobeAuth")),
-	webhook: WebhookDefinitionBaseSchema
-});
-/** Schema for a webhook entry that provides an explicit URL. */
-const WebhookEntryWithUrlSchema = object({
-	label: nonEmptyStringValueSchema("webhook label"),
-	description: nonEmptyStringValueSchema("webhook description"),
-	category: optional(CategorySchema),
-	webhook: WebhookDefinitionWithUrlSchema
-});
-/** Schema for a single webhook entry — either runtimeAction (no url) or explicit url (no runtimeAction). */
-const WebhookEntrySchema = union([WebhookEntryWithRuntimeActionSchema, WebhookEntryWithUrlSchema], "Each webhook entry must define either a 'runtimeAction' (to resolve the URL from a runtime action) or an explicit 'url' inside the 'webhook' object, but not both");
-/** Schema for the optional webhooks array (when present, must have at least one item). */
-const WebhooksSchema = optional(pipe(array(WebhookEntrySchema, "Expected an array of webhook entries"), minLength(1, "webhooks array must contain at least one webhook when present")));
-/**
-* Check if config has webhooks (non-empty array).
-* @param config - The configuration to check.
-*/
-function hasWebhooks(config) {
-	return Array.isArray(config?.webhooks) && config.webhooks.length > 0;
-}
-
-//#endregion
-
-// EXTERNAL MODULE: external "util"
-var external_util_ = __webpack_require__(39023);
-// EXTERNAL MODULE: ./node_modules/ansis/index.cjs
-var ansis = __webpack_require__(56795);
-;// ./node_modules/ansis/index.mjs
-/* unused harmony import specifier */ var a;
-/* harmony default export */ const node_modules_ansis = ((/* unused pure expression or super */ null && (a)));const{Ansis,fg,bg,rgb,bgRgb,hex,bgHex,reset: ansis_reset,inverse,hidden: ansis_hidden,visible,link: ansis_link,bold,dim,italic,underline,strikethrough,black,red,green,yellow,blue,magenta,cyan,white,gray,redBright,greenBright,yellowBright,blueBright,magentaBright,cyanBright,whiteBright,bgBlack,bgRed,bgGreen,bgYellow,bgBlue,bgMagenta,bgCyan,bgWhite,bgGray,bgRedBright,bgGreenBright,bgYellowBright,bgBlueBright,bgMagentaBright,bgCyanBright,bgWhiteBright}=ansis;
-;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/error-WnQqveay.mjs
-/**
- * @license
- *
- * Copyright 2026 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License. You may obtain a copy
- * of the License at http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under
- * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
- * OF ANY KIND, either express or implied. See the License for the specific language
- * governing permissions and limitations under the License.
- */
-
-
-
-
-
-//#region source/error/base-error.ts
-/**
-* Base class for all the errors in the AIO Commerce SDK.
-* @example
-* ```ts
-* class ValidationError extends CommerceSdkErrorBase {
-*   constructor(message: string, options: ValidationErrorOptions) {
-*     super(message, options);
-*   }
-* }
+* Schema for a non-empty array of Commerce environments, used to scope an item
+* (a configuration field, webhook, or event) to specific environments.
 *
-* const err = new ValidationError("Invalid value", {
-*   tag: "ValidationError",
-*   field: "name",
-*   value: "John Doe",
-* });
-*
-* console.log(err.toJSON());
-* ```
+* Apply the optional wrapper at the call site (`v.optional(CommerceEnvArraySchema)`);
+* when omitted, the item applies to all environments.
 */
-var CommerceSdkErrorBase = class CommerceSdkErrorBase extends Error {
-	/**
-	* Constructs a new CommerceSdkErrorBase instance. This is an abstract class so you
-	* should not instantiate it directly. Only invoke this constructor from a subclass.
-	*
-	* @param message - A human-friendly description of the error.
-	* @param options - Optional error options (additional information).
-	*/
-	constructor(message, options) {
-		const { traceId, ...baseOptions } = options ?? {};
-		super(message, baseOptions);
-		Object.setPrototypeOf(this, new.target.prototype);
-		if (Error.captureStackTrace) Error.captureStackTrace(this, new.target);
-		this.name = new.target.name || "CommerceSdkError";
-		this.traceId = traceId;
-	}
-	/**
-	* Checks if the error is any CommerceSdkErrorBase instance.
-	* @example
-	* ```ts
-	* class ValidationError extends CommerceSdkErrorBase {}
-	* const err = new ValidationError("Invalid", {});
-	*
-	* CommerceSdkErrorBase.isSdkError(err); // true
-	* ValidationError.isSdkError(err); // true
-	* CommerceSdkErrorBase.isSdkError(new Error("Regular")); // false
-	* ```
-	*/
-	static isSdkError(error) {
-		return error instanceof CommerceSdkErrorBase;
-	}
-	/** Returns the full stack trace of the error and its causes. */
-	get fullStack() {
-		let out = this.stack ?? "";
-		let cause = this.cause;
-		while (cause instanceof Error) {
-			out += `\nCaused by: ${cause.stack ?? cause.message}`;
-			cause = cause.cause;
-		}
-		return out;
-	}
-	/** Returns the root cause of the error. */
-	get rootCause() {
-		let cause = this.cause;
-		while (cause) if (typeof cause === "object" && cause !== null && "cause" in cause) cause = cause.cause;
-		else break;
-		return cause;
-	}
-	/** Converts the error to a JSON-like representation. */
-	toJSON() {
-		return {
-			name: this.name,
-			message: this.message,
-			stack: this.fullStack,
-			cause: this.cause,
-			traceId: this.traceId
-		};
-	}
-	/**
-	* Returns a pretty string representation of the error.
-	* @param inspect - Whether to inspect the error (returns a more detailed string, useful for debugging).
-	*/
-	toString(inspect = true) {
-		if (inspect) return external_util_.inspect(this, {
-			depth: null,
-			colors: true,
-			sorted: true,
-			maxStringLength: Number.POSITIVE_INFINITY
-		});
-		return super.toString();
-	}
-};
-
-//#endregion
-//#region source/error/validation-error.ts
-const LAST_RETURN_CHAR = "└── ";
-const RETURN_CHAR = "├── ";
-/** Maps issue kinds to their corresponding error titles for display purposes. */
-const ISSUE_KIND_TO_ERROR_TITLE = {
-	schema: "Schema validation error",
-	transformation: "Transformation error",
-	validation: "Input error"
-};
-function getReturnChar(isLastItem, withColor) {
-	const char = isLastItem ? LAST_RETURN_CHAR : RETURN_CHAR;
-	return withColor ? cyanBright(char) : char;
-}
-function getKindText(kind, withColor) {
-	const text = ISSUE_KIND_TO_ERROR_TITLE[kind] ?? "Unknown issue kind";
-	return withColor ? yellowBright(text) : text;
-}
-function getPathText(dotPath, withColor) {
-	if (!dotPath) return "";
-	return withColor ? `${cyanBright(dotPath)}${whiteBright(dim(" →"))}` : `${dotPath} →`;
-}
-function issueToDisplay(issues, withColor = true) {
-	return (issues?.map((issue, index) => {
-		const returnChar = getReturnChar(index === issues.length - 1, withColor);
-		const kindText = getKindText(issue.kind, withColor);
-		const path = getPathText(getDotPath(issue), withColor);
-		const message = withColor ? whiteBright(issue.message) : issue.message;
-		return `${returnChar} ${`${kindText} ${withColor ? whiteBright("at") : "at"} ${path} ${message}`}`;
-	}))?.join("\n") ?? "";
-}
-function displayValidationError(error, withColor = true) {
-	const display = issueToDisplay(error.issues, withColor);
-	return `${withColor ? whiteBright(error.message) : error.message}\n${display}`;
-}
-/**
-* Represents a validation error in the Commerce SDK.
-* This error should be thrown when an input does not conform to the expected schema.
-* It contains a list of issues that describe the validation errors.
-*
-* @example
-* ```ts
-* const error = new CommerceSdkValidationError("Invalid input", {
-*   // `someIssues` is in scope, returned by some `valibot` operation.
-*   issues: someIssues
-* });
-*
-* console.log(error.display());
-* ```
-*/
-var CommerceSdkValidationError = class extends CommerceSdkErrorBase {
-	/**
-	* Constructs a new {@link CommerceSdkValidationError} instance.
-	*
-	* @param message - A human-friendly description of the validation error.
-	* @param options - Options for the validation error, including the issues that caused the error.
-	*/
-	constructor(message, { issues, ...options }) {
-		super(message, options);
-		this.issues = issues;
-	}
-	/**
-	* Returns a pretty string (and colored) representation of the validation error.
-	* @param withColor Whether to use color in the output.
-	*/
-	display(withColor = true) {
-		return displayValidationError(this, withColor);
-	}
-};
+const CommerceEnvArraySchema = pipe(array(CommerceEnvSchema, "Expected an array of commerce environments for the field \"env\""), nonEmpty("The \"env\" array must contain at least one commerce environment"));
 
 //#endregion
 
@@ -117511,16 +116174,16 @@ var safe_stable_stringify = __webpack_require__(12068);
 const configure = safe_stable_stringify.configure
 
 const stringify = (/* unused pure expression or super */ null && (cjsModule))
-/* harmony default export */ const wrapper = ((/* unused pure expression or super */ null && (cjsModule)));
+/* harmony default export */ const wrapper = (safe_stable_stringify);
 
-;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-config/dist/es/index.mjs
+// EXTERNAL MODULE: ./node_modules/@adobe/aio-lib-core-logging/src/AioLogger.js
+var AioLogger = __webpack_require__(65586);
+;// ./node_modules/@adobe/aio-commerce-lib-config/dist/es/index.mjs
 /* unused harmony import specifier */ var decrypt;
 /* unused harmony import specifier */ var encrypt;
-/* unused harmony import specifier */ var es_init;
-/* unused harmony import specifier */ var init$1;
+/* unused harmony import specifier */ var v;
+/* unused harmony import specifier */ var CommerceSdkValidationError;
 /* unused harmony import specifier */ var stringify$1;
-/* unused harmony import specifier */ var es_stringify;
-/* unused harmony import specifier */ var es_AioLogger;
 /* unused harmony import specifier */ var v4;
 /* unused harmony import specifier */ var AdobeCommerceHttpClient;
 /**
@@ -117536,6 +116199,7 @@ const stringify = (/* unused pure expression or super */ null && (cjsModule))
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
 
 
 
@@ -117578,7 +116242,7 @@ function requireGlobalSchema() {
 * @param message - Optional custom error message for the validation error.
 */
 function parseOrThrow(schema, input, message) {
-	const result = safeParse(schema, input);
+	const result = v.safeParse(schema, input);
 	if (!result.success) throw new CommerceSdkValidationError(message ?? "Invalid input", { issues: result.issues });
 	return result.output;
 }
@@ -117598,25 +116262,16 @@ function validateMarkdownLink(text) {
 const DEFAULT_BOOLEAN_VALUE = false;
 const DEFAULT_STRING_VALUE = "";
 const DEFAULT_MULTIPLE_LIST_VALUE = [];
-/** The list of supported Commerce environments a configuration field can be scoped to. */
-const COMMERCE_ENVS = ["paas", "saas"];
-/** Schema for a single Commerce environment a configuration field can be scoped to. */
-const CommerceEnvSchema = picklist(COMMERCE_ENVS, `Expected one of: ${COMMERCE_ENVS.map((e) => `"${e}"`).join(", ")}`);
-/**
-* Schema for the optional `env` property used to scope a configuration field to
-* specific Commerce environments. When omitted, the field applies to all environments.
-*/
-const EnvSchema = pipe(array(CommerceEnvSchema, "Expected an array of commerce environments for the field \"env\""), nonEmpty("The \"env\" array must contain at least one commerce environment"));
 /**
 * Base schema for configuration field options with name, optional label,
 * optional description, and optional `env` to scope the field to specific
 * Commerce environments (when omitted, the field applies to all environments).
 */
 const BaseOptionSchema = object({
-	name: pipe(string("Expected a string for the field name"), nonEmpty("The field name must not be empty")),
-	label: optional(string("Expected a string for the field label")),
 	description: optional(pipe(string("Expected a string for the field description"), check(validateMarkdownLink, "Field description contains an invalid markdown URL."))),
-	env: optional(EnvSchema)
+	env: optional(CommerceEnvArraySchema),
+	label: optional(string("Expected a string for the field label")),
+	name: pipe(string("Expected a string for the field name"), nonEmpty("The field name must not be empty"))
 });
 /** Schema for a single option in a list field, containing a display label and a value */
 const ListOptionSchema = object({
@@ -117626,76 +116281,76 @@ const ListOptionSchema = object({
 /** Entries shared between the single- and multiple-selection list field schemas. */
 const ListEntriesCommon = {
 	...BaseOptionSchema.entries,
-	type: literal("list", "Expected the type to be 'list'"),
-	options: array(ListOptionSchema, "Expected an array of list options")
+	options: array(ListOptionSchema, "Expected an array of list options"),
+	type: literal("list", "Expected the type to be 'list'")
 };
 /** Schema for a list field that allows single selection from a list of options */
 const SingleListSchema = object({
 	...ListEntriesCommon,
-	selectionMode: literal("single", "Expected the selectionMode to be 'single'"),
-	default: pipe(string("Expected a string for the default value"), nonEmpty("The default value must not be empty"))
+	default: pipe(string("Expected a string for the default value"), nonEmpty("The default value must not be empty")),
+	selectionMode: literal("single", "Expected the selectionMode to be 'single'")
 });
 /** Schema for a list field that allows multiple selections from a list of options */
 const MultipleListSchema = object({
 	...ListEntriesCommon,
-	selectionMode: literal("multiple", "Expected the selectionMode to be 'multiple'"),
-	default: optional(array(pipe(string("Expected a string for each default value"), nonEmpty("Each default value must not be empty")), "Expected an array of default values"), DEFAULT_MULTIPLE_LIST_VALUE)
+	default: optional(array(pipe(string("Expected a string for each default value"), nonEmpty("Each default value must not be empty")), "Expected an array of default values"), DEFAULT_MULTIPLE_LIST_VALUE),
+	selectionMode: literal("multiple", "Expected the selectionMode to be 'multiple'")
 });
 /** Schema for list fields supporting either single or multiple selection modes */
 const ListSchema = variant("selectionMode", [SingleListSchema, MultipleListSchema]);
 /** Schema for a text input field that accepts string values */
 const TextSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("text", "Expected the type to be 'text'"),
-	default: optional(string("Expected a string for the default value"), DEFAULT_STRING_VALUE)
+	default: optional(string("Expected a string for the default value"), DEFAULT_STRING_VALUE),
+	type: literal("text", "Expected the type to be 'text'")
 });
 /** Schema for a password input field that accepts string values (typically masked in UI) */
 const PasswordSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("password", "Expected the type to be 'password'"),
-	default: optional(literal(DEFAULT_STRING_VALUE, "Password fields do not have a default value"), DEFAULT_STRING_VALUE)
+	default: optional(literal(DEFAULT_STRING_VALUE, "Password fields do not have a default value"), DEFAULT_STRING_VALUE),
+	type: literal("password", "Expected the type to be 'password'")
 });
 /** Schema for an email input field that accepts and validates email addresses */
 const EmailSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("email", "Expected the type to be 'email'"),
-	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default email value"), email("The email must be a valid email address"))]), DEFAULT_STRING_VALUE)
+	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default email value"), email("The email must be a valid email address"))]), DEFAULT_STRING_VALUE),
+	type: literal("email", "Expected the type to be 'email'")
 });
 /** Schema for a URL input field that accepts and validates URL strings */
 const UrlSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("url", "Expected the type to be 'url'"),
-	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default URL value"), url("The URL must be a valid URL"))]), DEFAULT_STRING_VALUE)
+	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default URL value"), url("The URL must be a valid URL"))]), DEFAULT_STRING_VALUE),
+	type: literal("url", "Expected the type to be 'url'")
 });
 /** Schema for a phone number input field that accepts and validates telephone numbers */
 const PhoneSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("tel", "Expected the type to be 'tel'"),
-	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default phone number value"), regex(/^\+?[0-9\s\-()]+$/, "The phone number must contain only numbers and/or country codes"))]), DEFAULT_STRING_VALUE)
+	default: optional(union([literal(DEFAULT_STRING_VALUE), pipe(string("Expected a string for the default phone number value"), regex(/^\+?[0-9\s\-()]+$/, "The phone number must contain only numbers and/or country codes"))]), DEFAULT_STRING_VALUE),
+	type: literal("tel", "Expected the type to be 'tel'")
 });
 /** Schema for a boolean toggle field that accepts true/false values */
 const BooleanSchema = object({
 	...BaseOptionSchema.entries,
-	type: literal("boolean", "Expected the type to be 'boolean'"),
-	default: optional(dist_boolean("Expected a boolean for the default value"), DEFAULT_BOOLEAN_VALUE)
+	default: optional(dist_boolean("Expected a boolean for the default value"), DEFAULT_BOOLEAN_VALUE),
+	type: literal("boolean", "Expected the type to be 'boolean'")
 });
 /** Entries shared between the single- and multiple-selection dynamic list field schemas. */
 const DynamicListEntriesCommon = {
 	...BaseOptionSchema.entries,
-	type: literal("dynamicList", "Expected the type to be 'dynamicList'"),
-	options: custom((input) => typeof input === "function", "Expected a function for \"options\"")
+	options: custom((input) => typeof input === "function", "Expected a function for \"options\""),
+	type: literal("dynamicList", "Expected the type to be 'dynamicList'")
 };
 /** Schema for a dynamic list field that allows single selection. */
 const SingleDynamicListSchema = object({
 	...DynamicListEntriesCommon,
-	selectionMode: literal("single", "Expected the selectionMode to be 'single'"),
-	default: custom((input) => typeof input === "function", "Expected a function for \"default\"")
+	default: custom((input) => typeof input === "function", "Expected a function for \"default\""),
+	selectionMode: literal("single", "Expected the selectionMode to be 'single'")
 });
 /** Schema for a dynamic list field that allows multiple selections. */
 const MultipleDynamicListSchema = object({
 	...DynamicListEntriesCommon,
-	selectionMode: literal("multiple", "Expected the selectionMode to be 'multiple'"),
-	default: optional(custom((input) => typeof input === "function", "Expected a function for \"default\""))
+	default: optional(custom((input) => typeof input === "function", "Expected a function for \"default\"")),
+	selectionMode: literal("multiple", "Expected the selectionMode to be 'multiple'")
 });
 /** Schema for dynamic list fields supporting either single or multiple selection modes. */
 const DynamicListSchema = variant("selectionMode", [SingleDynamicListSchema, MultipleDynamicListSchema]);
@@ -117751,16 +116406,17 @@ async function resolveDynamicListField(field, params) {
 	} catch (error) {
 		throw new Error(`Failed to resolve options for dynamicList field "${field.name}"`, { cause: error });
 	}
-	return parseOrThrow(ListSchema, {
-		name: field.name,
-		label: field.label,
+	const candidate = {
+		default: field.default?.(options),
 		description: field.description,
 		env: field.env,
-		type: "list",
-		selectionMode: field.selectionMode,
+		label: field.label,
+		name: field.name,
 		options,
-		default: field.default?.(options)
-	}, `Invalid resolved value for dynamicList field "${field.name}"`);
+		selectionMode: field.selectionMode,
+		type: "list"
+	};
+	return parseOrThrow(ListSchema, candidate, `Invalid resolved value for dynamicList field "${field.name}"`);
 }
 /**
 * Resolves any dynamic parts of a business configuration schema into a static
@@ -117809,10 +116465,10 @@ let __sharedFiles = null;
 let __globalStateOptions = null;
 function getOptimalRegion(owRegion) {
 	const regionMapping = {
-		"us-east-1": "amer",
-		"eu-west-1": "emea",
 		"ap-northeast-1": "apac",
-		"ap-southeast-2": "aus"
+		"ap-southeast-2": "aus",
+		"eu-west-1": "emea",
+		"us-east-1": "amer"
 	};
 	return owRegion && regionMapping[owRegion] ? regionMapping[owRegion] : regionMapping["us-east-1"];
 }
@@ -117830,7 +116486,8 @@ function setGlobalStateOptions(options) {
 async function getSharedState() {
 	if (!__sharedState) {
 		const initRegion = __globalStateOptions?.region ?? "auto";
-		__sharedState = await init$1({ region: initRegion === "auto" ? getOptimalRegion(process.env.__OW_REGION) : initRegion });
+		const region = initRegion === "auto" ? getOptimalRegion(process.env.__OW_REGION) : initRegion;
+		__sharedState = await (0,aio_lib_state.init)({ region });
 	}
 	return __sharedState;
 }
@@ -117839,7 +116496,7 @@ async function getSharedState() {
 * @returns Promise resolving to the shared Files instance
 */
 async function getSharedFiles() {
-	if (!__sharedFiles) __sharedFiles = await es_init();
+	if (!__sharedFiles) __sharedFiles = await (0,init/* init */.Ts)();
 	return __sharedFiles;
 }
 
@@ -117916,8 +116573,8 @@ function deriveScopeFromCodeAndLevel(code, level, tree) {
 	if (path.length === 0 || !node) throw new Error(`INVALID_SCOPE: Unknown scope code='${trimmedCode}' level='${trimmedLevel}'`);
 	return {
 		scopeCode: node.code,
-		scopeLevel: node.level,
 		scopeId: node.id,
+		scopeLevel: node.level,
 		scopePath: path
 	};
 }
@@ -117937,8 +116594,8 @@ function deriveScopeFromCommerceScopeId(commerceScopeId, level, tree) {
 	const path = findScopePath(tree, node.code, node.level);
 	return {
 		scopeCode: node.code,
-		scopeLevel: node.level,
 		scopeId: node.id,
+		scopeLevel: node.level,
 		scopePath: path
 	};
 }
@@ -117956,8 +116613,8 @@ function deriveScopeFromId(id, tree) {
 	const path = findScopePath(tree, node.code, node.level);
 	return {
 		scopeCode: node.code,
-		scopeLevel: node.level,
 		scopeId: node.id,
+		scopeLevel: node.level,
 		scopePath: path
 	};
 }
@@ -117985,7 +116642,7 @@ function deriveScopeFromArgs(args, tree) {
 		return deriveScopeFromCodeAndLevel(args[0], args[1], tree);
 	}
 	if (args.length === 1) {
-		const arg = args[0];
+		const [arg] = args;
 		try {
 			return deriveScopeFromId(arg, tree);
 		} catch {
@@ -118049,25 +116706,25 @@ function mergeScopes(existingScopeEntries, requestedScopeEntries, scopeCode, sco
 	const mergedMap = /* @__PURE__ */ new Map();
 	for (const existingEntry of existingScopeEntries) mergedMap.set(existingEntry.name, {
 		name: existingEntry.name,
-		value: existingEntry.value,
 		origin: existingEntry.origin || {
 			code: scopeCode,
 			level: scopeLevel
-		}
+		},
+		value: existingEntry.value
 	});
 	for (const requestedEntry of requestedScopeEntries) if (requestedEntry.value === null) mergedMap.delete(requestedEntry.name);
 	else mergedMap.set(requestedEntry.name, {
 		name: requestedEntry.name,
-		value: requestedEntry.value,
 		origin: {
 			code: scopeCode,
 			level: scopeLevel
-		}
+		},
+		value: requestedEntry.value
 	});
 	return Array.from(mergedMap.values()).map((data) => ({
 		name: data.name,
-		value: data.value,
-		origin: data.origin
+		origin: data.origin,
+		value: data.value
 	}));
 }
 /**
@@ -118078,11 +116735,11 @@ function mergeScopes(existingScopeEntries, requestedScopeEntries, scopeCode, sco
 function getSchemaDefaults(schema) {
 	return { config: schema.filter((field) => field.default !== void 0).map((field) => ({
 		name: field.name,
-		value: field.default,
 		origin: {
 			code: "default",
 			level: "system"
-		}
+		},
+		value: field.default
 	})) };
 }
 /**
@@ -118094,8 +116751,8 @@ function getSchemaDefaults(schema) {
 function mergeConfigEntries(merged, entries, origin) {
 	for (const entry of entries) if (!merged.has(entry.name)) merged.set(entry.name, {
 		name: entry.name,
-		value: entry.value,
-		origin
+		origin,
+		value: entry.value
 	});
 }
 /**
@@ -118105,13 +116762,14 @@ function mergeConfigEntries(merged, entries, origin) {
 * @param loadScopeConfigFn - Function to load config for a scope
 */
 async function mergeConfigFromPath(merged, scopePath, loadScopeConfigFn) {
-	for (const node of scopePath) {
-		const persisted = await loadScopeConfigFn(node.code);
+	const persistedConfigs = await Promise.all(scopePath.map((node) => loadScopeConfigFn(node.code)));
+	scopePath.forEach((node, index) => {
+		const persisted = persistedConfigs[index];
 		if (persisted?.config && Array.isArray(persisted.config)) mergeConfigEntries(merged, persisted.config, {
 			code: node.code,
 			level: node.level
 		});
-	}
+	});
 }
 /**
 * Checks if global scope is in the path and loads it if not
@@ -118136,14 +116794,14 @@ async function mergeGlobalConfigIfNeeded(merged, scopePath, loadScopeConfigFn) {
 * @param scopeLevel - The level of the scope
 */
 function mergeCurrentConfigData(merged, configData, scopeCode, scopeLevel) {
-	if (configData?.config && Array.isArray(configData.config)) {
+	if (Array.isArray(configData.config)) {
 		for (const entry of configData.config) if (!merged.has(entry.name)) merged.set(entry.name, {
 			name: entry.name,
-			value: entry.value,
 			origin: entry.origin || {
 				code: configData.scope?.code || scopeCode,
 				level: configData.scope?.level || scopeLevel
-			}
+			},
+			value: entry.value
 		});
 	}
 }
@@ -118155,11 +116813,11 @@ function mergeCurrentConfigData(merged, configData, scopeCode, scopeLevel) {
 function applySchemaDefaults(merged, defaultMap) {
 	for (const [name, def] of defaultMap.entries()) if (!merged.has(name)) merged.set(name, {
 		name,
-		value: def,
 		origin: {
 			code: "default",
 			level: "system"
-		}
+		},
+		value: def
 	});
 }
 /**
@@ -118185,8 +116843,8 @@ async function mergeWithSchemaDefaults({ loadScopeConfigFn, getSchemaFn, configD
 	applySchemaDefaults(merged, defaultMap);
 	configData.config = Array.from(merged.entries()).map(([name, data]) => ({
 		name,
-		value: data.value,
-		origin: data.origin
+		origin: data.origin,
+		value: data.value
 	}));
 	return configData;
 }
@@ -118345,7 +117003,7 @@ function byStoreViewId(commerceScopeId) {
 * @returns Logger instance
 */
 function getLogger(moduleName) {
-	return es_AioLogger(moduleName, { level: process.env.LOG_LEVEL ?? "info" });
+	return AioLogger(moduleName, { level: process.env.LOG_LEVEL ?? "info" });
 }
 
 //#endregion
@@ -118438,8 +117096,8 @@ async function saveScopeTree(namespace, scopes) {
 		const files = await getSharedFiles();
 		const filePath = generateScopeFilePath(namespace);
 		const data = {
-			scopes,
 			lastUpdated: (/* @__PURE__ */ new Date()).toISOString(),
+			scopes,
 			version: "1.0"
 		};
 		await files.write(filePath, stringify$1(data, null, 2));
@@ -118455,13 +117113,13 @@ async function saveScopeTree(namespace, scopes) {
 */
 function createInitialScopeTree() {
 	return [{
-		id: generateUUID(),
 		code: "global",
-		label: "Global",
-		level: "global",
+		id: generateUUID(),
 		is_editable: true,
+		is_final: true,
 		is_removable: false,
-		is_final: true
+		label: "Global",
+		level: "global"
 	}];
 }
 /**
@@ -118476,16 +117134,22 @@ function generateScopeFilePath(namespace) {
 
 //#endregion
 //#region source/modules/configuration/configuration-repository.ts
+/** Storage layout for scope-keyed Business Configuration. */
+const CONFIGURATION_NAMESPACE = {
+	filePath: (scopeCode) => `scope/${scopeCode.toLowerCase()}/configuration.json`,
+	stateKey: (scopeCode) => `configuration.${scopeCode}`
+};
 /**
 * Gets cached configuration payload from state store.
 *
 * @param scopeCode - Scope code identifier.
+* @param namespace - Storage namespace to read from.
 * @returns Promise resolving to cached configuration payload or null if not found.
 */
-async function getCachedConfig(scopeCode) {
+async function getCachedConfig(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
 	try {
 		const state = await getSharedState();
-		const key = getConfigStateKey(scopeCode);
+		const key = namespace.stateKey(scopeCode);
 		const result = await state.get(key);
 		if (result.value) return JSON.parse(result.value).data || null;
 		return null;
@@ -118498,29 +117162,45 @@ async function getCachedConfig(scopeCode) {
 *
 * @param scopeCode - Scope code identifier.
 * @param payload - Configuration payload as JSON string.
+* @param ttlSeconds - Time to live for the cached configuration value.
+* @param namespace - Storage namespace to write to.
 */
-async function setCachedConfig(scopeCode, payload) {
+async function setCachedConfig(scopeCode, payload, ttlSeconds, namespace = CONFIGURATION_NAMESPACE) {
 	const logger = getLogger("@adobe/aio-commerce-lib-config:configuration-repository");
 	try {
 		const state = await getSharedState();
-		const key = getConfigStateKey(scopeCode);
-		await state.put(key, es_stringify({ data: payload }));
+		const key = namespace.stateKey(scopeCode);
+		await state.put(key, wrapper({ data: payload }), { ttl: ttlSeconds });
 	} catch (error) {
-		logger.debug("Failed to cache configuration:", error instanceof Error ? error.message : String(error));
+		logger.debug("Failed to cache configuration; invalidating cache entry:", error instanceof Error ? error.message : String(error));
+		await deleteCachedConfig(scopeCode, namespace);
+	}
+}
+/**
+* Removes a configuration entry from the state cache. Failures are swallowed
+* (logged at debug) since `aio-lib-files` remains the source of truth.
+*
+* @param scopeCode - Scope code identifier.
+* @param namespace - Storage namespace to delete from.
+*/
+async function deleteCachedConfig(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
+	const logger = getLogger("@adobe/aio-commerce-lib-config:configuration-repository");
+	try {
+		await (await getSharedState()).delete(namespace.stateKey(scopeCode));
+	} catch (error) {
+		logger.debug("Failed to clear cached configuration:", error instanceof Error ? error.message : String(error));
 	}
 }
 /**
 * Gets persisted configuration payload from files.
 *
 * @param scopeCode - Scope code identifier.
+* @param namespace - Storage namespace to read from.
 * @returns Promise resolving to configuration payload as string or null if not found.
 */
-async function getPersistedConfig(scopeCode) {
+async function getPersistedConfig(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
 	try {
-		const files = await getSharedFiles();
-		const filePath = getConfigFilePath(scopeCode);
-		if (!(await files.list("scope/")).find((file) => file.name === filePath)) return null;
-		const content = await files.read(filePath);
+		const content = await (await getSharedFiles()).read(namespace.filePath(scopeCode));
 		return content ? content.toString("utf8") : null;
 	} catch {
 		return null;
@@ -118531,46 +117211,71 @@ async function getPersistedConfig(scopeCode) {
 *
 * @param scopeCode - Scope code identifier.
 * @param payload - Configuration payload as JSON string.
+* @param namespace - Storage namespace to write to.
 */
-async function saveConfig(scopeCode, payload) {
+async function saveConfig(scopeCode, payload, namespace = CONFIGURATION_NAMESPACE) {
 	const files = await getSharedFiles();
-	const filePath = getConfigFilePath(scopeCode);
+	const filePath = namespace.filePath(scopeCode);
 	await files.write(filePath, payload);
+}
+/**
+* Removes a configuration entry's file from storage. Clearing an entry that was
+* never persisted is a no-op since `aio-lib-files` delete is idempotent; any
+* real failure surfaces to the caller, since files are the source of truth.
+*
+* @param scopeCode - Scope code identifier.
+* @param namespace - Storage namespace to delete from.
+*/
+async function deletePersistedConfig(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
+	await (await getSharedFiles()).delete(namespace.filePath(scopeCode));
 }
 /**
 * Persists configuration with caching strategy (files + state cache).
 *
 * @param scopeCode - The scope code to persist configuration for.
 * @param payload - The configuration payload object.
+* @param ttlSeconds - Time to live for the cached configuration value.
+* @param namespace - Storage namespace to persist to.
 */
-async function persistConfig(scopeCode, payload) {
-	const payloadString = es_stringify(payload);
+async function persistConfig(scopeCode, payload, ttlSeconds, namespace = CONFIGURATION_NAMESPACE) {
+	const payloadString = wrapper(payload);
 	const logger = getLogger("@adobe/aio-commerce-lib-config:configuration-repository");
-	await saveConfig(scopeCode, payloadString);
+	await saveConfig(scopeCode, payloadString, namespace);
 	try {
-		await setCachedConfig(scopeCode, payloadString);
+		await setCachedConfig(scopeCode, payloadString, ttlSeconds, namespace);
 	} catch (e) {
 		logger.debug("Failed to cache configuration in state", {
-			scopeCode,
-			error: e instanceof Error ? e.message : String(e)
+			error: e instanceof Error ? e.message : String(e),
+			scopeCode
 		});
 	}
+}
+/**
+* Removes a configuration entry from both storage layers.
+*
+* @param scopeCode - The scope code to delete configuration for.
+* @param namespace - Storage namespace to delete from.
+*/
+async function deleteConfig(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
+	await deletePersistedConfig(scopeCode, namespace);
+	await deleteCachedConfig(scopeCode, namespace);
 }
 /**
 * Tries to load configuration from state cache.
 *
 * @param scopeCode - The scope code to load configuration for.
+* @param namespace - Storage namespace to load from.
 * @returns Promise resolving to parsed configuration or null if not found.
 */
-async function loadFromStateCache(scopeCode) {
+async function loadFromStateCache(scopeCode, namespace = CONFIGURATION_NAMESPACE) {
 	const logger = getLogger("@adobe/aio-commerce-lib-config:configuration-repository");
 	try {
-		const statePayload = await getCachedConfig(scopeCode);
+		const statePayload = await getCachedConfig(scopeCode, namespace);
 		if (statePayload) return JSON.parse(statePayload);
 	} catch (err) {
 		logger.debug("Failed to load configuration from state cache", {
-			scopeCode,
-			error: err instanceof Error ? err.message : String(err)
+			error: err instanceof Error ? err.message : String(err),
+			scopeCode
 		});
 	}
 	return null;
@@ -118579,19 +117284,21 @@ async function loadFromStateCache(scopeCode) {
 * Tries to load configuration from persisted files.
 *
 * @param scopeCode - The scope code to load configuration for.
+* @param ttlSeconds - Time to live for the cached configuration value.
+* @param namespace - Storage namespace to load from.
 * @returns Promise resolving to parsed configuration or null if not found.
 */
-async function loadFromPersistedFiles(scopeCode) {
+async function loadFromPersistedFiles(scopeCode, ttlSeconds, namespace = CONFIGURATION_NAMESPACE) {
 	const logger = getLogger("@adobe/aio-commerce-lib-config:configuration-repository");
 	try {
-		const filePayload = await getPersistedConfig(scopeCode);
+		const filePayload = await getPersistedConfig(scopeCode, namespace);
 		if (!filePayload) return null;
 		try {
-			await setCachedConfig(scopeCode, filePayload);
+			await setCachedConfig(scopeCode, filePayload, ttlSeconds, namespace);
 		} catch (err) {
 			logger.debug("Failed to cache configuration in state", {
-				scopeCode,
-				error: err instanceof Error ? err.message : String(err)
+				error: err instanceof Error ? err.message : String(err),
+				scopeCode
 			});
 		}
 		return JSON.parse(filePayload);
@@ -118605,32 +117312,16 @@ async function loadFromPersistedFiles(scopeCode) {
 * Loads configuration with smart fallback strategy (state -> files -> cache).
 *
 * @param scopeCode - The scope code to load configuration for.
+* @param ttlSeconds - Time to live for the cached configuration value.
+* @param namespace - Storage namespace to load from.
 * @returns Promise resolving to configuration payload or null if not found.
 */
-async function loadConfig(scopeCode) {
-	const fromState = await loadFromStateCache(scopeCode);
+async function loadConfig(scopeCode, ttlSeconds, namespace = CONFIGURATION_NAMESPACE) {
+	const fromState = await loadFromStateCache(scopeCode, namespace);
 	if (fromState) return fromState;
-	const fromFiles = await loadFromPersistedFiles(scopeCode);
+	const fromFiles = await loadFromPersistedFiles(scopeCode, ttlSeconds, namespace);
 	if (fromFiles) return fromFiles;
 	return null;
-}
-/**
-* Gets the state key for a given scope code.
-*
-* @param scopeCode - The scope code to get the state key for.
-* @returns State key string.
-*/
-function getConfigStateKey(scopeCode) {
-	return `configuration.${scopeCode}`;
-}
-/**
-* Gets the file path for a given scope code.
-*
-* @param scopeCode - The scope code to get the file path for.
-* @returns File path string.
-*/
-function getConfigFilePath(scopeCode) {
-	return `scope/${scopeCode.toLowerCase()}/configuration.json`;
 }
 /**
 * Checks if error is a not-found error.
@@ -118651,27 +117342,26 @@ function isNotFoundError(err) {
 */
 async function fetchRawConfiguration(context, ...args) {
 	const schema = requireGlobalSchema();
-	const { scopeCode, scopeLevel, scopeId, scopePath } = deriveScopeFromArgs(args, await getPersistedScopeTree(context.namespace));
-	let configData = await loadConfig(scopeCode);
-	if (!configData) {
-		const defaults = getSchemaDefaults(schema);
-		configData = {
-			scope: {
-				id: scopeId,
-				code: scopeCode,
-				level: scopeLevel
-			},
-			config: defaults.config
-		};
-	} else if (!Array.isArray(configData.config)) configData.config = [];
+	const scopeTree = await getPersistedScopeTree(context.namespace);
+	const { scopeCode, scopeLevel, scopeId, scopePath } = deriveScopeFromArgs(args, scopeTree);
+	let configData = await loadConfig(scopeCode, context.cacheTimeout);
+	if (!configData) configData = {
+		config: getSchemaDefaults(schema).config,
+		scope: {
+			code: scopeCode,
+			id: scopeId,
+			level: scopeLevel
+		}
+	};
+	else if (!Array.isArray(configData.config)) configData.config = [];
 	try {
 		configData = await mergeWithSchemaDefaults({
 			configData,
+			getSchemaFn: async () => Promise.resolve(schema),
+			loadScopeConfigFn: (code) => loadConfig(code, context.cacheTimeout),
 			scopeCode,
 			scopeLevel,
-			scopePath,
-			loadScopeConfigFn: (code) => loadConfig(code),
-			getSchemaFn: async () => Promise.resolve(schema)
+			scopePath
 		});
 	} catch {}
 	return {
@@ -118750,8 +117440,8 @@ async function getConfigurationByKey$1(context, configKey, ...args) {
 		};
 	}
 	return {
-		scope: configData.scope,
-		config: configValue
+		config: configValue,
+		scope: configData.scope
 	};
 }
 
@@ -118774,31 +117464,33 @@ async function getConfigurationByKey$1(context, configKey, ...args) {
 */
 async function setConfiguration$1(context, request, ...args) {
 	const schema = requireGlobalSchema();
-	const { scopeCode, scopeLevel, scopeId } = deriveScopeFromArgs(args, await getPersistedScopeTree(context.namespace));
-	const encryptedEntries = encryptPasswordFields(sanitizeRequestEntries(request?.config), getPasswordFields(schema), context.encryptionKey);
-	const existingPersisted = await loadConfig(scopeCode);
-	const mergedScopeConfig = mergeScopes(Array.isArray(existingPersisted?.config) ? existingPersisted?.config ?? [] : [], encryptedEntries, scopeCode, scopeLevel);
+	const scopeTree = await getPersistedScopeTree(context.namespace);
+	const { scopeCode, scopeLevel, scopeId } = deriveScopeFromArgs(args, scopeTree);
+	const encryptedEntries = encryptPasswordFields(sanitizeRequestEntries(request.config), getPasswordFields(schema), context.encryptionKey);
+	const existingPersisted = await loadConfig(scopeCode, context.cacheTimeout);
+	const existingEntries = Array.isArray(existingPersisted?.config) ? existingPersisted?.config ?? [] : [];
+	const mergedScopeConfig = mergeScopes(existingEntries, encryptedEntries, scopeCode, scopeLevel);
 	const payload = {
+		config: mergedScopeConfig,
 		scope: {
+			code: scopeCode,
 			id: scopeId,
-			code: scopeCode,
 			level: scopeLevel
-		},
-		config: mergedScopeConfig
+		}
 	};
-	await persistConfig(scopeCode, payload);
+	await persistConfig(scopeCode, payload, context.cacheTimeout);
 	return {
-		message: "Configuration values updated successfully",
-		timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-		scope: {
-			id: String(scopeId),
-			code: scopeCode,
-			level: scopeLevel
-		},
 		config: mergedScopeConfig.map(({ name, value }) => ({
 			name,
 			value
-		}))
+		})),
+		message: "Configuration values updated successfully",
+		scope: {
+			code: scopeCode,
+			id: String(scopeId),
+			level: scopeLevel
+		},
+		timestamp: (/* @__PURE__ */ new Date()).toISOString()
 	};
 }
 /**
@@ -118837,12 +117529,12 @@ async function getAllScopeData(httpClient) {
 			getStoreViews(httpClient)
 		]);
 		return {
-			websites,
 			storeGroups,
-			storeViews
+			storeViews,
+			websites
 		};
 	} catch (error) {
-		throw new Error(`Failed to fetch Commerce scope data: ${error}`);
+		throw new Error(`Failed to fetch Commerce scope data: ${error}`, { cause: error });
 	}
 }
 /**
@@ -118854,7 +117546,7 @@ async function getWebsites(httpClient) {
 	try {
 		return await httpClient.get("store/websites").json();
 	} catch (error) {
-		throw new Error(`Failed to fetch websites: ${error}`);
+		throw new Error(`Failed to fetch websites: ${error}`, { cause: error });
 	}
 }
 /**
@@ -118866,7 +117558,7 @@ async function getStoreGroups(httpClient) {
 	try {
 		return await httpClient.get("store/storeGroups").json();
 	} catch (error) {
-		throw new Error(`Failed to fetch store groups: ${error}`);
+		throw new Error(`Failed to fetch store groups: ${error}`, { cause: error });
 	}
 }
 /**
@@ -118878,7 +117570,7 @@ async function getStoreViews(httpClient) {
 	try {
 		return await httpClient.get("store/storeViews").json();
 	} catch (error) {
-		throw new Error(`Failed to fetch store views: ${error}`);
+		throw new Error(`Failed to fetch store views: ${error}`, { cause: error });
 	}
 }
 
@@ -118935,15 +117627,15 @@ function mergeCommerceScopes(freshData, existingTree) {
 	return websites.map((website) => {
 		const existingWebsite = findScopeByCommerceId(existingCommerceScopes, website.id, "website");
 		return {
-			id: existingWebsite?.id || generateUUID(),
-			commerce_id: website.id,
+			children: buildStoreGroups(storeGroups.filter((sg) => sg.website_id === website.id), storeViews, existingWebsite?.children || []),
 			code: website.code,
-			label: website.name,
-			level: "website",
+			commerce_id: website.id,
+			id: existingWebsite?.id || generateUUID(),
 			is_editable: true,
 			is_final: true,
 			is_removable: false,
-			children: buildStoreGroups(storeGroups.filter((sg) => sg.website_id === website.id), storeViews, existingWebsite?.children || [])
+			label: website.name,
+			level: "website"
 		};
 	});
 }
@@ -118959,15 +117651,15 @@ function buildStoreGroups(storeGroups, allStoreViews, existingStoreGroups) {
 	return storeGroups.map((storeGroup) => {
 		const existing = findScopeByCommerceId(existingStoreGroups, storeGroup.id, "store");
 		return {
-			id: existing?.id || generateUUID(),
-			commerce_id: storeGroup.id,
+			children: buildStoreViews(allStoreViews.filter((sv) => sv.store_group_id === storeGroup.id), existing?.children || []),
 			code: storeGroup.code,
-			label: storeGroup.name,
-			level: "store",
+			commerce_id: storeGroup.id,
+			id: existing?.id || generateUUID(),
 			is_editable: false,
 			is_final: true,
 			is_removable: false,
-			children: buildStoreViews(allStoreViews.filter((sv) => sv.store_group_id === storeGroup.id), existing?.children || [])
+			label: storeGroup.name,
+			level: "store"
 		};
 	});
 }
@@ -118980,15 +117672,16 @@ function buildStoreGroups(storeGroups, allStoreViews, existingStoreGroups) {
 */
 function buildStoreViews(storeViews, existingStoreViews) {
 	return storeViews.map((storeView) => {
+		const existing = findScopeByCommerceId(existingStoreViews, storeView.id, "store_view");
 		return {
-			id: findScopeByCommerceId(existingStoreViews, storeView.id, "store_view")?.id || generateUUID(),
-			commerce_id: storeView.id,
 			code: storeView.code,
-			label: storeView.name,
-			level: "store_view",
+			commerce_id: storeView.id,
+			id: existing?.id || generateUUID(),
 			is_editable: true,
 			is_final: true,
-			is_removable: false
+			is_removable: false,
+			label: storeView.name,
+			level: "store_view"
 		};
 	});
 }
@@ -119072,14 +117765,14 @@ function findScopeByCommerceId(scopes, commerceId, level) {
 */
 function buildUpdatedScopeTree(updatedCommerceScopes, existingTree) {
 	if (!existingTree.some((node) => node.code === "commerce")) return [...existingTree, {
-		id: generateUUID(),
+		children: updatedCommerceScopes,
 		code: "commerce",
-		label: "Commerce",
-		level: "commerce",
+		id: generateUUID(),
 		is_editable: false,
-		is_removable: false,
 		is_final: true,
-		children: updatedCommerceScopes
+		is_removable: false,
+		label: "Commerce",
+		level: "commerce"
 	}];
 	return existingTree.map((node) => {
 		if (node.code === "commerce") return {
@@ -119092,7 +117785,7 @@ function buildUpdatedScopeTree(updatedCommerceScopes, existingTree) {
 
 //#endregion
 //#region source/modules/scope-tree/get-scope-tree.ts
-const es_logger = AioLogger("@adobe/aio-commerce-lib-config:get-scope-tree", { level: process.env.LOG_LEVEL ?? "info" });
+const logger = AioLogger("@adobe/aio-commerce-lib-config:get-scope-tree", { level: process.env.LOG_LEVEL ?? "info" });
 function hasCommerceConfig(ctx) {
 	return !!ctx.commerceConfig;
 }
@@ -119112,14 +117805,14 @@ async function getScopeTree$1(context, options = {}) {
 	if (remoteFetch && hasCommerceConfig(context)) return await buildTreeWithUpdatedCommerceScopes(context);
 	const cached = await getCachedScopeTree(context.namespace);
 	if (cached) return {
-		scopeTree: cached,
-		isCachedData: true
+		isCachedData: true,
+		scopeTree: cached
 	};
 	const persistedTree = await getPersistedScopeTree(context.namespace);
 	await setCachedScopeTree(context.namespace, persistedTree, context.cacheTimeout);
 	return {
-		scopeTree: persistedTree,
-		isCachedData: true
+		isCachedData: true,
+		scopeTree: persistedTree
 	};
 }
 /**
@@ -119130,30 +117823,32 @@ async function getScopeTree$1(context, options = {}) {
 */
 async function buildTreeWithUpdatedCommerceScopes(context) {
 	try {
-		const updatedCommerceScopeData = await getAllScopeData(initializeCommerceClient(context.commerceConfig));
+		const commerceClient = initializeCommerceClient(context.commerceConfig);
+		const updatedCommerceScopeData = await getAllScopeData(commerceClient);
 		const existingTree = await getPersistedScopeTree(context.namespace);
-		const finalTree = buildUpdatedScopeTree(mergeCommerceScopes(updatedCommerceScopeData, existingTree), existingTree);
+		const updatedCommerceScopes = mergeCommerceScopes(updatedCommerceScopeData, existingTree);
+		const finalTree = buildUpdatedScopeTree(updatedCommerceScopes, existingTree);
 		await saveScopeTree(context.namespace, finalTree);
 		await setCachedScopeTree(context.namespace, finalTree, context.cacheTimeout);
 		return {
-			scopeTree: finalTree,
-			isCachedData: false
+			isCachedData: false,
+			scopeTree: finalTree
 		};
 	} catch (error) {
 		const errorMessage = error instanceof Error ? error.message : "";
-		es_logger.debug("Failed to fetch fresh Commerce data, using fallback: ", error instanceof Error ? error.message : String(error));
+		logger.debug("Failed to fetch fresh Commerce data, using fallback: ", error instanceof Error ? error.message : String(error));
 		const cachedFlattenedTree = await getCachedScopeTree(context.namespace);
 		if (cachedFlattenedTree) return {
-			scopeTree: cachedFlattenedTree,
+			fallbackError: errorMessage,
 			isCachedData: true,
-			fallbackError: errorMessage
+			scopeTree: cachedFlattenedTree
 		};
 		const existingTree = await getPersistedScopeTree(context.namespace);
 		await setCachedScopeTree(context.namespace, existingTree, context.cacheTimeout);
 		return {
-			scopeTree: existingTree,
+			fallbackError: errorMessage,
 			isCachedData: true,
-			fallbackError: errorMessage
+			scopeTree: existingTree
 		};
 	}
 }
@@ -119169,7 +117864,7 @@ function initializeCommerceClient(commerceConfig) {
 	try {
 		return new AdobeCommerceHttpClient(commerceConfig);
 	} catch (error) {
-		throw new Error(`Failed to initialize Commerce client: ${error}`);
+		throw new Error(`Failed to initialize Commerce client: ${error}`, { cause: error });
 	}
 }
 
@@ -119342,8 +118037,8 @@ async function setCustomScopeTree$1(context, request) {
 	await deleteCachedScopeTree(context.namespace);
 	return {
 		message: "Custom scope tree updated successfully",
-		timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-		scopes: convertToResponseFormat(processedCustomScopes)
+		scopes: convertToResponseFormat(processedCustomScopes),
+		timestamp: (/* @__PURE__ */ new Date()).toISOString()
 	};
 }
 /**
@@ -119383,14 +118078,15 @@ function processCustomScopes(inputScopes, existingCustomScopes) {
 * @returns Processed scope node with preserved or generated ID.
 */
 function processSingleScope(inputScope, existingCustomScopes) {
+	const id = findExistingId(inputScope, existingCustomScopes) || generateUUID();
 	const baseCustomScope = {
-		id: findExistingId(inputScope, existingCustomScopes) || generateUUID(),
 		code: inputScope.code,
-		label: inputScope.label,
-		level: inputScope.level ?? "base",
+		id,
 		is_editable: inputScope.is_editable,
 		is_final: inputScope.is_final,
-		is_removable: true
+		is_removable: true,
+		label: inputScope.label,
+		level: inputScope.level ?? "base"
 	};
 	if (inputScope.children && inputScope.children.length > 0) return {
 		...baseCustomScope,
@@ -119443,12 +118139,12 @@ function convertToResponseFormat(scopes) {
 */
 function convertSingleScopeToOutput(scope) {
 	const baseScope = {
-		id: scope.id,
 		code: scope.code,
-		label: scope.label,
-		level: scope.level,
+		id: scope.id,
 		is_editable: scope.is_editable,
-		is_final: scope.is_final
+		is_final: scope.is_final,
+		label: scope.label,
+		level: scope.level
 	};
 	if (scope.children && scope.children.length > 0) return {
 		...baseScope,
@@ -119476,8 +118172,8 @@ function initialize(options) {
 }
 async function getScopeTree(params, options) {
 	const context = {
-		namespace: DEFAULT_NAMESPACE,
-		cacheTimeout: options?.cacheTimeout ?? 300
+		cacheTimeout: options?.cacheTimeout ?? 300,
+		namespace: DEFAULT_NAMESPACE
 	};
 	if (params?.refreshData === true) return getScopeTree$1({
 		...context,
@@ -119523,8 +118219,8 @@ async function getScopeTree(params, options) {
 async function syncCommerceScopes(commerceConfig, options) {
 	try {
 		const result = await getScopeTree({
-			refreshData: true,
-			commerceConfig
+			commerceConfig,
+			refreshData: true
 		}, options);
 		const syncResult = {
 			scopeTree: result.scopeTree,
@@ -119533,7 +118229,7 @@ async function syncCommerceScopes(commerceConfig, options) {
 		if (result.fallbackError) syncResult.error = result.fallbackError;
 		return syncResult;
 	} catch (error) {
-		throw new Error(`Failed to sync Commerce scopes: ${error instanceof Error ? error.message : "Unknown error"}`);
+		throw new Error(`Failed to sync Commerce scopes: ${error instanceof Error ? error.message : "Unknown error"}`, { cause: error });
 	}
 }
 /**
@@ -119558,7 +118254,8 @@ async function unsyncCommerceScopes() {
 	const COMMERCE_SCOPE_CODE = "commerce";
 	const scopeTree = await getPersistedScopeTree(DEFAULT_NAMESPACE);
 	if (!scopeTree.some((scope) => scope.code === COMMERCE_SCOPE_CODE)) return { unsynced: false };
-	await saveScopeTree(DEFAULT_NAMESPACE, scopeTree.filter((scope) => scope.code !== COMMERCE_SCOPE_CODE));
+	const updatedScopeTree = scopeTree.filter((scope) => scope.code !== COMMERCE_SCOPE_CODE);
+	await saveScopeTree(DEFAULT_NAMESPACE, updatedScopeTree);
 	return { unsynced: true };
 }
 /**
@@ -119606,9 +118303,9 @@ async function unsyncCommerceScopes() {
 */
 async function getConfiguration(selector, options) {
 	const context = {
-		namespace: DEFAULT_NAMESPACE,
 		cacheTimeout: options?.cacheTimeout ?? 300,
-		encryptionKey: options?.encryptionKey
+		encryptionKey: options?.encryptionKey,
+		namespace: DEFAULT_NAMESPACE
 	};
 	if (selector.by._tag === "scopeId") return await getConfiguration$1(context, selector.by.scopeId);
 	if (selector.by._tag === "codeAndLevel") return await getConfiguration$1(context, selector.by.code, selector.by.level);
@@ -119647,9 +118344,9 @@ async function getConfiguration(selector, options) {
 */
 async function getConfigurationByKey(configKey, selector, options) {
 	const context = {
-		namespace: DEFAULT_NAMESPACE,
 		cacheTimeout: options?.cacheTimeout ?? 300,
-		encryptionKey: options?.encryptionKey
+		encryptionKey: options?.encryptionKey,
+		namespace: DEFAULT_NAMESPACE
 	};
 	if (selector.by._tag === "scopeId") return await getConfigurationByKey$1(context, configKey, selector.by.scopeId);
 	if (selector.by._tag === "codeAndLevel") return await getConfigurationByKey$1(context, configKey, selector.by.code, selector.by.level);
@@ -119701,9 +118398,9 @@ async function getConfigurationByKey(configKey, selector, options) {
 */
 async function setConfiguration(request, selector, options) {
 	const context = {
-		namespace: DEFAULT_NAMESPACE,
 		cacheTimeout: options?.cacheTimeout ?? 300,
-		encryptionKey: options?.encryptionKey
+		encryptionKey: options?.encryptionKey,
+		namespace: DEFAULT_NAMESPACE
 	};
 	if (selector.by._tag === "scopeId") return await setConfiguration$1(context, request, selector.by.scopeId);
 	if (selector.by._tag === "codeAndLevel") return await setConfiguration$1(context, request, selector.by.code, selector.by.level);
@@ -119775,10 +118472,59 @@ async function setConfiguration(request, selector, options) {
 * ```
 */
 async function setCustomScopeTree(request, options) {
-	return await setCustomScopeTree$1({
-		namespace: DEFAULT_NAMESPACE,
-		cacheTimeout: options?.cacheTimeout ?? 300
-	}, request);
+	const context = {
+		cacheTimeout: options?.cacheTimeout ?? 300,
+		namespace: DEFAULT_NAMESPACE
+	};
+	return await setCustomScopeTree$1(context, request);
+}
+
+//#endregion
+//#region source/modules/configuration/system-config.ts
+const SYSTEM_CONFIG_CACHE_TTL_SECONDS = 86400;
+/**
+* Storage layout for SDK-managed system config. The key already carries the
+* `system.` prefix (e.g. `system.association`), so it doubles as the cache key
+* and keeps these entries cleanly separated from `configuration.*`.
+*/
+const SYSTEM_NAMESPACE = {
+	filePath: (key) => `system/${key}.json`,
+	stateKey: (key) => key
+};
+/**
+* Stores or clears a system configuration value by key.
+*
+* Persists the value to `aio-lib-files` (source of truth) and caches it in
+* `aio-lib-state`. Passing `null` or `undefined` clears the entry from both
+* storage layers. System config is stored under the `system.*` namespace,
+* separate from scope-keyed Business Configuration.
+*
+* @param key - The system configuration key (e.g. `"system.association"`).
+* @param value - The value to store, or `null`/`undefined` to clear the entry.
+* @param ttlSeconds - Cache TTL in seconds for the `aio-lib-state` entry.
+*   Defaults to 24 hours; `aio-lib-state` caps it at one year (31536000s).
+*/
+async function setSystemConfigByKey(key, value, ttlSeconds = SYSTEM_CONFIG_CACHE_TTL_SECONDS) {
+	if (value === null || value === void 0) {
+		await deleteConfig(key, SYSTEM_NAMESPACE);
+		return;
+	}
+	await persistConfig(key, value, ttlSeconds, SYSTEM_NAMESPACE);
+}
+/**
+* Retrieves a system configuration value by key.
+*
+* Reads from the `aio-lib-state` cache first, falling back to `aio-lib-files`
+* and re-caching. Returns `null` when the key is not found in either layer.
+*
+* @param key - The system configuration key (e.g. `"system.association"`).
+* @param ttlSeconds - Cache TTL in seconds applied when re-caching a value
+*   read from `aio-lib-files`. Defaults to 24 hours; `aio-lib-state` caps it
+*   at one year (31536000s).
+* @returns The stored value cast to `T`, or `null` if not found.
+*/
+async function getSystemConfigByKey(key, ttlSeconds = SYSTEM_CONFIG_CACHE_TTL_SECONDS) {
+	return await loadConfig(key, ttlSeconds, SYSTEM_NAMESPACE);
 }
 
 //#endregion
@@ -119788,15 +118534,8 @@ const SchemaBusinessConfig = object({ schema: optional(SchemaBusinessConfigSchem
 
 //#endregion
 
-;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/validate-Du3LhCre.mjs
-/* unused harmony import specifier */ var validate_Du3LhCre_hasCommerceEvents;
-/* unused harmony import specifier */ var validate_Du3LhCre_hasExternalEvents;
-/* unused harmony import specifier */ var validate_Du3LhCre_hasCustomInstallation;
-/* unused harmony import specifier */ var validate_Du3LhCre_hasWebhooks;
-/* unused harmony import specifier */ var validate_Du3LhCre_hasAdminUiSdk;
-/* unused harmony import specifier */ var validate_Du3LhCre_hasCustomInstallationSteps;
-/* unused harmony import specifier */ var validate_Du3LhCre_CommerceSdkValidationError;
-/* unused harmony import specifier */ var v;
+;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/repository-BGmy0YeZ.mjs
+/* unused harmony import specifier */ var repository_BGmy0YeZ_getSystemConfigByKey;
 /**
  * @license
  *
@@ -119814,198 +118553,330 @@ const SchemaBusinessConfig = object({ schema: optional(SchemaBusinessConfigSchem
 
 
 
-
-
-
-//#region source/config/schema/business-configuration.ts
+//#region source/management/association/repository.ts
+/** Reserved key under which association data is stored. */
+const ASSOCIATION_KEY = "system.association";
+const ASSOCIATION_CACHE_TTL_SECONDS = aio_lib_state/* MAX_TTL */.y;
 /**
-* Check if config has business config.
-* @param config - The configuration to check.
+* Stores the Commerce instance the app is associated with.
+*
+* Called by the `association` runtime action's `POST /` handler when App
+* Management registers the app with a Commerce instance.
+*
+* @param data - The data to store.
 */
-function hasBusinessConfig(config) {
-	return config.businessConfig !== void 0;
+async function setAssociationData(data) {
+	await setSystemConfigByKey(ASSOCIATION_KEY, data, ASSOCIATION_CACHE_TTL_SECONDS);
 }
 /**
-* Check if config has business config schema.
-* @param config - The configuration to check.
+* Retrieves the Commerce instance the app is currently associated with.
+*
+* @returns The stored association data, or `null` if the app is not associated.
 */
-function hasBusinessConfigSchema(config) {
-	return config.businessConfig?.schema !== void 0 && config.businessConfig.schema.length > 0;
+async function getAssociationData() {
+	return repository_BGmy0YeZ_getSystemConfigByKey(ASSOCIATION_KEY, ASSOCIATION_CACHE_TTL_SECONDS);
 }
-
-//#endregion
-//#region source/config/schema/metadata.ts
-const MAX_ID_LENGTH = 100;
-const validate_Du3LhCre_MAX_DESCRIPTION_LENGTH = 255;
-const MAX_DISPLAY_NAME_LENGTH = 50;
-const NUMERIC_IDENTIFIER = "(0|[1-9]\\d*)";
-const SEMVER_REGEX = new RegExp(`^${NUMERIC_IDENTIFIER}\\.${NUMERIC_IDENTIFIER}\\.${NUMERIC_IDENTIFIER}$`);
-function nonEmptyString(fieldName) {
-	return pipe(string(`Expected a string for the ${fieldName}`), nonEmpty(`The ${fieldName} must not be empty`));
-}
-/** The schema for the metadata of the application. */
-const MetadataSchema = object({
-	id: pipe(alphaNumericOrHyphenSchema("application id (metadata.id)"), maxLength(MAX_ID_LENGTH, `The application id must not be longer than ${MAX_ID_LENGTH} characters`)),
-	displayName: pipe(nonEmptyString("application display name"), maxLength(MAX_DISPLAY_NAME_LENGTH, `The application display name must not be longer than ${MAX_DISPLAY_NAME_LENGTH} characters`)),
-	description: pipe(nonEmptyString("metadata description"), maxLength(validate_Du3LhCre_MAX_DESCRIPTION_LENGTH, `The metadata description must not be longer than ${validate_Du3LhCre_MAX_DESCRIPTION_LENGTH} characters`)),
-	version: pipe(nonEmptyString("version"), regex(SEMVER_REGEX, "The version must follow semantic versioning (semver) format: Major.Minor.Patch (e.g., '1.0.0', '2.3.1')"))
-});
 /**
-* Check if config has metadata.
-* @param config - The configuration to check.
+* Clears the stored association data.
+*
+* Called by the `association` runtime action's `DELETE /` handler when the
+* app is unassociated.
 */
-function hasMetadata(config) {
-	return config.metadata !== void 0;
+async function clearAssociationData() {
+	await setSystemConfigByKey(ASSOCIATION_KEY, null);
 }
 
 //#endregion
-//#region source/config/schema/app.ts
-/** biome-ignore-all lint/performance/noBarrelFile: We want to have all the schema exports in one file. */
-/** The schema used to validate the commerce app config file. */
-const CommerceAppConfigSchema = looseObject({
-	metadata: MetadataSchema,
-	businessConfig: optional(SchemaBusinessConfig),
-	eventing: optional(EventingSchema),
-	adminUiSdk: optional(AdminUiSdkSchema),
-	installation: optional(InstallationSchema),
-	webhooks: optional(WebhooksSchema)
-});
 
-//#endregion
-//#region source/config/schema/domains.ts
-/** The individual validatable domains of the app config. */
-const CommerceAppConfigSchemas = {
-	metadata: MetadataSchema,
-	businessConfig: SchemaBusinessConfig,
-	eventing: EventingSchema,
-	installation: InstallationSchema,
-	webhooks: WebhooksSchema,
-	"businessConfig.schema": unwrap(SchemaBusinessConfig.entries.schema),
-	"eventing.commerce": unwrap(EventingSchema.entries.commerce),
-	"eventing.external": unwrap(EventingSchema.entries.external),
-	"installation.customInstallationSteps": unwrap(InstallationSchema.entries.customInstallationSteps),
-	adminUiSdk: AdminUiSdkSchema
-};
+;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/responses/index.mjs
 /**
-* Get the config domains that are present in the config.
-* @param config - The configuration to check.
+ * @license
+ *
+ * Copyright 2026 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+
+//#region source/responses/helpers.ts
+function isObjectRecord(value) {
+	return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function isHeadersRecord(value) {
+	return value === void 0 || isObjectRecord(value) && Object.values(value).every((entry) => typeof entry === "string");
+}
+function isBodyRecord(value) {
+	return value === void 0 || isObjectRecord(value);
+}
+function isResponsePayload(value) {
+	return isObjectRecord(value) && typeof value.statusCode === "number" && isBodyRecord(value.body) && isHeadersRecord(value.headers);
+}
+/**
+* Determines whether a value is a standardized SDK success response.
+*
+* @param response - Value to inspect.
+* @returns True when the value matches the SDK success response shape.
+*
+* @example
+* ```typescript
+* const result = await runAction(params);
+* if (isSuccessResponse(result)) {
+*   console.log(result.statusCode);
+* }
+* ```
 */
-function getConfigDomains(config) {
-	const withCommerceEvents = validate_Du3LhCre_hasCommerceEvents(config);
-	const withExternalEvents = validate_Du3LhCre_hasExternalEvents(config);
-	const domains = {
-		metadata: hasMetadata(config),
-		businessConfig: hasBusinessConfig(config),
-		eventing: withCommerceEvents || withExternalEvents,
-		installation: validate_Du3LhCre_hasCustomInstallation(config),
-		webhooks: validate_Du3LhCre_hasWebhooks(config),
-		adminUiSdk: validate_Du3LhCre_hasAdminUiSdk(config),
-		"businessConfig.schema": hasBusinessConfigSchema(config),
-		"eventing.commerce": withCommerceEvents,
-		"eventing.external": withExternalEvents,
-		"installation.customInstallationSteps": validate_Du3LhCre_hasCustomInstallationSteps(config)
+function isSuccessResponse(response) {
+	return isObjectRecord(response) && response.type === "success" && isResponsePayload(response);
+}
+/**
+* Determines whether a value is a standardized SDK error response.
+*
+* @param response - Value to inspect.
+* @returns True when the value matches the SDK error response shape.
+*
+* @example
+* ```typescript
+* const result = await runAction(params);
+* if (isErrorResponse(result)) {
+*   console.log(result.error.statusCode);
+* }
+* ```
+*/
+function isErrorResponse(response) {
+	return isObjectRecord(response) && response.type === "error" && isResponsePayload(response.error);
+}
+/**
+* Determines whether a value is a standardized SDK action response.
+*
+* @param response - Value to inspect.
+* @returns True when the value matches the SDK action response shape.
+*
+* @example
+* ```typescript
+* const result = await runAction(params);
+* if (isActionResponse(result) && result.type === "success") {
+*   console.log(result.statusCode);
+* }
+* ```
+*/
+function isActionResponse(response) {
+	return isSuccessResponse(response) || isErrorResponse(response);
+}
+/**
+* Creates a standardized error response for runtime actions
+* @see https://developer.adobe.com/app-builder/docs/guides/runtime_guides/creating-actions#unsuccessful-response
+*
+* @template TBody - Additional error body properties beyond the required message field
+* @template THeaders - Custom response headers
+*
+* @param statusCode - HTTP status code (e.g., 400, 404, 500)
+* @param payload - Error response configuration
+* @param payload.message - Human-readable error message (required)
+* @param payload.body - Optional additional error details to include in the response body
+* @param payload.headers - Optional custom response headers
+*
+* @returns Standardized error response object with type discriminator
+*
+* @example
+* ```typescript
+* // Simple error with just a message
+* const error = buildErrorResponse(404, {
+*   message: 'Resource not found'
+* });
+*
+* // Error with additional body data
+* const error = buildErrorResponse(400, {
+*   message: 'Invalid request',
+*   body: { field: 'email', code: 'INVALID_FORMAT' }
+* });
+*
+* // Error with custom headers
+* const error = buildErrorResponse(429, {
+*   message: 'Rate limit exceeded',
+*   headers: { 'Retry-After': '60' }
+* });
+* ```
+*/
+function buildErrorResponse(statusCode, payload) {
+	return {
+		error: {
+			...payload.headers && { headers: payload.headers },
+			body: payload.body,
+			statusCode
+		},
+		type: "error"
 	};
-	const domainsList = Object.entries(domains).filter(([_, value]) => value).map(([key]) => key);
-	return new Set(domainsList);
 }
 /**
-* Check if the config has a specific domain.
-* @param config - The configuration to check.
-* @param domain - The domain to check.
-*/
-function hasConfigDomain(config, domain) {
-	return getConfigDomains(config).has(domain);
-}
-
-//#endregion
-//#region source/config/lib/validate.ts
-const commerceAppConfigDomainsSchema = picklist(Object.keys(CommerceAppConfigSchemas));
-/**
-* Validates a complete commerce app configuration object against the schema.
+* Creates a standardized success response for runtime actions
+* @see https://developer.adobe.com/app-builder/docs/guides/runtime_guides/creating-actions#successful-response
 *
-* @param config - The configuration object to validate.
-* @returns The validated and typed configuration output model.
+* @template TBody - Response body properties
+* @template THeaders - Custom response headers
 *
-* @throws {CommerceSdkValidationError} If the configuration is invalid, with
-* detailed validation issues included.
+* @param statusCode - HTTP status code (typically 200, 201, 204, etc.)
+* @param payload - Success response configuration
+* @param payload.message - Human-readable success message (required)
+* @param payload.body - Optional additional response data to include in the response body
+* @param payload.headers - Optional custom response headers
+*
+* @returns Standardized success response object with type discriminator
 *
 * @example
 * ```typescript
-* const config = {
-*   businessConfiguration: {
-*     // ... configuration data
-*   }
-* };
+* // Simple success response
+* const response = buildSuccessResponse(200, {
+*   message: 'Operation successful'
+* });
 *
-* try {
-*   const validatedConfig = validateCommerceAppConfig(config);
-*   // Use validatedConfig safely
-* } catch (error) {
-*   if (error instanceof CommerceSdkValidationError) {
-*     console.error('Validation failed:', error.display());
-*   }
-* }
+* // Success with additional body data
+* const response = buildSuccessResponse(201, {
+*   message: 'Resource created',
+*   body: { id: '456', created: true },
+*   headers: { 'Location': '/api/resources/456' }
+* });
 * ```
 */
-function validateCommerceAppConfig(config) {
-	const validatedConfig = safeParse(CommerceAppConfigSchema, config);
-	if (!validatedConfig.success) throw new CommerceSdkValidationError("Invalid commerce app config", { issues: validatedConfig.issues });
-	return validatedConfig.output;
-}
-/**
-* Validates a specific domain configuration within the commerce app config.
-*
-* This function validates only a specific domain's configuration rather than
-* the entire commerce app configuration object. It first validates that the
-* domain name is valid, then validates the configuration data against the
-* schema for that specific domain.
-*
-* @template T - The type of the domain, constrained to valid domain names.
-*
-* @param config - The domain configuration object to validate.
-* @param domain - The name of the domain to validate (e.g., 'businessConfiguration').
-* @returns The validated and typed configuration for the specified domain.
-*
-* @throws {CommerceSdkValidationError} If the domain name is invalid or if the
-* configuration doesn't match the domain's schema.
-*
-* @example
-* ```typescript
-* const businessConfig = {
-*   fields: [
-*     {
-*       name: 'category',
-*       type: 'dropdown',
-*       // ... field configuration
-*     }
-*   ]
-* };
-*
-* try {
-*   const validatedConfig = validateCommerceAppConfigDomain(
-*     businessConfig,
-*     'businessConfig'
-*   );
-*   // Use validatedConfig safely
-* } catch (error) {
-*   if (error instanceof CommerceSdkValidationError) {
-*     console.error('Domain validation failed:', error.issues);
-*   }
-* }
-* ```
-*/
-function validateCommerceAppConfigDomain(config, domain) {
-	const domainSchema = v.safeParse(commerceAppConfigDomainsSchema, domain);
-	if (!domainSchema.success) throw new validate_Du3LhCre_CommerceSdkValidationError("Invalid commerce app config domain", { issues: domainSchema.issues });
-	const domainConfigSchema = CommerceAppConfigSchemas[domain];
-	const validatedConfig = v.safeParse(domainConfigSchema, config);
-	if (!validatedConfig.success) throw new validate_Du3LhCre_CommerceSdkValidationError(`Invalid commerce app config: ${domain}`, { issues: validatedConfig.issues });
-	return validatedConfig.output;
+function buildSuccessResponse(statusCode, payload) {
+	return {
+		statusCode,
+		type: "success",
+		...payload?.headers && { headers: payload.headers },
+		...payload?.body && { body: payload.body }
+	};
 }
 
 //#endregion
+//#region source/responses/presets.ts
+const HTTP_OK = 200;
+const HTTP_CREATED = 201;
+const HTTP_ACCEPTED = 202;
+const HTTP_NON_AUTHORITATIVE_INFORMATION = 203;
+const HTTP_NO_CONTENT = 204;
+const HTTP_BAD_REQUEST = 400;
+const HTTP_UNAUTHORIZED = 401;
+const HTTP_FORBIDDEN = 403;
+const HTTP_NOT_FOUND = 404;
+const HTTP_METHOD_NOT_ALLOWED = 405;
+const HTTP_CONFLICT = 409;
+const HTTP_INTERNAL_SERVER_ERROR = 500;
+function curryBuildSuccessResponse(code) {
+	return (payload) => buildSuccessResponse(code, typeof payload === "string" ? { body: { message: payload } } : payload);
+}
+function curryBuildErrorResponse(code) {
+	return (payload) => buildErrorResponse(code, typeof payload === "string" ? { body: { message: payload } } : payload);
+}
+/**
+* Creates a success response with the HTTP status code 200.
+* See {@link buildSuccessResponse} for details on the response payload.
+*/
+const ok = curryBuildSuccessResponse(200);
+/**
+* Creates a success response with the HTTP status code 201.
+* See {@link buildSuccessResponse} for details on the response payload.
+*/
+const created = curryBuildSuccessResponse(201);
+/**
+* Creates a success response with the HTTP status code 202.
+* See {@link buildSuccessResponse} for details on the response payload.
+*/
+const accepted = curryBuildSuccessResponse(202);
+/**
+* Creates a success response with the HTTP status code 203.
+* See {@link buildSuccessResponse} for details on the response payload.
+*/
+const nonAuthoritativeInformation = curryBuildSuccessResponse(203);
+/**
+* Creates a success response with the HTTP status code 204 (No Content).
+* This response has no body.
+*/
+const noContent = () => buildSuccessResponse(204);
+/**
+* Creates an error response with the HTTP status code 400.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const badRequest = curryBuildErrorResponse(400);
+/**
+* Creates an error response with the HTTP status code 401.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const unauthorized = curryBuildErrorResponse(401);
+/**
+* Creates an error response with the HTTP status code 403.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const forbidden = curryBuildErrorResponse(403);
+/**
+* Creates an error response with the HTTP status code 404.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const notFound = curryBuildErrorResponse(404);
+/**
+* Creates an error response with the HTTP status code 405.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const methodNotAllowed = curryBuildErrorResponse(405);
+/**
+* Creates an error response with the HTTP status code 409.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const conflict = curryBuildErrorResponse(409);
+/**
+* Creates an error response with the HTTP status code 500.
+* See {@link buildErrorResponse} for details on the response payload.
+*/
+const internalServerError = curryBuildErrorResponse(500);
 
-;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/actions/app-config.mjs
+//#endregion
+
+;// ./node_modules/regexparam/dist/index.mjs
+/**
+ * @param {string|RegExp} input The route pattern
+ * @param {boolean} [loose] Allow open-ended matching. Ignored with `RegExp` input.
+ */
+function dist_parse(input, loose) {
+	if (input instanceof RegExp) return { keys:false, pattern:input };
+	var c, o, tmp, ext, keys=[], pattern='', arr = input.split('/');
+	arr[0] || arr.shift();
+
+	while (tmp = arr.shift()) {
+		c = tmp[0];
+		if (c === '*') {
+			keys.push(c);
+			pattern += tmp[1] === '?' ? '(?:/(.*))?' : '/(.*)';
+		} else if (c === ':') {
+			o = tmp.indexOf('?', 1);
+			ext = tmp.indexOf('.', 1);
+			keys.push( tmp.substring(1, !!~o ? o : !!~ext ? ext : tmp.length) );
+			pattern += !!~o && !~ext ? '(?:/([^/]+?))?' : '/([^/]+?)';
+			if (!!~ext) pattern += (!!~o ? '?' : '') + '\\' + tmp.substring(ext);
+		} else {
+			pattern += '/' + tmp;
+		}
+	}
+
+	return {
+		keys: keys,
+		pattern: new RegExp('^' + pattern + (loose ? '(?=$|\/)' : '\/?$'), 'i')
+	};
+}
+
+var RGX = /(\/|^)([:*][^/]*?)(\?)?(?=[/.]|$)/g;
+
+// error if key missing?
+function inject(route, values) {
+	return route.replace(RGX, (x, lead, key, optional) => {
+		x = values[key=='*' ? key : key.substring(1)];
+		return x ? '/'+x : (optional || key=='*') ? '' : '/' + key;
+	});
+}
+
+;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/router-BshIPAR1.mjs
 /**
  * @license
  *
@@ -120024,45 +118895,409 @@ function validateCommerceAppConfigDomain(config, domain) {
 
 
 
+//#region ../../packages-private/common-utils/source/actions/http/middleware/logger.ts
+/**
+* Creates a logger middleware that adds logging capabilities to the context.
+*
+* @example
+* ```typescript
+* router.use(logger({ level: "debug", name: () => "my-logger-name" }));
+*
+* router.get("/test", {
+*   handler: (req, ctx) => {
+*     ctx.logger.info("Hello world");
+*     return ok({ body: {} });
+*   },
+* });
+* ```
+*/
+function router_BshIPAR1_logger({ name, ...restOptions } = {}) {
+	return (ctx) => {
+		const params = ctx.rawParams;
+		const loggerName = `${params.__ow_method}-${name?.(ctx) ?? process.env.__OW_ACTION_NAME}`;
+		return { logger: AioLogger(loggerName, {
+			level: `${params.LOG_LEVEL ?? "info"}`,
+			...restOptions
+		}) };
+	};
+}
 
-//#region source/actions/app-config.ts
-/** Router for the app config actions. */
-const router = new HttpActionRouter().use(logger({ name: () => "app-config" }));
-/** GET / - Get app config */
-router.get("/", { handler: async (_req, { logger, rawParams }) => {
-	const rawAppConfig = rawParams.appConfig;
-	if (!rawAppConfig) return internalServerError("Could not find or parse the app.commerce.manifest.json file, is it present and valid?");
-	let appConfig = rawAppConfig;
-	if (hasBusinessConfigSchema(rawAppConfig)) {
-		logger.debug("Resolving business config schema...");
-		const schema = await resolveBusinessConfigSchema(rawAppConfig.businessConfig.schema, rawParams);
-		appConfig = {
-			...rawAppConfig,
-			businessConfig: {
-				...rawAppConfig.businessConfig,
-				schema
-			}
+//#endregion
+//#region ../../packages-private/common-utils/source/actions/http/utils.ts
+/**
+* Validates input against a Standard Schema and returns a result.
+*
+* @template TInput - The input type expected by the schema
+* @template TOutput - The output type produced by the schema
+* @param schema - A Standard Schema v1 compliant schema
+* @param input - The input data to validate
+* @returns A promise resolving to either success with validated data or failure with issues
+*
+* @example
+* ```typescript
+* const result = await validateSchema(mySchema, userInput);
+* if (result.success) {
+*   console.log(result.data); // Typed as TOutput
+* } else {
+*   console.error(result.issues); // Validation errors
+* }
+* ```
+*/
+async function validateSchema(schema, input) {
+	const result = await schema["~standard"].validate(input);
+	if (result.issues) return {
+		issues: result.issues.map((issue) => ({
+			message: issue.message,
+			path: issue.path?.map((segment) => typeof segment === "object" && segment !== null && "key" in segment ? segment.key : segment)
+		})),
+		success: false
+	};
+	return {
+		data: result.value,
+		success: true
+	};
+}
+/**
+* Parses a request body from OpenWhisk/Runtime.
+* Handles multiple formats:
+* - Base64-encoded strings (__ow_body)
+* - Already-parsed objects
+* - Body properties mixed into args (web actions with JSON content-type)
+*
+* @param owBody - Body from __ow_body (base64 string, JSON string, or object)
+* @param args - Full args object to extract body from if __ow_body is not present
+*
+* @example
+* ```typescript
+* const body = parseRequestBody(params.__ow_body, params);
+* ```
+*/
+function parseRequestBody(owBody, args) {
+	if (owBody) {
+		if (typeof owBody === "object") return owBody;
+		if (typeof owBody === "string") {
+			try {
+				return JSON.parse(owBody);
+			} catch {}
+			try {
+				const decoded = Buffer.from(owBody, "base64").toString();
+				return JSON.parse(decoded);
+			} catch {}
+		}
+	}
+	if (args && typeof args === "object") {
+		const body = {};
+		for (const [key, value] of Object.entries(args)) if (!key.startsWith("__ow_")) body[key] = value;
+		return body;
+	}
+	return {};
+}
+/**
+* Parses query parameters from OpenWhisk/Runtime format.
+*
+* @param queryString - Query string from __ow_query
+* @param fallbackParams - Fallback params object (used when __ow_query is not present)
+* @returns Parsed query parameters as a record
+*
+* @example
+* ```typescript
+* const query = parseQueryParams(params.__ow_query, params);
+* ```
+*/
+function parseQueryParams(queryString, fallbackParams) {
+	if (queryString) return Object.fromEntries(new URLSearchParams(queryString));
+	if (fallbackParams) {
+		const { __ow_method, __ow_path, __ow_headers, __ow_body, __ow_query, ...rest } = fallbackParams;
+		return rest;
+	}
+	return {};
+}
+
+//#endregion
+//#region ../../packages-private/common-utils/source/actions/http/router.ts
+/**
+* HTTP router for Adobe I/O Runtime actions.
+* Provides type-safe routing with schema validation and OpenWhisk integration.
+*
+* @example
+* ```typescript
+* const router = new HttpActionRouter();
+*
+* router.get("/users/:id", {
+*   handler: (req) => ok({ id: req.params.id, context: req.context })
+* });
+*
+* // Add context builders
+* router.use(async (base) => ({
+*   user: await getUser(base.rawParams.__ow_headers?.authorization),
+* }));
+*
+* export const main = router.handler();
+* ```
+*/
+var HttpActionRouter = class {
+	routes = [];
+	contextBuilders = [];
+	/**
+	* Internal method to add a route to the router.
+	*/
+	addRoute(method, path, config) {
+		const { pattern, keys } = dist_parse(path);
+		this.routes.push({
+			body: config.body,
+			handler: config.handler,
+			keys,
+			method,
+			params: config.params,
+			pattern,
+			query: config.query
+		});
+		return this;
+	}
+	/**
+	* Register a GET route.
+	*
+	* @example
+	* ```typescript
+	* router.get("/users/:id", {
+	*   handler: (req) => ok({ id: req.params.id })
+	* });
+	* ```
+	*/
+	get(path, config) {
+		return this.addRoute("GET", path, config);
+	}
+	/**
+	* Register a POST route.
+	*
+	* @example
+	* ```typescript
+	* router.post("/users", {
+	*   body: userSchema,
+	*   handler: (req) => created(req.body)
+	* });
+	* ```
+	*/
+	post(path, config) {
+		return this.addRoute("POST", path, config);
+	}
+	/**
+	* Register a PUT route.
+	*
+	* @example
+	* ```typescript
+	* router.put("/users/:id", {
+	*   body: userSchema,
+	*   handler: (req) => ok(req.body)
+	* });
+	* ```
+	*/
+	put(path, config) {
+		return this.addRoute("PUT", path, config);
+	}
+	/**
+	* Register a PATCH route.
+	*
+	* @example
+	* ```typescript
+	* router.patch("/users/:id", {
+	*   body: partialUserSchema,
+	*   handler: (req) => ok(req.body)
+	* });
+	* ```
+	*/
+	patch(path, config) {
+		return this.addRoute("PATCH", path, config);
+	}
+	/**
+	* Register a DELETE route.
+	*
+	* @example
+	* ```typescript
+	* router.delete("/users/:id", {
+	*   handler: (req) => noContent()
+	* });
+	* ```
+	*/
+	delete(path, config) {
+		return this.addRoute("DELETE", path, config);
+	}
+	/**
+	* Register a context builder that runs before route handlers.
+	* Context builders can add properties to the request context.
+	* Multiple builders are executed in order and their results are merged.
+	*
+	* The returned router has an updated context type that includes the new properties,
+	* enabling type-safe access in route handlers.
+	*
+	* @param builder - Function that receives base context and returns additional context
+	* @returns The router instance with updated context type for chaining
+	*
+	* @example
+	* ```typescript
+	* const router = new HttpActionRouter()
+	*   .use(logger()) // HttpActionRouter<BaseContext & { logger: Logger }>
+	*   .use(auth());  // HttpActionRouter<BaseContext & { logger: Logger } & { user: User }>
+	*
+	* router.get("/me", {
+	*   handler: (req, ctx) => {
+	*     ctx.logger.info("Hello"); // ✅ typed
+	*     return ok({ body: ctx.user }); // ✅ typed
+	*   },
+	* });
+	* ```
+	*/
+	use(builder) {
+		this.contextBuilders.push(builder);
+		return this;
+	}
+	/**
+	* Builds the full context by running all context builders.
+	*/
+	async buildContext(args) {
+		let context = { rawParams: args };
+		for (const builder of this.contextBuilders) {
+			const result = await builder(context);
+			if (result) context = {
+				...context,
+				...result
+			};
+		}
+		return context;
+	}
+	/**
+	* Validates and extracts route parameters.
+	*/
+	async validateParams(route, params) {
+		if (!route.params) return {
+			data: params,
+			success: true
+		};
+		const result = await validateSchema(route.params, params);
+		if (!result.success) return {
+			issues: result.issues,
+			success: false
+		};
+		return {
+			data: result.data,
+			success: true
 		};
 	}
-	logger.debug("Validating app config...");
-	const config = validateCommerceAppConfig(appConfig);
-	logger.debug("Successfully validated the app config");
-	return ok({ body: config });
-} });
-/** Factory to create the route handler for the `app-config` action. */
-const appConfigRuntimeAction = ({ appConfig }) => async (params) => {
-	return await router.handler()({
-		...params,
-		appConfig
-	});
+	/**
+	* Validates request body.
+	*/
+	async validateBody(route, body) {
+		if (!route.body) return {
+			data: body,
+			success: true
+		};
+		const result = await validateSchema(route.body, body);
+		if (!result.success) return {
+			issues: result.issues,
+			success: false
+		};
+		return {
+			data: result.data,
+			success: true
+		};
+	}
+	/**
+	* Validates query parameters.
+	*/
+	async validateQuery(route, query) {
+		if (!route.query) return {
+			data: query,
+			success: true
+		};
+		const result = await validateSchema(route.query, query);
+		if (!result.success) return {
+			issues: result.issues,
+			success: false
+		};
+		return {
+			data: result.data,
+			success: true
+		};
+	}
+	/** Handles a matched route by validating inputs and calling the handler. */
+	async handleRoute(route, match, body, query, headers, method, path, context) {
+		const params = {};
+		route.keys.forEach((key, i) => {
+			params[key] = decodeURIComponent(match[i + 1] || "");
+		});
+		const paramsResult = await this.validateParams(route, params);
+		if (!paramsResult.success) return badRequest({ body: {
+			issues: paramsResult.issues,
+			message: "Invalid route parameters"
+		} });
+		const bodyResult = await this.validateBody(route, body);
+		if (!bodyResult.success) return badRequest({ body: {
+			issues: bodyResult.issues,
+			message: "Invalid request body"
+		} });
+		const queryResult = await this.validateQuery(route, query);
+		if (!queryResult.success) return badRequest({ body: {
+			issues: queryResult.issues,
+			message: "Invalid query parameters"
+		} });
+		try {
+			return await route.handler({
+				body: bodyResult.data,
+				headers,
+				method,
+				params: paramsResult.data,
+				path,
+				query: queryResult.data
+			}, context);
+		} catch (err) {
+			console.error("Handler error:", err);
+			return internalServerError({ body: {
+				error: err instanceof Error ? err.message : "Unknown error",
+				message: "Internal server error"
+			} });
+		}
+	}
+	/**
+	* Creates an OpenWhisk/Runtime action handler from the registered routes.
+	*
+	* @example
+	* ```typescript
+	* const router = new HttpActionRouter();
+	* router.get("/hello", { handler: () => ok({ message: "Hello!" }) });
+	*
+	* export const main = router.handler();
+	* ```
+	*/
+	handler() {
+		return async (args) => {
+			const method = (args.__ow_method ?? "get").toUpperCase();
+			const rawPath = args.__ow_path ?? "/";
+			const path = rawPath.startsWith("/") ? rawPath : `/${rawPath}`;
+			const headers = args.__ow_headers ?? {};
+			const body = parseRequestBody(args.__ow_body, args);
+			const query = parseQueryParams(args.__ow_query, args);
+			const context = await this.buildContext(args);
+			const matchedMethods = [];
+			for (const route of this.routes) {
+				const match = route.pattern.exec(path);
+				if (!match) continue;
+				matchedMethods.push(route.method);
+				if (route.method !== method) continue;
+				const response = await this.handleRoute(route, match, body, query, headers, method, path, context);
+				if (response) return response;
+			}
+			if (matchedMethods.length > 0) return methodNotAllowed(`Method ${method} not allowed`);
+			return notFound(`No route matches ${path}`);
+		};
+	}
 };
 
 //#endregion
 
-;// ./src/commerce-extensibility-1/.generated/app.commerce.manifest.json
-const app_commerce_manifest_namespaceObject = /*#__PURE__*/JSON.parse('{"adminUi":{"menu":{"label":"Digital Magazine","src":"src/commerce-extensibility-1/admin/main.jsx"},"routes":[{"path":"/digital-magazine","src":"src/commerce-extensibility-1/admin/main.jsx"}]},"businessConfig":{"schema":[{"default":"","description":"GraphQL endpoint used by get-magazine-products and related enrichment actions.","label":"Commerce GraphQL Endpoint","name":"COMMERCE_GRAPHQL_ENDPOINT","type":"url"},{"default":"","description":"ACCS Page Builder CMS endpoint used by sync-magazine-content.","label":"Magazine CMS Endpoint","name":"MAGAZINE_CMS_ENDPOINT","type":"url"},{"default":"","description":"Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.","label":"IO State Key","name":"IO_STATE_KEY","type":"text"}]},"eventing":{},"metadata":{"description":"Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.","displayName":"Digital Magazine Editorial Hub","id":"digital-magazine-editorial-hub","version":"1.0.0"}}');
-;// ./src/commerce-extensibility-1/.generated/actions/app-management/app-config.js
-/*
+;// ./node_modules/@adobe/aio-commerce-lib-app/dist/es/actions/association/index.mjs
+/**
+ * @license
+ *
  * Copyright 2026 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
@@ -120074,16 +119309,81 @@ const app_commerce_manifest_namespaceObject = /*#__PURE__*/JSON.parse('{"adminUi
  * governing permissions and limitations under the License.
  */
 
+
+
+
+
+
+
+//#region source/actions/association/schema.ts
+/** Request body for POST / — store association data. */
+const AssociationRequestBodySchema = object({
+	commerceBaseUrl: pipe(string(), url("The 'commerceBaseUrl' field must be a valid absolute URL (e.g., 'https://my-store.example.com')")),
+	commerceEnv: CommerceEnvSchema
+});
+
+//#endregion
+//#region source/actions/association/router.ts
+/**
+* Association action router.
+*
+* Routes:
+* - POST /   Store Commerce instance details (`baseUrl`, `env`)
+* - DELETE / Clear stored Commerce instance details
+*/
+const router = new HttpActionRouter().use(router_BshIPAR1_logger({ name: () => "association" }));
+/**
+* POST / - Store association data.
+*
+* Persists the Commerce instance the app is associated with so runtime actions
+* can later retrieve it via `getCommerceInstance` / `getCommerceClient`.
+*/
+router.post("/", {
+	body: AssociationRequestBodySchema,
+	handler: async (req, { logger }) => {
+		const { commerceBaseUrl, commerceEnv } = req.body;
+		logger.debug(`Storing association data (baseUrl: "${commerceBaseUrl}", env: "${commerceEnv}")`);
+		await setAssociationData({ commerce: {
+			baseUrl: commerceBaseUrl,
+			env: commerceEnv
+		} });
+		return noContent();
+	}
+});
+/**
+* DELETE / - Clear association data.
+*
+* Called when the app is unassociated.
+*/
+router.delete("/", { handler: async (_req, { logger }) => {
+	logger.debug("Clearing association data");
+	await clearAssociationData();
+	return noContent();
+} });
+
+//#endregion
+//#region source/actions/association/index.ts
+/**
+* Factory to create the route handler for the `association` action.
+*
+* The `association` action manages the lifecycle of the Commerce instance the
+* app is associated with — `POST /` stores the data when the app is associated,
+* and `DELETE /` clears it on unassociation. Runtime actions consume the data
+* via `getCommerceInstance` / `getCommerceClient` from the root entrypoint.
+*/
+const associationRuntimeAction = () => async (params) => {
+	return await router.handler()({ ...params });
+};
+
+//#endregion
+
+;// ./src/commerce-extensibility-1/.generated/actions/app-management/association.js
 // This file has been auto-generated by `@adobe/aio-commerce-lib-app`
 // Do not modify this file directly
 
 
 
-// The manifest is always at this relative constant path from the action.
-
-
-const app_config_args = { appConfig: app_commerce_manifest_namespaceObject };
-const main = appConfigRuntimeAction(app_config_args);
+const main = associationRuntimeAction();
 
 })();
 

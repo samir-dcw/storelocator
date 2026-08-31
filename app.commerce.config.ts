@@ -14,6 +14,13 @@ export default defineConfig({
       { name: 'IO_STATE_KEY', type: 'text', label: 'IO State Key', description: 'Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.' },
     ],
   },
+  adminUi: {
+    menu: {
+      label: 'Digital Magazine',
+      src: 'src/commerce-extensibility-1/admin/main.jsx',
+    },
+    routes: [{ path: '/digital-magazine', src: 'src/commerce-extensibility-1/admin/main.jsx' }],
+  },
   eventing: {
     subscriptions: [
       {

@@ -870,7 +870,7 @@ const saveFile = (file, obj, format) => {
 }
 
 module.exports = {
-  mkdirp,
+  ...void (mkdirp),
   getValue,
   setValue,
   merge,
@@ -1055,8 +1055,8 @@ const AioCoreSDKError = __webpack_require__(18407)
 const AioCoreSDKErrorWrapper = __webpack_require__(68560)
 
 module.exports = {
-  AioCoreSDKError,
-  AioCoreSDKErrorWrapper
+  ...void (AioCoreSDKError),
+  y: AioCoreSDKErrorWrapper
 }
 
 
@@ -1738,7 +1738,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 
 const codes = {}
 const messages = new Map()
@@ -1773,7 +1773,7 @@ const E = ErrorWrapper(
 
 module.exports = {
   codes,
-  messages
+  ...void (messages)
 }
 
 // Define your error codes with the wrapper
@@ -1803,10 +1803,10 @@ const { createFetch, getProxyOptionsFromConfig, parseRetryAfterHeader } = __webp
 
 module.exports = {
   HttpExponentialBackoff,
-  ProxyFetch,
-  createFetch,
-  getProxyOptionsFromConfig,
-  parseRetryAfterHeader
+  ...void (ProxyFetch),
+  ...void (createFetch),
+  ...void (getProxyOptionsFromConfig),
+  ...void (parseRetryAfterHeader)
 }
 
 
@@ -2417,7 +2417,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-core-tvm', { provider: 'debug' })
 
 // TODO find a better way to jsdoc error types
@@ -2463,7 +2463,7 @@ function logAndThrow (e) {
 
 module.exports = {
   codes,
-  messages,
+  ...void (messages),
   logAndThrow
 }
 
@@ -2543,8 +2543,8 @@ function setCliEnv (envValue) {
 
 module.exports = {
   getCliEnv,
-  setCliEnv,
-  SUPPORTED_ENVS,
+  ...void (setCliEnv),
+  ...void (SUPPORTED_ENVS),
   DEFAULT_ENV,
   PROD_ENV,
   STAGE_ENV
@@ -2577,7 +2577,7 @@ const logger = __webpack_require__(65586)('@adobe/aio-lib-files', { provider: 'd
 
 const { codes, logAndThrow } = __webpack_require__(59303)
 
-__webpack_require__(13990) // for VS Code autocomplete
+0 // for VS Code autocomplete
 /* global RemotePathString, RemoteFileProperties */ // for linter
 
 // eslint-disable-next-line jsdoc/require-jsdoc
@@ -3452,7 +3452,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-files', { provider: 'debug' })
 
 const codes = {}
@@ -3494,7 +3494,7 @@ E('ERROR_INIT_FAILURE', '%s')
 
 module.exports = {
   codes,
-  messages,
+  ...void (messages),
   logAndThrow
 }
 
@@ -3532,7 +3532,7 @@ const utils = __webpack_require__(30423)
 const { Files, FilePermissions, UrlType } = __webpack_require__(6721)
 const { codes, logAndThrow } = __webpack_require__(59303)
 
-__webpack_require__(13990) // for VS Code autocomplete
+0 // for VS Code autocomplete
 
 const STREAM_BUFFER_SIZE = 4 * 1024 * 1024 // 4 MB
 const STREAM_MAX_CONCURRENCY = 10
@@ -4204,7 +4204,7 @@ const utils = __webpack_require__(30423)
 const { AzureBlobFiles } = __webpack_require__(8654)
 const { Files, FilePermissions, UrlType } = __webpack_require__(6721)
 
-__webpack_require__(13990) // for VS Code autocomplete
+0 // for VS Code autocomplete
 /* global OpenWhiskCredentials, AzureCredentialsAccount, AzureCredentialsSAS */ // for linter
 
 /**
@@ -4260,106 +4260,7 @@ async function init (config = {}) {
   }
 }
 
-module.exports = { init, FilePermissions, UrlType }
-
-
-/***/ },
-
-/***/ 13990
-() {
-
-/*
-Copyright 2019 Adobe. All rights reserved.
-This file is licensed to you under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License. You may obtain a copy
-of the License at http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under
-the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-OF ANY KIND, either express or implied. See the License for the specific language
-governing permissions and limitations under the License.
-*/
-
-/* istanbul ignore file */
-
-/**
- * An object holding the OpenWhisk credentials
- *
- * @typedef OpenWhiskCredentials
- * @type {object}
- * @property {string} namespace user namespace
- * @property {string} auth auth key
- */
-
-/**
- * SAS Azure credentials. The sdk needs two SAS credentials to allow access to
- * two already existing containers, a private and a public one (with access=`blob`).
- *
- * @typedef AzureCredentialsSAS
- * @type {object}
- * @property {string} sasURLPrivate sas url to existing private azure blob
- * container
- * @property {string} sasURLPublic sas url to existing public (with
- * access=`blob`) azure blob container
- */
-
-/**
- * Azure account credentials. Must have the permission to create containers.
- *
- * @typedef AzureCredentialsAccount
- * @type {object}
- * @property {string} storageAccount name of azure storage account
- * @property {string} storageAccessKey access key for azure storage account
- * @property {string} containerName name of container to store files.
- * Another `${containerName}-public` will also be used for public files.
- * @property {string} [hostName] custom domain for returned URLs
- */
-/**
- * @typedef RemotePathString
- * @type {string}
- * @description a string to the remote path. If the path ends with a `/` it will
- * be treated as a directory, if not it will be treated as a file.
- */
-
-/**
- * @typedef RemoteFileProperties
- * @description File properties
- * @type {object}
- * @property {string} name - unique name of this file, it is the full path
- * @property {string} creationTime - utc datetime string when file was created
- * @property {string} lastModified - utc datetime string when file last modified
- * @property {string} etag - unique ( per modification ) etag for the asset
- * @property {number} contentLength - size, in bytes
- * @property {string} contentType - mime/type
- * @property {boolean} isDirectory true if file is a directory
- * @property {boolean} isPublic true if file is public
- * @property {string} url remote file URL with URI encoded path, use decodeURIComponent to decode the URL.
- * @property {string} internalUrl remote file URL which allows file access only from Adobe I/O Runtime actions.
- */
-
-/**
- * @typedef FilesLibError
- * @type {Error}
- */
-
-/**
- * Files lib custom errors.
- *
- * `e.sdkDetails` provides additional context for each error (e.g. function parameter)
- *
- * @typedef FilesLibErrors
- * @type {object}
- * @property {FilesLibError} ERROR_BAD_ARGUMENT this error is thrown when an argument is missing or has invalid type
- * @property {FilesLibError} ERROR_NOT_IMPLEMENTED this error is thrown when a method is not implemented or when calling
- * methods directly on the abstract class (Files).
- * @property {FilesLibError} ERROR_BAD_CREDENTIALS this error is thrown when the supplied init credentials are invalid.
- * @property {FilesLibError} ERROR_INTERNAL this error is thrown when an unknown error is thrown by the underlying
- * provider or TVM server for credential exchange. More details can be found in `e.sdkDetails._internal`.
- * @property {FilesLibError} ERROR_FILE_NOT_EXISTS this error is thrown when the filePath does not exists for operations
- * that need the file to exists (e.g. read)
- * @property {FilesLibError} ERROR_BAD_FILE_TYPE this error is thrown when the filePath is not the expected type for
- * operations that need the file to be of a specific type, e.g. write on a dir would fail
- */
+module.exports = { Ts: init, ...void (FilePermissions), ...void (UrlType) }
 
 
 /***/ },
@@ -4426,7 +4327,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 
 const codes = {}
 const messages = new Map()
@@ -4457,7 +4358,7 @@ const E = ErrorWrapper(
 
 module.exports = {
   codes,
-  messages
+  ...void (messages)
 }
 
 // Define your error codes with the wrapper
@@ -4784,21 +4685,21 @@ function parseConfig (config) {
 }
 
 module.exports = {
-  parseJson,
+  ...void (parseJson),
   parseConfig,
-  handleGET,
-  handlePOST,
-  handleOPTIONS,
-  handleUnsupportedHttpMethod,
-  codeTransform,
-  cors,
-  stringToJson,
-  randomId,
-  authSiteUrl,
-  createServer,
-  IMS_CLI_OAUTH_URL,
-  IMS_CLI_OAUTH_LOGOUT_URL,
-  getImsCliOAuthUrl
+  ...void (handleGET),
+  ...void (handlePOST),
+  ...void (handleOPTIONS),
+  ...void (handleUnsupportedHttpMethod),
+  ...void (codeTransform),
+  ...void (cors),
+  ...void (stringToJson),
+  ...void (randomId),
+  ...void (authSiteUrl),
+  ...void (createServer),
+  ...void (IMS_CLI_OAUTH_URL),
+  ...void (IMS_CLI_OAUTH_LOGOUT_URL),
+  ...void (getImsCliOAuthUrl)
 }
 
 
@@ -4915,7 +4816,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 
 const codes = {}
 const messages = new Map()
@@ -4946,7 +4847,7 @@ const E = ErrorWrapper(
 
 module.exports = {
   codes,
-  messages
+  ...void (messages)
 }
 
 // Define your error codes with the wrapper
@@ -5084,7 +4985,7 @@ async function createJwt (ims, clientId, imsOrg, techacctId, metaScopes, private
 }
 
 module.exports = {
-  parseJson,
+  ...void (parseJson),
   createJwt
 }
 
@@ -5381,15 +5282,15 @@ function resetContext () {
 }
 
 module.exports = {
-  resetContext,
+  ...void (resetContext),
   getContext,
-  TYPE_ACTION,
-  TYPE_CLI,
-  IMS,
-  CURRENT,
-  CLI,
-  CONTEXTS,
-  CONFIG
+  ...void (TYPE_ACTION),
+  ...void (TYPE_CLI),
+  ...void (IMS),
+  ...void (CURRENT),
+  ...void (CLI),
+  ...void (CONTEXTS),
+  ...void (CONFIG)
 }
 
 
@@ -5941,7 +5842,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 
 const codes = {}
 const messages = new Map()
@@ -5972,7 +5873,7 @@ const E = ErrorWrapper(
 
 module.exports = {
   codes,
-  messages
+  ...void (messages)
 }
 
 // Define your error codes with the wrapper
@@ -6673,36 +6574,36 @@ const ValidationCache = __webpack_require__(55328)
  */
 module.exports = {
   /** @see [`getTokenData`](#gettokendata) */
-  getTokenData,
+  ...void (getTokenData),
 
   /** @see [`Ims`](#ims) */
-  Ims,
+  ...void (Ims),
 
   /** @see [`ValidationCache`](#ValidationCache) */
-  ValidationCache,
+  ...void (ValidationCache),
 
   /** @see [`ACCESS_TOKEN`](#access_token) */
-  ACCESS_TOKEN,
+  ...void (ACCESS_TOKEN),
 
   /** @see [`REFRESH_TOKEN`](#refresh_token) */
-  REFRESH_TOKEN,
+  ...void (REFRESH_TOKEN),
 
   /** @see [`AUTHORIZATION_CODE`](#authorization_code) */
-  AUTHORIZATION_CODE,
+  ...void (AUTHORIZATION_CODE),
 
   /** @see [`CLIENT_ID`](#client_id) */
-  CLIENT_ID,
+  ...void (CLIENT_ID),
 
   /** @see [`CLIENT_SECRET`](#client_secret) */
-  CLIENT_SECRET,
+  ...void (CLIENT_SECRET),
 
   /** @see [`SCOPE`](#scope) */
-  SCOPE,
+  ...void (SCOPE),
 
   /**
    * @see [`Context`](#context)
    */
-  context: getContext(),
+  _O: getContext(),
 
   /**
    * Returns an access token for the given context name. When running in Adobe I/O Runtime
@@ -6714,7 +6615,7 @@ module.exports = {
    * @param {object} options A set of arbitrary options which will be passed to the underlying login plugin.
    * @returns {Promise} Resolving to an access token (string)
    */
-  getToken: async (contextName, options) => IMS_TOKEN_MANAGER.getToken(contextName, options),
+  gf: async (contextName, options) => IMS_TOKEN_MANAGER.getToken(contextName, options),
 
   /**
    * Invalidates the access and optionally refresh of an IMS context.
@@ -6732,7 +6633,7 @@ module.exports = {
    *              to also invalidate the refresh token. Defaults to `false`.
    * @returns {Promise} Promise that resolves with the request data
    */
-  invalidateToken: async (contextName, force) => IMS_TOKEN_MANAGER.invalidateToken(contextName, !!force)
+  ...(/* unused pure expression */ null && (async (contextName, force) => IMS_TOKEN_MANAGER.invalidateToken(contextName, !!force)))
 }
 
 
@@ -7604,7 +7505,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const { ErrorWrapper, createUpdater } = (__webpack_require__(87065).AioCoreSDKErrorWrapper)
+const { ErrorWrapper, createUpdater } = (__webpack_require__(87065)/* .AioCoreSDKErrorWrapper */ .y)
 const logger = __webpack_require__(65586)('@adobe/aio-lib-state', { provider: 'debug' })
 
 /**
@@ -7664,7 +7565,7 @@ function logAndThrow (e) {
 
 module.exports = {
   codes,
-  messages,
+  ...void (messages),
   logAndThrow
 }
 
@@ -7734,18 +7635,18 @@ module.exports = {
   ALLOWED_STAGE_REGION,
   ENDPOINTS,
   CUSTOM_ENDPOINT,
-  MAX_KEY_SIZE,
+  ...void (MAX_KEY_SIZE),
   MAX_TTL_SECONDS,
-  REGEX_PATTERN_STORE_NAMESPACE,
+  ...void (REGEX_PATTERN_STORE_NAMESPACE),
   REGEX_PATTERN_STORE_KEY,
   HEADER_KEY_EXPIRES,
   REGEX_PATTERN_MATCH_KEY,
   REQUEST_ID_HEADER,
   // for testing only
-  ENDPOINT_PROD,
-  ENDPOINT_PROD_INTERNAL,
-  ENDPOINT_STAGE,
-  ENDPOINT_STAGE_INTERNAL
+  ...void (ENDPOINT_PROD),
+  ...void (ENDPOINT_PROD_INTERNAL),
+  ...void (ENDPOINT_STAGE),
+  ...void (ENDPOINT_STAGE_INTERNAL)
 }
 
 
@@ -7999,7 +7900,7 @@ var ansiStyles = colors.styles = __webpack_require__(68692);
 var defineProps = Object.defineProperties;
 var newLineRegex = new RegExp(/[\r\n]+/g);
 
-colors.supportsColor = (__webpack_require__(17419).supportsColor);
+colors.supportsColor = (__webpack_require__(17419)/* .supportsColor */ .WI);
 
 if (typeof colors.enabled === 'undefined') {
   colors.enabled = colors.supportsColor() !== false;
@@ -8706,9 +8607,9 @@ function getSupportLevel(stream) {
 }
 
 module.exports = {
-  supportsColor: getSupportLevel,
-  stdout: getSupportLevel(process.stdout),
-  stderr: getSupportLevel(process.stderr),
+  WI: getSupportLevel,
+  ...void (getSupportLevel(process.stdout)),
+  ...void (getSupportLevel(process.stderr)),
 };
 
 
@@ -23765,7 +23666,7 @@ module.exports = function (dst, src) {
 const fs = __webpack_require__(63735)
 const path = __webpack_require__(16928)
 const mkdirsSync = (__webpack_require__(63798).mkdirsSync)
-const utimesMillisSync = (__webpack_require__(47211).utimesMillisSync)
+const utimesMillisSync = (__webpack_require__(47211)/* .utimesMillisSync */ .n)
 const stat = __webpack_require__(66462)
 
 function copySync (src, dest, opts) {
@@ -25475,7 +25376,7 @@ function utimesMillisSync (path, atime, mtime) {
 
 module.exports = {
   utimesMillis: u(utimesMillis),
-  utimesMillisSync
+  n: utimesMillisSync
 }
 
 
@@ -28667,15 +28568,15 @@ module.exports={
   parse: parse,
   stringify: stringify,
 
-  endOfLine: function() { return common.EOL; },
-  setEndOfLine: function(eol) {
+  ...(/* unused pure expression */ null && (function() { return common.EOL; })),
+  ...(/* unused pure expression */ null && (function(eol) {
     if (eol === '\n' || eol === '\r\n') common.EOL = eol;
-  },
+  })),
 
-  version: version,
+  ...(/* unused pure expression */ null && (version)),
 
   // round trip shortcut
-  rt: {
+  ...(/* unused pure expression */ null && ({
     parse: function(text, options) {
       (options=options||{}).keepWsc=true;
       return parse(text, options);
@@ -28684,11 +28585,11 @@ module.exports={
       (options=options||{}).keepWsc=true;
       return stringify(value, options);
     },
-  },
+  })),
 
-  comments: comments,
+  ...(/* unused pure expression */ null && (comments)),
 
-  dsf: dsf.std,
+  ...void (dsf.std),
 
 };
 
@@ -32588,7 +32489,11 @@ exports.compile = function (messages, target) {
         Assert(typeof message === 'object' && !Array.isArray(message), 'Invalid message for', code);
 
         const language = code;
-        target[language] = target[language] || {};
+
+        // Don't reuse an inherited object, otherwise a language named __proto__ or constructor writes on the prototype
+
+        const localizedTarget = Object.prototype.hasOwnProperty.call(target, language) ? target[language] : {};
+        target[language] = localizedTarget;
 
         for (code in message) {
             const localized = message[code];
@@ -32596,12 +32501,12 @@ exports.compile = function (messages, target) {
             if (code === 'root' ||
                 Template.isTemplate(localized)) {
 
-                target[language][code] = localized;
+                localizedTarget[code] = localized;
                 continue;
             }
 
             Assert(typeof localized === 'string', 'Invalid message for', code, 'in', language);
-            target[language][code] = new Template(localized);
+            localizedTarget[code] = new Template(localized);
         }
     }
 
@@ -32694,7 +32599,11 @@ exports.merge = function (base, extended) {
         Assert(typeof message === 'object' && !Array.isArray(message), 'Invalid message for', code);
 
         const language = code;
-        target[language] = target[language] || {};
+
+        // Same as in compile(), don't reuse an inherited object
+
+        const localizedTarget = Object.prototype.hasOwnProperty.call(target, language) ? target[language] : {};
+        target[language] = localizedTarget;
 
         for (code in message) {
             const localized = message[code];
@@ -32702,12 +32611,12 @@ exports.merge = function (base, extended) {
             if (code === 'root' ||
                 Template.isTemplate(localized)) {
 
-                target[language][code] = localized;
+                localizedTarget[code] = localized;
                 continue;
             }
 
             Assert(typeof localized === 'string', 'Invalid message for', code, 'in', language);
-            target[language][code] = new Template(localized);
+            localizedTarget[code] = new Template(localized);
         }
     }
 
@@ -37255,6 +37164,7 @@ module.exports = Any.extend({
         'object.regex': '{{#label}} must be a RegExp object',
         'object.rename.multiple': '{{#label}} cannot rename {{:#from}} because multiple renames are disabled and another key was already renamed to {{:#to}}',
         'object.rename.override': '{{#label}} cannot rename {{:#from}} because override is disabled and target {{:#to}} exists',
+        'object.rename.proto': '{{#label}} cannot rename {{:#from}} because target {{:#to}} is a reserved key',
         'object.schema': '{{#label}} must be a Joi schema of {{#type}} type',
         'object.unknown': '{{#label}} is not allowed',
         'object.with': '{{:#mainWithLabel}} missing required peer {{:#peerWithLabel}}',
@@ -37275,8 +37185,15 @@ internals.clone = function (value, prefs) {
             return Clone(value, { shallow: true });
         }
 
-        const clone = Object.create(Object.getPrototypeOf(value));
+        const proto = Object.getPrototypeOf(value);
+        const clone = Object.create(proto);
         Object.assign(clone, value);
+
+        // Restore the prototype in case of pre-existing prototype pollution
+        if (Object.getPrototypeOf(clone) !== proto) {
+            Object.setPrototypeOf(clone, proto);
+        }
+
         return clone;
     }
 
@@ -37573,6 +37490,15 @@ internals.rename = function (schema, value, state, prefs, errors) {
                 if (prefs.abortEarly) {
                     return false;
                 }
+            }
+
+            if (to === '__proto__') {
+                errors.push(schema.$_createError('object.rename.proto', value, { from, to, pattern }, state, prefs));
+                if (prefs.abortEarly) {
+                    return false;
+                }
+
+                continue;
             }
 
             if (value[from] === undefined) {
@@ -41860,19 +41786,28 @@ function captureSegment (state, start, end, checkJson) {
   }
 }
 
+function chargeMergeWork (state) {
+  state.totalMergeKeys++
+
+  if (state.maxTotalMergeKeys !== -1 && state.totalMergeKeys > state.maxTotalMergeKeys) {
+    throwError(state, 'merge keys exceeded maxTotalMergeKeys (' + state.maxTotalMergeKeys + ')')
+  }
+}
+
 function mergeMappings (state, destination, source, overridableKeys) {
   if (!common.isObject(source)) {
     throwError(state, 'cannot merge mappings; the provided source object is unacceptable')
   }
+
+  // Count the source mapping itself to bound sequences of empty mappings.
+  chargeMergeWork(state)
 
   const sourceKeys = Object.keys(source)
 
   for (let index = 0, quantity = sourceKeys.length; index < quantity; index += 1) {
     const key = sourceKeys[index]
 
-    if (state.maxTotalMergeKeys !== -1 && ++state.totalMergeKeys > state.maxTotalMergeKeys) {
-      throwError(state, 'merge keys exceeded maxTotalMergeKeys (' + state.maxTotalMergeKeys + ')')
-    }
+    chargeMergeWork(state)
 
     if (!_hasOwnProperty.call(destination, key)) {
       setProperty(destination, key, source[key])
@@ -41915,6 +41850,10 @@ function storeMappingPair (state, _result, overridableKeys, keyTag, keyNode, val
 
   if (keyTag === 'tag:yaml.org,2002:merge') {
     if (Array.isArray(valueNode)) {
+      if (valueNode.length > 100) {
+        throwError(state, 'abnormal merge sequence size')
+      }
+
       for (let index = 0, quantity = valueNode.length; index < quantity; index += 1) {
         mergeMappings(state, _result, valueNode[index], overridableKeys)
       }
@@ -44191,7 +44130,7 @@ const _toString = Object.prototype.toString
 function resolveYamlOmap (data) {
   if (data === null) return true
 
-  const objectKeys = []
+  const objectKeys = {}
   const object = data
 
   for (let index = 0, length = object.length; index < length; index += 1) {
@@ -44210,8 +44149,8 @@ function resolveYamlOmap (data) {
 
     if (!pairHasKey) return false
 
-    if (objectKeys.indexOf(pairKey) === -1) objectKeys.push(pairKey)
-    else return false
+    if (_hasOwnProperty.call(objectKeys, pairKey)) return false
+    Object.defineProperty(objectKeys, pairKey, { value: true })
   }
 
   return true
@@ -44715,12 +44654,12 @@ module.exports = function (jwt, options) {
 (module, __unused_webpack_exports, __webpack_require__) {
 
 module.exports = {
-  decode: __webpack_require__(37260),
-  verify: __webpack_require__(91691),
+  ...void (__webpack_require__(37260)),
+  ...void (__webpack_require__(91691)),
   sign: __webpack_require__(37651),
-  JsonWebTokenError: __webpack_require__(81741),
-  NotBeforeError: __webpack_require__(13726),
-  TokenExpiredError: __webpack_require__(18980),
+  ...void (__webpack_require__(81741)),
+  ...void (__webpack_require__(13726)),
+  ...void (__webpack_require__(18980)),
 };
 
 
@@ -69116,7 +69055,7 @@ module.exports = class Stream extends TransportStream {
 
 module.exports = {
 
-  isArray: function(value) {
+  c: function(value) {
     if (Array.isArray) {
       return Array.isArray(value);
     }
@@ -69141,9 +69080,9 @@ var json2xml = __webpack_require__(38433);
 
 module.exports = {
   xml2js: xml2js,
-  xml2json: xml2json,
-  js2xml: js2xml,
-  json2xml: json2xml
+  ...(/* unused pure expression */ null && (xml2json)),
+  ...(/* unused pure expression */ null && (js2xml)),
+  ...(/* unused pure expression */ null && (json2xml))
 };
 
 
@@ -69153,7 +69092,7 @@ module.exports = {
 (module, __unused_webpack_exports, __webpack_require__) {
 
 var helper = __webpack_require__(45193);
-var isArray = (__webpack_require__(59740).isArray);
+var isArray = (__webpack_require__(59740)/* .isArray */ .c);
 
 var currentElement, currentElementName;
 
@@ -69504,7 +69443,7 @@ module.exports = function (json, options) {
 /***/ 45193
 (module, __unused_webpack_exports, __webpack_require__) {
 
-var isArray = (__webpack_require__(59740).isArray);
+var isArray = (__webpack_require__(59740)/* .isArray */ .c);
 
 module.exports = {
 
@@ -69557,7 +69496,7 @@ module.exports = {
 var sax = __webpack_require__(64043);
 var expat /*= require('node-expat');*/ = { on: function () { }, parse: function () { } };
 var helper = __webpack_require__(45193);
-var isArray = (__webpack_require__(59740).isArray);
+var isArray = (__webpack_require__(59740)/* .isArray */ .c);
 
 var options;
 var pureJsParser = true;
@@ -107210,6 +107149,52 @@ class StorageCRC64Calculator {
 
 /***/ },
 
+/***/ 93002
+(module) {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var StorageResponseFormat_exports = {};
+__export(StorageResponseFormat_exports, {
+  StorageResponseFormat: () => StorageResponseFormat
+});
+module.exports = __toCommonJS(StorageResponseFormat_exports);
+const StorageResponseFormat = {
+  /**
+   * Default. Currently maps to {@link StorageResponseFormat.Xml}, but may be updated in future releases.
+   */
+  Auto: "Auto",
+  /**
+   * Use XML to return list results.
+   */
+  Xml: "Xml",
+  /**
+   * Use Apache Arrow to return list results.
+   */
+  Arrow: "Arrow"
+};
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+//# sourceMappingURL=StorageResponseFormat.js.map
+
+
+/***/ },
+
 /***/ 14840
 (module, __unused_webpack_exports, __webpack_require__) {
 
@@ -108135,16 +108120,13 @@ function getCachedDefaultHttpClient() {
 /***/ },
 
 /***/ 87547
-(module, __unused_webpack_exports, __webpack_require__) {
+(module) {
 
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-// ESM compatibility block omitted in CommonJS build.
-
 var NativeCRC64 = (() => {
   var _scriptDir = typeof document !== 'undefined' && document.currentScript ? document.currentScript.src : undefined;
-  if (true) _scriptDir = _scriptDir || __filename;
   return (
 function(NativeCRC64) {
   NativeCRC64 = NativeCRC64 || {};
@@ -108250,52 +108232,10 @@ function logExceptionOnExit(e) {
 
 if (ENVIRONMENT_IS_NODE) {
   if (typeof process == 'undefined' || !process.release || process.release.name !== 'node') throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
-// NODE-READ-START (this block is replaced with a no-op in dist/browser and dist/react-native by copyJSFiles.cjs)
-  // `require()` is no-op in an ESM module, use `createRequire()` to construct
-  // the require()` function.  This is only necessary for multi-environment
-  // builds, `-sENVIRONMENT=node` emits a static import declaration instead.
-  // TODO: Swap all `require()`'s with `import()`'s?
-  // These modules will usually be used on Node.js. Load them eagerly to avoid
-  // the complexity of lazy-loading.
-  var fs = __webpack_require__(79896);
-  var nodePath = __webpack_require__(16928);
-
-  if (ENVIRONMENT_IS_WORKER) {
-    scriptDirectory = nodePath.dirname(scriptDirectory) + '/';
-  } else {
-    scriptDirectory = __dirname + '/';
-  }
-
-// include: node_shell_read.js
-
-
-read_ = (filename, binary) => {
-  // We need to re-wrap `file://` strings to URLs. Normalizing isn't
-  // necessary in that case, the path should already be absolute.
-  filename = isFileURI(filename) ? new URL(filename) : nodePath.normalize(filename);
-  return fs.readFileSync(filename, binary ? undefined : 'utf8');
-};
-
-readBinary = (filename) => {
-  var ret = read_(filename, true);
-  if (!ret.buffer) {
-    ret = new Uint8Array(ret);
-  }
-  assert(ret.buffer);
-  return ret;
-};
-
-readAsync = (filename, onload, onerror) => {
-  // See the comment in the `read_` function.
-  filename = isFileURI(filename) ? new URL(filename) : nodePath.normalize(filename);
-  fs.readFile(filename, function(err, data) {
-    if (err) onerror(err);
-    else onload(data.buffer);
-  });
-};
-
-// end include: node_shell_read.js
-// NODE-READ-END
+  // The wasm is base64-embedded (see `binaryInString`) and loaded via `getBinary()`,
+  // so the Node fs/path read hooks emitted by Emscripten are never exercised and
+  // have been removed. This keeps the file free of Node built-in imports so it can be
+  // consumed as-is by web bundlers and by ESM-to-CommonJS bundlers (see issue #39057).
   if (process['argv'].length > 1) {
     thisProgram = process['argv'][1].replace(/\\/g, '/');
   }
@@ -108334,26 +108274,6 @@ if (ENVIRONMENT_IS_SHELL) {
 
   if ((typeof process == 'object' && "function" === 'function') || typeof window == 'object' || typeof importScripts == 'function') throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
 
-  if (typeof read != 'undefined') {
-    read_ = function shell_read(f) {
-      return read(f);
-    };
-  }
-
-  readBinary = function readBinary(f) {
-    let data;
-    if (typeof readbuffer == 'function') {
-      return new Uint8Array(readbuffer(f));
-    }
-    data = read(f, 'binary');
-    assert(typeof data == 'object');
-    return data;
-  };
-
-  readAsync = function readAsync(f, onload, onerror) {
-    setTimeout(() => onload(readBinary(f)), 0);
-  };
-
   if (typeof scriptArgs != 'undefined') {
     arguments_ = scriptArgs;
   } else if (typeof arguments != 'undefined') {
@@ -108380,72 +108300,9 @@ if (ENVIRONMENT_IS_SHELL) {
 // Node.js workers are detected as a combination of ENVIRONMENT_IS_WORKER and
 // ENVIRONMENT_IS_NODE.
 if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
-  if (ENVIRONMENT_IS_WORKER) { // Check worker, not web, since window could be polyfilled
-    scriptDirectory = self.location.href;
-  } else if (typeof document != 'undefined' && document.currentScript) { // web
-    scriptDirectory = document.currentScript.src;
-  }
-  // When MODULARIZE, this JS may be executed later, after document.currentScript
-  // is gone, so we saved it, and we use it here instead of any other info.
-  if (_scriptDir) {
-    scriptDirectory = _scriptDir;
-  }
-  // blob urls look like blob:http://site.com/etc/etc and we cannot infer anything from them.
-  // otherwise, slice off the final part of the url to find the script directory.
-  // if scriptDirectory does not contain a slash, lastIndexOf will return -1,
-  // and scriptDirectory will correctly be replaced with an empty string.
-  // If scriptDirectory contains a query (starting with ?) or a fragment (starting with #),
-  // they are removed because they could contain a slash.
-  if (scriptDirectory.indexOf('blob:') !== 0) {
-    scriptDirectory = scriptDirectory.substr(0, scriptDirectory.replace(/[?#].*/, "").lastIndexOf('/')+1);
-  } else {
-    scriptDirectory = '';
-  }
-
   if (!(typeof window == 'object' || typeof importScripts == 'function')) throw new Error('not compiled for this environment (did you build to HTML and try to run it not on the web, or set ENVIRONMENT to something - like node - and run it someplace else - like on the web?)');
-
-  // Differentiate the Web Worker from the Node Worker case, as reading must
-  // be done differently.
-  {
-// include: web_or_worker_shell_read.js
-
-
-  read_ = (url) => {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url, false);
-      xhr.send(null);
-      return xhr.responseText;
-  }
-
-  if (ENVIRONMENT_IS_WORKER) {
-    readBinary = (url) => {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, false);
-        xhr.responseType = 'arraybuffer';
-        xhr.send(null);
-        return new Uint8Array(/** @type{!ArrayBuffer} */(xhr.response));
-    };
-  }
-
-  readAsync = (url, onload, onerror) => {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'arraybuffer';
-    xhr.onload = () => {
-      if (xhr.status == 200 || (xhr.status == 0 && xhr.response)) { // file URLs can return 0
-        onload(xhr.response);
-        return;
-      }
-      onerror();
-    };
-    xhr.onerror = onerror;
-    xhr.send(null);
-  }
-
-// end include: web_or_worker_shell_read.js
-  }
-
-  setWindowTitle = (title) => document.title = title;
+  // The XHR-based read hooks emitted by Emscripten are unused because the wasm is
+  // base64-embedded; they have been removed so the file contains no DOM/XHR I/O.
 } else
 {
   throw new Error('environment detection error');
@@ -111360,6 +111217,7 @@ __reExport(indexPlatform_exports, __webpack_require__(87784), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(2668), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(72036), module.exports);
 var import_cache = __webpack_require__(27053);
+__reExport(indexPlatform_exports, __webpack_require__(93002), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(93838), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(76110), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(48589), module.exports);
@@ -111373,6 +111231,7 @@ __reExport(indexPlatform_exports, __webpack_require__(39910), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(72751), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(57848), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(18380), module.exports);
+__reExport(indexPlatform_exports, __webpack_require__(1073), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(56431), module.exports);
 __reExport(indexPlatform_exports, __webpack_require__(52551), module.exports);
 // Annotate the CommonJS export names for ESM import in node:
@@ -111717,6 +111576,52 @@ function storageCorrectContentLengthPolicy() {
 
 /***/ },
 
+/***/ 1073
+(module) {
+
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var StorageRedirectRangeHeaderPolicy_exports = {};
+__export(StorageRedirectRangeHeaderPolicy_exports, {
+  storageRedirectRangeHeaderPolicy: () => storageRedirectRangeHeaderPolicy,
+  storageRedirectRangeHeaderPolicyName: () => storageRedirectRangeHeaderPolicyName
+});
+module.exports = __toCommonJS(StorageRedirectRangeHeaderPolicy_exports);
+const storageRedirectRangeHeaderPolicyName = "storageRedirectRangeHeaderPolicy";
+function storageRedirectRangeHeaderPolicy() {
+  return {
+    name: storageRedirectRangeHeaderPolicyName,
+    async sendRequest(request, next) {
+      if (request.headers.has("range")) {
+        request.headers.set("x-ms-range", request.headers.get("range"));
+        request.headers.delete("range");
+      }
+      return next(request);
+    }
+  };
+}
+// Annotate the CommonJS export names for ESM import in node:
+0 && (0);
+//# sourceMappingURL=StorageRedirectRangeHeaderPolicy.js.map
+
+
+/***/ },
+
 /***/ 56431
 (module) {
 
@@ -111750,6 +111655,12 @@ function storageRequestFailureDetailsParserPolicy() {
     async sendRequest(request, next) {
       try {
         const response = await next(request);
+        if (response.status === 400 && response.bodyAsText?.includes("<Error><Code>InvalidHeaderValue</Code>") && response.bodyAsText.includes("<HeaderName>x-ms-version</HeaderName>")) {
+          response.bodyAsText = response.bodyAsText.replace(
+            /<Message>.*<\/Message>/s,
+            "<Message>The provided service version is not enabled on this storage account. Please see https://learn.microsoft.com/rest/api/storageservices/versioning-for-the-azure-storage-services for additional information.</Message>"
+          );
+        }
         return response;
       } catch (err) {
         if (typeof err === "object" && err !== null && err.response && err.response.parsedBody) {
@@ -113031,7 +112942,7 @@ __export(constants_exports, {
   URLConstants: () => URLConstants
 });
 module.exports = __toCommonJS(constants_exports);
-const SDK_VERSION = "12.4.0";
+const SDK_VERSION = "12.5.0";
 const URLConstants = {
   Parameters: {
     FORCE_BROWSER_NO_CACHE: "_",
@@ -113702,6 +113613,7 @@ function getClient(endpoint, clientOptions = {}) {
       });
     }
   }
+  const noDefaultAcceptHeader = clientOptions.internal?.noDefaultAcceptHeader ?? false;
   const { allowInsecureConnection, httpClient } = clientOptions;
   const endpointUrl = clientOptions.endpoint ?? endpoint;
   const client = (path, ...args) => {
@@ -113714,7 +113626,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       post: (requestOptions = {}) => {
@@ -113724,7 +113637,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       put: (requestOptions = {}) => {
@@ -113734,7 +113648,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       patch: (requestOptions = {}) => {
@@ -113744,7 +113659,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       delete: (requestOptions = {}) => {
@@ -113754,7 +113670,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       head: (requestOptions = {}) => {
@@ -113764,7 +113681,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       options: (requestOptions = {}) => {
@@ -113774,7 +113692,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       },
       trace: (requestOptions = {}) => {
@@ -113784,7 +113703,8 @@ function getClient(endpoint, clientOptions = {}) {
           pipeline,
           requestOptions,
           allowInsecureConnection,
-          httpClient
+          httpClient,
+          noDefaultAcceptHeader
         );
       }
     };
@@ -113795,7 +113715,7 @@ function getClient(endpoint, clientOptions = {}) {
     pipeline
   };
 }
-function buildOperation(method, url, pipeline, options, allowInsecureConnection, httpClient) {
+function buildOperation(method, url, pipeline, options, allowInsecureConnection, httpClient, noDefaultAcceptHeader = false) {
   allowInsecureConnection = options.allowInsecureConnection ?? allowInsecureConnection;
   return {
     then: function(onFulfilled, onrejected) {
@@ -113803,7 +113723,7 @@ function buildOperation(method, url, pipeline, options, allowInsecureConnection,
         method,
         url,
         pipeline,
-        { ...options, allowInsecureConnection },
+        { ...options, allowInsecureConnection, noDefaultAcceptHeader },
         httpClient
       ).then(onFulfilled, onrejected);
     },
@@ -113817,7 +113737,7 @@ function buildOperation(method, url, pipeline, options, allowInsecureConnection,
           method,
           url,
           pipeline,
-          { ...options, allowInsecureConnection, responseAsStream: true },
+          { ...options, allowInsecureConnection, noDefaultAcceptHeader, responseAsStream: true },
           httpClient
         );
       }
@@ -113828,7 +113748,7 @@ function buildOperation(method, url, pipeline, options, allowInsecureConnection,
           method,
           url,
           pipeline,
-          { ...options, allowInsecureConnection, responseAsStream: true },
+          { ...options, allowInsecureConnection, noDefaultAcceptHeader, responseAsStream: true },
           httpClient
         );
       } else {
@@ -114177,9 +114097,10 @@ function getContentType(body) {
 function buildPipelineRequest(method, url, options = {}) {
   const requestContentType = getRequestContentType(options);
   const { body, multipartBody } = getRequestBody(options.body, requestContentType);
+  const accept = options.accept ?? options.headers?.accept ?? (options.noDefaultAcceptHeader ? void 0 : "application/json");
   const headers = (0, import_httpHeaders.createHttpHeaders)({
     ...options.headers ? options.headers : {},
-    accept: options.accept ?? options.headers?.accept ?? "application/json",
+    ...accept !== void 0 && { accept },
     ...requestContentType && {
       "content-type": requestContentType
     }
@@ -114191,6 +114112,7 @@ function buildPipelineRequest(method, url, options = {}) {
     onDownloadProgress,
     timeout,
     responseAsStream,
+    noDefaultAcceptHeader: _noDefaultAcceptHeader,
     url: _url,
     method: _method,
     body: _body,
@@ -114542,7 +114464,7 @@ __export(constants_exports, {
   SDK_VERSION: () => SDK_VERSION
 });
 module.exports = __toCommonJS(constants_exports);
-const SDK_VERSION = "0.3.7";
+const SDK_VERSION = "0.3.8";
 const DEFAULT_RETRY_POLICY_COUNT = 3;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (0);
@@ -118643,8 +118565,23 @@ let e,{defineProperty:r,getPrototypeOf:t,setPrototypeOf:n,create:o,keys:l}=Objec
 "use strict";
 
 
-const { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, escapePreservingEscapes, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = __webpack_require__(34834)
+const { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizePercentEncoding, normalizePathEncoding, serializePathEncoding, normalizeQueryFragmentEncoding, encodeQuery, encodeFragment, reescapeHostDelimiters, isIPv4, nonSimpleDomain } = __webpack_require__(34834)
 const { SCHEMES, getSchemeHandler } = __webpack_require__(343)
+
+const VALID_SCHEME = /^[A-Za-z][A-Za-z0-9+.-]*$/u
+const MALFORMED_SCHEME_ERROR = 'URI scheme is malformed.'
+
+/**
+ * @param {string} scheme
+ * @returns {string}
+ */
+function decodeValidScheme (scheme) {
+  const decodedScheme = unescape(String(scheme))
+  if (!VALID_SCHEME.test(decodedScheme)) {
+    throw new TypeError(MALFORMED_SCHEME_ERROR)
+  }
+  return decodedScheme
+}
 
 /**
  * @template {import('./types/index').URIComponent|string} T
@@ -118669,7 +118606,50 @@ function normalize (uri, options) {
  */
 function resolve (baseURI, relativeURI, options) {
   const schemelessOptions = options ? Object.assign({ scheme: 'null' }, options) : { scheme: 'null' }
-  const resolved = resolveComponent(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true)
+  const {
+    parsed: baseParsed,
+    malformedAuthorityOrPort: baseMalformed,
+    malformedPercentEncoding: baseMalformedPercentEncoding,
+    malformedSchemeSpecific: baseMalformedSchemeSpecific,
+    malformedHost: baseMalformedHost,
+    malformedScheme: baseMalformedScheme
+  } = parseWithStatus(baseURI, schemelessOptions)
+  const {
+    parsed: relativeParsed,
+    malformedAuthorityOrPort: relativeMalformed,
+    malformedPercentEncoding: relativeMalformedPercentEncoding,
+    malformedSchemeSpecific: relativeMalformedSchemeSpecific,
+    malformedHost: relativeMalformedHost,
+    malformedScheme: relativeMalformedScheme
+  } = parseWithStatus(relativeURI, schemelessOptions)
+  if (
+    baseMalformed ||
+    relativeMalformed ||
+    baseMalformedPercentEncoding ||
+    relativeMalformedPercentEncoding ||
+    baseMalformedSchemeSpecific ||
+    relativeMalformedSchemeSpecific ||
+    baseMalformedHost ||
+    relativeMalformedHost ||
+    baseMalformedScheme ||
+    relativeMalformedScheme
+  ) {
+    throw new Error(baseParsed.error || relativeParsed.error || 'URI is malformed.')
+  }
+  const resolved = resolveComponent(baseParsed, relativeParsed, schemelessOptions, true)
+  const resolvedSchemeHandler = getSchemeHandler((options && options.scheme) || resolved.scheme)
+  const resolvedHost = resolved.host
+  const resolvedHostIsIP = resolvedHost !== undefined && resolvedHost !== '' &&
+    (isIPv4(resolvedHost) || normalizeIPv6(resolvedHost).isIPV6)
+  canonicalizeHost(resolved, options || {}, resolvedSchemeHandler, resolvedHostIsIP)
+  // Percent escapes in an ASCII reg-name are encoded data. The WHATWG hostname
+  // parser can reject them even though fast-uri preserves them safely as RFC
+  // 3986 data. A raw non-ASCII host must still fail closed if conversion fails.
+  const encodedASCIIHost = resolvedHost && resolvedHost.indexOf('%') !== -1 &&
+    !/\P{ASCII}/u.test(resolvedHost)
+  if (resolved.error && !encodedASCIIHost) {
+    throw new Error(resolved.error)
+  }
   schemelessOptions.skipEscape = true
   return serialize(resolved, schemelessOptions)
 }
@@ -118752,7 +118732,7 @@ function equal (uriA, uriB, options) {
   const normalizedA = normalizeComparableURI(uriA, options)
   const normalizedB = normalizeComparableURI(uriB, options)
 
-  return normalizedA !== undefined && normalizedB !== undefined && normalizedA.toLowerCase() === normalizedB.toLowerCase()
+  return normalizedA !== undefined && normalizedB !== undefined && normalizedA === normalizedB
 }
 
 /**
@@ -118780,25 +118760,30 @@ function serialize (cmpts, opts) {
   const options = Object.assign({}, opts)
   const uriTokens = []
 
+  if (component.scheme) {
+    component.scheme = decodeValidScheme(component.scheme)
+  }
+
   // find scheme handler
   const schemeHandler = getSchemeHandler(options.scheme || component.scheme)
 
   // perform scheme specific serialization
   if (schemeHandler && schemeHandler.serialize) schemeHandler.serialize(component, options)
 
+  const hasAuthority = component.userinfo !== undefined || component.host !== undefined || component.port !== undefined
+  const pathNoScheme = !options.skipEscape && component.scheme === undefined && !hasAuthority
+
   if (component.path !== undefined) {
     if (!options.skipEscape) {
-      component.path = escapePreservingEscapes(component.path)
-
-      if (component.scheme !== undefined) {
-        component.path = component.path.split('%3A').join(':')
-      }
+      component.path = serializePathEncoding(component.path, pathNoScheme)
     } else {
       component.path = normalizePercentEncoding(component.path)
     }
   }
 
   if (options.reference !== 'suffix' && component.scheme) {
+    // Scheme handlers may replace the scheme during serialization.
+    component.scheme = decodeValidScheme(component.scheme)
     uriTokens.push(component.scheme, ':')
   }
 
@@ -118821,6 +118806,13 @@ function serialize (cmpts, opts) {
       s = removeDotSegments(s)
     }
 
+    // Dot-segment removal can expose a colon that was not originally in the
+    // first segment (for example, "./a:b"). Reapply path-noscheme encoding so
+    // the serialized relative reference cannot be reparsed as a URI scheme.
+    if (pathNoScheme) {
+      s = serializePathEncoding(s, true)
+    }
+
     if (
       authority === undefined &&
       s[0] === '/' &&
@@ -118834,11 +118826,11 @@ function serialize (cmpts, opts) {
   }
 
   if (component.query !== undefined) {
-    uriTokens.push('?', component.query)
+    uriTokens.push('?', encodeQuery(component.query))
   }
 
   if (component.fragment !== undefined) {
-    uriTokens.push('#', component.fragment)
+    uriTokens.push('#', encodeFragment(component.fragment))
   }
   return uriTokens.join('')
 }
@@ -118848,6 +118840,15 @@ const URI_PARSE = /^(?:([^#/:?]+):)?(?:\/\/((?:([^#/?@]*)@)?(\[[^#/?\]]+\]|[^#/:
 // Captures the authority component (between "//" and the next "/", "?" or "#"),
 // with or without a scheme prefix, for the literal-backslash rejection below.
 const AUTHORITY_PREFIX = /^(?:[^#/:?]+:)?\/\/([^/?#]*)/
+
+// Captures the leading authority-introducer region after an optional scheme: a
+// run of forward slashes, backslashes, and the characters the WHATWG URL parser
+// removes before parsing (TAB U+0009, LF U+000A, CR U+000D). A valid introducer
+// is exactly "//". Node treats "\" as "/" on special schemes and strips those
+// characters first, so forms like "\\", "/\", "\/", "/<TAB>/", or a leading
+// "<TAB>//" reach an authority in Node while fast-uri's URI_PARSE folds them into
+// the path group (host confusion / SSRF / redirect bypass).
+const AUTHORITY_INTRODUCER_REGION = /^(?:[^#/:?]+:)?([/\\\t\n\r]*)/
 
 /**
  * @param {import('./types/index').URIComponent} parsed
@@ -118867,9 +118868,73 @@ function getParseError (parsed, matches) {
 }
 
 /**
+ * Checks percent syntax without decoding the represented octets. RFC 3986
+ * percent-encoding is byte-oriented, so sequences such as `%FF` are valid even
+ * though they are not independently valid UTF-8.
+ *
+ * @param {string|undefined} component
+ * @returns {boolean}
+ */
+function hasMalformedPercentEncoding (component) {
+  if (component === undefined) return false
+
+  let percent = component.indexOf('%')
+  while (percent !== -1) {
+    if (percent + 2 >= component.length || !/^[\da-f]{2}$/iu.test(component.slice(percent + 1, percent + 3))) {
+      return true
+    }
+    percent = component.indexOf('%', percent + 3)
+  }
+
+  return false
+}
+
+/**
+ * @param {RegExpMatchArray} matches
+ * @returns {boolean}
+ */
+function hasMalformedComponentPercentEncoding (matches) {
+  // Bracketed IP literals use a raw "%" as the zone separator for historical
+  // compatibility. Their parsing is intentionally left to normalizeIPv6.
+  const host = matches[4]
+  return hasMalformedPercentEncoding(matches[3]) ||
+    (host !== undefined && !(host[0] === '[' && host[host.length - 1] === ']') && hasMalformedPercentEncoding(host)) ||
+    hasMalformedPercentEncoding(matches[6]) ||
+    hasMalformedPercentEncoding(matches[7]) ||
+    hasMalformedPercentEncoding(matches[8])
+}
+
+/**
+ * @param {import('./types/index').URIComponent} parsed
+ * @param {import('./types/index').Options} options
+ * @param {{ domainHost?: boolean, unicodeSupport?: boolean }|undefined} schemeHandler
+ * @param {boolean} isIP
+ * @returns {boolean} whether host conversion failed
+ */
+function canonicalizeHost (parsed, options, schemeHandler, isIP) {
+  if (
+    !options.unicodeSupport &&
+    (!schemeHandler || !schemeHandler.unicodeSupport) &&
+    parsed.host &&
+    parsed.host[0] !== '[' &&
+    (options.domainHost || (schemeHandler && schemeHandler.domainHost)) &&
+    isIP === false &&
+    nonSimpleDomain(parsed.host)
+  ) {
+    try {
+      parsed.host = new URL('http://' + parsed.host).hostname
+    } catch (e) {
+      parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e
+      return true
+    }
+  }
+  return false
+}
+
+/**
  * @param {string} uri
  * @param {import('./types/index').Options} [opts]
- * @returns {{ parsed: import('./types/index').URIComponent, malformedAuthorityOrPort: boolean }}
+ * @returns {{ parsed: import('./types/index').URIComponent, malformedAuthorityOrPort: boolean, malformedPercentEncoding: boolean, malformedSchemeSpecific: boolean, malformedHost: boolean, malformedScheme: boolean }}
  */
 function parseWithStatus (uri, opts) {
   const options = Object.assign({}, opts)
@@ -118885,6 +118950,11 @@ function parseWithStatus (uri, opts) {
   }
 
   let malformedAuthorityOrPort = false
+  let malformedPercentEncoding = false
+  let malformedSchemeSpecific = false
+  let malformedHost = false
+  let malformedIPLiteral = false
+  let malformedScheme = false
 
   let isIP = false
   if (options.reference === 'suffix') {
@@ -118908,6 +118978,28 @@ function parseWithStatus (uri, opts) {
     malformedAuthorityOrPort = true
   }
 
+  // Reject a malformed or whitespace-smuggled authority introducer. fast-uri
+  // only recognizes a literal "//"; anything else in the leading separator run
+  // (a backslash, or a "//" that appears only after removing the TAB/LF/CR that
+  // Node strips) means the authority fast-uri parses differs from the one Node's
+  // URL resolves. Reject rather than rewrite, mirroring the literal-backslash
+  // guard above. Percent-encoded forms (%5C, %09) are untouched, valid data.
+  const introducerMatch = uri.match(AUTHORITY_INTRODUCER_REGION)
+  if (introducerMatch !== null) {
+    const region = introducerMatch[1]
+    const normalizedRegion = region.replace(/[\t\n\r]/g, '')
+    // Two or more leading separators introduce an authority.
+    if (normalizedRegion.length >= 2) {
+      if (normalizedRegion.slice(0, 2) !== '//') {
+        parsed.error = parsed.error || 'URI authority must not contain a literal backslash.'
+        malformedAuthorityOrPort = true
+      } else if (region.length !== normalizedRegion.length) {
+        parsed.error = parsed.error || 'URI authority introducer must not contain whitespace.'
+        malformedAuthorityOrPort = true
+      }
+    }
+  }
+
   const matches = uri.match(URI_PARSE)
 
   if (matches) {
@@ -118919,6 +119011,21 @@ function parseWithStatus (uri, opts) {
     parsed.path = matches[6] || ''
     parsed.query = matches[7]
     parsed.fragment = matches[8]
+
+    if (parsed.scheme !== undefined) {
+      const decodedScheme = unescape(parsed.scheme)
+      if (VALID_SCHEME.test(decodedScheme)) {
+        parsed.scheme = decodedScheme.toLowerCase()
+      } else {
+        parsed.error = parsed.error || MALFORMED_SCHEME_ERROR
+        malformedScheme = true
+      }
+    }
+
+    malformedPercentEncoding = hasMalformedComponentPercentEncoding(matches)
+    if (malformedPercentEncoding) {
+      parsed.error = parsed.error || 'URI contains malformed percent-encoding.'
+    }
 
     // fix port number
     if (isNaN(parsed.port)) {
@@ -118934,9 +119041,16 @@ function parseWithStatus (uri, opts) {
     if (parsed.host) {
       const ipv4result = isIPv4(parsed.host)
       if (ipv4result === false) {
+        const bracketedIPLiteral = parsed.host[0] === '[' && parsed.host[parsed.host.length - 1] === ']'
         const ipv6result = normalizeIPv6(parsed.host)
-        parsed.host = ipv6result.host.toLowerCase()
-        isIP = ipv6result.isIPV6
+        isIP = ipv6result.isIPV6 || ipv6result.isIPVFuture === true
+        malformedIPLiteral = bracketedIPLiteral && ipv6result.error === true
+        parsed.host = isIP ? ipv6result.host : ipv6result.host.toLowerCase()
+
+        if (malformedIPLiteral) {
+          parsed.error = parsed.error || 'URI host is malformed.'
+          malformedAuthorityOrPort = true
+        }
       } else {
         isIP = true
       }
@@ -118959,49 +119073,38 @@ function parseWithStatus (uri, opts) {
     // find scheme handler
     const schemeHandler = getSchemeHandler(options.scheme || parsed.scheme)
 
-    // check if scheme can't handle IRIs
-    if (!options.unicodeSupport && (!schemeHandler || !schemeHandler.unicodeSupport)) {
-      // if host component is a domain name
-      if (parsed.host && (options.domainHost || (schemeHandler && schemeHandler.domainHost)) && isIP === false && nonSimpleDomain(parsed.host)) {
-        // convert Unicode IDN -> ASCII IDN
-        try {
-          parsed.host = new URL('http://' + parsed.host).hostname
-        } catch (e) {
-          parsed.error = parsed.error || "Host's domain name can not be converted to ASCII: " + e
-        }
-      }
-      // convert IRI -> URI
-    }
+    // convert Unicode IDN -> ASCII IDN when the effective scheme uses domain hosts
+    malformedHost = canonicalizeHost(parsed, options, schemeHandler, isIP)
 
     if (!schemeHandler || (schemeHandler && !schemeHandler.skipNormalize)) {
       if (uri.indexOf('%') !== -1) {
-        if (parsed.scheme !== undefined) {
-          parsed.scheme = unescape(parsed.scheme)
-        }
-        if (parsed.host !== undefined) {
-          parsed.host = reescapeHostDelimiters(unescape(parsed.host), isIP)
+        if (parsed.host !== undefined && !malformedIPLiteral) {
+          const host = isIP ? parsed.host : normalizePercentEncoding(parsed.host, true)
+          parsed.host = reescapeHostDelimiters(host, isIP)
         }
       }
       if (parsed.path) {
         parsed.path = normalizePathEncoding(parsed.path)
       }
+      if (parsed.query) {
+        parsed.query = normalizeQueryFragmentEncoding(parsed.query)
+      }
       if (parsed.fragment) {
-        try {
-          parsed.fragment = encodeURI(decodeURIComponent(parsed.fragment))
-        } catch {
-          parsed.error = parsed.error || 'URI malformed'
-        }
+        parsed.fragment = normalizeQueryFragmentEncoding(parsed.fragment)
       }
     }
 
     // perform scheme specific parsing
     if (schemeHandler && schemeHandler.parse) {
       schemeHandler.parse(parsed, options)
+      if (schemeHandler === SCHEMES.urn && parsed.nid === undefined) {
+        malformedSchemeSpecific = true
+      }
     }
   } else {
     parsed.error = parsed.error || 'URI can not be parsed.'
   }
-  return { parsed, malformedAuthorityOrPort }
+  return { parsed, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme }
 }
 
 /**
@@ -119025,13 +119128,17 @@ function normalizeString (uri, opts) {
 /**
  * @param {string} uri
  * @param {import('./types/index').Options} [opts]
- * @returns {{ normalized: string, malformedAuthorityOrPort: boolean }}
+ * @returns {{ normalized: string, malformedAuthorityOrPort: boolean, malformedPercentEncoding: boolean, malformedSchemeSpecific: boolean, malformedHost: boolean, malformedScheme: boolean }}
  */
 function normalizeStringWithStatus (uri, opts) {
-  const { parsed, malformedAuthorityOrPort } = parseWithStatus(uri, opts)
+  const { parsed, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = parseWithStatus(uri, opts)
   return {
-    normalized: malformedAuthorityOrPort ? uri : serialize(parsed, opts),
-    malformedAuthorityOrPort
+    normalized: malformedAuthorityOrPort || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? uri : serialize(parsed, opts),
+    malformedAuthorityOrPort,
+    malformedPercentEncoding,
+    malformedSchemeSpecific,
+    malformedHost,
+    malformedScheme
   }
 }
 
@@ -119041,14 +119148,18 @@ function normalizeStringWithStatus (uri, opts) {
  * @returns {string|undefined}
  */
 function normalizeComparableURI (uri, opts) {
-  if (typeof uri === 'string') {
-    const { normalized, malformedAuthorityOrPort } = normalizeStringWithStatus(uri, opts)
-    return malformedAuthorityOrPort ? undefined : normalized
+  if (typeof uri !== 'string' && typeof uri !== 'object') {
+    return undefined
   }
 
-  if (typeof uri === 'object') {
-    return serialize(uri, opts)
+  let value
+  try {
+    value = typeof uri === 'string' ? uri : serialize(uri, opts)
+  } catch {
+    return undefined
   }
+  const { normalized, malformedAuthorityOrPort, malformedPercentEncoding, malformedSchemeSpecific, malformedHost, malformedScheme } = normalizeStringWithStatus(value, opts)
+  return malformedAuthorityOrPort || malformedPercentEncoding || malformedSchemeSpecific || malformedHost || malformedScheme ? undefined : normalized
 }
 
 const fastUri = {
@@ -119075,7 +119186,7 @@ module.exports.fastUri = fastUri
 
 
 const { isUUID } = __webpack_require__(34834)
-const URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu
+const URN_REG = /^([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-./:;=@]|%[\da-f]{2})+)$/iu
 
 const supportedSchemeNames = /** @type {const} */ (['http', 'https', 'ws',
   'wss', 'urn', 'urn:uuid'])
@@ -119187,9 +119298,14 @@ function wsSerialize (wsComponent) {
 
   // reconstruct path from resource name
   if (wsComponent.resourceName) {
-    const [path, query] = wsComponent.resourceName.split('?')
+    const queryIndex = wsComponent.resourceName.indexOf('?')
+    const path = queryIndex === -1
+      ? wsComponent.resourceName
+      : wsComponent.resourceName.slice(0, queryIndex)
     wsComponent.path = (path && path !== '/' ? path : undefined)
-    wsComponent.query = query
+    wsComponent.query = queryIndex === -1
+      ? undefined
+      : wsComponent.resourceName.slice(queryIndex + 1)
     wsComponent.resourceName = undefined
   }
 
@@ -119206,7 +119322,7 @@ function urnParse (urnComponent, options) {
     return urnComponent
   }
   const matches = urnComponent.path.match(URN_REG)
-  if (matches) {
+  if (matches && matches[0] === urnComponent.path) {
     const scheme = options.scheme || urnComponent.scheme || 'urn'
     urnComponent.nid = matches[1].toLowerCase()
     urnComponent.nss = matches[2]
@@ -119334,9 +119450,9 @@ function getSchemeHandler (scheme) {
 }
 
 module.exports = {
-  wsIsSecure,
+  ...void (wsIsSecure),
   SCHEMES,
-  isValidSchemeName,
+  ...void (isValidSchemeName),
   getSchemeHandler,
 }
 
@@ -119362,7 +119478,36 @@ const isHexPair = RegExp.prototype.test.bind(/^[\da-f]{2}$/iu)
 const isUnreserved = RegExp.prototype.test.bind(/^[\da-z\-._~]$/iu)
 
 /** @type {(value: string) => boolean} */
-const isPathCharacter = RegExp.prototype.test.bind(/^[\da-z\-._~!$&'()*+,;=:@/]$/iu)
+const isPathCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/]$/u)
+
+/** @type {(value: string) => boolean} */
+const isQueryFragmentCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:@/?]$/u)
+
+/** @type {(value: string) => boolean} */
+const isUserinfoCharacter = RegExp.prototype.test.bind(/^[A-Za-z0-9\-._~!$&'()*+,;=:]$/u)
+
+const BYTE_HEX = new Array(256)
+{
+  const HEX_DIGITS = '0123456789ABCDEF'
+  for (let i = 0; i < 256; i++) {
+    BYTE_HEX[i] = '%' + HEX_DIGITS[i >> 4] + HEX_DIGITS[i & 0xF]
+  }
+}
+function percentEncodeNonAscii (cp) {
+  if (cp < 0x800) {
+    return BYTE_HEX[0xC0 | (cp >> 6)] +
+           BYTE_HEX[0x80 | (cp & 0x3F)]
+  }
+  if (cp < 0x10000) {
+    return BYTE_HEX[0xE0 | (cp >> 12)] +
+           BYTE_HEX[0x80 | ((cp >> 6) & 0x3F)] +
+           BYTE_HEX[0x80 | (cp & 0x3F)]
+  }
+  return BYTE_HEX[0xF0 | (cp >> 18)] +
+         BYTE_HEX[0x80 | ((cp >> 12) & 0x3F)] +
+         BYTE_HEX[0x80 | ((cp >> 6) & 0x3F)] +
+         BYTE_HEX[0x80 | (cp & 0x3F)]
+}
 
 /**
  * @param {Array<string>} input
@@ -119395,12 +119540,14 @@ function stringArrayToHexStripped (input) {
   return acc
 }
 
-/**
- * @typedef {Object} GetIPV6Result
- * @property {boolean} error - Indicates if there was an error parsing the IPv6 address.
- * @property {string} address - The parsed IPv6 address.
- * @property {string} [zone] - The zone identifier, if present.
- */
+/** @type {(value: string) => boolean} */
+const isHextet = RegExp.prototype.test.bind(/^[\dA-Fa-f]{1,4}$/)
+
+/** @type {(value: string) => boolean} */
+const isIPvFuture = RegExp.prototype.test.bind(/^[vV][\dA-Fa-f]+\.[A-Za-z\d\-._~!$&'()*+,;=:]+$/)
+
+/** @type {(value: string) => boolean} */
+const isZoneCharacter = RegExp.prototype.test.bind(/^[A-Za-z\d\-._~]$/)
 
 /**
  * @param {string} value
@@ -119409,88 +119556,104 @@ function stringArrayToHexStripped (input) {
 const nonSimpleDomain = RegExp.prototype.test.bind(/[^!"$&'()*+,\-.;=_`a-z{}~]/u)
 
 /**
- * @param {Array<string>} buffer
+ * @param {string} zone
  * @returns {boolean}
  */
-function consumeIsZone (buffer) {
-  buffer.length = 0
-  return true
-}
+function isZoneIdentifier (zone) {
+  if (zone.length === 0) return false
 
-/**
- * @param {Array<string>} buffer
- * @param {Array<string>} address
- * @param {GetIPV6Result} output
- * @returns {boolean}
- */
-function consumeHextets (buffer, address, output) {
-  if (buffer.length) {
-    const hex = stringArrayToHexStripped(buffer)
-    if (hex !== '') {
-      address.push(hex)
-    } else {
-      output.error = true
-      return false
+  for (let i = 0; i < zone.length; i++) {
+    if (isZoneCharacter(zone[i])) continue
+    if (zone[i] === '%' && i + 2 < zone.length && isHexPair(zone.slice(i + 1, i + 3))) {
+      i += 2
+      continue
     }
-    buffer.length = 0
+    return false
   }
+
   return true
 }
 
 /**
+ * Compresses the longest run of zero hextets to "::" per RFC 5952. A run of a
+ * single zero hextet is left uncompressed. On ties the leftmost run wins.
+ *
+ * @param {string[]} hextets
+ * @returns {string}
+ */
+function compressIPv6ZeroRun (hextets) {
+  let bestStart = -1
+  let bestLength = 0
+  let runStart = -1
+  let runLength = 0
+  for (let i = 0; i < hextets.length; i++) {
+    if (hextets[i] === '0') {
+      if (runStart === -1) runStart = i
+      runLength++
+      if (runLength > bestLength) {
+        bestLength = runLength
+        bestStart = runStart
+      }
+    } else {
+      runStart = -1
+      runLength = 0
+    }
+  }
+
+  if (bestLength < 2) return hextets.join(':')
+
+  const head = hextets.slice(0, bestStart).join(':')
+  const tail = hextets.slice(bestStart + bestLength).join(':')
+  return head + '::' + tail
+}
+
+/**
+ * Validates an IPv6 address against the alternatives in RFC 3986 section
+ * 3.2.2 and returns the same address with leading hextet zeroes removed.
+ * An embedded IPv4 address counts as two hextets and is only valid at the end.
+ *
  * @param {string} input
- * @returns {GetIPV6Result}
+ * @returns {string|undefined}
  */
-function getIPV6 (input) {
-  let tokenCount = 0
-  const output = { error: false, address: '', zone: '' }
-  /** @type {Array<string>} */
-  const address = []
-  /** @type {Array<string>} */
-  const buffer = []
-  let endipv6Encountered = false
-  let endIpv6 = false
+function normalizeIPv6Address (input) {
+  const compression = input.indexOf('::')
+  if (compression !== -1 && input.indexOf('::', compression + 1) !== -1) return undefined
 
-  let consume = consumeHextets
+  const left = compression === -1 ? input.split(':') : input.slice(0, compression).split(':')
+  const right = compression === -1 ? [] : input.slice(compression + 2).split(':')
+  if (compression !== -1) {
+    if (left.length === 1 && left[0] === '') left.length = 0
+    if (right.length === 1 && right[0] === '') right.length = 0
+  }
 
-  for (let i = 0; i < input.length; i++) {
-    const cursor = input[i]
-    if (cursor === '[' || cursor === ']') { continue }
-    if (cursor === ':') {
-      if (endipv6Encountered === true) {
-        endIpv6 = true
-      }
-      if (!consume(buffer, address, output)) { break }
-      if (++tokenCount > 7) {
-        // not valid
-        output.error = true
-        break
-      }
-      if (i > 0 && input[i - 1] === ':') {
-        endipv6Encountered = true
-      }
-      address.push(':')
-      continue
-    } else if (cursor === '%') {
-      if (!consume(buffer, address, output)) { break }
-      // switch to zone detection
-      consume = consumeIsZone
-    } else {
-      buffer.push(cursor)
+  const parts = left.concat(right)
+  let hextetCount = 0
+  for (let i = 0; i < parts.length; i++) {
+    const part = parts[i]
+    if (part === '') return undefined
+
+    if (part.indexOf('.') !== -1) {
+      if (i !== parts.length - 1 || (compression !== -1 && right.length === 0) || !isIPv4(part)) return undefined
+      hextetCount += 2
       continue
     }
+
+    if (!isHextet(part)) return undefined
+    parts[i] = parseInt(part, 16).toString(16)
+    hextetCount++
   }
-  if (buffer.length) {
-    if (consume === consumeIsZone) {
-      output.zone = buffer.join('')
-    } else if (endIpv6) {
-      address.push(buffer.join(''))
-    } else {
-      address.push(stringArrayToHexStripped(buffer))
-    }
+
+  if (compression === -1) {
+    if (hextetCount !== 8) return undefined
+    return compressIPv6ZeroRun(parts)
   }
-  output.address = address.join('')
-  return output
+  if (hextetCount >= 8) return undefined
+
+  // expand "::" then re-compress the longest run for a canonical result
+  const expanded = parts.slice(0, left.length)
+  for (let i = hextetCount; i < 8; i++) expanded.push('0')
+  for (let i = left.length; i < parts.length; i++) expanded.push(parts[i])
+  return compressIPv6ZeroRun(expanded)
 }
 
 /**
@@ -119498,26 +119661,49 @@ function getIPV6 (input) {
  * @property {string} host - The normalized host.
  * @property {string} [escapedHost] - The escaped host.
  * @property {boolean} isIPV6 - Indicates if the host is an IPv6 address.
+ * @property {boolean} [isIPVFuture] - Indicates if the host is an IPvFuture literal.
+ * @property {boolean} [error] - Indicates if a bracketed IP literal is malformed.
  */
 
 /**
+ * Validates and normalizes a bracketed IP literal. Raw zone separators remain
+ * accepted for backwards compatibility, while encoded separators and zone
+ * contents follow RFC 6874.
+ *
  * @param {string} host
  * @returns {NormalizeIPv6Result}
  */
 function normalizeIPv6 (host) {
-  if (findToken(host, ':') < 2) { return { host, isIPV6: false } }
-  const ipv6 = getIPV6(host)
+  const bracketed = host[0] === '[' && host[host.length - 1] === ']'
+  const hasBracket = host[0] === '[' || host[host.length - 1] === ']'
+  if (hasBracket && !bracketed) return { host, isIPV6: false, error: true }
 
-  if (!ipv6.error) {
-    let newHost = ipv6.address
-    let escapedHost = ipv6.address
-    if (ipv6.zone) {
-      newHost += '%' + ipv6.zone
-      escapedHost += '%25' + ipv6.zone
-    }
-    return { host: newHost, isIPV6: true, escapedHost }
-  } else {
-    return { host, isIPV6: false }
+  let input = bracketed ? host.slice(1, -1) : host
+  if (bracketed && isIPvFuture(input)) {
+    input = input.toLowerCase()
+    return { host: `[${input}]`, escapedHost: input, isIPV6: false, isIPVFuture: true }
+  }
+
+  if (findToken(input, ':') < 2) {
+    return { host, isIPV6: false, error: bracketed }
+  }
+
+  let zoneIdentifier = ''
+  const zoneSeparator = input.indexOf('%')
+  if (zoneSeparator !== -1) {
+    const separatorLength = input.slice(zoneSeparator, zoneSeparator + 3).toLowerCase() === '%25' ? 3 : 1
+    zoneIdentifier = input.slice(zoneSeparator + separatorLength)
+    if (!isZoneIdentifier(zoneIdentifier)) return { host, isIPV6: false, error: true }
+    input = input.slice(0, zoneSeparator)
+  }
+
+  const address = normalizeIPv6Address(input)
+  if (address === undefined) return { host, isIPV6: false, error: true }
+
+  return {
+    host: address + (zoneIdentifier ? '%' + zoneIdentifier : ''),
+    escapedHost: address + (zoneIdentifier ? '%25' + zoneIdentifier : ''),
+    isIPV6: true
   }
 }
 
@@ -119643,7 +119829,7 @@ function reescapeHostDelimiters (host, isIP) {
 
 /**
  * Normalizes percent escapes and optionally decodes only unreserved ASCII bytes.
- * Reserved delimiters such as `%2F` and `%2E` stay escaped.
+ * Reserved delimiters such as `%2F` stay escaped; `%2E` is unreserved.
  *
  * @param {string} input
  * @param {boolean} [decodeUnreserved=false]
@@ -119692,7 +119878,8 @@ function normalizePathEncoding (input) {
   let output = ''
 
   for (let i = 0; i < input.length; i++) {
-    if (input[i] === '%' && i + 2 < input.length) {
+    const ch = input[i]
+    if (ch === '%' && i + 2 < input.length) {
       const hex = input.slice(i + 1, i + 3)
       if (isHexPair(hex)) {
         const normalizedHex = hex.toUpperCase()
@@ -119709,10 +119896,225 @@ function normalizePathEncoding (input) {
       }
     }
 
-    if (isPathCharacter(input[i])) {
-      output += input[i]
+    if (isPathCharacter(ch)) {
+      output += ch
     } else {
-      output += escape(input[i])
+      const code = input.charCodeAt(i)
+      if (code < 0x80) {
+        output += isEscapeSafe(code) ? ch : BYTE_HEX[code]
+      } else if (code < 0xD800 || code > 0xDFFF) {
+        output += percentEncodeNonAscii(code)
+      } else if (code <= 0xDBFF && i + 1 < input.length) {
+        const low = input.charCodeAt(i + 1)
+        if (low >= 0xDC00 && low <= 0xDFFF) {
+          output += percentEncodeNonAscii(0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00))
+          i++
+        } else {
+          output += percentEncodeNonAscii(0xFFFD)
+        }
+      } else {
+        output += percentEncodeNonAscii(0xFFFD)
+      }
+    }
+  }
+
+  return output
+}
+
+/**
+ * Serializes a path without rewriting reserved data. Raw RFC 3986 path
+ * characters remain literal, valid escapes are preserved and uppercased, and
+ * everything else is UTF-8 percent-encoded. In a path-noscheme, a colon in the
+ * first segment must be escaped so the result cannot be parsed as a scheme.
+ *
+ * @param {string} input
+ * @param {boolean} [pathNoScheme=false]
+ * @returns {string}
+ */
+function serializePathEncoding (input, pathNoScheme = false) {
+  let output = ''
+  let firstSegment = pathNoScheme && input[0] !== '/'
+
+  for (let i = 0; i < input.length; i++) {
+    const ch = input[i]
+    if (ch === '%' && i + 2 < input.length) {
+      const hex = input.slice(i + 1, i + 3)
+      if (isHexPair(hex)) {
+        output += '%' + hex.toUpperCase()
+        i += 2
+        continue
+      }
+    }
+
+    if (ch === '/') {
+      firstSegment = false
+    }
+
+    if (isPathCharacter(ch) && (ch !== ':' || !firstSegment)) {
+      output += ch
+    } else {
+      const code = input.charCodeAt(i)
+      if (code < 0x80) {
+        output += BYTE_HEX[code]
+      } else if (code < 0xD800 || code > 0xDFFF) {
+        output += percentEncodeNonAscii(code)
+      } else if (code <= 0xDBFF && i + 1 < input.length) {
+        const low = input.charCodeAt(i + 1)
+        if (low >= 0xDC00 && low <= 0xDFFF) {
+          output += percentEncodeNonAscii(0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00))
+          i++
+        } else {
+          output += percentEncodeNonAscii(0xFFFD)
+        }
+      } else {
+        output += percentEncodeNonAscii(0xFFFD)
+      }
+    }
+  }
+
+  return output
+}
+
+/**
+ * Percent-encodes a URI component using its RFC 3986 literal character set.
+ * Existing valid escapes are preserved and normalized to uppercase hex.
+ *
+ * @param {string} input
+ * @param {(value: string) => boolean} isAllowed
+ * @returns {string}
+ */
+function encodeComponent (input, isAllowed) {
+  let output = ''
+
+  for (let i = 0; i < input.length; i++) {
+    const ch = input[i]
+    if (ch === '%' && i + 2 < input.length) {
+      const hex = input.slice(i + 1, i + 3)
+      if (isHexPair(hex)) {
+        output += '%' + hex.toUpperCase()
+        i += 2
+        continue
+      }
+    }
+
+    if (isAllowed(ch)) {
+      output += ch
+    } else {
+      const code = input.charCodeAt(i)
+      if (code < 0x80) {
+        output += BYTE_HEX[code]
+      } else if (code < 0xD800 || code > 0xDFFF) {
+        output += percentEncodeNonAscii(code)
+      } else if (code <= 0xDBFF && i + 1 < input.length) {
+        const low = input.charCodeAt(i + 1)
+        if (low >= 0xDC00 && low <= 0xDFFF) {
+          output += percentEncodeNonAscii(0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00))
+          i++
+        } else {
+          output += percentEncodeNonAscii(0xFFFD)
+        }
+      } else {
+        output += percentEncodeNonAscii(0xFFFD)
+      }
+    }
+  }
+
+  return output
+}
+
+/**
+ * Encodes userinfo while preserving its RFC 3986 §3.2.1 literal characters.
+ * In particular, authority delimiters such as `@`, `/`, `?`, and `#` are data.
+ *
+ * @param {string} input
+ * @returns {string}
+ */
+function encodeUserinfo (input) {
+  return encodeComponent(input, isUserinfoCharacter)
+}
+
+/**
+ * Encodes query data using the RFC 3986 §3.4 grammar. A literal `#` must be
+ * escaped because it would otherwise begin the fragment component.
+ *
+ * @param {string} input
+ * @returns {string}
+ */
+function encodeQuery (input) {
+  return encodeComponent(input, isQueryFragmentCharacter)
+}
+
+/**
+ * Encodes fragment data using the RFC 3986 §3.5 grammar.
+ *
+ * @param {string} input
+ * @returns {string}
+ */
+function encodeFragment (input) {
+  return encodeComponent(input, isQueryFragmentCharacter)
+}
+
+function isEscapeSafe (cp) {
+  return (
+    (cp >= 0x30 && cp <= 0x39) ||
+    (cp >= 0x41 && cp <= 0x5A) ||
+    (cp >= 0x61 && cp <= 0x7A) ||
+    cp === 0x2A || cp === 0x2B || cp === 0x2D || cp === 0x2E ||
+    cp === 0x2F || cp === 0x40 || cp === 0x5F
+  )
+}
+
+/**
+ * Normalizes the percent-encoding of a query or fragment component.
+ *
+ * Like `normalizePathEncoding`, but uses the query/fragment character set
+ * (which additionally allows `?`) and decodes `.` since it has no dot-segment
+ * meaning outside of a path.
+ *
+ * @param {string} input
+ * @returns {string}
+ */
+function normalizeQueryFragmentEncoding (input) {
+  let output = ''
+
+  for (let i = 0; i < input.length; i++) {
+    const ch = input[i]
+    if (ch === '%' && i + 2 < input.length) {
+      const hex = input.slice(i + 1, i + 3)
+      if (isHexPair(hex)) {
+        const normalizedHex = hex.toUpperCase()
+        const decoded = String.fromCharCode(parseInt(normalizedHex, 16))
+
+        if (isUnreserved(decoded)) {
+          output += decoded
+        } else {
+          output += '%' + normalizedHex
+        }
+
+        i += 2
+        continue
+      }
+    }
+
+    if (isQueryFragmentCharacter(ch)) {
+      output += ch
+    } else {
+      const code = input.charCodeAt(i)
+      if (code < 0x80) {
+        output += isEscapeSafe(code) ? ch : BYTE_HEX[code]
+      } else if (code < 0xD800 || code > 0xDFFF) {
+        output += percentEncodeNonAscii(code)
+      } else if (code <= 0xDBFF && i + 1 < input.length) {
+        const low = input.charCodeAt(i + 1)
+        if (low >= 0xDC00 && low <= 0xDFFF) {
+          output += percentEncodeNonAscii(0x10000 + ((code - 0xD800) << 10) + (low - 0xDC00))
+          i++
+        } else {
+          output += percentEncodeNonAscii(0xFFFD)
+        }
+      } else {
+        output += percentEncodeNonAscii(0xFFFD)
+      }
     }
   }
 
@@ -119752,15 +120154,21 @@ function recomposeAuthority (component) {
   const uriTokens = []
 
   if (component.userinfo !== undefined) {
-    uriTokens.push(component.userinfo)
+    uriTokens.push(encodeUserinfo(component.userinfo))
     uriTokens.push('@')
   }
 
   if (component.host !== undefined) {
-    let host = unescape(component.host)
+    let host = component.host
     if (!isIPv4(host)) {
-      const ipV6res = normalizeIPv6(host)
-      if (ipV6res.isIPV6 === true) {
+      let ipV6res = normalizeIPv6(host)
+      if (ipV6res.isIPV6 !== true && ipV6res.isIPVFuture !== true) {
+        // Decode only unreserved bytes, once. In particular, keep %25 encoded
+        // so it cannot introduce a second escape during recomposition.
+        host = normalizePercentEncoding(host, true)
+        ipV6res = normalizeIPv6(host)
+      }
+      if (ipV6res.isIPV6 === true || ipV6res.isIPVFuture === true) {
         host = `[${ipV6res.escapedHost}]`
       } else {
         host = reescapeHostDelimiters(host, false)
@@ -119783,12 +120191,17 @@ module.exports = {
   reescapeHostDelimiters,
   normalizePercentEncoding,
   normalizePathEncoding,
-  escapePreservingEscapes,
+  serializePathEncoding,
+  normalizeQueryFragmentEncoding,
+  ...void (encodeUserinfo),
+  encodeQuery,
+  encodeFragment,
+  ...void (escapePreservingEscapes),
   removeDotSegments,
   isIPv4,
   isUUID,
   normalizeIPv6,
-  stringArrayToHexStripped
+  ...void (stringArrayToHexStripped)
 }
 
 
@@ -119797,7 +120210,7 @@ module.exports = {
 /***/ 94603
 (module) {
 
-(()=>{"use strict";var t={d:(e,i)=>{for(var n in i)t.o(i,n)&&!t.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:i[n]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r:t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})}},e={};t.r(e),t.d(e,{XMLBuilder:()=>Oe,XMLParser:()=>re,XMLValidator:()=>je});const i=":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD",n=new RegExp("^["+i+"]["+i+"\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$");function r(t,e){const i=[];let n=e.exec(t);for(;n;){const r=[];r.startIndex=e.lastIndex-n[0].length;const s=n.length;for(let t=0;t<s;t++)r.push(n[t]);i.push(r),n=e.exec(t)}return i}const s=function(t){return!(null==n.exec(t))},o=["hasOwnProperty","toString","valueOf","__defineGetter__","__defineSetter__","__lookupGetter__","__lookupSetter__"],a=["__proto__","constructor","prototype"],l={allowBooleanAttributes:!1,unpairedTags:[]};function p(t,e){e=Object.assign({},l,e);const i=[];let n=!1,r=!1;"\ufeff"===t[0]&&(t=t.substr(1));for(let s=0;s<t.length;s++)if("<"===t[s]&&"?"===t[s+1]){if(s+=2,s=h(t,s),s.err)return s}else{if("<"!==t[s]){if(c(t[s]))continue;return y("InvalidChar","char '"+t[s]+"' is not expected.",w(t,s))}{let o=s;if(s++,"!"===t[s]){s=d(t,s);continue}{let a=!1;"/"===t[s]&&(a=!0,s++);let l="";for(;s<t.length&&">"!==t[s]&&" "!==t[s]&&"\t"!==t[s]&&"\n"!==t[s]&&"\r"!==t[s];s++)l+=t[s];if(l=l.trim(),"/"===l[l.length-1]&&(l=l.substring(0,l.length-1),s--),!E(l)){let e;return e=0===l.trim().length?"Invalid space after '<'.":"Tag '"+l+"' is an invalid name.",y("InvalidTag",e,w(t,s))}const p=g(t,s);if(!1===p)return y("InvalidAttr","Attributes for '"+l+"' have open quote.",w(t,s));let u=p.value;if(s=p.index,"/"===u[u.length-1]){const i=s-u.length;u=u.substring(0,u.length-1);const r=x(u,e);if(!0!==r)return y(r.err.code,r.err.msg,w(t,i+r.err.line));n=!0}else if(a){if(!p.tagClosed)return y("InvalidTag","Closing tag '"+l+"' doesn't have proper closing.",w(t,s));if(u.trim().length>0)return y("InvalidTag","Closing tag '"+l+"' can't have attributes or invalid starting.",w(t,o));if(0===i.length)return y("InvalidTag","Closing tag '"+l+"' has not been opened.",w(t,o));{const e=i.pop();if(l!==e.tagName){let i=w(t,e.tagStartPos);return y("InvalidTag","Expected closing tag '"+e.tagName+"' (opened in line "+i.line+", col "+i.col+") instead of closing tag '"+l+"'.",w(t,o))}0==i.length&&(r=!0)}}else{const a=x(u,e);if(!0!==a)return y(a.err.code,a.err.msg,w(t,s-u.length+a.err.line));if(!0===r)return y("InvalidXml","Multiple possible root nodes found.",w(t,s));-1!==e.unpairedTags.indexOf(l)||i.push({tagName:l,tagStartPos:o}),n=!0}for(s++;s<t.length;s++)if("<"===t[s]){if("!"===t[s+1]){s++,s=d(t,s);continue}if("?"!==t[s+1])break;if(s=h(t,++s),s.err)return s}else if("&"===t[s]){const e=b(t,s);if(-1==e)return y("InvalidChar","char '&' is not expected.",w(t,s));s=e}else if(!0===r&&!c(t[s]))return y("InvalidXml","Extra text at the end",w(t,s));"<"===t[s]&&s--}}}return n?1==i.length?y("InvalidTag","Unclosed tag '"+i[0].tagName+"'.",w(t,i[0].tagStartPos)):!(i.length>0)||y("InvalidXml","Invalid '"+JSON.stringify(i.map(t=>t.tagName),null,4).replace(/\r?\n/g,"")+"' found.",{line:1,col:1}):y("InvalidXml","Start tag expected.",1)}function c(t){return" "===t||"\t"===t||"\n"===t||"\r"===t}function h(t,e){const i=e;for(;e<t.length;e++)if("?"==t[e]||" "==t[e]){const n=t.substr(i,e-i);if(e>5&&"xml"===n)return y("InvalidXml","XML declaration allowed only at the start of the document.",w(t,e));if("?"==t[e]&&">"==t[e+1]){e++;break}continue}return e}function d(t,e){if(t.length>e+5&&"-"===t[e+1]&&"-"===t[e+2]){for(e+=3;e<t.length;e++)if("-"===t[e]&&"-"===t[e+1]&&">"===t[e+2]){e+=2;break}}else if(t.length>e+8&&"D"===t[e+1]&&"O"===t[e+2]&&"C"===t[e+3]&&"T"===t[e+4]&&"Y"===t[e+5]&&"P"===t[e+6]&&"E"===t[e+7]){let i=1;for(e+=8;e<t.length;e++)if("<"===t[e])i++;else if(">"===t[e]&&(i--,0===i))break}else if(t.length>e+9&&"["===t[e+1]&&"C"===t[e+2]&&"D"===t[e+3]&&"A"===t[e+4]&&"T"===t[e+5]&&"A"===t[e+6]&&"["===t[e+7])for(e+=8;e<t.length;e++)if("]"===t[e]&&"]"===t[e+1]&&">"===t[e+2]){e+=2;break}return e}const u='"',f="'";function g(t,e){let i="",n="",r=!1;for(;e<t.length;e++){if(t[e]===u||t[e]===f)""===n?n=t[e]:n!==t[e]||(n="");else if(">"===t[e]&&""===n){r=!0;break}i+=t[e]}return""===n&&{value:i,index:e,tagClosed:r}}const m=new RegExp("(\\s*)([^\\s=]+)(\\s*=)?(\\s*(['\"])(([\\s\\S])*?)\\5)?","g");function x(t,e){const i=r(t,m),n={};for(let t=0;t<i.length;t++){if(0===i[t][1].length)return y("InvalidAttr","Attribute '"+i[t][2]+"' has no space in starting.",v(i[t]));if(void 0!==i[t][3]&&void 0===i[t][4])return y("InvalidAttr","Attribute '"+i[t][2]+"' is without value.",v(i[t]));if(void 0===i[t][3]&&!e.allowBooleanAttributes)return y("InvalidAttr","boolean attribute '"+i[t][2]+"' is not allowed.",v(i[t]));const r=i[t][2];if(!N(r))return y("InvalidAttr","Attribute '"+r+"' is an invalid name.",v(i[t]));if(Object.prototype.hasOwnProperty.call(n,r))return y("InvalidAttr","Attribute '"+r+"' is repeated.",v(i[t]));n[r]=1}return!0}function b(t,e){if(";"===t[++e])return-1;if("#"===t[e])return function(t,e){let i=/\d/;for("x"===t[e]&&(e++,i=/[\da-fA-F]/);e<t.length;e++){if(";"===t[e])return e;if(!t[e].match(i))break}return-1}(t,++e);let i=0;for(;e<t.length;e++,i++)if(!(t[e].match(/\w/)&&i<20)){if(";"===t[e])break;return-1}return e}function y(t,e,i){return{err:{code:t,msg:e,line:i.line||i,col:i.col}}}function N(t){return s(t)}function E(t){return s(t)}function w(t,e){const i=t.substring(0,e).split(/\r?\n/);return{line:i.length,col:i[i.length-1].length+1}}function v(t){return t.startIndex+t[1].length}const S=t=>o.includes(t)?"__"+t:t,A={preserveOrder:!1,attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,removeNSPrefix:!1,allowBooleanAttributes:!1,parseTagValue:!0,parseAttributeValue:!1,trimValues:!0,cdataPropName:!1,numberParseOptions:{hex:!0,leadingZeros:!0,eNotation:!0,unicode:!1},tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},stopNodes:[],alwaysCreateTextNode:!1,isArray:()=>!1,commentPropName:!1,unpairedTags:[],processEntities:!0,htmlEntities:!1,entityDecoder:null,ignoreDeclaration:!1,ignorePiTags:!1,transformTagName:!1,transformAttributeName:!1,updateTag:function(t,e,i){return t},captureMetaData:!1,maxNestedTags:100,strictReservedNames:!0,jPath:!0,onDangerousProperty:S};function T(t,e){if("string"!=typeof t)return;const i=t.toLowerCase();if(o.some(t=>i===t.toLowerCase()))throw new Error(`[SECURITY] Invalid ${e}: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`);if(a.some(t=>i===t.toLowerCase()))throw new Error(`[SECURITY] Invalid ${e}: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`)}function _(t,e){return"boolean"==typeof t?{enabled:t,maxEntitySize:1e4,maxExpansionDepth:1e4,maxTotalExpansions:1/0,maxExpandedLength:1e5,maxEntityCount:1e3,allowedTags:null,tagFilter:null,appliesTo:"all"}:"object"==typeof t&&null!==t?{enabled:!1!==t.enabled,maxEntitySize:Math.max(1,t.maxEntitySize??1e4),maxExpansionDepth:Math.max(1,t.maxExpansionDepth??1e4),maxTotalExpansions:Math.max(1,t.maxTotalExpansions??1/0),maxExpandedLength:Math.max(1,t.maxExpandedLength??1e5),maxEntityCount:Math.max(1,t.maxEntityCount??1e3),allowedTags:t.allowedTags??null,tagFilter:t.tagFilter??null,appliesTo:t.appliesTo??"all"}:_(!0)}const C=function(t){const e=Object.assign({},A,t),i=[{value:e.attributeNamePrefix,name:"attributeNamePrefix"},{value:e.attributesGroupName,name:"attributesGroupName"},{value:e.textNodeName,name:"textNodeName"},{value:e.cdataPropName,name:"cdataPropName"},{value:e.commentPropName,name:"commentPropName"}];for(const{value:t,name:e}of i)t&&T(t,e);return null===e.onDangerousProperty&&(e.onDangerousProperty=S),e.processEntities=_(e.processEntities,e.htmlEntities),e.unpairedTagsSet=new Set(e.unpairedTags),e.stopNodes&&Array.isArray(e.stopNodes)&&(e.stopNodes=e.stopNodes.map(t=>"string"==typeof t&&t.startsWith("*.")?".."+t.substring(2):t)),e};let $;$="function"!=typeof Symbol?"@@xmlMetadata":Symbol("XML Node Metadata");class P{constructor(t){this.tagname=t,this.child=[],this[":@"]=Object.create(null)}add(t,e){"__proto__"===t&&(t="#__proto__"),this.child.push({[t]:e})}addChild(t,e){"__proto__"===t.tagname&&(t.tagname="#__proto__"),t[":@"]&&Object.keys(t[":@"]).length>0?this.child.push({[t.tagname]:t.child,":@":t[":@"]}):this.child.push({[t.tagname]:t.child}),void 0!==e&&(this.child[this.child.length-1][$]={startIndex:e})}static getMetaDataSymbol(){return $}}const O=":A-Za-z_À-ÖØ-öø-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�",j=":A-Za-z_À-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�𐀀-󯿿",I=j+"\\-\\.\\d·̀-ͯ҇‿-⁀",k=(t,e,i="")=>{const n=`[${t.replace(":","")}][${e.replace(":","")}]*`;return{name:new RegExp(`^[${t}][${e}]*$`,i),ncName:new RegExp(`^${n}$`,i),qName:new RegExp(`^${n}(?::${n})?$`,i),nmToken:new RegExp(`^[${e}]+$`,i),nmTokens:new RegExp(`^[${e}]+(?:\\s+[${e}]+)*$`,i)}},L=k(O,O+"\\-\\.\\d·̀-ͯ‿-⁀"),D=k(j,I,"u"),R=":A-Za-z_",M=k(R,R+"\\-\\.\\d"),V=(t,{xmlVersion:e="1.0",asciiOnly:i=!1}={})=>((t="1.0",e=!1)=>e?M:"1.1"===t?D:L)(e,i).qName.test(t);class q{constructor(t,e){this.suppressValidationErr=!t,this.options=t,this.xmlVersion=e||1}setXmlVersion(t=1){this.xmlVersion=t}readDocType(t,e){const i=Object.create(null);let n=0;if("O"!==t[e+3]||"C"!==t[e+4]||"T"!==t[e+5]||"Y"!==t[e+6]||"P"!==t[e+7]||"E"!==t[e+8])throw new Error("Invalid Tag instead of DOCTYPE");{e+=9;let r=1,s=!1,o=!1,a="";for(;e<t.length;e++)if("<"!==t[e]||o)if(">"===t[e]){if(o?"-"===t[e-1]&&"-"===t[e-2]&&(o=!1,r--):r--,0===r)break}else"["===t[e]?s=!0:a+=t[e];else{if(s&&U(t,"!ENTITY",e)){let r,s;if(e+=7,[r,s,e]=this.readEntityExp(t,e+1,this.suppressValidationErr),-1===s.indexOf("&")){if(!1!==this.options.enabled&&null!=this.options.maxEntityCount&&n>=this.options.maxEntityCount)throw new Error(`Entity count (${n+1}) exceeds maximum allowed (${this.options.maxEntityCount})`);i[r]=s,n++}}else if(s&&U(t,"!ELEMENT",e)){e+=8;const{index:i}=this.readElementExp(t,e+1);e=i}else if(s&&U(t,"!ATTLIST",e))e+=8;else if(s&&U(t,"!NOTATION",e)){e+=9;const{index:i}=this.readNotationExp(t,e+1,this.suppressValidationErr);e=i}else{if(!U(t,"!--",e))throw new Error("Invalid DOCTYPE");o=!0}r++,a=""}if(0!==r)throw new Error("Unclosed DOCTYPE")}return{entities:i,i:e}}readEntityExp(t,e){const i=e=F(t,e);for(;e<t.length&&!/\s/.test(t[e])&&'"'!==t[e]&&"'"!==t[e];)e++;let n=t.substring(i,e);if(B(n,{xmlVersion:this.xmlVersion}),e=F(t,e),!this.suppressValidationErr){if("SYSTEM"===t.substring(e,e+6).toUpperCase())throw new Error("External entities are not supported");if("%"===t[e])throw new Error("Parameter entities are not supported")}let r="";if([e,r]=this.readIdentifierVal(t,e,"entity"),!1!==this.options.enabled&&null!=this.options.maxEntitySize&&r.length>this.options.maxEntitySize)throw new Error(`Entity "${n}" size (${r.length}) exceeds maximum allowed size (${this.options.maxEntitySize})`);return[n,r,--e]}readNotationExp(t,e){const i=e=F(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);!this.suppressValidationErr&&B(n,{xmlVersion:this.xmlVersion}),e=F(t,e);const r=t.substring(e,e+6).toUpperCase();if(!this.suppressValidationErr&&"SYSTEM"!==r&&"PUBLIC"!==r)throw new Error(`Expected SYSTEM or PUBLIC, found "${r}"`);e+=r.length,e=F(t,e);let s=null,o=null;if("PUBLIC"===r)[e,s]=this.readIdentifierVal(t,e,"publicIdentifier"),'"'!==t[e=F(t,e)]&&"'"!==t[e]||([e,o]=this.readIdentifierVal(t,e,"systemIdentifier"));else if("SYSTEM"===r&&([e,o]=this.readIdentifierVal(t,e,"systemIdentifier"),!this.suppressValidationErr&&!o))throw new Error("Missing mandatory system identifier for SYSTEM notation");return{notationName:n,publicIdentifier:s,systemIdentifier:o,index:--e}}readIdentifierVal(t,e,i){let n="";const r=t[e];if('"'!==r&&"'"!==r)throw new Error(`Expected quoted string, found "${r}"`);const s=++e;for(;e<t.length&&t[e]!==r;)e++;if(n=t.substring(s,e),t[e]!==r)throw new Error(`Unterminated ${i} value`);return[++e,n]}readElementExp(t,e){const i=e=F(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);if(!this.suppressValidationErr&&!V(n,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid element name: "${n}"`);let r="";if("E"===t[e=F(t,e)]&&U(t,"MPTY",e))e+=4;else if("A"===t[e]&&U(t,"NY",e))e+=2;else if("("===t[e]){const i=++e;for(;e<t.length&&")"!==t[e];)e++;if(r=t.substring(i,e),")"!==t[e])throw new Error("Unterminated content model")}else if(!this.suppressValidationErr)throw new Error(`Invalid Element Expression, found "${t[e]}"`);return{elementName:n,contentModel:r.trim(),index:e}}readAttlistExp(t,e){let i=e=F(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);for(B(n,{xmlVersion:this.xmlVersion}),i=e=F(t,e);e<t.length&&!/\s/.test(t[e]);)e++;let r=t.substring(i,e);if(!B(r,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid attribute name: "${r}"`);e=F(t,e);let s="";if("NOTATION"===t.substring(e,e+8).toUpperCase()){if(s="NOTATION","("!==t[e=F(t,e+=8)])throw new Error(`Expected '(', found "${t[e]}"`);e++;let i=[];for(;e<t.length&&")"!==t[e];){const n=e;for(;e<t.length&&"|"!==t[e]&&")"!==t[e];)e++;let r=t.substring(n,e);if(r=r.trim(),!B(r,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid notation name: "${r}"`);i.push(r),"|"===t[e]&&(e++,e=F(t,e))}if(")"!==t[e])throw new Error("Unterminated list of notations");e++,s+=" ("+i.join("|")+")"}else{const i=e;for(;e<t.length&&!/\s/.test(t[e]);)e++;s+=t.substring(i,e);const n=["CDATA","ID","IDREF","IDREFS","ENTITY","ENTITIES","NMTOKEN","NMTOKENS"];if(!this.suppressValidationErr&&!n.includes(s.toUpperCase()))throw new Error(`Invalid attribute type: "${s}"`)}e=F(t,e);let o="";return"#REQUIRED"===t.substring(e,e+8).toUpperCase()?(o="#REQUIRED",e+=8):"#IMPLIED"===t.substring(e,e+7).toUpperCase()?(o="#IMPLIED",e+=7):[e,o]=this.readIdentifierVal(t,e,"ATTLIST"),{elementName:n,attributeName:r,attributeType:s,defaultValue:o,index:e}}}const F=(t,e)=>{for(;e<t.length&&/\s/.test(t[e]);)e++;return e};function U(t,e,i){for(let n=0;n<e.length;n++)if(e[n]!==t[i+n+1])return!1;return!0}function B(t,e){if(V(t,{xmlVersion:e}))return t;throw new Error(`Invalid entity name ${t}`)}const G=[48,1632,1776,2406,2534,2662,2790,2918,3046,3174,3302,3430,3558,3664,3792,3872,4160,4240,6112,6160,6470,6608,6784,6800,6992,7088,7232,7248,65296,120782,120792,120802,120812,120822,66720,68912,69734,69872,69942,70096,70384,70736,70864,71248,71360,71472,71904,72016,72688,72784,73040,73120,73552,92768,92864,93008,123200,123632,124144,125264,130032],X=new Map,W=1632,z=new Uint8Array(63904).fill(255);for(const t of G)for(let e=0;e<10;e++){const i=t+e;i<=65535?z[i-W]=e:X.set(i,e)}const Y=new Set([8722,65293,65123]),H=/^[-+]?0x[a-fA-F0-9]+$/,Q=/^0b[01]+$/,J=/^0o[0-7]+$/,Z=/^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/,K={hex:!0,binary:!1,octal:!1,leadingZeros:!0,decimalPoint:".",eNotation:!0,infinity:"original",unicode:!1};function tt(t,e={}){if(e=Object.assign({},K,e),!t||"string"!=typeof t)return t;let i=t.trim();if(0===i.length)return t;if(void 0!==e.skipLike&&e.skipLike.test(i))return t;if("0"===i)return 0;if(e.unicode&&(i=function(t){if("string"!=typeof t)return t;const e=t.length;if(0===e)return t;let i=-1;for(let n=0;n<e;n++){const r=t.charCodeAt(n);if(!(r>=48&&r<=57||45===r))if(r<W){if(Y.has(r)){i=n;break}}else if(r>=55296&&r<=56319){if(n+1<e){const e=t.charCodeAt(n+1);if(e>=56320&&e<=57343){const t=65536+(r-55296<<10)+(e-56320);if(X.has(t)){i=n;break}}}}else if(255!==z[r-W]||Y.has(r)){i=n;break}}if(-1===i)return t;const n=[];i>0&&n.push(t.slice(0,i));for(let r=i;r<e;r++){const i=t.charCodeAt(r);if(i>=48&&i<=57||45===i){n.push(t[r]);continue}if(i<W){n.push(Y.has(i)?"-":t[r]);continue}if(i>=55296&&i<=56319){if(r+1<e){const e=t.charCodeAt(r+1);if(e>=56320&&e<=57343){const t=65536+(i-55296<<10)+(e-56320),s=X.get(t);if(void 0!==s){n.push(String.fromCharCode(s+48)),r++;continue}}}n.push(t[r]);continue}if(Y.has(i)){n.push("-");continue}const s=z[i-W];n.push(255!==s?String.fromCharCode(s+48):t[r])}return n.join("")}(i),"0"===i))return 0;if(e.hex&&H.test(i))return it(i,16);if(e.binary&&Q.test(i))return it(i,2);if(e.octal&&J.test(i))return it(i,8);if(isFinite(i)){if(i.includes("e")||i.includes("E"))return function(t,e,i){if(!i.eNotation)return t;const n=e.match(et);if(n){let r=n[1]||"";const s=-1===n[3].indexOf("e")?"E":"e",o=n[2],a=r?t[o.length+1]===s:t[o.length]===s;return o.length>1&&a?t:(1!==o.length||!n[3].startsWith(`.${s}`)&&n[3][0]!==s)&&o.length>0?i.leadingZeros&&!a?(e=(n[1]||"")+n[3],Number(e)):t:Number(e)}return t}(t,i,e);{const r=Z.exec(i);if(r){const s=r[1]||"",o=r[2];let a=(n=r[3])&&-1!==n.indexOf(".")?("."===(n=n.replace(/0+$/,""))?n="0":"."===n[0]?n="0"+n:"."===n[n.length-1]&&(n=n.substring(0,n.length-1)),n):n;const l=s?"."===t[o.length+1]:"."===t[o.length];if(!e.leadingZeros&&(o.length>1||1===o.length&&!l))return t;{const n=Number(i),r=String(n);if(0===n)return n;if(-1!==r.search(/[eE]/))return e.eNotation?n:t;if(-1!==i.indexOf("."))return"0"===r||r===a||r===`${s}${a}`?n:t;let l=o?a:i;return o?l===r||s+l===r?n:t:l===r||l===s+r?n:t}}return t}}var n;return function(t,e,i){const n=e===1/0;switch(i.infinity.toLowerCase()){case"null":return null;case"infinity":return e;case"string":return n?"Infinity":"-Infinity";default:return t}}(t,Number(i),e)}const et=/^([-+])?(0*)(\d*(\.\d*)?[eE][-\+]?\d+)$/;function it(t,e){const i=t.trim();if(2!==e&&8!==e||(t=i.substring(2)),parseInt)return parseInt(t,e);if(Number.parseInt)return Number.parseInt(t,e);if(window&&window.parseInt)return window.parseInt(t,e);throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")}class nt{constructor(t){this._matcher=t}get separator(){return this._matcher.separator}getCurrentTag(){const t=this._matcher.path;return t.length>0?t[t.length-1].tag:void 0}getCurrentNamespace(){const t=this._matcher.path;return t.length>0?t[t.length-1].namespace:void 0}getAttrValue(t){const e=this._matcher.path;if(0!==e.length)return e[e.length-1].values?.[t]}hasAttr(t){const e=this._matcher.path;if(0===e.length)return!1;const i=e[e.length-1];return void 0!==i.values&&t in i.values}getAnyParentAttr(t){return this._matcher.getAnyParentAttr(t)}hasAnyParentAttr(t){return this._matcher.hasAnyParentAttr(t)}getPosition(){const t=this._matcher.path;return 0===t.length?-1:t[t.length-1].position??0}getCounter(){const t=this._matcher.path;return 0===t.length?-1:t[t.length-1].counter??0}getIndex(){return this.getPosition()}getDepth(){return this._matcher.path.length}toString(t,e=!0){return this._matcher.toString(t,e)}toArray(){return this._matcher.path.map(t=>t.tag)}matches(t){return this._matcher.matches(t)}matchesAny(t){return t.matchesAny(this._matcher)}}class rt{constructor(t={}){this.separator=t.separator||".",this.path=[],this.siblingStacks=[],this._pathStringCache=null,this._view=new nt(this),this._keptAttrs=[]}push(t,e=null,i=null,n=null){this._pathStringCache=null,this.path.length>0&&(this.path[this.path.length-1].values=void 0);const r=this.path.length;let s=this.siblingStacks[r];s||(s={counts:new Map,total:0},this.siblingStacks[r]=s);const o=i?`${i}:${t}`:t,a=s.counts.get(o)||0,l=s.total;s.counts.set(o,a+1),s.total++;const p={tag:t,position:l,counter:a};null!=i&&(p.namespace=i),null!=e&&(p.values=e),this.path.push(p);const c=this.path.length,h=null!==n?n.keep:null;if(null!=h&&h.length>0&&e)for(let t=0;t<h.length;t++){const i=h[t];void 0!==e[i]&&this._keptAttrs.push({depth:c,name:i,value:e[i]})}}pop(){if(0===this.path.length)return;this._pathStringCache=null;const t=this.path.pop();this.siblingStacks.length>this.path.length+1&&(this.siblingStacks.length=this.path.length+1);const e=this.path.length+1;for(;this._keptAttrs.length>0&&this._keptAttrs[this._keptAttrs.length-1].depth>=e;)this._keptAttrs.pop();return t}updateCurrent(t){if(this.path.length>0){const e=this.path[this.path.length-1];null!=t&&(e.values=t)}}getCurrentTag(){return this.path.length>0?this.path[this.path.length-1].tag:void 0}getCurrentNamespace(){return this.path.length>0?this.path[this.path.length-1].namespace:void 0}getAttrValue(t){if(0!==this.path.length)return this.path[this.path.length-1].values?.[t]}hasAttr(t){if(0===this.path.length)return!1;const e=this.path[this.path.length-1];return void 0!==e.values&&t in e.values}getAnyParentAttr(t){const e=this._keptAttrs;for(let i=e.length-1;i>=0;i--)if(e[i].name===t)return e[i].value}hasAnyParentAttr(t){const e=this._keptAttrs;for(let i=e.length-1;i>=0;i--)if(e[i].name===t)return!0;return!1}getPosition(){return 0===this.path.length?-1:this.path[this.path.length-1].position??0}getCounter(){return 0===this.path.length?-1:this.path[this.path.length-1].counter??0}getIndex(){return this.getPosition()}getDepth(){return this.path.length}toString(t,e=!0){const i=t||this.separator;if(i===this.separator&&!0===e){if(null!==this._pathStringCache)return this._pathStringCache;const t=this.path.map(t=>t.namespace?`${t.namespace}:${t.tag}`:t.tag).join(i);return this._pathStringCache=t,t}return this.path.map(t=>e&&t.namespace?`${t.namespace}:${t.tag}`:t.tag).join(i)}toArray(){return this.path.map(t=>t.tag)}reset(){this._pathStringCache=null,this.path=[],this.siblingStacks=[],this._keptAttrs=[]}matches(t){const e=t.segments;return 0!==e.length&&(t.hasDeepWildcard()?this._matchWithDeepWildcard(e):this._matchSimple(e))}_matchSimple(t){if(this.path.length!==t.length)return!1;for(let e=0;e<t.length;e++)if(!this._matchSegment(t[e],this.path[e],e===this.path.length-1))return!1;return!0}_matchWithDeepWildcard(t){let e=this.path.length-1,i=t.length-1;for(;i>=0&&e>=0;){const n=t[i];if("deep-wildcard"===n.type){if(i--,i<0)return!0;const n=t[i];let r=!1;for(let t=e;t>=0;t--)if(this._matchSegment(n,this.path[t],t===this.path.length-1)){e=t-1,i--,r=!0;break}if(!r)return!1}else{if(!this._matchSegment(n,this.path[e],e===this.path.length-1))return!1;e--,i--}}return i<0}_matchSegment(t,e,i){if("*"!==t.tag&&t.tag!==e.tag)return!1;if(void 0!==t.namespace&&"*"!==t.namespace&&t.namespace!==e.namespace)return!1;if(void 0!==t.attrName){if(!i)return!1;if(!e.values||!(t.attrName in e.values))return!1;if(void 0!==t.attrValue&&String(e.values[t.attrName])!==String(t.attrValue))return!1}if(void 0!==t.position){if(!i)return!1;const n=e.counter??0;if("first"===t.position&&0!==n)return!1;if("odd"===t.position&&n%2!=1)return!1;if("even"===t.position&&n%2!=0)return!1;if("nth"===t.position&&n!==t.positionValue)return!1}return!0}matchesAny(t){return t.matchesAny(this)}snapshot(){return{path:this.path.map(t=>({...t})),siblingStacks:this.siblingStacks.map(t=>t?{counts:new Map(t.counts),total:t.total}:t),keptAttrs:this._keptAttrs.map(t=>({...t}))}}restore(t){this._pathStringCache=null,this.path=t.path.map(t=>({...t})),this.siblingStacks=t.siblingStacks.map(t=>t?{counts:new Map(t.counts),total:t.total}:t),this._keptAttrs=(t.keptAttrs||[]).map(t=>({...t}))}readOnly(){return this._view}}class st{constructor(t,e={},i){this.pattern=t,this.separator=e.separator||".",this.segments=this._parse(t),this.data=i,this._hasDeepWildcard=this.segments.some(t=>"deep-wildcard"===t.type),this._hasAttributeCondition=this.segments.some(t=>void 0!==t.attrName),this._hasPositionSelector=this.segments.some(t=>void 0!==t.position)}_parse(t){const e=[];let i=0,n="";for(;i<t.length;)t[i]===this.separator?i+1<t.length&&t[i+1]===this.separator?(n.trim()&&(e.push(this._parseSegment(n.trim())),n=""),e.push({type:"deep-wildcard"}),i+=2):(n.trim()&&e.push(this._parseSegment(n.trim())),n="",i++):(n+=t[i],i++);return n.trim()&&e.push(this._parseSegment(n.trim())),e}_parseSegment(t){const e={type:"tag"};let i=null,n=t;const r=t.match(/^([^\[]+)(\[[^\]]*\])(.*)$/);if(r&&(n=r[1]+r[3],r[2])){const t=r[2].slice(1,-1);t&&(i=t)}let s,o,a=n;if(n.includes("::")){const e=n.indexOf("::");if(s=n.substring(0,e).trim(),a=n.substring(e+2).trim(),!s)throw new Error(`Invalid namespace in pattern: ${t}`)}let l=null;if(a.includes(":")){const t=a.lastIndexOf(":"),e=a.substring(0,t).trim(),i=a.substring(t+1).trim();["first","last","odd","even"].includes(i)||/^nth\(\d+\)$/.test(i)?(o=e,l=i):o=a}else o=a;if(!o)throw new Error(`Invalid segment pattern: ${t}`);if(e.tag=o,s&&(e.namespace=s),i)if(i.includes("=")){const t=i.indexOf("=");e.attrName=i.substring(0,t).trim(),e.attrValue=i.substring(t+1).trim()}else e.attrName=i.trim();if(l){const t=l.match(/^nth\((\d+)\)$/);t?(e.position="nth",e.positionValue=parseInt(t[1],10)):e.position=l}return e}get length(){return this.segments.length}hasDeepWildcard(){return this._hasDeepWildcard}hasAttributeCondition(){return this._hasAttributeCondition}hasPositionSelector(){return this._hasPositionSelector}toString(){return this.pattern}}class ot{constructor(){this._byDepthAndTag=new Map,this._wildcardByDepth=new Map,this._deepWildcards=[],this._deepByTerminalTag=new Map,this._patterns=new Set,this._sealed=!1}add(t){if(this._sealed)throw new TypeError("ExpressionSet is sealed. Create a new ExpressionSet to add more expressions.");if(this._patterns.has(t.pattern))return this;if(this._patterns.add(t.pattern),t.hasDeepWildcard()){const e=t.segments[t.segments.length-1];if(e&&"deep-wildcard"!==e.type&&"*"!==e.tag){const i=e.tag;this._deepByTerminalTag.has(i)||this._deepByTerminalTag.set(i,[]),this._deepByTerminalTag.get(i).push(t)}else this._deepWildcards.push(t);return this}const e=t.length,i=t.segments[t.segments.length-1],n=i?.tag;if(n&&"*"!==n){const i=`${e}:${n}`;this._byDepthAndTag.has(i)||this._byDepthAndTag.set(i,[]),this._byDepthAndTag.get(i).push(t)}else this._wildcardByDepth.has(e)||this._wildcardByDepth.set(e,[]),this._wildcardByDepth.get(e).push(t);return this}addAll(t){for(const e of t)this.add(e);return this}has(t){return this._patterns.has(t.pattern)}get size(){return this._patterns.size}seal(){return this._sealed=!0,this}get isSealed(){return this._sealed}matchesAny(t){return null!==this.findMatch(t)}findMatch(t){const e=t.getDepth(),i=t.getCurrentTag(),n=`${e}:${i}`,r=this._byDepthAndTag.get(n);if(r)for(let e=0;e<r.length;e++)if(t.matches(r[e]))return r[e];const s=this._wildcardByDepth.get(e);if(s)for(let e=0;e<s.length;e++)if(t.matches(s[e]))return s[e];const o=this._deepByTerminalTag.get(i);if(o)for(let e=0;e<o.length;e++)if(t.matches(o[e]))return o[e];for(let e=0;e<this._deepWildcards.length;e++)if(t.matches(this._deepWildcards[e]))return this._deepWildcards[e];return null}}const at={cent:"¢",pound:"£",curren:"¤",yen:"¥",euro:"€",dollar:"$",fnof:"ƒ",inr:"₹",af:"؋",birr:"ብር",peso:"₱",rub:"₽",won:"₩",yuan:"¥",cedil:"¸"},lt={amp:"&",apos:"'",gt:">",lt:"<",quot:'"'},pt={nbsp:" ",copy:"©",reg:"®",trade:"™",mdash:"—",ndash:"–",hellip:"…",laquo:"«",raquo:"»",lsquo:"‘",rsquo:"’",ldquo:"“",rdquo:"”",bull:"•",para:"¶",sect:"§",deg:"°",frac12:"½",frac14:"¼",frac34:"¾"},ct=Object.freeze({ALLOW:"allow",BLOCK:"block",THROW:"throw"}),ht=new Set("!?\\\\/[]$%{}^&*()<>|+");function dt(t){if("#"===t[0])throw new Error(`[EntityReplacer] Invalid character '#' in entity name: "${t}"`);for(const e of t)if(ht.has(e))throw new Error(`[EntityReplacer] Invalid character '${e}' in entity name: "${t}"`);return t}function ut(...t){const e=Object.create(null);for(const i of t)if(i)for(const t of Object.keys(i)){const n=i[t];if("string"==typeof n)e[t]=n;else if(n&&"object"==typeof n&&void 0!==n.val){const i=n.val;"string"==typeof i&&(e[t]=i)}}return e}const ft="external",gt="base",mt="all",xt=Object.freeze({allow:0,leave:1,remove:2,throw:3}),bt=new Set([9,10,13]);class yt{constructor(t={}){var e;this._limit=t.limit||{},this._maxTotalExpansions=this._limit.maxTotalExpansions||0,this._maxExpandedLength=this._limit.maxExpandedLength||0,this._postCheck="function"==typeof t.postCheck?t.postCheck:t=>t,this._limitTiers=(e=this._limit.applyLimitsTo??ft)&&e!==ft?e===mt?new Set([mt]):e===gt?new Set([gt]):Array.isArray(e)?new Set(e):new Set([ft]):new Set([ft]),this._numericAllowed=t.numericAllowed??!0,this._baseMap=ut(lt,t.namedEntities||null),this._externalMap=Object.create(null),this._inputMap=Object.create(null),this._totalExpansions=0,this._expandedLength=0,this._removeSet=new Set(t.remove&&Array.isArray(t.remove)?t.remove:[]),this._leaveSet=new Set(t.leave&&Array.isArray(t.leave)?t.leave:[]);const i=function(t){if(!t)return{xmlVersion:1,onLevel:xt.allow,nullLevel:xt.remove};const e=1.1===t.xmlVersion?1.1:1,i=xt[t.onNCR]??xt.allow,n=xt[t.nullNCR]??xt.remove;return{xmlVersion:e,onLevel:i,nullLevel:Math.max(n,xt.remove)}}(t.ncr);this._ncrXmlVersion=i.xmlVersion,this._ncrOnLevel=i.onLevel,this._ncrNullLevel=i.nullLevel,this._onExternalEntity="function"==typeof t.onExternalEntity?t.onExternalEntity:null,this._onInputEntity="function"==typeof t.onInputEntity?t.onInputEntity:null}_applyRegistrationHook(t,e,i,n){if(!t)return!0;const r=t(e,i);if(r===ct.BLOCK)return!1;if(r===ct.THROW)throw new Error(`[EntityDecoder] Registration of ${n} entity "&${e};" was rejected by hook`);return!0}setExternalEntities(t){if(t)for(const e of Object.keys(t))dt(e);if(!this._onExternalEntity)return void(this._externalMap=ut(t));const e=ut(t),i=Object.create(null);for(const[t,n]of Object.entries(e))this._applyRegistrationHook(this._onExternalEntity,t,n,"external")&&(i[t]=n);this._externalMap=i}addExternalEntity(t,e){dt(t),"string"==typeof e&&-1===e.indexOf("&")&&this._applyRegistrationHook(this._onExternalEntity,t,e,"external")&&(this._externalMap[t]=e)}addInputEntities(t){if(this._totalExpansions=0,this._expandedLength=0,!this._onInputEntity)return void(this._inputMap=ut(t));const e=ut(t),i=Object.create(null);for(const[t,n]of Object.entries(e))this._applyRegistrationHook(this._onInputEntity,t,n,"input")&&(i[t]=n);this._inputMap=i}reset(){return this._inputMap=Object.create(null),this._totalExpansions=0,this._expandedLength=0,this}setXmlVersion(t){this._ncrXmlVersion=1.1===t?1.1:1}decode(t){if("string"!=typeof t||0===t.length)return t;if(-1===t.indexOf("&"))return t;const e=t,i=[],n=t.length;let r=0,s=0;const o=this._maxTotalExpansions>0,a=this._maxExpandedLength>0,l=o||a;for(;s<n;){if(38!==t.charCodeAt(s)){s++;continue}let e=s+1;for(;e<n&&59!==t.charCodeAt(e)&&e-s<=32;)e++;if(e>=n||59!==t.charCodeAt(e)){s++;continue}const p=t.slice(s+1,e);if(0===p.length){s++;continue}let c,h;if(this._removeSet.has(p))c="",void 0===h&&(h=ft);else{if(this._leaveSet.has(p)){s++;continue}if(35===p.charCodeAt(0)){const t=this._resolveNCR(p);if(void 0===t){s++;continue}c=t,h=gt}else{const t=this._resolveName(p);c=t?.value,h=t?.tier}}if(void 0!==c){if(s>r&&i.push(t.slice(r,s)),i.push(c),r=e+1,s=r,l&&this._tierCounts(h)){if(o&&(this._totalExpansions++,this._totalExpansions>this._maxTotalExpansions))throw new Error(`[EntityReplacer] Entity expansion count limit exceeded: ${this._totalExpansions} > ${this._maxTotalExpansions}`);if(a){const t=c.length-(p.length+2);if(t>0&&(this._expandedLength+=t,this._expandedLength>this._maxExpandedLength))throw new Error(`[EntityReplacer] Expanded content length limit exceeded: ${this._expandedLength} > ${this._maxExpandedLength}`)}}}else s++}r<n&&i.push(t.slice(r));const p=0===i.length?t:i.join("");return this._postCheck(p,e)}_tierCounts(t){return!!this._limitTiers.has(mt)||this._limitTiers.has(t)}_resolveName(t){return t in this._inputMap?{value:this._inputMap[t],tier:ft}:t in this._externalMap?{value:this._externalMap[t],tier:ft}:t in this._baseMap?{value:this._baseMap[t],tier:gt}:void 0}_classifyNCR(t){return 0===t?this._ncrNullLevel:t>=55296&&t<=57343||1===this._ncrXmlVersion&&t>=1&&t<=31&&!bt.has(t)?xt.remove:-1}_applyNCRAction(t,e,i){switch(t){case xt.allow:return String.fromCodePoint(i);case xt.remove:return"";case xt.leave:return;case xt.throw:throw new Error(`[EntityDecoder] Prohibited numeric character reference &${e}; (U+${i.toString(16).toUpperCase().padStart(4,"0")})`);default:return String.fromCodePoint(i)}}_resolveNCR(t){const e=t.charCodeAt(1);let i;if(i=120===e||88===e?parseInt(t.slice(2),16):parseInt(t.slice(1),10),Number.isNaN(i)||i<0||i>1114111)return;const n=this._classifyNCR(i);if(!this._numericAllowed&&n<xt.remove)return;const r=-1===n?this._ncrOnLevel:Math.max(this._ncrOnLevel,n);return this._applyNCRAction(r,t,i)}}const Nt=[{id:"sql-block-comment-open",description:"SQL block comment open: /* ... */ — unusual in legitimate user text",pattern:/\/\*/},{id:"sql-union-select",description:"UNION SELECT — most common SQL injection aggregation attack",pattern:/\bUNION\s{1,20}(?:ALL\s{1,20})?SELECT\b/i},{id:"sql-drop-table",description:"DROP TABLE — destructive DDL injection",pattern:/\bDROP\s{1,20}TABLE\b/i},{id:"sql-drop-database",description:"DROP DATABASE — destructive DDL injection",pattern:/\bDROP\s{1,20}DATABASE\b/i},{id:"sql-insert-into",description:"INSERT INTO — data injection",pattern:/\bINSERT\s{1,20}INTO\b/i},{id:"sql-delete-from",description:"DELETE FROM — data deletion injection",pattern:/\bDELETE\s{1,20}FROM\b/i},{id:"sql-update-set",description:"UPDATE ... SET — data modification injection",pattern:/\bUPDATE\b[\s\S]{1,60}\bSET\b/i},{id:"sql-exec-xp",description:"EXEC xp_ — MSSQL extended stored procedure execution",pattern:/\bEXEC(?:UTE)?\s{1,20}xp_/i},{id:"sql-tautology-string",description:'Classic string tautology: \' OR \'1\'=\'1 or " OR "1"="1"',pattern:/'\s{0,10}OR\s{0,10}'[^']{0,20}'\s*=\s*'[^']{0,20}/i},{id:"sql-tautology-numeric",description:"Numeric tautology: OR 1=1",pattern:/\bOR\s{1,10}1\s*=\s*1\b/i},{id:"sql-always-true-zero",description:"Numeric tautology: OR 0=0",pattern:/\bOR\s{1,10}0\s*=\s*0\b/i},{id:"sql-sleep-benchmark",description:"Time-based blind injection: SLEEP() or BENCHMARK()",pattern:/\b(?:SLEEP|BENCHMARK)\s*\(/i},{id:"sql-waitfor-delay",description:"MSSQL time-based blind injection: WAITFOR DELAY",pattern:/\bWAITFOR\s{1,20}DELAY\b/i},{id:"sql-char-function",description:"CHAR() function — used to obfuscate injected strings",pattern:/\bCHAR\s*\(\s*\d{1,3}/i},{id:"sql-information-schema",description:"INFORMATION_SCHEMA — reconnaissance query for table/column enumeration",pattern:/\bINFORMATION_SCHEMA\b/i}],Et=[...Nt,{id:"sql-line-comment",description:"SQL line comment: -- followed by whitespace or end of string",pattern:/--(?:\s|$)/},{id:"sql-stacked-query",description:"Stacked queries: semicolon immediately followed by a SQL keyword",pattern:/;\s{0,10}(?:SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC)\b/i},{id:"sql-hex-encoding",description:"Hex-encoded string injection: 0x41414141 style (MySQL)",pattern:/\b0x[0-9a-f]{4,}/i}],wt=[{id:"html-script-open",description:"<script opening tag",pattern:/<script[\s>/]/i},{id:"html-script-close",description:"<\/script closing tag",pattern:/<\/script[\s>]/i},{id:"html-javascript-protocol",description:"javascript: URI scheme (with optional whitespace/encoding)",pattern:/j[\t\n\r ]*a[\t\n\r ]*v[\t\n\r ]*a[\t\n\r ]*s[\t\n\r ]*c[\t\n\r ]*r[\t\n\r ]*i[\t\n\r ]*p[\t\n\r ]*t[\t\n\r ]*:/i},{id:"html-vbscript-protocol",description:"vbscript: URI scheme",pattern:/vbscript[\t\n\r ]*:/i},{id:"html-data-html",description:"data:text/html URI — can execute scripts in browsers",pattern:/data[\t\n\r ]*:[\t\n\r ]*text\/html/i},{id:"html-data-xhtml",description:"data:application/xhtml+xml URI",pattern:/data[\t\n\r ]*:[\t\n\r ]*application\/xhtml/i},{id:"html-data-svg",description:"data:image/svg+xml URI — can execute scripts",pattern:/data[\t\n\r ]*:[\t\n\r ]*image\/svg\+xml/i},{id:"html-inline-event-handler",description:"Inline event handler attributes: onclick=, onerror=, onload=, etc.",pattern:/\bon\w{1,30}\s*=/i},{id:"html-entity-obfuscated-script",description:"HTML-entity-encoded <script (e.g. &#x3C;script or &lt;script)",pattern:/(?:&#x0*3[Cc];?|&#0*60;?|&lt;)\s*script/i},{id:"html-entity-obfuscated-javascript",description:'HTML-entity-encoded javascript: (partial — catches common &#106; or &#x6a; for "j")',pattern:/(?:&#x0*6[Aa];?|&#0*106;?)\s*(?:&#x0*61;?|a)[\s\S]{0,80}script\s*:/i},{id:"html-style-expression",description:"CSS expression() — IE-era code execution in style attributes",pattern:/style[\s\S]{0,20}expression\s*\(/i},{id:"html-object-embed",description:"<object or <embed tags that can load active content",pattern:/<(?:object|embed)[\s>/]/i},{id:"html-base-tag",description:"<base href= — can hijack all relative URLs on a page",pattern:/<base[\s>]/i},{id:"html-meta-refresh",description:'<meta http-equiv="refresh" — can redirect users',pattern:/<meta[\s\S]{0,40}http-equiv[\s\S]{0,20}refresh/i},{id:"html-srcdoc",description:"srcdoc= attribute on iframes — embeds HTML that can run scripts",pattern:/srcdoc\s*=/i},{id:"html-iframe",description:"<iframe tag",pattern:/<iframe[\s>/]/i},{id:"html-form",description:"<form tag — can be used for phishing / credential harvesting injection",pattern:/<form[\s>/]/i}],vt=[{id:"xml-cdata-injection",description:"CDATA section injection: <![CDATA[ breaks out of text node context",pattern:/<!\[CDATA\[/i},{id:"xml-cdata-close",description:"CDATA close sequence: ]]> can terminate an enclosing CDATA section",pattern:/\]\]>/},{id:"xml-processing-instruction",description:"XML processing instruction: <?xml-stylesheet or <?php etc.",pattern:/<\?(?:xml[\- ]|php|asp)/i},{id:"xml-doctype-injection",description:"DOCTYPE declaration embedded in content — can define entities",pattern:/<!DOCTYPE(?:[\s[]|$)/i},{id:"xml-entity-system",description:"SYSTEM keyword — used in external entity declarations (XXE)",pattern:/\bSYSTEM\s+["']/i},{id:"xml-entity-public",description:"PUBLIC keyword — used in external entity declarations (XXE)",pattern:/\bPUBLIC\s+["']/i},{id:"xml-entity-declaration",description:"<!ENTITY declaration — defines entities, potential XXE or entity expansion",pattern:/<!ENTITY[\s%]/i},{id:"xml-billion-laughs",description:"Entity reference chaining / billion laughs: repeated &eX; style references",pattern:/(?:&\w{1,20};){3,}/},{id:"xml-namespace-confusion",description:"xmlns: attribute injection — can redefine namespaces to confuse parsers",pattern:/\bxmlns\s*(?::\w{1,40})?\s*=/i},{id:"xml-comment-injection",description:"\x3c!-- comment injection — can hide content from some parsers",pattern:/<!--/},{id:"xml-comment-close",description:"--\x3e closes an enclosing XML comment",pattern:/-->/},{id:"xml-pi-close",description:"?> closes an enclosing processing instruction",pattern:/\?>/}],St=[{id:"svg-script-element",description:"<script element inside SVG executes JavaScript",pattern:/<script[\s>/]/i},{id:"svg-xlink-href-javascript",description:"xlink:href with javascript: — classic SVG XSS via <a> or <use>",pattern:/xlink\s*:\s*href\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-href-javascript",description:"href= with javascript: in SVG context (<a>, <animate>, etc.)",pattern:/href\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-foreignobject",description:"<foreignObject embeds HTML inside SVG — can execute scripts",pattern:/<foreignObject[\s>/]/i},{id:"svg-use-external",description:"<use xlink:href or href pointing to external resource (non-fragment URL)",pattern:/<use[\s\S]{0,60}(?:xlink\s*:\s*)?href\s*=\s*(?:["'][^#]|[^"'#\s>])/i},{id:"svg-animate-href",description:'<animate attributeName="href" — can dynamically change href to javascript:',pattern:/<animate[\s\S]{0,80}attributeName\s*=\s*["'][\s]*href["']/i},{id:"svg-animate-xlinkhref",description:'<animate attributeName="xlink:href"',pattern:/<animate[\s\S]{0,80}attributeName\s*=\s*["'][\s]*xlink\s*:\s*href["']/i},{id:"svg-set-javascript",description:'<set to="javascript:..." — sets an attribute to a javascript: URI',pattern:/<set[\s\S]{0,80}to\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-event-handler",description:"SVG-specific event handler attributes: onload=, onerror=, onactivate=, etc.",pattern:/\bon(?:load|error|activate|begin|end|repeat|focus|blur|click|mouse\w{1,20}|key\w{1,20})\s*=/i},{id:"svg-handler-generic",description:"Generic on* handler catch-all for SVG attributes",pattern:/\bon\w{1,30}\s*=/i},{id:"svg-filter-feimage",description:"<feImage href= — filter primitive that can load external resources",pattern:/<feImage[\s\S]{0,80}(?:xlink\s*:\s*)?href\s*=/i},{id:"svg-image-external",description:"<image xlink:href with http/https or javascript protocol",pattern:/<image[\s\S]{0,80}(?:xlink\s*:\s*)?href\s*=\s*["']?\s*(?:https?|javascript)\s*:/i},{id:"svg-style-javascript",description:"style= attribute containing javascript: (e.g. background:url(javascript:...))",pattern:/style\s*=[\s\S]{0,60}javascript\s*:/i}],At=[{id:"shell-path-traversal-unix",description:"Unix path traversal: ../  — climbing the directory tree",pattern:/\.\.\//},{id:"shell-path-traversal-windows",description:"Windows path traversal: ..\\ — climbing the directory tree",pattern:/\.\.\\/},{id:"shell-path-traversal-encoded",description:"URL-encoded path traversal: %2e%2e or %2f variants",pattern:/%2e%2e|%2f\.\.|\.\.%2f/i},{id:"shell-null-byte",description:"Null byte injection: \\x00 or %00 — truncates strings in C-backed functions",pattern:/\x00|%00/},{id:"shell-semicolon",description:"Semicolon command separator: cmd1; cmd2",pattern:/;/},{id:"shell-pipe",description:"Pipe operator: cmd1 | cmd2",pattern:/\|/},{id:"shell-and-operator",description:"AND operator: cmd1 && cmd2",pattern:/&&/},{id:"shell-or-operator",description:"OR operator: cmd1 || cmd2",pattern:/\|\|/},{id:"shell-backtick",description:"Backtick command substitution: `cmd`",pattern:/`/},{id:"shell-dollar-paren",description:"Dollar-paren command substitution: $(cmd)",pattern:/\$\(/},{id:"shell-dollar-brace",description:"Dollar-brace variable expansion: ${var} — can be abused for injection",pattern:/\$\{/},{id:"shell-redirect-out",description:"Output redirection: cmd > file or cmd >> file",pattern:/>{1,2}/},{id:"shell-redirect-in",description:"Input redirection: cmd < file",pattern:/</},{id:"shell-newline-injection",description:"Newline injection: \\n or \\r — can inject new shell commands",pattern:/[\n\r]/},{id:"shell-glob-star",description:"Glob expansion: * or ? — can expand to unintended files",pattern:/[/\\][*?]/},{id:"shell-absolute-root",description:"Absolute root path injection: string starting with / or \\ (Windows UNC)",pattern:/^(?:\/|\\\\)/},{id:"shell-windows-drive",description:"Windows drive letter path injection: C:\\ or D:/",pattern:/^[a-zA-Z]:[/\\]/},{id:"shell-curl-wget",description:"curl/wget with URL or flags — can exfiltrate data or download payloads",pattern:/\b(?:curl|wget)\s+(?:https?:\/\/|ftp:\/\/|-)/i}],Tt=[{id:"redos-nested-quantifier-plus",description:"Nested + quantifier inside a group with outer quantifier: (a+)+, (.+b)*, etc.",pattern:/\([^)]*\+[^)]*\)[+*]/},{id:"redos-nested-quantifier-star",description:"Nested * quantifier: (a*)* or (a*)+ — catastrophic backtracking",pattern:/\([^)]*\*[^)]*\)[*+]/},{id:"redos-nested-groups",description:"Doubly nested quantified groups: ((a+)+) — guaranteed catastrophic",pattern:/\(\([^)]{0,40}\)[+*]\)[+*]/},{id:"redos-alternation-overlap",description:"Overlapping alternation under quantifier: (a|a)+ — ambiguous NFA paths",pattern:/\(([^|()]{1,20})\|(?:\1)(?:\|[^|()]{1,20}){0,5}\)[+*?]{1,2}/},{id:"redos-star-plus-concat",description:"(x*x)+ pattern — triggers super-linear backtracking",pattern:/\([^)]{0,10}\*[^)]{0,10}\)[+*]/},{id:"redos-dot-star-greedy",description:"(.*){n,} or (.+){n,} — repeated greedy dot quantifiers",pattern:/\(\.[*+]\)\{?\d/},{id:"redos-large-repetition",description:"Very large fixed or range repetition count {1000,} or {1000,n} — denial of service via backtracking",pattern:/\{\d{4,}(?:,\d*)?\}/},{id:"redos-catastrophic-alternation",description:"Long alternation with many similar branches — polynomial backtracking risk",pattern:/\([^)]{0,200}(?:\|[^|)]{0,50}){9,}\)/}],_t="[\"'\\s]*:",Ct=[{id:"nosql-where-operator",description:"$where — executes arbitrary JavaScript server-side in MongoDB",pattern:new RegExp(`\\$where${_t}`,"i")},{id:"nosql-ne-operator",description:'$ne — "not equal" operator used to bypass equality checks',pattern:new RegExp(`\\$ne${_t}`,"i")},{id:"nosql-gt-operator",description:'$gt — "greater than" used to bypass password/value checks',pattern:new RegExp(`\\$gte?${_t}`,"i")},{id:"nosql-lt-operator",description:'$lt / $lte — "less than" bypass variants',pattern:new RegExp(`\\$lte?${_t}`,"i")},{id:"nosql-regex-operator",description:"$regex — can be used to extract data character by character (blind injection)",pattern:new RegExp(`\\$regex${_t}`,"i")},{id:"nosql-or-operator",description:"$or — logical OR; used to create always-true conditions",pattern:new RegExp(`\\$or${_t}\\s*\\[`,"i")},{id:"nosql-and-operator",description:"$and — logical AND operator injection",pattern:new RegExp(`\\$and${_t}\\s*\\[`,"i")},{id:"nosql-nor-operator",description:"$nor — logical NOR operator injection",pattern:new RegExp(`\\$nor${_t}\\s*\\[`,"i")},{id:"nosql-exists-operator",description:"$exists — can enumerate fields to determine schema",pattern:new RegExp(`\\$exists${_t}`,"i")},{id:"nosql-in-operator",description:"$in — matches any value in a list; can enumerate values",pattern:new RegExp(`\\$in${_t}\\s*\\[`,"i")},{id:"nosql-expr-operator",description:"$expr — allows aggregation expressions in queries (MongoDB 3.6+)",pattern:new RegExp(`\\$expr${_t}`,"i")},{id:"nosql-function-operator",description:"$function — executes arbitrary JavaScript in MongoDB 4.4+",pattern:new RegExp(`\\$function${_t}`,"i")},{id:"nosql-accumulator-operator",description:"$accumulator — custom aggregation with arbitrary JS execution",pattern:new RegExp(`\\$accumulator${_t}`,"i")},{id:"nosql-proto-pollution",description:"__proto__ — prototype pollution via object key injection",pattern:/__proto__/},{id:"nosql-constructor-prototype",description:"constructor.prototype — alternative prototype pollution vector (dot notation or JSON key)",pattern:/constructor[\s"':.,{\[]*prototype/i},{id:"nosql-proto-bracket",description:'["__proto__"] — bracket-notation prototype pollution',pattern:/\[["']__proto__["']\]/}],$t=[{id:"log-crlf-injection",description:"CRLF injection: literal \\r or \\n embeds fake log lines",pattern:/[\r\n]/},{id:"log-url-encoded-crlf",description:"URL-encoded CRLF: %0d, %0a, %0D, %0A — decoded by some log parsers",pattern:/%0[dDaA]/},{id:"log-unicode-newline",description:"Unicode newline variants: U+2028 (line separator), U+2029 (paragraph separator)",pattern:/[\u2028\u2029]/},{id:"log-log4shell-jndi",description:"Log4Shell: ${jndi:...} triggers remote code execution in Apache Log4j",pattern:/\$\{jndi\s*:/i},{id:"log-log4shell-obfuscated",description:"Obfuscated Log4Shell: ${::-j}... lookup-bypass prefix used to evade WAF detection",pattern:/\$\{::-/},{id:"log-log4j-lookup",description:"Log4j lookup syntax: ${env:...}, ${sys:...}, ${ctx:...} — data exfiltration",pattern:/\$\{(?:env|sys|ctx|main|map|sd|web|docker|k8s|spring)\s*:/i},{id:"log-ssti-double-brace",description:"SSTI double-brace: {{expression}} — Jinja2, Twig, Handlebars, etc.",pattern:/\{\{[\s\S]{0,80}\}\}/},{id:"log-ssti-hash-brace",description:"SSTI hash-brace: #{expression} — Thymeleaf, Velocity, Ruby ERB",pattern:/#\{[\s\S]{0,80}\}/},{id:"log-ssti-dollar-brace",description:"SSTI/EL injection: ${expression with operators or method calls} — JSP EL, Freemarker, SpEL",pattern:/\$\{[^}]*(?:\.|\(|\*|\+|\bclass\b|\bruntime\b|\bprocess\b|\bexec\b)[^}]{0,80}\}/i},{id:"log-ssti-percent-tag",description:"SSTI ERB/ASP tag: <%= expression %> — Ruby ERB, ASP",pattern:/<%=[\s\S]{0,80}%>/},{id:"log-null-byte",description:"Null byte: \\x00 or %00 — can truncate log entries in C-backed loggers",pattern:/\x00|%00/},{id:"log-ansi-escape",description:"ANSI escape sequence: ESC[ — can manipulate terminal output when logs are tailed",pattern:/\x1b\[/}];function Pt(t,e){const i=e.label??"CUSTOM";for(const n of e)if(n.pattern.test(t))return{context:i,id:n.id,description:n.description,pattern:n.pattern};return null}function Ot(t,e){(function(t){if("string"!=typeof t)throw new TypeError("is-unsafe: first argument must be a string, got "+typeof t)})(t),function(t){if(!(t instanceof RegExp)){if(!Array.isArray(t))throw new TypeError("is-unsafe: second argument must be a PatternList (e.g. HTML), an array of PatternLists (e.g. [HTML, XML]), or a RegExp. Got: "+typeof t);if(0===t.length)throw new TypeError("is-unsafe: context must not be an empty array");if(Array.isArray(t[0]))for(const e of t)if(!Array.isArray(e)||0===e.length)throw new TypeError("is-unsafe: each context in the array must be a non-empty pattern array (PatternList)")}}(e);const{lists:i,regex:n}=function(t){return t instanceof RegExp?{lists:null,regex:t}:Array.isArray(t[0])?{lists:t,regex:null}:{lists:[t],regex:null}}(e);if(n)return n.test(t);for(const e of i)if(null!==Pt(t,e))return!0;return!1}function jt(t,e){if(!t)return{};const i=e.attributesGroupName?t[e.attributesGroupName]:t;if(!i)return{};const n={};for(const t in i)t.startsWith(e.attributeNamePrefix)?n[t.substring(e.attributeNamePrefix.length)]=i[t]:n[t]=i[t];return n}function It(t){if(!t||"string"!=typeof t)return;const e=t.indexOf(":");if(-1!==e&&e>0){const i=t.substring(0,e);if("xmlns"!==i)return i}}wt.label="HTML",vt.label="XML",St.label="SVG",Nt.label="SQL",Et.label="SQL-STRICT",At.label="SHELL",Tt.label="REDOS",Ct.label="NOSQL",$t.label="LOG",Object.freeze({HTML:wt,XML:vt,SVG:St,SQL:Nt,"SQL-STRICT":Et,SHELL:At,REDOS:Tt,NOSQL:Ct,LOG:$t});class kt{constructor(t,e){var i;this.options=t,this.currentNode=null,this.tagsNodeStack=[],this.parseXml=Vt,this.parseTextData=Lt,this.resolveNameSpace=Dt,this.buildAttributesMap=Mt,this.isItStopNode=Bt,this.replaceEntitiesValue=Ft,this.readStopNodeData=zt,this.saveTextToParentTag=Ut,this.addChild=qt,this.ignoreAttributesFn="function"==typeof(i=this.options.ignoreAttributes)?i:Array.isArray(i)?t=>{for(const e of i){if("string"==typeof e&&t===e)return!0;if(e instanceof RegExp&&e.test(t))return!0}}:()=>!1,this.entityExpansionCount=0,this.currentExpandedLength=0,this.doctypefound=!1;let n={...lt};this.options.entityDecoder?this.entityDecoder=this.options.entityDecoder:("object"==typeof this.options.htmlEntities?n=this.options.htmlEntities:!0===this.options.htmlEntities&&(n={...pt,...at}),this.entityDecoder=new yt({namedEntities:{...n,...e},numericAllowed:this.options.htmlEntities,limit:{maxTotalExpansions:this.options.processEntities.maxTotalExpansions,maxExpandedLength:this.options.processEntities.maxExpandedLength,applyLimitsTo:this.options.processEntities.appliesTo},onInputEntity:(t,e)=>Ot(e,[wt,vt])?ct.BLOCK:ct.ALLOW})),this.matcher=new rt,this.readonlyMatcher=this.matcher.readOnly(),this.isCurrentNodeStopNode=!1,this.stopNodeExpressionsSet=new ot;const r=this.options.stopNodes;if(r&&r.length>0){for(let t=0;t<r.length;t++){const e=r[t];"string"==typeof e?this.stopNodeExpressionsSet.add(new st(e)):e instanceof st&&this.stopNodeExpressionsSet.add(e)}this.stopNodeExpressionsSet.seal()}}}function Lt(t,e,i,n,r,s,o){const a=this.options;if(void 0!==t&&(a.trimValues&&!n&&(t=t.trim()),t.length>0)){o||(t=this.replaceEntitiesValue(t,e,i));const n=a.jPath?i.toString():i,l=a.tagValueProcessor(e,t,n,r,s);return null==l?t:typeof l!=typeof t||l!==t?l:a.trimValues||t.trim()===t?Yt(t,a.parseTagValue,a.numberParseOptions):t}}function Dt(t){if(this.options.removeNSPrefix){const e=t.split(":"),i="/"===t.charAt(0)?"/":"";if("xmlns"===e[0])return"";2===e.length&&(t=i+e[1])}return t}const Rt=new RegExp("([^\\s=]+)\\s*(=\\s*(['\"])([\\s\\S]*?)\\3)?","gm");function Mt(t,e,i,n=!1){const s=this.options;if(!0===n||!0!==s.ignoreAttributes&&"string"==typeof t){const n=r(t,Rt),o=n.length,a={},l=new Array(o);let p=!1;const c={};for(let t=0;t<o;t++){const e=this.resolveNameSpace(n[t][1]),r=n[t][4];if(e.length&&void 0!==r){let n=r;s.trimValues&&(n=n.trim()),n=this.replaceEntitiesValue(n,i,this.readonlyMatcher),l[t]=n,c[e]=n,p=!0}}p&&"object"==typeof e&&e.updateCurrent&&e.updateCurrent(c);const h=s.jPath?e.toString():this.readonlyMatcher;let d=!1;for(let t=0;t<o;t++){const e=this.resolveNameSpace(n[t][1]);if(this.ignoreAttributesFn(e,h))continue;let i=s.attributeNamePrefix+e;if(e.length)if(s.transformAttributeName&&(i=s.transformAttributeName(i)),i=Qt(i,s),void 0!==n[t][4]){const n=l[t],r=s.attributeValueProcessor(e,n,h);a[i]=null==r?n:typeof r!=typeof n||r!==n?r:Yt(n,s.parseAttributeValue,s.numberParseOptions),d=!0}else s.allowBooleanAttributes&&(a[i]=!0,d=!0)}if(!d)return;if(s.attributesGroupName&&!s.preserveOrder){const t={};return t[s.attributesGroupName]=a,t}return a}}const Vt=function(t){t=t.replace(/\r\n?/g,"\n");const e=new P("!xml");let i=e,n="";this.matcher.reset(),this.entityDecoder.reset(),this.entityExpansionCount=0,this.currentExpandedLength=0,this.doctypefound=!1;const r=this.options,s=new q(r.processEntities),o=t.length;for(let a=0;a<o;a++)if("<"===t[a]){const l=t.charCodeAt(a+1);if(47===l){const e=Gt(t,">",a,"Closing Tag is not closed.");let s=t.substring(a+2,e).trim();if(r.removeNSPrefix){const t=s.indexOf(":");-1!==t&&(s=s.substr(t+1))}s=Ht(r.transformTagName,s,"",r).tagName,i&&(n=this.saveTextToParentTag(n,i,this.readonlyMatcher));const o=this.matcher.getCurrentTag();if(s&&r.unpairedTagsSet.has(s))throw new Error(`Unpaired tag can not be used as closing tag: </${s}>`);o&&r.unpairedTagsSet.has(o)&&(this.matcher.pop(),this.tagsNodeStack.pop()),this.matcher.pop(),this.isCurrentNodeStopNode=!1,i=this.tagsNodeStack.pop(),n="",a=e}else if(63===l){let e=Wt(t,a,!1,"?>");if(!e)throw new Error("Pi Tag is not closed.");n=this.saveTextToParentTag(n,i,this.readonlyMatcher);const o=this.buildAttributesMap(e.tagExp,this.matcher,e.tagName,!0);if(o){const t=o[this.options.attributeNamePrefix+"version"];this.entityDecoder.setXmlVersion(Number(t)||1),s.setXmlVersion(Number(t)||1)}if(r.ignoreDeclaration&&"?xml"===e.tagName||r.ignorePiTags);else{const t=new P(e.tagName);t.add(r.textNodeName,""),e.tagName!==e.tagExp&&e.attrExpPresent&&!0!==r.ignoreAttributes&&(t[":@"]=o),this.addChild(i,t,this.readonlyMatcher,a)}a=e.closeIndex+1}else if(33===l&&45===t.charCodeAt(a+2)&&45===t.charCodeAt(a+3)){const e=Gt(t,"--\x3e",a+4,"Comment is not closed.");if(r.commentPropName){const s=t.substring(a+4,e-2);n=this.saveTextToParentTag(n,i,this.readonlyMatcher),i.add(r.commentPropName,[{[r.textNodeName]:s}])}a=e}else if(33===l&&68===t.charCodeAt(a+2)){if(this.doctypefound)throw new Error("Multiple DOCTYPE declarations found.");this.doctypefound=!0;const e=s.readDocType(t,a);this.entityDecoder.addInputEntities(e.entities),a=e.i}else if(33===l&&91===t.charCodeAt(a+2)){const e=Gt(t,"]]>",a,"CDATA is not closed.")-2,s=t.substring(a+9,e);n=this.saveTextToParentTag(n,i,this.readonlyMatcher);let o=this.parseTextData(s,i.tagname,this.readonlyMatcher,!0,!1,!0,!0);null==o&&(o=""),r.cdataPropName?i.add(r.cdataPropName,[{[r.textNodeName]:s}]):i.add(r.textNodeName,o),a=e+2}else{let s=Wt(t,a,r.removeNSPrefix);if(!s){const e=t.substring(Math.max(0,a-50),Math.min(o,a+50));throw new Error(`readTagExp returned undefined at position ${a}. Context: "${e}"`)}let l=s.tagName;const p=s.rawTagName;let c=s.tagExp,h=s.attrExpPresent,d=s.closeIndex;if(({tagName:l,tagExp:c}=Ht(r.transformTagName,l,c,r)),r.strictReservedNames&&(l===r.commentPropName||l===r.cdataPropName||l===r.textNodeName||l===r.attributesGroupName))throw new Error(`Invalid tag name: ${l}`);i&&n&&"!xml"!==i.tagname&&(n=this.saveTextToParentTag(n,i,this.readonlyMatcher,!1));const u=i;u&&r.unpairedTagsSet.has(u.tagname)&&(i=this.tagsNodeStack.pop(),this.matcher.pop());let f=!1;c.length>0&&c.lastIndexOf("/")===c.length-1&&(f=!0,"/"===l[l.length-1]?(l=l.substr(0,l.length-1),c=l):c=c.substr(0,c.length-1),h=l!==c);let g,m=null,x={};g=It(p),l!==e.tagname&&this.matcher.push(l,{},g),l!==c&&h&&(m=this.buildAttributesMap(c,this.matcher,l),m&&(x=jt(m,r))),l!==e.tagname&&(this.isCurrentNodeStopNode=this.isItStopNode());const b=a;if(this.isCurrentNodeStopNode){let e="";if(f)a=s.closeIndex;else if(r.unpairedTagsSet.has(l))a=s.closeIndex;else{const i=this.readStopNodeData(t,p,d+1);if(!i)throw new Error(`Unexpected end of ${p}`);a=i.i,e=i.tagContent}const n=new P(l);m&&(n[":@"]=m),n.add(r.textNodeName,e),this.matcher.pop(),this.isCurrentNodeStopNode=!1,this.addChild(i,n,this.readonlyMatcher,b)}else{if(f){({tagName:l,tagExp:c}=Ht(r.transformTagName,l,c,r));const t=new P(l);m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),this.matcher.pop(),this.isCurrentNodeStopNode=!1}else{if(r.unpairedTagsSet.has(l)){const t=new P(l);m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),this.matcher.pop(),this.isCurrentNodeStopNode=!1,a=s.closeIndex;continue}{const t=new P(l);if(this.tagsNodeStack.length>r.maxNestedTags)throw new Error("Maximum nested tags exceeded");this.tagsNodeStack.push(i),m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),i=t}}n="",a=d}}}else n+=t[a];return e.child};function qt(t,e,i,n){this.options.captureMetaData||(n=void 0);const r=this.options.jPath?i.toString():i,s=this.options.updateTag(e.tagname,r,e[":@"]);!1===s||("string"==typeof s?(e.tagname=s,t.addChild(e,n)):t.addChild(e,n))}function Ft(t,e,i){const n=this.options.processEntities;if(!n||!n.enabled)return t;if(n.allowedTags){const r=this.options.jPath?i.toString():i;if(!(Array.isArray(n.allowedTags)?n.allowedTags.includes(e):n.allowedTags(e,r)))return t}if(n.tagFilter){const r=this.options.jPath?i.toString():i;if(!n.tagFilter(e,r))return t}return this.entityDecoder.decode(t)}function Ut(t,e,i,n){return t&&(void 0===n&&(n=0===e.child.length),void 0!==(t=this.parseTextData(t,e.tagname,i,!1,!!e[":@"]&&0!==Object.keys(e[":@"]).length,n))&&""!==t&&e.add(this.options.textNodeName,t),t=""),t}function Bt(){return 0!==this.stopNodeExpressionsSet.size&&this.matcher.matchesAny(this.stopNodeExpressionsSet)}function Gt(t,e,i,n){const r=t.indexOf(e,i);if(-1===r)throw new Error(n);return r+e.length-1}function Xt(t,e,i,n){const r=t.indexOf(e,i);if(-1===r)throw new Error(n);return r}function Wt(t,e,i,n=">"){const r=function(t,e,i=">"){let n=0;const r=t.length,s=i.charCodeAt(0),o=i.length>1?i.charCodeAt(1):-1;let a="",l=e;for(let i=e;i<r;i++){const e=t.charCodeAt(i);if(n)e===n&&(n=0);else if(34===e||39===e)n=e;else if(e===s){if(-1===o)return a+=t.substring(l,i),{data:a,index:i};if(t.charCodeAt(i+1)===o)return a+=t.substring(l,i),{data:a,index:i}}else 9!==e||n||(a+=t.substring(l,i)+" ",l=i+1)}}(t,e+1,n);if(!r)return;let s=r.data;const o=r.index,a=s.search(/\s/);let l=s,p=!0;-1!==a&&(l=s.substring(0,a),s=s.substring(a+1).trimStart());const c=l;if(i){const t=l.indexOf(":");-1!==t&&(l=l.substr(t+1),p=l!==r.data.substr(t+1))}return{tagName:l,tagExp:s,closeIndex:o,attrExpPresent:p,rawTagName:c}}function zt(t,e,i){const n=i;let r=1;const s=t.length;for(;i<s;i++)if("<"===t[i]){const s=t.charCodeAt(i+1);if(47===s){const s=Xt(t,">",i,`${e} is not closed`);if(t.substring(i+2,s).trim()===e&&(r--,0===r))return{tagContent:t.substring(n,i),i:s};i=s}else if(63===s)i=Gt(t,"?>",i+1,"StopNode is not closed.");else if(33===s&&45===t.charCodeAt(i+2)&&45===t.charCodeAt(i+3))i=Gt(t,"--\x3e",i+3,"StopNode is not closed.");else if(33===s&&91===t.charCodeAt(i+2))i=Gt(t,"]]>",i,"StopNode is not closed.")-2;else{const n=Wt(t,i,!1);n&&((n&&n.tagName)===e&&"/"!==n.tagExp[n.tagExp.length-1]&&r++,i=n.closeIndex)}}}function Yt(t,e,i){if(e&&"string"==typeof t){const e=t.trim();return"true"===e||"false"!==e&&tt(t,i)}return void 0!==t?t:""}function Ht(t,e,i,n){if(t){const n=t(e);i===e&&(i=n),e=n}return{tagName:e=Qt(e,n),tagExp:i}}function Qt(t,e){if(a.includes(t))throw new Error(`[SECURITY] Invalid name: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`);return o.includes(t)?e.onDangerousProperty(t):t}const Jt=P.getMetaDataSymbol();function Zt(t,e){if(!t||"object"!=typeof t)return{};if(!e)return t;const i={};for(const n in t)n.startsWith(e)?i[n.substring(e.length)]=t[n]:i[n]=t[n];return i}function Kt(t,e,i,n){return te(t,e,i,n)}function te(t,e,i,n){let r;const s={};for(let o=0;o<t.length;o++){const a=t[o],l=ee(a);if(void 0!==l&&l!==e.textNodeName){const t=Zt(a[":@"]||{},e.attributeNamePrefix);i.push(l,t)}if(l===e.textNodeName)void 0===r?r=a[l]:r+=""+a[l];else{if(void 0===l)continue;if(a[l]){let t=te(a[l],e,i,n);const r=ne(t,e);if(0===Object.keys(t).length&&e.alwaysCreateTextNode&&(t[e.textNodeName]=""),a[":@"]?ie(t,a[":@"],n,e):1!==Object.keys(t).length||void 0===t[e.textNodeName]||e.alwaysCreateTextNode?0===Object.keys(t).length&&(e.alwaysCreateTextNode?t[e.textNodeName]="":t=""):t=t[e.textNodeName],void 0!==a[Jt]&&"object"==typeof t&&null!==t&&(t[Jt]=a[Jt]),void 0!==s[l]&&Object.prototype.hasOwnProperty.call(s,l))Array.isArray(s[l])||(s[l]=[s[l]]),s[l].push(t);else{const i=e.jPath?n.toString():n;e.isArray(l,i,r)?s[l]=[t]:s[l]=t}void 0!==l&&l!==e.textNodeName&&i.pop()}}}return"string"==typeof r?r.length>0&&(s[e.textNodeName]=r):void 0!==r&&(s[e.textNodeName]=r),s}function ee(t){const e=Object.keys(t);for(let t=0;t<e.length;t++){const i=e[t];if(":@"!==i)return i}}function ie(t,e,i,n){if(e){const r=Object.keys(e),s=r.length;for(let o=0;o<s;o++){const s=r[o],a=s.startsWith(n.attributeNamePrefix)?s.substring(n.attributeNamePrefix.length):s,l=n.jPath?i.toString()+"."+a:i;n.isArray(s,l,!0,!0)?t[s]=[e[s]]:t[s]=e[s]}}}function ne(t,e){const{textNodeName:i}=e,n=Object.keys(t).length;return 0===n||!(1!==n||!t[i]&&"boolean"!=typeof t[i]&&0!==t[i])}class re{constructor(t){this.externalEntities={},this.options=C(t)}parse(t,e){if("string"!=typeof t&&t.toString)t=t.toString();else if("string"!=typeof t)throw new Error("XML data is accepted in String or Bytes[] form.");if(e){!0===e&&(e={});const i=p(t,e);if(!0!==i)throw Error(`${i.err.msg}:${i.err.line}:${i.err.col}`)}const i=new kt(this.options,this.externalEntities),n=i.parseXml(t);return this.options.preserveOrder||void 0===n?n:Kt(n,this.options,i.matcher,i.readonlyMatcher)}addEntity(t,e){if(-1!==e.indexOf("&"))throw new Error("Entity value can't have '&'");if(-1!==t.indexOf("&")||-1!==t.indexOf(";"))throw new Error("An entity must be set without '&' and ';'. Eg. use '#xD' for '&#xD;'");if("&"===e)throw new Error("An entity with value '&' is not permitted");this.externalEntities[t]=e}static getMetaDataSymbol(){return P.getMetaDataSymbol()}}function se(t){return String(t).replace(/--/g,"- -").replace(/--/g,"- -").replace(/-$/,"- ")}function oe(t){return String(t).replace(/\]\]>/g,"]]]]><![CDATA[>")}function ae(t){return String(t).replace(/"/g,"&quot;").replace(/'/g,"&apos;")}const le=":A-Za-z_À-ÖØ-öø-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�",pe=":A-Za-z_À-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�𐀀-󯿿",ce=pe+"\\-\\.\\d·̀-ͯ҇‿-⁀",he=(t,e,i="")=>{const n=`[${t.replace(":","")}][${e.replace(":","")}]*`;return{name:new RegExp(`^[${t}][${e}]*$`,i),ncName:new RegExp(`^${n}$`,i),qName:new RegExp(`^${n}(?::${n})?$`,i),nmToken:new RegExp(`^[${e}]+$`,i),nmTokens:new RegExp(`^[${e}]+(?:\\s+[${e}]+)*$`,i)}},de=he(le,le+"\\-\\.\\d·̀-ͯ‿-⁀"),ue=he(pe,ce,"u"),fe=(t,{xmlVersion:e="1.0"}={})=>((t="1.0")=>"1.1"===t?ue:de)(e).qName.test(t);function ge(t,e,i,n,r){return i.sanitizeName?fe(t,{xmlVersion:r})?t:i.sanitizeName(t,{isAttribute:e,matcher:n.readOnly()}):t}function me(t,e){let i="";e.format&&(i="\n");const n=[];if(e.stopNodes&&Array.isArray(e.stopNodes))for(let t=0;t<e.stopNodes.length;t++){const i=e.stopNodes[t];"string"==typeof i?n.push(new st(i)):i instanceof st&&n.push(i)}const r=function(t,e){if(!Array.isArray(t)||0===t.length)return"1.0";const i=t[0];if("?xml"===Ee(i)){const t=i[":@"];if(t){const i=e.attributeNamePrefix+"version";if(t[i])return t[i]}}return"1.0"}(t,e);return xe(t,e,i,new rt,n,r)}function xe(t,e,i,n,r,s){let o="",a=!1;if(e.maxNestedTags&&n.getDepth()>e.maxNestedTags)throw new Error("Maximum nested tags exceeded");if(!Array.isArray(t)){if(null!=t){let i=t.toString();return i=Se(i,e),i}return""}for(let l=0;l<t.length;l++){const p=t[l],c=Ee(p);if(void 0===c)continue;const h=c===e.textNodeName||c===e.cdataPropName||c===e.commentPropName||"?"===c[0]?c:ge(c,!1,e,n,s),d=be(p[":@"],e);n.push(h,d);const u=ve(n,r);if(h===e.textNodeName){let t=p[c];u||(t=e.tagValueProcessor(h,t),t=Se(t,e)),a&&(o+=i),o+=t,a=!1,n.pop();continue}if(h===e.cdataPropName){a&&(o+=i),o+=`<![CDATA[${oe(p[c][0][e.textNodeName])}]]>`,a=!1,n.pop();continue}if(h===e.commentPropName){o+=i+`\x3c!--${se(p[c][0][e.textNodeName])}--\x3e`,a=!0,n.pop();continue}if("?"===h[0]){o+=("?xml"===h?"":i)+`<${h}${we(p[":@"],e,u,n,s)}?>`,a=!0,n.pop();continue}let f=i;""!==f&&(f+=e.indentBy);const g=i+`<${h}${we(p[":@"],e,u,n,s)}`;let m;m=u?ye(p[c],e):xe(p[c],e,f,n,r,s),-1!==e.unpairedTags.indexOf(h)?e.suppressUnpairedNode?o+=g+">":o+=g+"/>":m&&0!==m.length||!e.suppressEmptyNode?m&&m.endsWith(">")?o+=g+`>${m}${i}</${h}>`:(o+=g+">",m&&""!==i&&(m.includes("/>")||m.includes("</"))?o+=i+e.indentBy+m+i:o+=m,o+=`</${h}>`):o+=g+"/>",a=!0,n.pop()}return o}function be(t,e){if(!t||e.ignoreAttributes)return null;const i={};let n=!1;for(let r in t)Object.prototype.hasOwnProperty.call(t,r)&&(i[r.startsWith(e.attributeNamePrefix)?r.substr(e.attributeNamePrefix.length):r]=ae(t[r]),n=!0);return n?i:null}function ye(t,e){if(!Array.isArray(t))return null!=t?t.toString():"";let i="";for(let n=0;n<t.length;n++){const r=t[n],s=Ee(r);if(s===e.textNodeName)i+=r[s];else if(s===e.cdataPropName)i+=r[s][0][e.textNodeName];else if(s===e.commentPropName)i+=r[s][0][e.textNodeName];else{if(s&&"?"===s[0])continue;if(s){const t=Ne(r[":@"],e),n=ye(r[s],e);n&&0!==n.length?i+=`<${s}${t}>${n}</${s}>`:i+=`<${s}${t}/>`}}}return i}function Ne(t,e){let i="";if(t&&!e.ignoreAttributes)for(let n in t){if(!Object.prototype.hasOwnProperty.call(t,n))continue;let r=t[n];!0===r&&e.suppressBooleanAttributes?i+=` ${n.substr(e.attributeNamePrefix.length)}`:i+=` ${n.substr(e.attributeNamePrefix.length)}="${ae(r)}"`}return i}function Ee(t){const e=Object.keys(t);for(let i=0;i<e.length;i++){const n=e[i];if(Object.prototype.hasOwnProperty.call(t,n)&&":@"!==n)return n}}function we(t,e,i,n,r){let s="";if(t&&!e.ignoreAttributes)for(let o in t){if(!Object.prototype.hasOwnProperty.call(t,o))continue;const a=o.substr(e.attributeNamePrefix.length),l=i?a:ge(a,!0,e,n,r);let p;i?p=t[o]:(p=e.attributeValueProcessor(o,t[o]),p=Se(p,e)),!0===p&&e.suppressBooleanAttributes?s+=` ${l}`:s+=` ${l}="${ae(p)}"`}return s}function ve(t,e){if(!e||0===e.length)return!1;for(let i=0;i<e.length;i++)if(t.matches(e[i]))return!0;return!1}function Se(t,e){if(t&&t.length>0&&e.processEntities)for(let i=0;i<e.entities.length;i++){const n=e.entities[i];t=t.replace(n.regex,n.val)}return t}const Ae={attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,cdataPropName:!1,format:!1,indentBy:"  ",suppressEmptyNode:!1,suppressUnpairedNode:!0,suppressBooleanAttributes:!0,tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},preserveOrder:!1,commentPropName:!1,unpairedTags:[],entities:[{regex:new RegExp("&","g"),val:"&amp;"},{regex:new RegExp(">","g"),val:"&gt;"},{regex:new RegExp("<","g"),val:"&lt;"},{regex:new RegExp("'","g"),val:"&apos;"},{regex:new RegExp('"',"g"),val:"&quot;"}],processEntities:!0,stopNodes:[],oneListGroup:!1,maxNestedTags:100,jPath:!0,sanitizeName:!1};function Te(t){if(this.options=Object.assign({},Ae,t),this.options.stopNodes&&Array.isArray(this.options.stopNodes)&&(this.options.stopNodes=this.options.stopNodes.map(t=>"string"==typeof t&&t.startsWith("*.")?".."+t.substring(2):t)),this.stopNodeExpressions=[],this.options.stopNodes&&Array.isArray(this.options.stopNodes))for(let t=0;t<this.options.stopNodes.length;t++){const e=this.options.stopNodes[t];"string"==typeof e?this.stopNodeExpressions.push(new st(e)):e instanceof st&&this.stopNodeExpressions.push(e)}var e;!0===this.options.ignoreAttributes||this.options.attributesGroupName?this.isAttribute=function(){return!1}:(this.ignoreAttributesFn="function"==typeof(e=this.options.ignoreAttributes)?e:Array.isArray(e)?t=>{for(const i of e){if("string"==typeof i&&t===i)return!0;if(i instanceof RegExp&&i.test(t))return!0}}:()=>!1,this.attrPrefixLen=this.options.attributeNamePrefix.length,this.isAttribute=Pe),this.processTextOrObjNode=Ce,this.options.format?(this.indentate=$e,this.tagEndChar=">\n",this.newLine="\n"):(this.indentate=function(){return""},this.tagEndChar=">",this.newLine="")}function _e(t,e,i,n,r){return i.sanitizeName?fe(t,{xmlVersion:r})?t:i.sanitizeName(t,{isAttribute:e,matcher:n.readOnly()}):t}function Ce(t,e,i,n,r){const s=this.extractAttributes(t);if(n.push(e,s),this.checkStopNode(n)){const r=this.buildRawContent(t),s=this.buildAttributesForStopNode(t);return n.pop(),this.buildObjectNode(r,e,s,i)}const o=this.j2x(t,i+1,n,r);return n.pop(),"?"===e[0]?this.buildTextValNode("",e,o.attrStr,i,n):void 0!==t[this.options.textNodeName]&&1===Object.keys(t).length?this.buildTextValNode(t[this.options.textNodeName],e,o.attrStr,i,n):this.buildObjectNode(o.val,e,o.attrStr,i)}function $e(t){return this.options.indentBy.repeat(t)}function Pe(t){return!(!t.startsWith(this.options.attributeNamePrefix)||t===this.options.textNodeName)&&t.substr(this.attrPrefixLen)}Te.prototype.build=function(t){if(this.options.preserveOrder)return me(t,this.options);{Array.isArray(t)&&this.options.arrayNodeName&&this.options.arrayNodeName.length>1&&(t={[this.options.arrayNodeName]:t});const e=new rt,i=function(t,e){const i=t["?xml"];if(i&&"object"==typeof i){if(e.attributesGroupName&&i[e.attributesGroupName]){const t=i[e.attributesGroupName][e.attributeNamePrefix+"version"];if(t)return t}const t=i[e.attributeNamePrefix+"version"];if(t)return t}return"1.0"}(t,this.options);return this.j2x(t,0,e,i).val}},Te.prototype.j2x=function(t,e,i,n){let r="",s="";if(this.options.maxNestedTags&&i.getDepth()>=this.options.maxNestedTags)throw new Error("Maximum nested tags exceeded");const o=this.options.jPath?i.toString():i,a=this.checkStopNode(i);for(let l in t){if(!Object.prototype.hasOwnProperty.call(t,l))continue;const p=l===this.options.textNodeName||l===this.options.cdataPropName||l===this.options.commentPropName||this.options.attributesGroupName&&l===this.options.attributesGroupName||this.isAttribute(l)||"?"===l[0]?l:_e(l,!1,this.options,i,n);if(void 0===t[l])this.isAttribute(l)&&(s+="");else if(null===t[l])this.isAttribute(l)||p===this.options.cdataPropName||p===this.options.commentPropName?s+="":"?"===p[0]?s+=this.indentate(e)+"<"+p+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+p+"/"+this.tagEndChar;else if(t[l]instanceof Date)s+=this.buildTextValNode(t[l],p,"",e,i);else if("object"!=typeof t[l]){const c=this.isAttribute(l);if(c&&!this.ignoreAttributesFn(c,o)){const e=_e(c,!0,this.options,i,n);r+=this.buildAttrPairStr(e,""+t[l],a)}else if(!c)if(l===this.options.textNodeName){let e=this.options.tagValueProcessor(l,""+t[l]);s+=this.replaceEntitiesValue(e)}else{i.push(p);const n=this.checkStopNode(i);if(i.pop(),n){const i=""+t[l];s+=""===i?this.indentate(e)+"<"+p+this.closeTag(p)+this.tagEndChar:this.indentate(e)+"<"+p+">"+i+"</"+p+this.tagEndChar}else s+=this.buildTextValNode(t[l],p,"",e,i)}}else if(Array.isArray(t[l])){const r=t[l].length;let o="",a="";for(let c=0;c<r;c++){const r=t[l][c];if(void 0===r);else if(null===r)"?"===p[0]?s+=this.indentate(e)+"<"+p+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+p+"/"+this.tagEndChar;else if("object"==typeof r)if(this.options.oneListGroup){i.push(p);const t=this.j2x(r,e+1,i,n);i.pop(),o+=t.val,this.options.attributesGroupName&&r.hasOwnProperty(this.options.attributesGroupName)&&(a+=t.attrStr)}else o+=this.processTextOrObjNode(r,p,e,i,n);else if(this.options.oneListGroup){let t=this.options.tagValueProcessor(p,r);t=this.replaceEntitiesValue(t),o+=t}else{i.push(p);const t=this.checkStopNode(i);if(i.pop(),t){const t=""+r;o+=""===t?this.indentate(e)+"<"+p+this.closeTag(p)+this.tagEndChar:this.indentate(e)+"<"+p+">"+t+"</"+p+this.tagEndChar}else o+=this.buildTextValNode(r,p,"",e,i)}}this.options.oneListGroup&&(o=this.buildObjectNode(o,p,a,e)),s+=o}else if(this.options.attributesGroupName&&l===this.options.attributesGroupName){const e=Object.keys(t[l]),s=e.length;for(let o=0;o<s;o++){const s=_e(e[o],!0,this.options,i,n);r+=this.buildAttrPairStr(s,""+t[l][e[o]],a)}}else s+=this.processTextOrObjNode(t[l],p,e,i,n)}return{attrStr:r,val:s}},Te.prototype.buildAttrPairStr=function(t,e,i){return i||(e=this.options.attributeValueProcessor(t,""+e),e=this.replaceEntitiesValue(e)),this.options.suppressBooleanAttributes&&"true"===e?" "+t:" "+t+'="'+ae(e)+'"'},Te.prototype.extractAttributes=function(t){if(!t||"object"!=typeof t)return null;const e={};let i=!1;if(this.options.attributesGroupName&&t[this.options.attributesGroupName]){const n=t[this.options.attributesGroupName];for(let t in n)Object.prototype.hasOwnProperty.call(n,t)&&(e[t.startsWith(this.options.attributeNamePrefix)?t.substring(this.options.attributeNamePrefix.length):t]=ae(n[t]),i=!0)}else for(let n in t){if(!Object.prototype.hasOwnProperty.call(t,n))continue;const r=this.isAttribute(n);r&&(e[r]=ae(t[n]),i=!0)}return i?e:null},Te.prototype.buildRawContent=function(t){if("string"==typeof t)return t;if("object"!=typeof t||null===t)return String(t);if(void 0!==t[this.options.textNodeName])return t[this.options.textNodeName];let e="";for(let i in t){if(!Object.prototype.hasOwnProperty.call(t,i))continue;if(this.isAttribute(i))continue;if(this.options.attributesGroupName&&i===this.options.attributesGroupName)continue;const n=t[i];if(i===this.options.textNodeName)e+=n;else if(Array.isArray(n)){for(let t of n)if("string"==typeof t||"number"==typeof t)e+=`<${i}>${t}</${i}>`;else if("object"==typeof t&&null!==t){const n=this.buildRawContent(t),r=this.buildAttributesForStopNode(t);e+=""===n?`<${i}${r}/>`:`<${i}${r}>${n}</${i}>`}}else if("object"==typeof n&&null!==n){const t=this.buildRawContent(n),r=this.buildAttributesForStopNode(n);e+=""===t?`<${i}${r}/>`:`<${i}${r}>${t}</${i}>`}else e+=`<${i}>${n}</${i}>`}return e},Te.prototype.buildAttributesForStopNode=function(t){if(!t||"object"!=typeof t)return"";let e="";if(this.options.attributesGroupName&&t[this.options.attributesGroupName]){const i=t[this.options.attributesGroupName];for(let t in i){if(!Object.prototype.hasOwnProperty.call(i,t))continue;const n=t.startsWith(this.options.attributeNamePrefix)?t.substring(this.options.attributeNamePrefix.length):t,r=i[t];!0===r&&this.options.suppressBooleanAttributes?e+=" "+n:e+=" "+n+'="'+r+'"'}}else for(let i in t){if(!Object.prototype.hasOwnProperty.call(t,i))continue;const n=this.isAttribute(i);if(n){const r=t[i];!0===r&&this.options.suppressBooleanAttributes?e+=" "+n:e+=" "+n+'="'+r+'"'}}return e},Te.prototype.buildObjectNode=function(t,e,i,n){if(""===t)return"?"===e[0]?this.indentate(n)+"<"+e+i+"?"+this.tagEndChar:this.indentate(n)+"<"+e+i+this.closeTag(e)+this.tagEndChar;if("?"===e[0])return this.indentate(n)+"<"+e+i+"?"+this.tagEndChar;{let r="</"+e+this.tagEndChar,s="";return"?"===e[0]&&(s="?",r=""),!i&&""!==i||-1!==t.indexOf("<")?!1!==this.options.commentPropName&&e===this.options.commentPropName&&0===s.length?this.indentate(n)+`\x3c!--${t}--\x3e`+this.newLine:this.indentate(n)+"<"+e+i+s+this.tagEndChar+t+this.indentate(n)+r:this.indentate(n)+"<"+e+i+s+">"+t+r}},Te.prototype.closeTag=function(t){let e="";return-1!==this.options.unpairedTags.indexOf(t)?this.options.suppressUnpairedNode||(e="/"):e=this.options.suppressEmptyNode?"/":`></${t}`,e},Te.prototype.checkStopNode=function(t){if(!this.stopNodeExpressions||0===this.stopNodeExpressions.length)return!1;for(let e=0;e<this.stopNodeExpressions.length;e++)if(t.matches(this.stopNodeExpressions[e]))return!0;return!1},Te.prototype.buildTextValNode=function(t,e,i,n,r){if(!1!==this.options.cdataPropName&&e===this.options.cdataPropName){const e=oe(t);return this.indentate(n)+`<![CDATA[${e}]]>`+this.newLine}if(!1!==this.options.commentPropName&&e===this.options.commentPropName){const e=se(t);return this.indentate(n)+`\x3c!--${e}--\x3e`+this.newLine}if("?"===e[0])return this.indentate(n)+"<"+e+i+"?"+this.tagEndChar;{let r=this.options.tagValueProcessor(e,t);return r=this.replaceEntitiesValue(r),""===r?this.indentate(n)+"<"+e+i+this.closeTag(e)+this.tagEndChar:this.indentate(n)+"<"+e+i+">"+r+"</"+e+this.tagEndChar}},Te.prototype.replaceEntitiesValue=function(t){if(t&&t.length>0&&this.options.processEntities)for(let e=0;e<this.options.entities.length;e++){const i=this.options.entities[e];t=t.replace(i.regex,i.val)}return t};const Oe=Te,je={validate:p};module.exports=e})();
+(()=>{"use strict";var t={d:(e,i)=>{for(var n in i)t.o(i,n)&&!t.o(e,n)&&Object.defineProperty(e,n,{enumerable:!0,get:i[n]})},o:(t,e)=>Object.prototype.hasOwnProperty.call(t,e),r:t=>{"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})}},e={};t.r(e),t.d(e,{XMLBuilder:()=>$e,XMLParser:()=>ie,XMLValidator:()=>Pe});const i=":A-Za-z_\\u00C0-\\u00D6\\u00D8-\\u00F6\\u00F8-\\u02FF\\u0370-\\u037D\\u037F-\\u1FFF\\u200C-\\u200D\\u2070-\\u218F\\u2C00-\\u2FEF\\u3001-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFFD",n=new RegExp("^["+i+"]["+i+"\\-.\\d\\u00B7\\u0300-\\u036F\\u203F-\\u2040]*$"),r=function(t){return!(null==n.exec(t))},s=["hasOwnProperty","toString","valueOf","__defineGetter__","__defineSetter__","__lookupGetter__","__lookupSetter__"],o=["__proto__","constructor","prototype"],a={allowBooleanAttributes:!1,unpairedTags:[]};function l(t,e){e=Object.assign({},a,e);const i=[];let n=!1,r=!1;"\ufeff"===t[0]&&(t=t.substr(1));for(let s=0;s<t.length;s++)if("<"===t[s]&&"?"===t[s+1]){if(s+=2,s=c(t,s),s.err)return s}else{if("<"!==t[s]){if(p(t[s]))continue;return x("InvalidChar","char '"+t[s]+"' is not expected.",N(t,s))}{let o=s;if(s++,"!"===t[s]){s=h(t,s);continue}{let a=!1;"/"===t[s]&&(a=!0,s++);let l="";for(;s<t.length&&">"!==t[s]&&" "!==t[s]&&"\t"!==t[s]&&"\n"!==t[s]&&"\r"!==t[s];s++)l+=t[s];if(l=l.trim(),"/"===l[l.length-1]&&(l=l.substring(0,l.length-1),s--),!y(l)){let e;return e=0===l.trim().length?"Invalid space after '<'.":"Tag '"+l+"' is an invalid name.",x("InvalidTag",e,N(t,s))}const d=f(t,s);if(!1===d)return x("InvalidAttr","Attributes for '"+l+"' have open quote.",N(t,s));let u=d.value;if(s=d.index,"/"===u[u.length-1]){const i=s-u.length;u=u.substring(0,u.length-1);const r=g(u,e);if(!0!==r)return x(r.err.code,r.err.msg,N(t,i+r.err.line));n=!0}else if(a){if(!d.tagClosed)return x("InvalidTag","Closing tag '"+l+"' doesn't have proper closing.",N(t,s));if(u.trim().length>0)return x("InvalidTag","Closing tag '"+l+"' can't have attributes or invalid starting.",N(t,o));if(0===i.length)return x("InvalidTag","Closing tag '"+l+"' has not been opened.",N(t,o));{const e=i.pop();if(l!==e.tagName){let i=N(t,e.tagStartPos);return x("InvalidTag","Expected closing tag '"+e.tagName+"' (opened in line "+i.line+", col "+i.col+") instead of closing tag '"+l+"'.",N(t,o))}0==i.length&&(r=!0)}}else{const a=g(u,e);if(!0!==a)return x(a.err.code,a.err.msg,N(t,s-u.length+a.err.line));if(!0===r)return x("InvalidXml","Multiple possible root nodes found.",N(t,s));-1!==e.unpairedTags.indexOf(l)||i.push({tagName:l,tagStartPos:o}),n=!0}for(s++;s<t.length;s++)if("<"===t[s]){if("!"===t[s+1]){s++,s=h(t,s);continue}if("?"!==t[s+1])break;if(s=c(t,++s),s.err)return s}else if("&"===t[s]){const e=m(t,s);if(-1==e)return x("InvalidChar","char '&' is not expected.",N(t,s));s=e}else if(!0===r&&!p(t[s]))return x("InvalidXml","Extra text at the end",N(t,s));"<"===t[s]&&s--}}}return n?1==i.length?x("InvalidTag","Unclosed tag '"+i[0].tagName+"'.",N(t,i[0].tagStartPos)):!(i.length>0)||x("InvalidXml","Invalid '"+JSON.stringify(i.map(t=>t.tagName),null,4).replace(/\r?\n/g,"")+"' found.",{line:1,col:1}):x("InvalidXml","Start tag expected.",1)}function p(t){return" "===t||"\t"===t||"\n"===t||"\r"===t}function c(t,e){const i=e;for(;e<t.length;e++)if("?"==t[e]||" "==t[e]){const n=t.substr(i,e-i);if(e>5&&"xml"===n)return x("InvalidXml","XML declaration allowed only at the start of the document.",N(t,e));if("?"==t[e]&&">"==t[e+1]){e++;break}continue}return e}function h(t,e){if(t.length>e+5&&"-"===t[e+1]&&"-"===t[e+2]){for(e+=3;e<t.length;e++)if("-"===t[e]&&"-"===t[e+1]&&">"===t[e+2]){e+=2;break}}else if(t.length>e+8&&"D"===t[e+1]&&"O"===t[e+2]&&"C"===t[e+3]&&"T"===t[e+4]&&"Y"===t[e+5]&&"P"===t[e+6]&&"E"===t[e+7]){let i=1;for(e+=8;e<t.length;e++)if("<"===t[e])i++;else if(">"===t[e]&&(i--,0===i))break}else if(t.length>e+9&&"["===t[e+1]&&"C"===t[e+2]&&"D"===t[e+3]&&"A"===t[e+4]&&"T"===t[e+5]&&"A"===t[e+6]&&"["===t[e+7])for(e+=8;e<t.length;e++)if("]"===t[e]&&"]"===t[e+1]&&">"===t[e+2]){e+=2;break}return e}const d='"',u="'";function f(t,e){let i="",n="",r=!1;for(;e<t.length;e++){if(t[e]===d||t[e]===u)""===n?n=t[e]:n!==t[e]||(n="");else if(">"===t[e]&&""===n){r=!0;break}i+=t[e]}return""===n&&{value:i,index:e,tagClosed:r}}function g(t,e){const i=function(t){const e=[],i=t.length;let n=0;for(;n<i;){const r=n;for(;n<i&&p(t[n]);)n++;if(n>=i)break;if("="===t[n]){n=r+1;continue}const s=t.slice(r,n),o=n;for(;n<i&&!p(t[n])&&"="!==t[n];)n++;const a=t.slice(o,n);let l,c,h,d=n;for(;d<i&&p(t[d]);)d++;d<i&&"="===t[d]&&(l=t.slice(n,d+1),n=d+1);let u=n;for(;u<i&&p(t[u]);)u++;if(u<i&&('"'===t[u]||"'"===t[u])){const e=u+1,i=t.indexOf(t[u],e);-1!==i&&(c=t[u],h=t.slice(e,i),n=i+1)}const f={startIndex:r};f[1]=s,f[2]=a,f[3]=l,f[4]=void 0!==c||void 0,f[5]=c,f[6]=h,e.push(f)}return e}(t),n={};for(let t=0;t<i.length;t++){if(0===i[t][1].length)return x("InvalidAttr","Attribute '"+i[t][2]+"' has no space in starting.",E(i[t]));if(void 0!==i[t][3]&&void 0===i[t][4])return x("InvalidAttr","Attribute '"+i[t][2]+"' is without value.",E(i[t]));if(void 0===i[t][3]&&!e.allowBooleanAttributes)return x("InvalidAttr","boolean attribute '"+i[t][2]+"' is not allowed.",E(i[t]));const r=i[t][2];if(!b(r))return x("InvalidAttr","Attribute '"+r+"' is an invalid name.",E(i[t]));if(Object.prototype.hasOwnProperty.call(n,r))return x("InvalidAttr","Attribute '"+r+"' is repeated.",E(i[t]));n[r]=1}return!0}function m(t,e){if(";"===t[++e])return-1;if("#"===t[e])return function(t,e){let i=/\d/;for("x"===t[e]&&(e++,i=/[\da-fA-F]/);e<t.length;e++){if(";"===t[e])return e;if(!t[e].match(i))break}return-1}(t,++e);let i=0;for(;e<t.length;e++,i++)if(!(t[e].match(/\w/)&&i<20)){if(";"===t[e])break;return-1}return e}function x(t,e,i){return{err:{code:t,msg:e,line:i.line||i,col:i.col}}}function b(t){return r(t)}function y(t){return r(t)}function N(t,e){const i=t.substring(0,e).split(/\r?\n/);return{line:i.length,col:i[i.length-1].length+1}}function E(t){return t.startIndex+t[1].length}const w=t=>s.includes(t)?"__"+t:t,v={preserveOrder:!1,attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,removeNSPrefix:!1,allowBooleanAttributes:!1,parseTagValue:!0,parseAttributeValue:!1,trimValues:!0,cdataPropName:!1,numberParseOptions:{hex:!0,leadingZeros:!0,eNotation:!0,unicode:!1},tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},stopNodes:[],alwaysCreateTextNode:!1,isArray:()=>!1,commentPropName:!1,unpairedTags:[],processEntities:!0,htmlEntities:!1,entityDecoder:null,ignoreDeclaration:!1,ignorePiTags:!1,transformTagName:!1,transformAttributeName:!1,updateTag:function(t,e,i){return t},captureMetaData:!1,maxNestedTags:100,strictReservedNames:!0,jPath:!0,onDangerousProperty:w};function S(t,e){if("string"!=typeof t)return;const i=t.toLowerCase();if(s.some(t=>i===t.toLowerCase()))throw new Error(`[SECURITY] Invalid ${e}: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`);if(o.some(t=>i===t.toLowerCase()))throw new Error(`[SECURITY] Invalid ${e}: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`)}function A(t,e){return"boolean"==typeof t?{enabled:t,maxEntitySize:1e4,maxExpansionDepth:1e4,maxTotalExpansions:1/0,maxExpandedLength:1e5,maxEntityCount:1e3,allowedTags:null,tagFilter:null,appliesTo:"all"}:"object"==typeof t&&null!==t?{enabled:!1!==t.enabled,maxEntitySize:Math.max(1,t.maxEntitySize??1e4),maxExpansionDepth:Math.max(1,t.maxExpansionDepth??1e4),maxTotalExpansions:Math.max(1,t.maxTotalExpansions??1/0),maxExpandedLength:Math.max(1,t.maxExpandedLength??1e5),maxEntityCount:Math.max(1,t.maxEntityCount??1e3),allowedTags:t.allowedTags??null,tagFilter:t.tagFilter??null,appliesTo:t.appliesTo??"all"}:A(!0)}const T=function(t){const e=Object.assign({},v,t),i=[{value:e.attributeNamePrefix,name:"attributeNamePrefix"},{value:e.attributesGroupName,name:"attributesGroupName"},{value:e.textNodeName,name:"textNodeName"},{value:e.cdataPropName,name:"cdataPropName"},{value:e.commentPropName,name:"commentPropName"}];for(const{value:t,name:e}of i)t&&S(t,e);return null===e.onDangerousProperty&&(e.onDangerousProperty=w),e.processEntities=A(e.processEntities,e.htmlEntities),e.unpairedTagsSet=new Set(e.unpairedTags),e.stopNodes&&Array.isArray(e.stopNodes)&&(e.stopNodes=e.stopNodes.map(t=>"string"==typeof t&&t.startsWith("*.")?".."+t.substring(2):t)),e};let _;_="function"!=typeof Symbol?"@@xmlMetadata":Symbol("XML Node Metadata");class C{constructor(t){this.tagname=t,this.child=[],this[":@"]=Object.create(null)}add(t,e){"__proto__"===t&&(t="#__proto__"),this.child.push({[t]:e})}addChild(t,e){"__proto__"===t.tagname&&(t.tagname="#__proto__"),t[":@"]&&Object.keys(t[":@"]).length>0?this.child.push({[t.tagname]:t.child,":@":t[":@"]}):this.child.push({[t.tagname]:t.child}),this.addStartIndex(e)}addStartIndex(t){void 0!==t&&(this.child[this.child.length-1][_]={startIndex:t})}addEndIndex(t){const e=this.child[this.child.length-1];void 0!==e&&void 0!==e[_]&&void 0===e[_].endIndex&&(e[_].endIndex=t)}static getMetaDataSymbol(){return _}}const $=":A-Za-z_À-ÖØ-öø-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�",P=":A-Za-z_À-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�𐀀-󯿿",O=P+"\\-\\.\\d·̀-ͯ҇‿-⁀",I=(t,e,i="")=>{const n=`[${t.replace(":","")}][${e.replace(":","")}]*`;return{name:new RegExp(`^[${t}][${e}]*$`,i),ncName:new RegExp(`^${n}$`,i),qName:new RegExp(`^${n}(?::${n})?$`,i),nmToken:new RegExp(`^[${e}]+$`,i),nmTokens:new RegExp(`^[${e}]+(?:\\s+[${e}]+)*$`,i)}},j=I($,$+"\\-\\.\\d·̀-ͯ‿-⁀"),k=I(P,O,"u"),L=":A-Za-z_",D=I(L,L+"\\-\\.\\d"),R=(t,{xmlVersion:e="1.0",asciiOnly:i=!1}={})=>((t="1.0",e=!1)=>e?D:"1.1"===t?k:j)(e,i).qName.test(t);class M{constructor(t,e){this.suppressValidationErr=!t,this.options=t,this.xmlVersion=e||1}setXmlVersion(t=1){this.xmlVersion=t}readDocType(t,e){const i=Object.create(null);let n=0;if("O"!==t[e+3]||"C"!==t[e+4]||"T"!==t[e+5]||"Y"!==t[e+6]||"P"!==t[e+7]||"E"!==t[e+8])throw new Error("Invalid Tag instead of DOCTYPE");{e+=9;let r=1,s=!1,o=!1,a=null,l="";for(;e<t.length;e++)if(null===a)if(s||o||'"'!==t[e]&&"'"!==t[e])if("<"!==t[e]||o)if(">"===t[e]){if(o?"-"===t[e-1]&&"-"===t[e-2]&&(o=!1,r--):r--,0===r)break}else"["===t[e]?s=!0:l+=t[e];else{if(s&&q(t,"!ENTITY",e)){let r,s;if(e+=7,[r,s,e]=this.readEntityExp(t,e+1,this.suppressValidationErr),-1===s.indexOf("&")){if(!1!==this.options.enabled&&null!=this.options.maxEntityCount&&n>=this.options.maxEntityCount)throw new Error(`Entity count (${n+1}) exceeds maximum allowed (${this.options.maxEntityCount})`);i[r]=s,n++}}else if(s&&q(t,"!ELEMENT",e)){e+=8;const{index:i}=this.readElementExp(t,e+1);e=i}else if(s&&q(t,"!ATTLIST",e))e+=8;else if(s&&q(t,"!NOTATION",e)){e+=9;const{index:i}=this.readNotationExp(t,e+1,this.suppressValidationErr);e=i}else{if(!q(t,"!--",e))throw new Error("Invalid DOCTYPE");o=!0}r++,l=""}else a=t[e],l+=t[e];else t[e]===a&&(a=null),l+=t[e];if(null!==a||0!==r)throw new Error("Unclosed DOCTYPE")}return{entities:i,i:e}}readEntityExp(t,e){const i=e=V(t,e);for(;e<t.length&&!/\s/.test(t[e])&&'"'!==t[e]&&"'"!==t[e];)e++;let n=t.substring(i,e);if(F(n,{xmlVersion:this.xmlVersion}),e=V(t,e),!this.suppressValidationErr){if("SYSTEM"===t.substring(e,e+6).toUpperCase())throw new Error("External entities are not supported");if("%"===t[e])throw new Error("Parameter entities are not supported")}let r="";if([e,r]=this.readIdentifierVal(t,e,"entity"),!1!==this.options.enabled&&null!=this.options.maxEntitySize&&r.length>this.options.maxEntitySize)throw new Error(`Entity "${n}" size (${r.length}) exceeds maximum allowed size (${this.options.maxEntitySize})`);return[n,r,--e]}readNotationExp(t,e){const i=e=V(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);!this.suppressValidationErr&&F(n,{xmlVersion:this.xmlVersion}),e=V(t,e);const r=t.substring(e,e+6).toUpperCase();if(!this.suppressValidationErr&&"SYSTEM"!==r&&"PUBLIC"!==r)throw new Error(`Expected SYSTEM or PUBLIC, found "${r}"`);e+=r.length,e=V(t,e);let s=null,o=null;if("PUBLIC"===r)[e,s]=this.readIdentifierVal(t,e,"publicIdentifier"),'"'!==t[e=V(t,e)]&&"'"!==t[e]||([e,o]=this.readIdentifierVal(t,e,"systemIdentifier"));else if("SYSTEM"===r&&([e,o]=this.readIdentifierVal(t,e,"systemIdentifier"),!this.suppressValidationErr&&!o))throw new Error("Missing mandatory system identifier for SYSTEM notation");return{notationName:n,publicIdentifier:s,systemIdentifier:o,index:--e}}readIdentifierVal(t,e,i){let n="";const r=t[e];if('"'!==r&&"'"!==r)throw new Error(`Expected quoted string, found "${r}"`);const s=++e;for(;e<t.length&&t[e]!==r;)e++;if(n=t.substring(s,e),t[e]!==r)throw new Error(`Unterminated ${i} value`);return[++e,n]}readElementExp(t,e){const i=e=V(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);if(!this.suppressValidationErr&&!R(n,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid element name: "${n}"`);let r="";if("E"===t[e=V(t,e)]&&q(t,"MPTY",e))e+=4;else if("A"===t[e]&&q(t,"NY",e))e+=2;else if("("===t[e]){const i=++e;for(;e<t.length&&")"!==t[e];)e++;if(r=t.substring(i,e),")"!==t[e])throw new Error("Unterminated content model")}else if(!this.suppressValidationErr)throw new Error(`Invalid Element Expression, found "${t[e]}"`);return{elementName:n,contentModel:r.trim(),index:e}}readAttlistExp(t,e){let i=e=V(t,e);for(;e<t.length&&!/\s/.test(t[e]);)e++;let n=t.substring(i,e);for(F(n,{xmlVersion:this.xmlVersion}),i=e=V(t,e);e<t.length&&!/\s/.test(t[e]);)e++;let r=t.substring(i,e);if(!F(r,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid attribute name: "${r}"`);e=V(t,e);let s="";if("NOTATION"===t.substring(e,e+8).toUpperCase()){if(s="NOTATION","("!==t[e=V(t,e+=8)])throw new Error(`Expected '(', found "${t[e]}"`);e++;let i=[];for(;e<t.length&&")"!==t[e];){const n=e;for(;e<t.length&&"|"!==t[e]&&")"!==t[e];)e++;let r=t.substring(n,e);if(r=r.trim(),!F(r,{xmlVersion:this.xmlVersion}))throw new Error(`Invalid notation name: "${r}"`);i.push(r),"|"===t[e]&&(e++,e=V(t,e))}if(")"!==t[e])throw new Error("Unterminated list of notations");e++,s+=" ("+i.join("|")+")"}else{const i=e;for(;e<t.length&&!/\s/.test(t[e]);)e++;s+=t.substring(i,e);const n=["CDATA","ID","IDREF","IDREFS","ENTITY","ENTITIES","NMTOKEN","NMTOKENS"];if(!this.suppressValidationErr&&!n.includes(s.toUpperCase()))throw new Error(`Invalid attribute type: "${s}"`)}e=V(t,e);let o="";return"#REQUIRED"===t.substring(e,e+8).toUpperCase()?(o="#REQUIRED",e+=8):"#IMPLIED"===t.substring(e,e+7).toUpperCase()?(o="#IMPLIED",e+=7):[e,o]=this.readIdentifierVal(t,e,"ATTLIST"),{elementName:n,attributeName:r,attributeType:s,defaultValue:o,index:e}}}const V=(t,e)=>{for(;e<t.length&&/\s/.test(t[e]);)e++;return e};function q(t,e,i){for(let n=0;n<e.length;n++)if(e[n]!==t[i+n+1])return!1;return!0}function F(t,e){if(R(t,{xmlVersion:e}))return t;throw new Error(`Invalid entity name ${t}`)}const U=[48,1632,1776,2406,2534,2662,2790,2918,3046,3174,3302,3430,3558,3664,3792,3872,4160,4240,6112,6160,6470,6608,6784,6800,6992,7088,7232,7248,65296,120782,120792,120802,120812,120822,66720,68912,69734,69872,69942,70096,70384,70736,70864,71248,71360,71472,71904,72016,72688,72784,73040,73120,73552,92768,92864,93008,123200,123632,124144,125264,130032],B=new Map,G=1632,X=new Uint8Array(63904).fill(255);for(const t of U)for(let e=0;e<10;e++){const i=t+e;i<=65535?X[i-G]=e:B.set(i,e)}const W=new Set([8722,65293,65123]),z=/^[-+]?0x[a-fA-F0-9]+$/,Y=/^0b[01]+$/,H=/^0o[0-7]+$/,Q=/^([\-\+])?(0*)([0-9]*(\.[0-9]*)?)$/,J={hex:!0,binary:!1,octal:!1,leadingZeros:!0,decimalPoint:".",eNotation:!0,infinity:"original",unicode:!1};function Z(t,e={}){if(e=Object.assign({},J,e),!t||"string"!=typeof t)return t;let i=t.trim();if(0===i.length)return t;if(void 0!==e.skipLike&&e.skipLike.test(i))return t;if("0"===i)return 0;if(e.unicode&&(i=function(t){if("string"!=typeof t)return t;const e=t.length;if(0===e)return t;let i=-1;for(let n=0;n<e;n++){const r=t.charCodeAt(n);if(!(r>=48&&r<=57||45===r))if(r<G){if(W.has(r)){i=n;break}}else if(r>=55296&&r<=56319){if(n+1<e){const e=t.charCodeAt(n+1);if(e>=56320&&e<=57343){const t=65536+(r-55296<<10)+(e-56320);if(B.has(t)){i=n;break}}}}else if(255!==X[r-G]||W.has(r)){i=n;break}}if(-1===i)return t;const n=[];i>0&&n.push(t.slice(0,i));for(let r=i;r<e;r++){const i=t.charCodeAt(r);if(i>=48&&i<=57||45===i){n.push(t[r]);continue}if(i<G){n.push(W.has(i)?"-":t[r]);continue}if(i>=55296&&i<=56319){if(r+1<e){const e=t.charCodeAt(r+1);if(e>=56320&&e<=57343){const t=65536+(i-55296<<10)+(e-56320),s=B.get(t);if(void 0!==s){n.push(String.fromCharCode(s+48)),r++;continue}}}n.push(t[r]);continue}if(W.has(i)){n.push("-");continue}const s=X[i-G];n.push(255!==s?String.fromCharCode(s+48):t[r])}return n.join("")}(i),"0"===i))return 0;if(e.hex&&z.test(i))return tt(i,16);if(e.binary&&Y.test(i))return tt(i,2);if(e.octal&&H.test(i))return tt(i,8);if(isFinite(i)){if(i.includes("e")||i.includes("E"))return function(t,e,i){if(!i.eNotation)return t;const n=e.match(K);if(n){let r=n[1]||"";const s=-1===n[3].indexOf("e")?"E":"e",o=n[2],a=r?t[o.length+1]===s:t[o.length]===s;return o.length>1&&a?t:(1!==o.length||!n[3].startsWith(`.${s}`)&&n[3][0]!==s)&&o.length>0?i.leadingZeros&&!a?(e=(n[1]||"")+n[3],Number(e)):t:Number(e)}return t}(t,i,e);{const n=Q.exec(i);if(n){const r=n[1]||"",s=n[2];let o=function(t){if(t&&-1!==t.indexOf(".")){let e=t.length;for(;e>0&&48===t.charCodeAt(e-1);)e--;return"."===(t=t.slice(0,e))?t="0":"."===t[0]?t="0"+t:"."===t[t.length-1]&&(t=t.substring(0,t.length-1)),t}return t}(n[3]);const a=r?"."===t[s.length+1]:"."===t[s.length];if(!e.leadingZeros&&(s.length>1||1===s.length&&!a))return t;{const n=Number(i),a=String(n);if(0===n)return n;if(-1!==a.search(/[eE]/))return e.eNotation?n:t;if(-1!==i.indexOf("."))return"0"===a||a===o||a===`${r}${o}`?n:t;let l=s?o:i;return s?l===a||r+l===a?n:t:l===a||l===r+a?n:t}}return t}}return function(t,e,i){const n=e===1/0;switch(i.infinity.toLowerCase()){case"null":return null;case"infinity":return e;case"string":return n?"Infinity":"-Infinity";default:return t}}(t,Number(i),e)}const K=/^([-+])?(0*)(\d*(\.\d*)?[eE][-\+]?\d+)$/;function tt(t,e){const i=t.trim();if(2!==e&&8!==e||(t=i.substring(2)),parseInt)return parseInt(t,e);if(Number.parseInt)return Number.parseInt(t,e);if(window&&window.parseInt)return window.parseInt(t,e);throw new Error("parseInt, Number.parseInt, window.parseInt are not supported")}class et{constructor(t){this._matcher=t}get separator(){return this._matcher.separator}getCurrentTag(){const t=this._matcher.path;return t.length>0?t[t.length-1].tag:void 0}getCurrentNamespace(){const t=this._matcher.path;return t.length>0?t[t.length-1].namespace:void 0}getAttrValue(t){const e=this._matcher.path;if(0!==e.length)return e[e.length-1].values?.[t]}hasAttr(t){const e=this._matcher.path;if(0===e.length)return!1;const i=e[e.length-1];return void 0!==i.values&&t in i.values}getAnyParentAttr(t){return this._matcher.getAnyParentAttr(t)}hasAnyParentAttr(t){return this._matcher.hasAnyParentAttr(t)}getPosition(){const t=this._matcher.path;return 0===t.length?-1:t[t.length-1].position??0}getCounter(){const t=this._matcher.path;return 0===t.length?-1:t[t.length-1].counter??0}getIndex(){return this.getPosition()}getDepth(){return this._matcher.path.length}toString(t,e=!0){return this._matcher.toString(t,e)}toArray(){return this._matcher.path.map(t=>t.tag)}matches(t){return this._matcher.matches(t)}matchesAny(t){return t.matchesAny(this._matcher)}}class it{constructor(t={}){this.separator=t.separator||".",this.path=[],this.siblingStacks=[],this._pathStringCache=null,this._view=new et(this),this._keptAttrs=[]}push(t,e=null,i=null,n=null){this._pathStringCache=null,this.path.length>0&&(this.path[this.path.length-1].values=void 0);const r=this.path.length;let s=this.siblingStacks[r];s||(s={counts:new Map,total:0},this.siblingStacks[r]=s);const o=i?`${i}:${t}`:t,a=s.counts.get(o)||0,l=s.total;s.counts.set(o,a+1),s.total++;const p={tag:t,position:l,counter:a};null!=i&&(p.namespace=i),null!=e&&(p.values=e),this.path.push(p);const c=this.path.length,h=null!==n?n.keep:null;if(null!=h&&h.length>0&&e)for(let t=0;t<h.length;t++){const i=h[t];void 0!==e[i]&&this._keptAttrs.push({depth:c,name:i,value:e[i]})}}pop(){if(0===this.path.length)return;this._pathStringCache=null;const t=this.path.pop();this.siblingStacks.length>this.path.length+1&&(this.siblingStacks.length=this.path.length+1);const e=this.path.length+1;for(;this._keptAttrs.length>0&&this._keptAttrs[this._keptAttrs.length-1].depth>=e;)this._keptAttrs.pop();return t}updateCurrent(t){if(this.path.length>0){const e=this.path[this.path.length-1];null!=t&&(e.values=t)}}getCurrentTag(){return this.path.length>0?this.path[this.path.length-1].tag:void 0}getCurrentNamespace(){return this.path.length>0?this.path[this.path.length-1].namespace:void 0}getAttrValue(t){if(0!==this.path.length)return this.path[this.path.length-1].values?.[t]}hasAttr(t){if(0===this.path.length)return!1;const e=this.path[this.path.length-1];return void 0!==e.values&&t in e.values}getAnyParentAttr(t){const e=this._keptAttrs;for(let i=e.length-1;i>=0;i--)if(e[i].name===t)return e[i].value}hasAnyParentAttr(t){const e=this._keptAttrs;for(let i=e.length-1;i>=0;i--)if(e[i].name===t)return!0;return!1}getPosition(){return 0===this.path.length?-1:this.path[this.path.length-1].position??0}getCounter(){return 0===this.path.length?-1:this.path[this.path.length-1].counter??0}getIndex(){return this.getPosition()}getDepth(){return this.path.length}toString(t,e=!0){const i=t||this.separator;if(i===this.separator&&!0===e){if(null!==this._pathStringCache)return this._pathStringCache;const t=this.path.map(t=>t.namespace?`${t.namespace}:${t.tag}`:t.tag).join(i);return this._pathStringCache=t,t}return this.path.map(t=>e&&t.namespace?`${t.namespace}:${t.tag}`:t.tag).join(i)}toArray(){return this.path.map(t=>t.tag)}reset(){this._pathStringCache=null,this.path=[],this.siblingStacks=[],this._keptAttrs=[]}matches(t){const e=t.segments;return 0!==e.length&&(t.hasDeepWildcard()?this._matchWithDeepWildcard(e):this._matchSimple(e))}_matchSimple(t){if(this.path.length!==t.length)return!1;for(let e=0;e<t.length;e++)if(!this._matchSegment(t[e],this.path[e],e===this.path.length-1))return!1;return!0}_matchWithDeepWildcard(t){let e=this.path.length-1,i=t.length-1;for(;i>=0&&e>=0;){const n=t[i];if("deep-wildcard"===n.type){if(i--,i<0)return!0;const n=t[i];let r=!1;for(let t=e;t>=0;t--)if(this._matchSegment(n,this.path[t],t===this.path.length-1)){e=t-1,i--,r=!0;break}if(!r)return!1}else{if(!this._matchSegment(n,this.path[e],e===this.path.length-1))return!1;e--,i--}}return i<0}_matchSegment(t,e,i){if("*"!==t.tag&&t.tag!==e.tag)return!1;if(void 0!==t.namespace&&"*"!==t.namespace&&t.namespace!==e.namespace)return!1;if(void 0!==t.attrName){if(!i)return!1;if(!e.values||!(t.attrName in e.values))return!1;if(void 0!==t.attrValue&&String(e.values[t.attrName])!==String(t.attrValue))return!1}if(void 0!==t.position){if(!i)return!1;const n=e.counter??0;if("first"===t.position&&0!==n)return!1;if("odd"===t.position&&n%2!=1)return!1;if("even"===t.position&&n%2!=0)return!1;if("nth"===t.position&&n!==t.positionValue)return!1}return!0}matchesAny(t){return t.matchesAny(this)}snapshot(){return{path:this.path.map(t=>({...t})),siblingStacks:this.siblingStacks.map(t=>t?{counts:new Map(t.counts),total:t.total}:t),keptAttrs:this._keptAttrs.map(t=>({...t}))}}restore(t){this._pathStringCache=null,this.path=t.path.map(t=>({...t})),this.siblingStacks=t.siblingStacks.map(t=>t?{counts:new Map(t.counts),total:t.total}:t),this._keptAttrs=(t.keptAttrs||[]).map(t=>({...t}))}readOnly(){return this._view}}class nt{constructor(t,e={},i){this.pattern=t,this.separator=e.separator||".",this.segments=this._parse(t),this.data=i,this._hasDeepWildcard=this.segments.some(t=>"deep-wildcard"===t.type),this._hasAttributeCondition=this.segments.some(t=>void 0!==t.attrName),this._hasPositionSelector=this.segments.some(t=>void 0!==t.position)}_parse(t){const e=[];let i=0,n="";for(;i<t.length;)t[i]===this.separator?i+1<t.length&&t[i+1]===this.separator?(n.trim()&&(e.push(this._parseSegment(n.trim())),n=""),e.push({type:"deep-wildcard"}),i+=2):(n.trim()&&e.push(this._parseSegment(n.trim())),n="",i++):(n+=t[i],i++);return n.trim()&&e.push(this._parseSegment(n.trim())),e}_parseSegment(t){const e={type:"tag"};let i=null,n=t;const r=t.match(/^([^\[]+)(\[[^\]]*\])(.*)$/);if(r&&(n=r[1]+r[3],r[2])){const t=r[2].slice(1,-1);t&&(i=t)}let s,o,a=n;if(n.includes("::")){const e=n.indexOf("::");if(s=n.substring(0,e).trim(),a=n.substring(e+2).trim(),!s)throw new Error(`Invalid namespace in pattern: ${t}`)}let l=null;if(a.includes(":")){const t=a.lastIndexOf(":"),e=a.substring(0,t).trim(),i=a.substring(t+1).trim();["first","last","odd","even"].includes(i)||/^nth\(\d+\)$/.test(i)?(o=e,l=i):o=a}else o=a;if(!o)throw new Error(`Invalid segment pattern: ${t}`);if(e.tag=o,s&&(e.namespace=s),i)if(i.includes("=")){const t=i.indexOf("=");e.attrName=i.substring(0,t).trim(),e.attrValue=i.substring(t+1).trim()}else e.attrName=i.trim();if(l){const t=l.match(/^nth\((\d+)\)$/);t?(e.position="nth",e.positionValue=parseInt(t[1],10)):e.position=l}return e}get length(){return this.segments.length}hasDeepWildcard(){return this._hasDeepWildcard}hasAttributeCondition(){return this._hasAttributeCondition}hasPositionSelector(){return this._hasPositionSelector}toString(){return this.pattern}}class rt{constructor(){this._byDepthAndTag=new Map,this._wildcardByDepth=new Map,this._deepWildcards=[],this._deepByTerminalTag=new Map,this._patterns=new Set,this._sealed=!1}add(t){if(this._sealed)throw new TypeError("ExpressionSet is sealed. Create a new ExpressionSet to add more expressions.");if(this._patterns.has(t.pattern))return this;if(this._patterns.add(t.pattern),t.hasDeepWildcard()){const e=t.segments[t.segments.length-1];if(e&&"deep-wildcard"!==e.type&&"*"!==e.tag){const i=e.tag;this._deepByTerminalTag.has(i)||this._deepByTerminalTag.set(i,[]),this._deepByTerminalTag.get(i).push(t)}else this._deepWildcards.push(t);return this}const e=t.length,i=t.segments[t.segments.length-1],n=i?.tag;if(n&&"*"!==n){const i=`${e}:${n}`;this._byDepthAndTag.has(i)||this._byDepthAndTag.set(i,[]),this._byDepthAndTag.get(i).push(t)}else this._wildcardByDepth.has(e)||this._wildcardByDepth.set(e,[]),this._wildcardByDepth.get(e).push(t);return this}addAll(t){for(const e of t)this.add(e);return this}has(t){return this._patterns.has(t.pattern)}get size(){return this._patterns.size}seal(){return this._sealed=!0,this}get isSealed(){return this._sealed}matchesAny(t){return null!==this.findMatch(t)}findMatch(t){const e=t.getDepth(),i=t.getCurrentTag(),n=`${e}:${i}`,r=this._byDepthAndTag.get(n);if(r)for(let e=0;e<r.length;e++)if(t.matches(r[e]))return r[e];const s=this._wildcardByDepth.get(e);if(s)for(let e=0;e<s.length;e++)if(t.matches(s[e]))return s[e];const o=this._deepByTerminalTag.get(i);if(o)for(let e=0;e<o.length;e++)if(t.matches(o[e]))return o[e];for(let e=0;e<this._deepWildcards.length;e++)if(t.matches(this._deepWildcards[e]))return this._deepWildcards[e];return null}}const st={cent:"¢",pound:"£",curren:"¤",yen:"¥",euro:"€",dollar:"$",fnof:"ƒ",inr:"₹",af:"؋",birr:"ብር",peso:"₱",rub:"₽",won:"₩",yuan:"¥",cedil:"¸"},ot={amp:"&",apos:"'",gt:">",lt:"<",quot:'"'},at={nbsp:" ",copy:"©",reg:"®",trade:"™",mdash:"—",ndash:"–",hellip:"…",laquo:"«",raquo:"»",lsquo:"‘",rsquo:"’",ldquo:"“",rdquo:"”",bull:"•",para:"¶",sect:"§",deg:"°",frac12:"½",frac14:"¼",frac34:"¾"},lt=Object.freeze({ALLOW:"allow",BLOCK:"block",THROW:"throw"}),pt=new Set("!?\\\\/[]$%{}^&*()<>|+");function ct(t){if("#"===t[0])throw new Error(`[EntityReplacer] Invalid character '#' in entity name: "${t}"`);for(const e of t)if(pt.has(e))throw new Error(`[EntityReplacer] Invalid character '${e}' in entity name: "${t}"`);return t}function ht(...t){const e=Object.create(null);for(const i of t)if(i)for(const t of Object.keys(i)){const n=i[t];if("string"==typeof n)e[t]=n;else if(n&&"object"==typeof n&&void 0!==n.val){const i=n.val;"string"==typeof i&&(e[t]=i)}}return e}const dt="external",ut="base",ft="all",gt=Object.freeze({allow:0,leave:1,remove:2,throw:3}),mt=new Set([9,10,13]);class xt{constructor(t={}){var e;this._limit=t.limit||{},this._maxTotalExpansions=this._limit.maxTotalExpansions||0,this._maxExpandedLength=this._limit.maxExpandedLength||0,this._postCheck="function"==typeof t.postCheck?t.postCheck:t=>t,this._limitTiers=(e=this._limit.applyLimitsTo??dt)&&e!==dt?e===ft?new Set([ft]):e===ut?new Set([ut]):Array.isArray(e)?new Set(e):new Set([dt]):new Set([dt]),this._numericAllowed=t.numericAllowed??!0,this._baseMap=ht(ot,t.namedEntities||null),this._externalMap=Object.create(null),this._inputMap=Object.create(null),this._totalExpansions=0,this._expandedLength=0,this._removeSet=new Set(t.remove&&Array.isArray(t.remove)?t.remove:[]),this._leaveSet=new Set(t.leave&&Array.isArray(t.leave)?t.leave:[]);const i=function(t){if(!t)return{xmlVersion:1,onLevel:gt.allow,nullLevel:gt.remove};const e=1.1===t.xmlVersion?1.1:1,i=gt[t.onNCR]??gt.allow,n=gt[t.nullNCR]??gt.remove;return{xmlVersion:e,onLevel:i,nullLevel:Math.max(n,gt.remove)}}(t.ncr);this._ncrXmlVersion=i.xmlVersion,this._ncrOnLevel=i.onLevel,this._ncrNullLevel=i.nullLevel,this._onExternalEntity="function"==typeof t.onExternalEntity?t.onExternalEntity:null,this._onInputEntity="function"==typeof t.onInputEntity?t.onInputEntity:null}_applyRegistrationHook(t,e,i,n){if(!t)return!0;const r=t(e,i);if(r===lt.BLOCK)return!1;if(r===lt.THROW)throw new Error(`[EntityDecoder] Registration of ${n} entity "&${e};" was rejected by hook`);return!0}setExternalEntities(t){if(t)for(const e of Object.keys(t))ct(e);if(!this._onExternalEntity)return void(this._externalMap=ht(t));const e=ht(t),i=Object.create(null);for(const[t,n]of Object.entries(e))this._applyRegistrationHook(this._onExternalEntity,t,n,"external")&&(i[t]=n);this._externalMap=i}addExternalEntity(t,e){ct(t),"string"==typeof e&&-1===e.indexOf("&")&&this._applyRegistrationHook(this._onExternalEntity,t,e,"external")&&(this._externalMap[t]=e)}addInputEntities(t){if(this._totalExpansions=0,this._expandedLength=0,!this._onInputEntity)return void(this._inputMap=ht(t));const e=ht(t),i=Object.create(null);for(const[t,n]of Object.entries(e))this._applyRegistrationHook(this._onInputEntity,t,n,"input")&&(i[t]=n);this._inputMap=i}reset(){return this._inputMap=Object.create(null),this._totalExpansions=0,this._expandedLength=0,this}setXmlVersion(t){this._ncrXmlVersion=1.1===t?1.1:1}decode(t){if("string"!=typeof t||0===t.length)return t;if(-1===t.indexOf("&"))return t;const e=t,i=[],n=t.length;let r=0,s=0;const o=this._maxTotalExpansions>0,a=this._maxExpandedLength>0,l=o||a;for(;s<n;){if(38!==t.charCodeAt(s)){s++;continue}let e=s+1;for(;e<n&&59!==t.charCodeAt(e)&&e-s<=32;)e++;if(e>=n||59!==t.charCodeAt(e)){s++;continue}const p=t.slice(s+1,e);if(0===p.length){s++;continue}let c,h;if(this._removeSet.has(p))c="",void 0===h&&(h=dt);else{if(this._leaveSet.has(p)){s++;continue}if(35===p.charCodeAt(0)){const t=this._resolveNCR(p);if(void 0===t){s++;continue}c=t,h=ut}else{const t=this._resolveName(p);c=t?.value,h=t?.tier}}if(void 0!==c){if(s>r&&i.push(t.slice(r,s)),i.push(c),r=e+1,s=r,l&&this._tierCounts(h)){if(o&&(this._totalExpansions++,this._totalExpansions>this._maxTotalExpansions))throw new Error(`[EntityReplacer] Entity expansion count limit exceeded: ${this._totalExpansions} > ${this._maxTotalExpansions}`);if(a){const t=c.length-(p.length+2);if(t>0&&(this._expandedLength+=t,this._expandedLength>this._maxExpandedLength))throw new Error(`[EntityReplacer] Expanded content length limit exceeded: ${this._expandedLength} > ${this._maxExpandedLength}`)}}}else s++}r<n&&i.push(t.slice(r));const p=0===i.length?t:i.join("");return this._postCheck(p,e)}_tierCounts(t){return!!this._limitTiers.has(ft)||this._limitTiers.has(t)}_resolveName(t){return t in this._inputMap?{value:this._inputMap[t],tier:dt}:t in this._externalMap?{value:this._externalMap[t],tier:dt}:t in this._baseMap?{value:this._baseMap[t],tier:ut}:void 0}_classifyNCR(t){return 0===t?this._ncrNullLevel:t>=55296&&t<=57343||1===this._ncrXmlVersion&&t>=1&&t<=31&&!mt.has(t)?gt.remove:-1}_applyNCRAction(t,e,i){switch(t){case gt.allow:return String.fromCodePoint(i);case gt.remove:return"";case gt.leave:return;case gt.throw:throw new Error(`[EntityDecoder] Prohibited numeric character reference &${e}; (U+${i.toString(16).toUpperCase().padStart(4,"0")})`);default:return String.fromCodePoint(i)}}_resolveNCR(t){const e=t.charCodeAt(1);let i;if(i=120===e||88===e?parseInt(t.slice(2),16):parseInt(t.slice(1),10),Number.isNaN(i)||i<0||i>1114111)return;const n=this._classifyNCR(i);if(!this._numericAllowed&&n<gt.remove)return;const r=-1===n?this._ncrOnLevel:Math.max(this._ncrOnLevel,n);return this._applyNCRAction(r,t,i)}}const bt=[{id:"sql-block-comment-open",description:"SQL block comment open: /* ... */ — unusual in legitimate user text",pattern:/\/\*/},{id:"sql-union-select",description:"UNION SELECT — most common SQL injection aggregation attack",pattern:/\bUNION\s{1,20}(?:ALL\s{1,20})?SELECT\b/i},{id:"sql-drop-table",description:"DROP TABLE — destructive DDL injection",pattern:/\bDROP\s{1,20}TABLE\b/i},{id:"sql-drop-database",description:"DROP DATABASE — destructive DDL injection",pattern:/\bDROP\s{1,20}DATABASE\b/i},{id:"sql-insert-into",description:"INSERT INTO — data injection",pattern:/\bINSERT\s{1,20}INTO\b/i},{id:"sql-delete-from",description:"DELETE FROM — data deletion injection",pattern:/\bDELETE\s{1,20}FROM\b/i},{id:"sql-update-set",description:"UPDATE ... SET — data modification injection",pattern:/\bUPDATE\b[\s\S]{1,60}\bSET\b/i},{id:"sql-exec-xp",description:"EXEC xp_ — MSSQL extended stored procedure execution",pattern:/\bEXEC(?:UTE)?\s{1,20}xp_/i},{id:"sql-tautology-string",description:'Classic string tautology: \' OR \'1\'=\'1 or " OR "1"="1"',pattern:/'\s{0,10}OR\s{0,10}'[^']{0,20}'\s*=\s*'[^']{0,20}/i},{id:"sql-tautology-numeric",description:"Numeric tautology: OR 1=1",pattern:/\bOR\s{1,10}1\s*=\s*1\b/i},{id:"sql-always-true-zero",description:"Numeric tautology: OR 0=0",pattern:/\bOR\s{1,10}0\s*=\s*0\b/i},{id:"sql-sleep-benchmark",description:"Time-based blind injection: SLEEP() or BENCHMARK()",pattern:/\b(?:SLEEP|BENCHMARK)\s*\(/i},{id:"sql-waitfor-delay",description:"MSSQL time-based blind injection: WAITFOR DELAY",pattern:/\bWAITFOR\s{1,20}DELAY\b/i},{id:"sql-char-function",description:"CHAR() function — used to obfuscate injected strings",pattern:/\bCHAR\s*\(\s*\d{1,3}/i},{id:"sql-information-schema",description:"INFORMATION_SCHEMA — reconnaissance query for table/column enumeration",pattern:/\bINFORMATION_SCHEMA\b/i}],yt=[...bt,{id:"sql-line-comment",description:"SQL line comment: -- followed by whitespace or end of string",pattern:/--(?:\s|$)/},{id:"sql-stacked-query",description:"Stacked queries: semicolon immediately followed by a SQL keyword",pattern:/;\s{0,10}(?:SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC)\b/i},{id:"sql-hex-encoding",description:"Hex-encoded string injection: 0x41414141 style (MySQL)",pattern:/\b0x[0-9a-f]{4,}/i}],Nt=[{id:"html-script-open",description:"<script opening tag",pattern:/<script[\s>/]/i},{id:"html-script-close",description:"<\/script closing tag",pattern:/<\/script[\s>]/i},{id:"html-javascript-protocol",description:"javascript: URI scheme (with optional whitespace/encoding)",pattern:/j[\t\n\r ]*a[\t\n\r ]*v[\t\n\r ]*a[\t\n\r ]*s[\t\n\r ]*c[\t\n\r ]*r[\t\n\r ]*i[\t\n\r ]*p[\t\n\r ]*t[\t\n\r ]*:/i},{id:"html-vbscript-protocol",description:"vbscript: URI scheme",pattern:/vbscript[\t\n\r ]*:/i},{id:"html-data-html",description:"data:text/html URI — can execute scripts in browsers",pattern:/data[\t\n\r ]*:[\t\n\r ]*text\/html/i},{id:"html-data-xhtml",description:"data:application/xhtml+xml URI",pattern:/data[\t\n\r ]*:[\t\n\r ]*application\/xhtml/i},{id:"html-data-svg",description:"data:image/svg+xml URI — can execute scripts",pattern:/data[\t\n\r ]*:[\t\n\r ]*image\/svg\+xml/i},{id:"html-inline-event-handler",description:"Inline event handler attributes: onclick=, onerror=, onload=, etc.",pattern:/\bon\w{1,30}\s*=/i},{id:"html-entity-obfuscated-script",description:"HTML-entity-encoded <script (e.g. &#x3C;script or &lt;script)",pattern:/(?:&#x0*3[Cc];?|&#0*60;?|&lt;)\s*script/i},{id:"html-entity-obfuscated-javascript",description:'HTML-entity-encoded javascript: (partial — catches common &#106; or &#x6a; for "j")',pattern:/(?:&#x0*6[Aa];?|&#0*106;?)\s*(?:&#x0*61;?|a)[\s\S]{0,80}script\s*:/i},{id:"html-style-expression",description:"CSS expression() — IE-era code execution in style attributes",pattern:/style[\s\S]{0,20}expression\s*\(/i},{id:"html-object-embed",description:"<object or <embed tags that can load active content",pattern:/<(?:object|embed)[\s>/]/i},{id:"html-base-tag",description:"<base href= — can hijack all relative URLs on a page",pattern:/<base[\s>]/i},{id:"html-meta-refresh",description:'<meta http-equiv="refresh" — can redirect users',pattern:/<meta[\s\S]{0,40}http-equiv[\s\S]{0,20}refresh/i},{id:"html-srcdoc",description:"srcdoc= attribute on iframes — embeds HTML that can run scripts",pattern:/srcdoc\s*=/i},{id:"html-iframe",description:"<iframe tag",pattern:/<iframe[\s>/]/i},{id:"html-form",description:"<form tag — can be used for phishing / credential harvesting injection",pattern:/<form[\s>/]/i}],Et=[{id:"xml-cdata-injection",description:"CDATA section injection: <![CDATA[ breaks out of text node context",pattern:/<!\[CDATA\[/i},{id:"xml-cdata-close",description:"CDATA close sequence: ]]> can terminate an enclosing CDATA section",pattern:/\]\]>/},{id:"xml-processing-instruction",description:"XML processing instruction: <?xml-stylesheet or <?php etc.",pattern:/<\?(?:xml[\- ]|php|asp)/i},{id:"xml-doctype-injection",description:"DOCTYPE declaration embedded in content — can define entities",pattern:/<!DOCTYPE(?:[\s[]|$)/i},{id:"xml-entity-system",description:"SYSTEM keyword — used in external entity declarations (XXE)",pattern:/\bSYSTEM\s+["']/i},{id:"xml-entity-public",description:"PUBLIC keyword — used in external entity declarations (XXE)",pattern:/\bPUBLIC\s+["']/i},{id:"xml-entity-declaration",description:"<!ENTITY declaration — defines entities, potential XXE or entity expansion",pattern:/<!ENTITY[\s%]/i},{id:"xml-billion-laughs",description:"Entity reference chaining / billion laughs: repeated &eX; style references",pattern:/(?:&\w{1,20};){3,}/},{id:"xml-namespace-confusion",description:"xmlns: attribute injection — can redefine namespaces to confuse parsers",pattern:/\bxmlns\s*(?::\w{1,40})?\s*=/i},{id:"xml-comment-injection",description:"\x3c!-- comment injection — can hide content from some parsers",pattern:/<!--/},{id:"xml-comment-close",description:"--\x3e closes an enclosing XML comment",pattern:/-->/},{id:"xml-pi-close",description:"?> closes an enclosing processing instruction",pattern:/\?>/}],wt=[{id:"svg-script-element",description:"<script element inside SVG executes JavaScript",pattern:/<script[\s>/]/i},{id:"svg-xlink-href-javascript",description:"xlink:href with javascript: — classic SVG XSS via <a> or <use>",pattern:/xlink\s*:\s*href\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-href-javascript",description:"href= with javascript: in SVG context (<a>, <animate>, etc.)",pattern:/href\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-foreignobject",description:"<foreignObject embeds HTML inside SVG — can execute scripts",pattern:/<foreignObject[\s>/]/i},{id:"svg-use-external",description:"<use xlink:href or href pointing to external resource (non-fragment URL)",pattern:/<use[\s\S]{0,60}(?:xlink\s*:\s*)?href\s*=\s*(?:["'][^#]|[^"'#\s>])/i},{id:"svg-animate-href",description:'<animate attributeName="href" — can dynamically change href to javascript:',pattern:/<animate[\s\S]{0,80}attributeName\s*=\s*["'][\s]*href["']/i},{id:"svg-animate-xlinkhref",description:'<animate attributeName="xlink:href"',pattern:/<animate[\s\S]{0,80}attributeName\s*=\s*["'][\s]*xlink\s*:\s*href["']/i},{id:"svg-set-javascript",description:'<set to="javascript:..." — sets an attribute to a javascript: URI',pattern:/<set[\s\S]{0,80}to\s*=\s*["']?\s*javascript\s*:/i},{id:"svg-event-handler",description:"SVG-specific event handler attributes: onload=, onerror=, onactivate=, etc.",pattern:/\bon(?:load|error|activate|begin|end|repeat|focus|blur|click|mouse\w{1,20}|key\w{1,20})\s*=/i},{id:"svg-handler-generic",description:"Generic on* handler catch-all for SVG attributes",pattern:/\bon\w{1,30}\s*=/i},{id:"svg-filter-feimage",description:"<feImage href= — filter primitive that can load external resources",pattern:/<feImage[\s\S]{0,80}(?:xlink\s*:\s*)?href\s*=/i},{id:"svg-image-external",description:"<image xlink:href with http/https or javascript protocol",pattern:/<image[\s\S]{0,80}(?:xlink\s*:\s*)?href\s*=\s*["']?\s*(?:https?|javascript)\s*:/i},{id:"svg-style-javascript",description:"style= attribute containing javascript: (e.g. background:url(javascript:...))",pattern:/style\s*=[\s\S]{0,60}javascript\s*:/i}],vt=[{id:"shell-path-traversal-unix",description:"Unix path traversal: ../  — climbing the directory tree",pattern:/\.\.\//},{id:"shell-path-traversal-windows",description:"Windows path traversal: ..\\ — climbing the directory tree",pattern:/\.\.\\/},{id:"shell-path-traversal-encoded",description:"URL-encoded path traversal: %2e%2e or %2f variants",pattern:/%2e%2e|%2f\.\.|\.\.%2f/i},{id:"shell-null-byte",description:"Null byte injection: \\x00 or %00 — truncates strings in C-backed functions",pattern:/\x00|%00/},{id:"shell-semicolon",description:"Semicolon command separator: cmd1; cmd2",pattern:/;/},{id:"shell-pipe",description:"Pipe operator: cmd1 | cmd2",pattern:/\|/},{id:"shell-and-operator",description:"AND operator: cmd1 && cmd2",pattern:/&&/},{id:"shell-or-operator",description:"OR operator: cmd1 || cmd2",pattern:/\|\|/},{id:"shell-backtick",description:"Backtick command substitution: `cmd`",pattern:/`/},{id:"shell-dollar-paren",description:"Dollar-paren command substitution: $(cmd)",pattern:/\$\(/},{id:"shell-dollar-brace",description:"Dollar-brace variable expansion: ${var} — can be abused for injection",pattern:/\$\{/},{id:"shell-redirect-out",description:"Output redirection: cmd > file or cmd >> file",pattern:/>{1,2}/},{id:"shell-redirect-in",description:"Input redirection: cmd < file",pattern:/</},{id:"shell-newline-injection",description:"Newline injection: \\n or \\r — can inject new shell commands",pattern:/[\n\r]/},{id:"shell-glob-star",description:"Glob expansion: * or ? — can expand to unintended files",pattern:/[/\\][*?]/},{id:"shell-absolute-root",description:"Absolute root path injection: string starting with / or \\ (Windows UNC)",pattern:/^(?:\/|\\\\)/},{id:"shell-windows-drive",description:"Windows drive letter path injection: C:\\ or D:/",pattern:/^[a-zA-Z]:[/\\]/},{id:"shell-curl-wget",description:"curl/wget with URL or flags — can exfiltrate data or download payloads",pattern:/\b(?:curl|wget)\s+(?:https?:\/\/|ftp:\/\/|-)/i}],St=[{id:"redos-nested-quantifier-plus",description:"Nested + quantifier inside a group with outer quantifier: (a+)+, (.+b)*, etc.",pattern:/\([^)]*\+[^)]*\)[+*]/},{id:"redos-nested-quantifier-star",description:"Nested * quantifier: (a*)* or (a*)+ — catastrophic backtracking",pattern:/\([^)]*\*[^)]*\)[*+]/},{id:"redos-nested-groups",description:"Doubly nested quantified groups: ((a+)+) — guaranteed catastrophic",pattern:/\(\([^)]{0,40}\)[+*]\)[+*]/},{id:"redos-alternation-overlap",description:"Overlapping alternation under quantifier: (a|a)+ — ambiguous NFA paths",pattern:/\(([^|()]{1,20})\|(?:\1)(?:\|[^|()]{1,20}){0,5}\)[+*?]{1,2}/},{id:"redos-star-plus-concat",description:"(x*x)+ pattern — triggers super-linear backtracking",pattern:/\([^)]{0,10}\*[^)]{0,10}\)[+*]/},{id:"redos-dot-star-greedy",description:"(.*){n,} or (.+){n,} — repeated greedy dot quantifiers",pattern:/\(\.[*+]\)\{?\d/},{id:"redos-large-repetition",description:"Very large fixed or range repetition count {1000,} or {1000,n} — denial of service via backtracking",pattern:/\{\d{4,}(?:,\d*)?\}/},{id:"redos-catastrophic-alternation",description:"Long alternation with many similar branches — polynomial backtracking risk",pattern:/\([^)]{0,200}(?:\|[^|)]{0,50}){9,}\)/}],At="[\"'\\s]*:",Tt=[{id:"nosql-where-operator",description:"$where — executes arbitrary JavaScript server-side in MongoDB",pattern:new RegExp(`\\$where${At}`,"i")},{id:"nosql-ne-operator",description:'$ne — "not equal" operator used to bypass equality checks',pattern:new RegExp(`\\$ne${At}`,"i")},{id:"nosql-gt-operator",description:'$gt — "greater than" used to bypass password/value checks',pattern:new RegExp(`\\$gte?${At}`,"i")},{id:"nosql-lt-operator",description:'$lt / $lte — "less than" bypass variants',pattern:new RegExp(`\\$lte?${At}`,"i")},{id:"nosql-regex-operator",description:"$regex — can be used to extract data character by character (blind injection)",pattern:new RegExp(`\\$regex${At}`,"i")},{id:"nosql-or-operator",description:"$or — logical OR; used to create always-true conditions",pattern:new RegExp(`\\$or${At}\\s*\\[`,"i")},{id:"nosql-and-operator",description:"$and — logical AND operator injection",pattern:new RegExp(`\\$and${At}\\s*\\[`,"i")},{id:"nosql-nor-operator",description:"$nor — logical NOR operator injection",pattern:new RegExp(`\\$nor${At}\\s*\\[`,"i")},{id:"nosql-exists-operator",description:"$exists — can enumerate fields to determine schema",pattern:new RegExp(`\\$exists${At}`,"i")},{id:"nosql-in-operator",description:"$in — matches any value in a list; can enumerate values",pattern:new RegExp(`\\$in${At}\\s*\\[`,"i")},{id:"nosql-expr-operator",description:"$expr — allows aggregation expressions in queries (MongoDB 3.6+)",pattern:new RegExp(`\\$expr${At}`,"i")},{id:"nosql-function-operator",description:"$function — executes arbitrary JavaScript in MongoDB 4.4+",pattern:new RegExp(`\\$function${At}`,"i")},{id:"nosql-accumulator-operator",description:"$accumulator — custom aggregation with arbitrary JS execution",pattern:new RegExp(`\\$accumulator${At}`,"i")},{id:"nosql-proto-pollution",description:"__proto__ — prototype pollution via object key injection",pattern:/__proto__/},{id:"nosql-constructor-prototype",description:"constructor.prototype — alternative prototype pollution vector (dot notation or JSON key)",pattern:/constructor[\s"':.,{\[]*prototype/i},{id:"nosql-proto-bracket",description:'["__proto__"] — bracket-notation prototype pollution',pattern:/\[["']__proto__["']\]/}],_t=[{id:"log-crlf-injection",description:"CRLF injection: literal \\r or \\n embeds fake log lines",pattern:/[\r\n]/},{id:"log-url-encoded-crlf",description:"URL-encoded CRLF: %0d, %0a, %0D, %0A — decoded by some log parsers",pattern:/%0[dDaA]/},{id:"log-unicode-newline",description:"Unicode newline variants: U+2028 (line separator), U+2029 (paragraph separator)",pattern:/[\u2028\u2029]/},{id:"log-log4shell-jndi",description:"Log4Shell: ${jndi:...} triggers remote code execution in Apache Log4j",pattern:/\$\{jndi\s*:/i},{id:"log-log4shell-obfuscated",description:"Obfuscated Log4Shell: ${::-j}... lookup-bypass prefix used to evade WAF detection",pattern:/\$\{::-/},{id:"log-log4j-lookup",description:"Log4j lookup syntax: ${env:...}, ${sys:...}, ${ctx:...} — data exfiltration",pattern:/\$\{(?:env|sys|ctx|main|map|sd|web|docker|k8s|spring)\s*:/i},{id:"log-ssti-double-brace",description:"SSTI double-brace: {{expression}} — Jinja2, Twig, Handlebars, etc.",pattern:/\{\{[\s\S]{0,80}\}\}/},{id:"log-ssti-hash-brace",description:"SSTI hash-brace: #{expression} — Thymeleaf, Velocity, Ruby ERB",pattern:/#\{[\s\S]{0,80}\}/},{id:"log-ssti-dollar-brace",description:"SSTI/EL injection: ${expression with operators or method calls} — JSP EL, Freemarker, SpEL",pattern:/\$\{[^}]*(?:\.|\(|\*|\+|\bclass\b|\bruntime\b|\bprocess\b|\bexec\b)[^}]{0,80}\}/i},{id:"log-ssti-percent-tag",description:"SSTI ERB/ASP tag: <%= expression %> — Ruby ERB, ASP",pattern:/<%=[\s\S]{0,80}%>/},{id:"log-null-byte",description:"Null byte: \\x00 or %00 — can truncate log entries in C-backed loggers",pattern:/\x00|%00/},{id:"log-ansi-escape",description:"ANSI escape sequence: ESC[ — can manipulate terminal output when logs are tailed",pattern:/\x1b\[/}];function Ct(t,e){const i=e.label??"CUSTOM";for(const n of e)if(n.pattern.test(t))return{context:i,id:n.id,description:n.description,pattern:n.pattern};return null}function $t(t,e){(function(t){if("string"!=typeof t)throw new TypeError("is-unsafe: first argument must be a string, got "+typeof t)})(t),function(t){if(!(t instanceof RegExp)){if(!Array.isArray(t))throw new TypeError("is-unsafe: second argument must be a PatternList (e.g. HTML), an array of PatternLists (e.g. [HTML, XML]), or a RegExp. Got: "+typeof t);if(0===t.length)throw new TypeError("is-unsafe: context must not be an empty array");if(Array.isArray(t[0]))for(const e of t)if(!Array.isArray(e)||0===e.length)throw new TypeError("is-unsafe: each context in the array must be a non-empty pattern array (PatternList)")}}(e);const{lists:i,regex:n}=function(t){return t instanceof RegExp?{lists:null,regex:t}:Array.isArray(t[0])?{lists:t,regex:null}:{lists:[t],regex:null}}(e);if(n)return n.test(t);for(const e of i)if(null!==Ct(t,e))return!0;return!1}function Pt(t,e){if(!t)return{};const i=e.attributesGroupName?t[e.attributesGroupName]:t;if(!i)return{};const n={};for(const t in i)t.startsWith(e.attributeNamePrefix)?n[t.substring(e.attributeNamePrefix.length)]=i[t]:n[t]=i[t];return n}function Ot(t){if(!t||"string"!=typeof t)return;const e=t.indexOf(":");if(-1!==e&&e>0){const i=t.substring(0,e);if("xmlns"!==i)return i}}Nt.label="HTML",Et.label="XML",wt.label="SVG",bt.label="SQL",yt.label="SQL-STRICT",vt.label="SHELL",St.label="REDOS",Tt.label="NOSQL",_t.label="LOG",Object.freeze({HTML:Nt,XML:Et,SVG:wt,SQL:bt,"SQL-STRICT":yt,SHELL:vt,REDOS:St,NOSQL:Tt,LOG:_t});class It{constructor(t,e){var i;this.options=t,this.currentNode=null,this.tagsNodeStack=[],this.parseXml=Rt,this.parseTextData=jt,this.resolveNameSpace=kt,this.buildAttributesMap=Dt,this.isItStopNode=Ft,this.replaceEntitiesValue=Vt,this.readStopNodeData=Xt,this.saveTextToParentTag=qt,this.addChild=Mt,this.ignoreAttributesFn="function"==typeof(i=this.options.ignoreAttributes)?i:Array.isArray(i)?t=>{for(const e of i){if("string"==typeof e&&t===e)return!0;if(e instanceof RegExp&&e.test(t))return!0}}:()=>!1,this.entityExpansionCount=0,this.currentExpandedLength=0,this.doctypefound=!1;let n={...ot};this.options.entityDecoder?this.entityDecoder=this.options.entityDecoder:("object"==typeof this.options.htmlEntities?n=this.options.htmlEntities:!0===this.options.htmlEntities&&(n={...at,...st}),this.entityDecoder=new xt({namedEntities:{...n,...e},numericAllowed:this.options.htmlEntities,limit:{maxTotalExpansions:this.options.processEntities.maxTotalExpansions,maxExpandedLength:this.options.processEntities.maxExpandedLength,applyLimitsTo:this.options.processEntities.appliesTo},onInputEntity:(t,e)=>$t(e,[Nt,Et])?lt.BLOCK:lt.ALLOW})),this.matcher=new it,this.readonlyMatcher=this.matcher.readOnly(),this.isCurrentNodeStopNode=!1,this.stopNodeExpressionsSet=new rt;const r=this.options.stopNodes;if(r&&r.length>0){for(let t=0;t<r.length;t++){const e=r[t];"string"==typeof e?this.stopNodeExpressionsSet.add(new nt(e)):e instanceof nt&&this.stopNodeExpressionsSet.add(e)}this.stopNodeExpressionsSet.seal()}}}function jt(t,e,i,n,r,s,o){const a=this.options;if(void 0!==t&&(a.trimValues&&!n&&(t=t.trim()),t.length>0)){o||(t=this.replaceEntitiesValue(t,e,i));const n=a.jPath?i.toString():i,l=a.tagValueProcessor(e,t,n,r,s);return null==l?t:typeof l!=typeof t||l!==t?l:a.trimValues||t.trim()===t?Wt(t,a.parseTagValue,a.numberParseOptions):t}}function kt(t){if(this.options.removeNSPrefix){const e=t.split(":"),i="/"===t.charAt(0)?"/":"";if("xmlns"===e[0])return"";2===e.length&&(t=i+e[1])}return t}const Lt=new RegExp("([^\\s=]+)\\s*(=\\s*(['\"])([\\s\\S]*?)\\3)?","gm");function Dt(t,e,i,n=!1){const r=this.options;if(!0===n||!0!==r.ignoreAttributes&&"string"==typeof t){const n=function(t,e){const i=[];let n=e.exec(t);for(;n;){const r=[];r.startIndex=e.lastIndex-n[0].length;const s=n.length;for(let t=0;t<s;t++)r.push(n[t]);i.push(r),n=e.exec(t)}return i}(t,Lt),s=n.length,o={},a=new Array(s);let l=!1;const p={};for(let t=0;t<s;t++){const e=this.resolveNameSpace(n[t][1]),s=n[t][4];if(e.length&&void 0!==s){let n=s;r.trimValues&&(n=n.trim()),n=this.replaceEntitiesValue(n,i,this.readonlyMatcher),a[t]=n,p[e]=n,l=!0}}l&&"object"==typeof e&&e.updateCurrent&&e.updateCurrent(p);const c=r.jPath?e.toString():this.readonlyMatcher;let h=!1;for(let t=0;t<s;t++){const e=this.resolveNameSpace(n[t][1]);if(this.ignoreAttributesFn(e,c))continue;let i=r.attributeNamePrefix+e;if(e.length)if(r.transformAttributeName&&(i=r.transformAttributeName(i)),i=Yt(i,r),void 0!==n[t][4]){const n=a[t],s=r.attributeValueProcessor(e,n,c);o[i]=null==s?n:typeof s!=typeof n||s!==n?s:Wt(n,r.parseAttributeValue,r.numberParseOptions),h=!0}else r.allowBooleanAttributes&&(o[i]=!0,h=!0)}if(!h)return;if(r.attributesGroupName&&!r.preserveOrder){const t={};return t[r.attributesGroupName]=o,t}return o}}const Rt=function(t){t=t.replace(/\r\n?/g,"\n");const e=new C("!xml");let i=e,n="";this.matcher.reset(),this.entityDecoder.reset(),this.entityExpansionCount=0,this.currentExpandedLength=0,this.doctypefound=!1;const r=this.options,s=new M(r.processEntities),o=t.length;for(let a=0;a<o;a++)if("<"===t[a]){const l=t.charCodeAt(a+1);if(47===l){const s=Ut(t,">",a,"Closing Tag is not closed.");let o=t.substring(a+2,s).trim();if(r.removeNSPrefix){const t=o.indexOf(":");-1!==t&&(o=o.substr(t+1))}o=zt(r.transformTagName,o,"",r).tagName,i&&(n=this.saveTextToParentTag(n,i,this.readonlyMatcher));const l=this.matcher.getCurrentTag();if(o&&r.unpairedTagsSet.has(o))throw new Error(`Unpaired tag can not be used as closing tag: </${o}>`);l&&r.unpairedTagsSet.has(l)&&(this.matcher.pop(),this.tagsNodeStack.pop()),this.matcher.pop(),this.isCurrentNodeStopNode=!1,i=this.tagsNodeStack.pop()||e,r.captureMetaData&&i&&i.addEndIndex(s+1),n="",a=s}else if(63===l){let e=Gt(t,a,!1,"?>");if(!e)throw new Error("Pi Tag is not closed.");n=this.saveTextToParentTag(n,i,this.readonlyMatcher);const o=this.buildAttributesMap(e.tagExp,this.matcher,e.tagName,!0);if(o){const t=o[this.options.attributeNamePrefix+"version"];this.entityDecoder.setXmlVersion(Number(t)||1),s.setXmlVersion(Number(t)||1)}if(r.ignoreDeclaration&&"?xml"===e.tagName||r.ignorePiTags);else{const t=new C(e.tagName);t.add(r.textNodeName,""),e.tagName!==e.tagExp&&e.attrExpPresent&&!0!==r.ignoreAttributes&&(t[":@"]=o),this.addChild(i,t,this.readonlyMatcher,a),r.captureMetaData&&i.addEndIndex(e.closeIndex+2)}a=e.closeIndex+1}else if(33===l&&45===t.charCodeAt(a+2)&&45===t.charCodeAt(a+3)){const e=Ut(t,"--\x3e",a+4,"Comment is not closed.");if(r.commentPropName){const s=t.substring(a+4,e-2);n=this.saveTextToParentTag(n,i,this.readonlyMatcher),i.add(r.commentPropName,[{[r.textNodeName]:s}])}a=e}else if(33===l&&68===t.charCodeAt(a+2)){if(this.doctypefound)throw new Error("Multiple DOCTYPE declarations found.");this.doctypefound=!0;const e=s.readDocType(t,a);this.entityDecoder.addInputEntities(e.entities),a=e.i}else if(33===l&&91===t.charCodeAt(a+2)){const e=Ut(t,"]]>",a,"CDATA is not closed.")-2,s=t.substring(a+9,e);n=this.saveTextToParentTag(n,i,this.readonlyMatcher);let o=this.parseTextData(s,i.tagname,this.readonlyMatcher,!0,!1,!0,!0);null==o&&(o=""),r.cdataPropName?i.add(r.cdataPropName,[{[r.textNodeName]:s}]):i.add(r.textNodeName,o),a=e+2}else{let s=Gt(t,a,r.removeNSPrefix);if(!s){const e=t.substring(Math.max(0,a-50),Math.min(o,a+50));throw new Error(`readTagExp returned undefined at position ${a}. Context: "${e}"`)}let l=s.tagName;const p=s.rawTagName;let c=s.tagExp,h=s.attrExpPresent,d=s.closeIndex;if(({tagName:l,tagExp:c}=zt(r.transformTagName,l,c,r)),r.strictReservedNames&&(l===r.commentPropName||l===r.cdataPropName||l===r.textNodeName||l===r.attributesGroupName))throw new Error(`Invalid tag name: ${l}`);i&&n&&"!xml"!==i.tagname&&(n=this.saveTextToParentTag(n,i,this.readonlyMatcher,!1));const u=i;u&&r.unpairedTagsSet.has(u.tagname)&&(i=this.tagsNodeStack.pop(),this.matcher.pop());let f=!1;c.length>0&&c.lastIndexOf("/")===c.length-1&&(f=!0,"/"===l[l.length-1]?(l=l.substr(0,l.length-1),c=l):c=c.substr(0,c.length-1),h=l!==c);let g,m=null,x={};g=Ot(p),l!==e.tagname&&this.matcher.push(l,{},g),l!==c&&h&&(m=this.buildAttributesMap(c,this.matcher,l),m&&(x=Pt(m,r))),l!==e.tagname&&(this.isCurrentNodeStopNode=this.isItStopNode());const b=a;if(this.isCurrentNodeStopNode){let e="";if(f)a=s.closeIndex;else if(r.unpairedTagsSet.has(l))a=s.closeIndex;else{const i=this.readStopNodeData(t,p,d+1);if(!i)throw new Error(`Unexpected end of ${p}`);a=i.i,e=i.tagContent}const n=new C(l);m&&(n[":@"]=m),n.add(r.textNodeName,e),this.matcher.pop(),this.isCurrentNodeStopNode=!1,this.addChild(i,n,this.readonlyMatcher,b),r.captureMetaData&&i.addEndIndex(a+1)}else{if(f){({tagName:l,tagExp:c}=zt(r.transformTagName,l,c,r));const t=new C(l);m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),r.captureMetaData&&i.addEndIndex(d+1),this.matcher.pop(),this.isCurrentNodeStopNode=!1}else{if(r.unpairedTagsSet.has(l)){const t=new C(l);m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),r.captureMetaData&&i.addEndIndex(s.closeIndex+1),this.matcher.pop(),this.isCurrentNodeStopNode=!1,a=s.closeIndex;continue}{const t=new C(l);if(this.tagsNodeStack.length>r.maxNestedTags)throw new Error("Maximum nested tags exceeded");this.tagsNodeStack.push(i),m&&(t[":@"]=m),this.addChild(i,t,this.readonlyMatcher,b),i=t}}n="",a=d}}}else n+=t[a];return e.child};function Mt(t,e,i,n){this.options.captureMetaData||(n=void 0);const r=this.options.jPath?i.toString():i,s=this.options.updateTag(e.tagname,r,e[":@"]);!1===s||("string"==typeof s?(e.tagname=s,t.addChild(e,n)):t.addChild(e,n))}function Vt(t,e,i){const n=this.options.processEntities;if(!n||!n.enabled)return t;if(n.allowedTags){const r=this.options.jPath?i.toString():i;if(!(Array.isArray(n.allowedTags)?n.allowedTags.includes(e):n.allowedTags(e,r)))return t}if(n.tagFilter){const r=this.options.jPath?i.toString():i;if(!n.tagFilter(e,r))return t}return this.entityDecoder.decode(t)}function qt(t,e,i,n){return t&&(void 0===n&&(n=0===e.child.length),void 0!==(t=this.parseTextData(t,e.tagname,i,!1,!!e[":@"]&&0!==Object.keys(e[":@"]).length,n))&&""!==t&&e.add(this.options.textNodeName,t),t=""),t}function Ft(){return 0!==this.stopNodeExpressionsSet.size&&this.matcher.matchesAny(this.stopNodeExpressionsSet)}function Ut(t,e,i,n){const r=t.indexOf(e,i);if(-1===r)throw new Error(n);return r+e.length-1}function Bt(t,e,i,n){const r=t.indexOf(e,i);if(-1===r)throw new Error(n);return r}function Gt(t,e,i,n=">"){const r=function(t,e,i=">"){let n=0;const r=t.length,s=i.charCodeAt(0),o=i.length>1?i.charCodeAt(1):-1;let a="",l=e;for(let i=e;i<r;i++){const e=t.charCodeAt(i);if(n)e===n&&(n=0);else if(34===e||39===e)n=e;else if(e===s){if(-1===o)return a+=t.substring(l,i),{data:a,index:i};if(t.charCodeAt(i+1)===o)return a+=t.substring(l,i),{data:a,index:i}}else 9!==e||n||(a+=t.substring(l,i)+" ",l=i+1)}}(t,e+1,n);if(!r)return;let s=r.data;const o=r.index,a=s.search(/\s/);let l=s,p=!0;-1!==a&&(l=s.substring(0,a),s=s.substring(a+1).trimStart());const c=l;if(i){const t=l.indexOf(":");-1!==t&&(l=l.substr(t+1),p=l!==r.data.substr(t+1))}return{tagName:l,tagExp:s,closeIndex:o,attrExpPresent:p,rawTagName:c}}function Xt(t,e,i){const n=i;let r=1;const s=t.length;for(;i<s;i++)if("<"===t[i]){const s=t.charCodeAt(i+1);if(47===s){const s=Bt(t,">",i,`${e} is not closed`);if(t.substring(i+2,s).trim()===e&&(r--,0===r))return{tagContent:t.substring(n,i),i:s};i=s}else if(63===s)i=Ut(t,"?>",i+1,"StopNode is not closed.");else if(33===s&&45===t.charCodeAt(i+2)&&45===t.charCodeAt(i+3))i=Ut(t,"--\x3e",i+3,"StopNode is not closed.");else if(33===s&&91===t.charCodeAt(i+2))i=Ut(t,"]]>",i,"StopNode is not closed.")-2;else{const n=Gt(t,i,!1);n&&((n&&n.tagName)===e&&"/"!==n.tagExp[n.tagExp.length-1]&&r++,i=n.closeIndex)}}}function Wt(t,e,i){if(e&&"string"==typeof t){const e=t.trim();return"true"===e||"false"!==e&&Z(t,i)}return void 0!==t?t:""}function zt(t,e,i,n){if(t){const n=t(e);i===e&&(i=n),e=n}return{tagName:e=Yt(e,n),tagExp:i}}function Yt(t,e){if(o.includes(t))throw new Error(`[SECURITY] Invalid name: "${t}" is a reserved JavaScript keyword that could cause prototype pollution`);return s.includes(t)?e.onDangerousProperty(t):t}const Ht=C.getMetaDataSymbol();function Qt(t,e){if(!t||"object"!=typeof t)return{};if(!e)return t;const i={};for(const n in t)n.startsWith(e)?i[n.substring(e.length)]=t[n]:i[n]=t[n];return i}function Jt(t,e,i,n){return Zt(t,e,i,n)}function Zt(t,e,i,n){let r;const s={};for(let o=0;o<t.length;o++){const a=t[o],l=Kt(a);if(void 0!==l&&l!==e.textNodeName){const t=Qt(a[":@"]||{},e.attributeNamePrefix);i.push(l,t)}if(l===e.textNodeName)void 0===r?r=a[l]:r+=""+a[l];else{if(void 0===l)continue;if(a[l]){let t=Zt(a[l],e,i,n);const r=ee(t,e);if(0===Object.keys(t).length&&e.alwaysCreateTextNode&&(t[e.textNodeName]=""),a[":@"]?te(t,a[":@"],n,e):1!==Object.keys(t).length||void 0===t[e.textNodeName]||e.alwaysCreateTextNode?0===Object.keys(t).length&&(e.alwaysCreateTextNode?t[e.textNodeName]="":t=""):t=t[e.textNodeName],void 0!==a[Ht]&&"object"==typeof t&&null!==t&&(t[Ht]=a[Ht]),void 0!==s[l]&&Object.prototype.hasOwnProperty.call(s,l))Array.isArray(s[l])||(s[l]=[s[l]]),s[l].push(t);else{const i=e.jPath?n.toString():n;e.isArray(l,i,r)?s[l]=[t]:s[l]=t}void 0!==l&&l!==e.textNodeName&&i.pop()}}}return"string"==typeof r?r.length>0&&(s[e.textNodeName]=r):void 0!==r&&(s[e.textNodeName]=r),s}function Kt(t){const e=Object.keys(t);for(let t=0;t<e.length;t++){const i=e[t];if(":@"!==i)return i}}function te(t,e,i,n){if(e){const r=Object.keys(e),s=r.length;for(let o=0;o<s;o++){const s=r[o],a=s.startsWith(n.attributeNamePrefix)?s.substring(n.attributeNamePrefix.length):s,l=n.jPath?i.toString()+"."+a:i;n.isArray(s,l,!0,!0)?t[s]=[e[s]]:t[s]=e[s]}}}function ee(t,e){const{textNodeName:i}=e,n=Object.keys(t).length;return 0===n||!(1!==n||!t[i]&&"boolean"!=typeof t[i]&&0!==t[i])}class ie{constructor(t){this.externalEntities={},this.options=T(t)}parse(t,e){if("string"!=typeof t&&t.toString)t=t.toString();else if("string"!=typeof t)throw new Error("XML data is accepted in String or Bytes[] form.");if(e){!0===e&&(e={});const i=l(t,e);if(!0!==i)throw Error(`${i.err.msg}:${i.err.line}:${i.err.col}`)}const i=new It(this.options,this.externalEntities),n=i.parseXml(t);return this.options.preserveOrder||void 0===n?n:Jt(n,this.options,i.matcher,i.readonlyMatcher)}addEntity(t,e){if(-1!==e.indexOf("&"))throw new Error("Entity value can't have '&'");if(-1!==t.indexOf("&")||-1!==t.indexOf(";"))throw new Error("An entity must be set without '&' and ';'. Eg. use '#xD' for '&#xD;'");if("&"===e)throw new Error("An entity with value '&' is not permitted");this.externalEntities[t]=e}static getMetaDataSymbol(){return C.getMetaDataSymbol()}}function ne(t){return String(t).replace(/--/g,"- -").replace(/--/g,"- -").replace(/-$/,"- ")}function re(t){return String(t).replace(/\]\]>/g,"]]]]><![CDATA[>")}function se(t){return String(t).replace(/"/g,"&quot;").replace(/'/g,"&apos;")}const oe=":A-Za-z_À-ÖØ-öø-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�",ae=":A-Za-z_À-˿Ͱ-ͽͿ-҆҈-῿‌-‍⁰-↏Ⰰ-⿯、-퟿豈-﷏ﷰ-�𐀀-󯿿",le=ae+"\\-\\.\\d·̀-ͯ҇‿-⁀",pe=(t,e,i="")=>{const n=`[${t.replace(":","")}][${e.replace(":","")}]*`;return{name:new RegExp(`^[${t}][${e}]*$`,i),ncName:new RegExp(`^${n}$`,i),qName:new RegExp(`^${n}(?::${n})?$`,i),nmToken:new RegExp(`^[${e}]+$`,i),nmTokens:new RegExp(`^[${e}]+(?:\\s+[${e}]+)*$`,i)}},ce=pe(oe,oe+"\\-\\.\\d·̀-ͯ‿-⁀"),he=pe(ae,le,"u"),de=(t,{xmlVersion:e="1.0"}={})=>((t="1.0")=>"1.1"===t?he:ce)(e).qName.test(t);function ue(t,e,i,n,r){return i.sanitizeName?de(t,{xmlVersion:r})?t:i.sanitizeName(t,{isAttribute:e,matcher:n.readOnly()}):t}function fe(t,e){let i="";e.format&&(i="\n");const n=[];if(e.stopNodes&&Array.isArray(e.stopNodes))for(let t=0;t<e.stopNodes.length;t++){const i=e.stopNodes[t];"string"==typeof i?n.push(new nt(i)):i instanceof nt&&n.push(i)}const r=function(t,e){if(!Array.isArray(t)||0===t.length)return"1.0";const i=t[0];if("?xml"===ye(i)){const t=i[":@"];if(t){const i=e.attributeNamePrefix+"version";if(t[i])return t[i]}}return"1.0"}(t,e);return ge(t,e,i,new it,n,r)}function ge(t,e,i,n,r,s){let o="",a=!1;if(e.maxNestedTags&&n.getDepth()>e.maxNestedTags)throw new Error("Maximum nested tags exceeded");if(!Array.isArray(t)){if(null!=t){let i=t.toString();return i=we(i,e),i}return""}for(let l=0;l<t.length;l++){const p=t[l],c=ye(p);if(void 0===c)continue;const h=c===e.textNodeName||c===e.cdataPropName||c===e.commentPropName||"?"===c[0]?c:ue(c,!1,e,n,s),d=me(p[":@"],e);n.push(h,d);const u=Ee(n,r);if(h===e.textNodeName){let t=p[c];u||(t=e.tagValueProcessor(h,t),t=we(t,e)),a&&(o+=i),o+=t,a=!1,n.pop();continue}if(h===e.cdataPropName){a&&(o+=i),o+=`<![CDATA[${re(p[c][0][e.textNodeName])}]]>`,a=!1,n.pop();continue}if(h===e.commentPropName){o+=i+`\x3c!--${ne(p[c][0][e.textNodeName])}--\x3e`,a=!0,n.pop();continue}if("?"===h[0]){o+=("?xml"===h?"":i)+`<${h}${Ne(p[":@"],e,u,n,s)}?>`,a=!0,n.pop();continue}let f=i;""!==f&&(f+=e.indentBy);const g=i+`<${h}${Ne(p[":@"],e,u,n,s)}`;let m;m=u?xe(p[c],e):ge(p[c],e,f,n,r,s),-1!==e.unpairedTags.indexOf(h)?e.suppressUnpairedNode?o+=g+">":o+=g+"/>":m&&0!==m.length||!e.suppressEmptyNode?m&&m.endsWith(">")?o+=g+`>${m}${i}</${h}>`:(o+=g+">",m&&""!==i&&(m.includes("/>")||m.includes("</"))?o+=i+e.indentBy+m+i:o+=m,o+=`</${h}>`):o+=g+"/>",a=!0,n.pop()}return o}function me(t,e){if(!t||e.ignoreAttributes)return null;const i={};let n=!1;for(let r in t)Object.prototype.hasOwnProperty.call(t,r)&&(i[r.startsWith(e.attributeNamePrefix)?r.substr(e.attributeNamePrefix.length):r]=se(t[r]),n=!0);return n?i:null}function xe(t,e){if(!Array.isArray(t))return null!=t?t.toString():"";let i="";for(let n=0;n<t.length;n++){const r=t[n],s=ye(r);if(s===e.textNodeName)i+=r[s];else if(s===e.cdataPropName)i+=r[s][0][e.textNodeName];else if(s===e.commentPropName)i+=r[s][0][e.textNodeName];else{if(s&&"?"===s[0])continue;if(s){const t=be(r[":@"],e),n=xe(r[s],e);n&&0!==n.length?i+=`<${s}${t}>${n}</${s}>`:i+=`<${s}${t}/>`}}}return i}function be(t,e){let i="";if(t&&!e.ignoreAttributes)for(let n in t){if(!Object.prototype.hasOwnProperty.call(t,n))continue;let r=t[n];!0===r&&e.suppressBooleanAttributes?i+=` ${n.substr(e.attributeNamePrefix.length)}`:i+=` ${n.substr(e.attributeNamePrefix.length)}="${se(r)}"`}return i}function ye(t){const e=Object.keys(t);for(let i=0;i<e.length;i++){const n=e[i];if(Object.prototype.hasOwnProperty.call(t,n)&&":@"!==n)return n}}function Ne(t,e,i,n,r){let s="";if(t&&!e.ignoreAttributes)for(let o in t){if(!Object.prototype.hasOwnProperty.call(t,o))continue;const a=o.substr(e.attributeNamePrefix.length),l=i?a:ue(a,!0,e,n,r);let p;i?p=t[o]:(p=e.attributeValueProcessor(o,t[o]),p=we(p,e)),!0===p&&e.suppressBooleanAttributes?s+=` ${l}`:s+=` ${l}="${se(p)}"`}return s}function Ee(t,e){if(!e||0===e.length)return!1;for(let i=0;i<e.length;i++)if(t.matches(e[i]))return!0;return!1}function we(t,e){if(t&&t.length>0&&e.processEntities)for(let i=0;i<e.entities.length;i++){const n=e.entities[i];t=t.replace(n.regex,n.val)}return t}const ve={attributeNamePrefix:"@_",attributesGroupName:!1,textNodeName:"#text",ignoreAttributes:!0,cdataPropName:!1,format:!1,indentBy:"  ",suppressEmptyNode:!1,suppressUnpairedNode:!0,suppressBooleanAttributes:!0,tagValueProcessor:function(t,e){return e},attributeValueProcessor:function(t,e){return e},preserveOrder:!1,commentPropName:!1,unpairedTags:[],entities:[{regex:new RegExp("&","g"),val:"&amp;"},{regex:new RegExp(">","g"),val:"&gt;"},{regex:new RegExp("<","g"),val:"&lt;"},{regex:new RegExp("'","g"),val:"&apos;"},{regex:new RegExp('"',"g"),val:"&quot;"}],processEntities:!0,stopNodes:[],oneListGroup:!1,maxNestedTags:100,jPath:!0,sanitizeName:!1};function Se(t){if(this.options=Object.assign({},ve,t),this.options.stopNodes&&Array.isArray(this.options.stopNodes)&&(this.options.stopNodes=this.options.stopNodes.map(t=>"string"==typeof t&&t.startsWith("*.")?".."+t.substring(2):t)),this.stopNodeExpressions=[],this.options.stopNodes&&Array.isArray(this.options.stopNodes))for(let t=0;t<this.options.stopNodes.length;t++){const e=this.options.stopNodes[t];"string"==typeof e?this.stopNodeExpressions.push(new nt(e)):e instanceof nt&&this.stopNodeExpressions.push(e)}var e;!0===this.options.ignoreAttributes||this.options.attributesGroupName?this.isAttribute=function(){return!1}:(this.ignoreAttributesFn="function"==typeof(e=this.options.ignoreAttributes)?e:Array.isArray(e)?t=>{for(const i of e){if("string"==typeof i&&t===i)return!0;if(i instanceof RegExp&&i.test(t))return!0}}:()=>!1,this.attrPrefixLen=this.options.attributeNamePrefix.length,this.isAttribute=Ce),this.processTextOrObjNode=Te,this.options.format?(this.indentate=_e,this.tagEndChar=">\n",this.newLine="\n"):(this.indentate=function(){return""},this.tagEndChar=">",this.newLine="")}function Ae(t,e,i,n,r){return i.sanitizeName?de(t,{xmlVersion:r})?t:i.sanitizeName(t,{isAttribute:e,matcher:n.readOnly()}):t}function Te(t,e,i,n,r){const s=this.extractAttributes(t);if(n.push(e,s),this.checkStopNode(n)){const r=this.buildRawContent(t),s=this.buildAttributesForStopNode(t);return n.pop(),this.buildObjectNode(r,e,s,i)}const o=this.j2x(t,i+1,n,r);return n.pop(),"?"===e[0]?this.buildTextValNode("",e,o.attrStr,i,n):void 0!==t[this.options.textNodeName]&&1===Object.keys(t).length?this.buildTextValNode(t[this.options.textNodeName],e,o.attrStr,i,n):this.buildObjectNode(o.val,e,o.attrStr,i)}function _e(t){return this.options.indentBy.repeat(t)}function Ce(t){return!(!t.startsWith(this.options.attributeNamePrefix)||t===this.options.textNodeName)&&t.substr(this.attrPrefixLen)}Se.prototype.build=function(t){if(this.options.preserveOrder)return fe(t,this.options);{Array.isArray(t)&&this.options.arrayNodeName&&this.options.arrayNodeName.length>1&&(t={[this.options.arrayNodeName]:t});const e=new it,i=function(t,e){const i=t["?xml"];if(i&&"object"==typeof i){if(e.attributesGroupName&&i[e.attributesGroupName]){const t=i[e.attributesGroupName][e.attributeNamePrefix+"version"];if(t)return t}const t=i[e.attributeNamePrefix+"version"];if(t)return t}return"1.0"}(t,this.options);return this.j2x(t,0,e,i).val}},Se.prototype.j2x=function(t,e,i,n){let r="",s="";if(this.options.maxNestedTags&&i.getDepth()>=this.options.maxNestedTags)throw new Error("Maximum nested tags exceeded");const o=this.options.jPath?i.toString():i,a=this.checkStopNode(i);for(let l in t){if(!Object.prototype.hasOwnProperty.call(t,l))continue;const p=l===this.options.textNodeName||l===this.options.cdataPropName||l===this.options.commentPropName||this.options.attributesGroupName&&l===this.options.attributesGroupName||this.isAttribute(l)||"?"===l[0]?l:Ae(l,!1,this.options,i,n);if(void 0===t[l])this.isAttribute(l)&&(s+="");else if(null===t[l])this.isAttribute(l)||p===this.options.cdataPropName||p===this.options.commentPropName?s+="":"?"===p[0]?s+=this.indentate(e)+"<"+p+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+p+"/"+this.tagEndChar;else if(t[l]instanceof Date)s+=this.buildTextValNode(t[l],p,"",e,i);else if("object"!=typeof t[l]){const c=this.isAttribute(l);if(c&&!this.ignoreAttributesFn(c,o)){const e=Ae(c,!0,this.options,i,n);r+=this.buildAttrPairStr(e,""+t[l],a)}else if(!c)if(l===this.options.textNodeName){let e=this.options.tagValueProcessor(l,""+t[l]);s+=this.replaceEntitiesValue(e)}else{i.push(p);const n=this.checkStopNode(i);if(i.pop(),n){const i=""+t[l];s+=""===i?this.indentate(e)+"<"+p+this.closeTag(p)+this.tagEndChar:this.indentate(e)+"<"+p+">"+i+"</"+p+this.tagEndChar}else s+=this.buildTextValNode(t[l],p,"",e,i)}}else if(Array.isArray(t[l])){const r=t[l].length;let o="",a="";for(let c=0;c<r;c++){const r=t[l][c];if(void 0===r);else if(null===r)"?"===p[0]?s+=this.indentate(e)+"<"+p+"?"+this.tagEndChar:s+=this.indentate(e)+"<"+p+"/"+this.tagEndChar;else if("object"==typeof r)if(this.options.oneListGroup){i.push(p);const t=this.j2x(r,e+1,i,n);i.pop(),o+=t.val,this.options.attributesGroupName&&r.hasOwnProperty(this.options.attributesGroupName)&&(a+=t.attrStr)}else o+=this.processTextOrObjNode(r,p,e,i,n);else if(this.options.oneListGroup){let t=this.options.tagValueProcessor(p,r);t=this.replaceEntitiesValue(t),o+=t}else{i.push(p);const t=this.checkStopNode(i);if(i.pop(),t){const t=""+r;o+=""===t?this.indentate(e)+"<"+p+this.closeTag(p)+this.tagEndChar:this.indentate(e)+"<"+p+">"+t+"</"+p+this.tagEndChar}else o+=this.buildTextValNode(r,p,"",e,i)}}this.options.oneListGroup&&(o=this.buildObjectNode(o,p,a,e)),s+=o}else if(this.options.attributesGroupName&&l===this.options.attributesGroupName){const e=Object.keys(t[l]),s=e.length;for(let o=0;o<s;o++){const s=Ae(e[o],!0,this.options,i,n);r+=this.buildAttrPairStr(s,""+t[l][e[o]],a)}}else s+=this.processTextOrObjNode(t[l],p,e,i,n)}return{attrStr:r,val:s}},Se.prototype.buildAttrPairStr=function(t,e,i){return i||(e=this.options.attributeValueProcessor(t,""+e),e=this.replaceEntitiesValue(e)),this.options.suppressBooleanAttributes&&"true"===e?" "+t:" "+t+'="'+se(e)+'"'},Se.prototype.extractAttributes=function(t){if(!t||"object"!=typeof t)return null;const e={};let i=!1;if(this.options.attributesGroupName&&t[this.options.attributesGroupName]){const n=t[this.options.attributesGroupName];for(let t in n)Object.prototype.hasOwnProperty.call(n,t)&&(e[t.startsWith(this.options.attributeNamePrefix)?t.substring(this.options.attributeNamePrefix.length):t]=se(n[t]),i=!0)}else for(let n in t){if(!Object.prototype.hasOwnProperty.call(t,n))continue;const r=this.isAttribute(n);r&&(e[r]=se(t[n]),i=!0)}return i?e:null},Se.prototype.buildRawContent=function(t){if("string"==typeof t)return t;if("object"!=typeof t||null===t)return String(t);if(void 0!==t[this.options.textNodeName])return t[this.options.textNodeName];let e="";for(let i in t){if(!Object.prototype.hasOwnProperty.call(t,i))continue;if(this.isAttribute(i))continue;if(this.options.attributesGroupName&&i===this.options.attributesGroupName)continue;const n=t[i];if(i===this.options.textNodeName)e+=n;else if(Array.isArray(n)){for(let t of n)if("string"==typeof t||"number"==typeof t)e+=`<${i}>${t}</${i}>`;else if("object"==typeof t&&null!==t){const n=this.buildRawContent(t),r=this.buildAttributesForStopNode(t);e+=""===n?`<${i}${r}/>`:`<${i}${r}>${n}</${i}>`}}else if("object"==typeof n&&null!==n){const t=this.buildRawContent(n),r=this.buildAttributesForStopNode(n);e+=""===t?`<${i}${r}/>`:`<${i}${r}>${t}</${i}>`}else e+=`<${i}>${n}</${i}>`}return e},Se.prototype.buildAttributesForStopNode=function(t){if(!t||"object"!=typeof t)return"";let e="";if(this.options.attributesGroupName&&t[this.options.attributesGroupName]){const i=t[this.options.attributesGroupName];for(let t in i){if(!Object.prototype.hasOwnProperty.call(i,t))continue;const n=t.startsWith(this.options.attributeNamePrefix)?t.substring(this.options.attributeNamePrefix.length):t,r=i[t];!0===r&&this.options.suppressBooleanAttributes?e+=" "+n:e+=" "+n+'="'+r+'"'}}else for(let i in t){if(!Object.prototype.hasOwnProperty.call(t,i))continue;const n=this.isAttribute(i);if(n){const r=t[i];!0===r&&this.options.suppressBooleanAttributes?e+=" "+n:e+=" "+n+'="'+r+'"'}}return e},Se.prototype.buildObjectNode=function(t,e,i,n){if(""===t)return"?"===e[0]?this.indentate(n)+"<"+e+i+"?"+this.tagEndChar:this.indentate(n)+"<"+e+i+this.closeTag(e)+this.tagEndChar;if("?"===e[0])return this.indentate(n)+"<"+e+i+"?"+this.tagEndChar;{let r="</"+e+this.tagEndChar,s="";return"?"===e[0]&&(s="?",r=""),!i&&""!==i||-1!==t.indexOf("<")?!1!==this.options.commentPropName&&e===this.options.commentPropName&&0===s.length?this.indentate(n)+`\x3c!--${t}--\x3e`+this.newLine:this.indentate(n)+"<"+e+i+s+this.tagEndChar+t+this.indentate(n)+r:this.indentate(n)+"<"+e+i+s+">"+t+r}},Se.prototype.closeTag=function(t){let e="";return-1!==this.options.unpairedTags.indexOf(t)?this.options.suppressUnpairedNode||(e="/"):e=this.options.suppressEmptyNode?"/":`></${t}`,e},Se.prototype.checkStopNode=function(t){if(!this.stopNodeExpressions||0===this.stopNodeExpressions.length)return!1;for(let e=0;e<this.stopNodeExpressions.length;e++)if(t.matches(this.stopNodeExpressions[e]))return!0;return!1},Se.prototype.buildTextValNode=function(t,e,i,n,r){if(!1!==this.options.cdataPropName&&e===this.options.cdataPropName){const e=re(t);return this.indentate(n)+`<![CDATA[${e}]]>`+this.newLine}if(!1!==this.options.commentPropName&&e===this.options.commentPropName){const e=ne(t);return this.indentate(n)+`\x3c!--${e}--\x3e`+this.newLine}if("?"===e[0])return this.indentate(n)+"<"+e+i+"?"+this.tagEndChar;{let r=this.options.tagValueProcessor(e,t);return r=this.replaceEntitiesValue(r),""===r?this.indentate(n)+"<"+e+i+this.closeTag(e)+this.tagEndChar:this.indentate(n)+"<"+e+i+">"+r+"</"+e+this.tagEndChar}},Se.prototype.replaceEntitiesValue=function(t){if(t&&t.length>0&&this.options.processEntities)for(let e=0;e<this.options.entities.length;e++){const i=this.options.entities[e];t=t.replace(i.regex,i.val)}return t};const $e=Se,Pe={validate:l};module.exports=e})();
 
 /***/ },
 
@@ -120243,7 +120656,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"http://json-schema.org/dra
 (module) {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"version":"17.13.4"}');
+module.exports = /*#__PURE__*/JSON.parse('{"version":"17.13.6"}');
 
 /***/ },
 
@@ -120302,56 +120715,31 @@ module.exports = {"version":"3.19.0"};
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter/value functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			if(Array.isArray(definition)) {
-/******/ 				var i = 0;
-/******/ 				while(i < definition.length) {
-/******/ 					var key = definition[i++];
-/******/ 					var binding = definition[i++];
-/******/ 					if(!__webpack_require__.o(exports, key)) {
-/******/ 						if(binding === 0) {
-/******/ 							Object.defineProperty(exports, key, { enumerable: true, value: definition[i++] });
-/******/ 						} else {
-/******/ 							Object.defineProperty(exports, key, { enumerable: true, get: binding });
-/******/ 						}
-/******/ 					} else if(binding === 0) { i++; }
-/******/ 				}
-/******/ 			} else {
-/******/ 				for(var key in definition) {
-/******/ 					if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 						Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 					}
-/******/ 				}
+/******/ 	// define getter/value functions for harmony exports
+/******/ 	__webpack_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
 /******/ 			}
-/******/ 		};
-/******/ 	})();
+/******/ 		}
+/******/ 	};
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
+/******/ 	__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop));
 /******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
 /******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nmd = (module) => {
-/******/ 			module.paths = [];
-/******/ 			if (!module.children) module.children = [];
-/******/ 			return module;
-/******/ 		};
-/******/ 	})();
+/******/ 	__webpack_require__.nmd = (module) => {
+/******/ 		module.paths = [];
+/******/ 		if (!module.children) module.children = [];
+/******/ 		return module;
+/******/ 	};
 /******/ 	
 /************************************************************************/
 let __webpack_exports__ = {};
@@ -120366,7 +120754,7 @@ __webpack_require__.d(__webpack_exports__, {
   main: () => (/* binding */ main)
 });
 
-;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/responses/index.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/responses/index.mjs
 /**
  * @license
  *
@@ -128877,7 +129265,7 @@ var ansis = __webpack_require__(56795);
 ;// ./node_modules/ansis/index.mjs
 /* unused harmony import specifier */ var a;
 /* harmony default export */ const node_modules_ansis = ((/* unused pure expression or super */ null && (a)));const{Ansis,fg,bg,rgb,bgRgb,hex,bgHex,reset: ansis_reset,inverse,hidden: ansis_hidden,visible,link: ansis_link,bold,dim,italic,underline,strikethrough,black,red,green,yellow,blue,magenta,cyan,white,gray,redBright,greenBright,yellowBright,blueBright,magentaBright,cyanBright,whiteBright,bgBlack,bgRed,bgGreen,bgYellow,bgBlue,bgMagenta,bgCyan,bgWhite,bgGray,bgRedBright,bgGreenBright,bgYellowBright,bgBlueBright,bgMagentaBright,bgCyanBright,bgWhiteBright}=ansis;
-;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/error-WnQqveay.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/error-WnQqveay.mjs
 /**
  * @license
  *
@@ -129287,7 +129675,7 @@ function camelCase(input, options) {
 	return leadingPrefix + postProcess(input, toUpperCase, options);
 }
 
-;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/headers/index.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/headers/index.mjs
 /* unused harmony import specifier */ var headers_CommerceSdkValidationError;
 /* unused harmony import specifier */ var headers_safeParse;
 /* unused harmony import specifier */ var headers_literal;
@@ -129750,7 +130138,7 @@ var src = __webpack_require__(64127);
 var external_crypto_ = __webpack_require__(76982);
 // EXTERNAL MODULE: ./node_modules/oauth-1.0a/oauth-1.0a.js
 var oauth_1_0a = __webpack_require__(45093);
-;// ./node_modules/@adobe/aio-commerce-lib-core/dist/es/params/index.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-core/dist/es/params/index.mjs
 /**
  * @license
  *
@@ -129789,7 +130177,7 @@ function allNonEmpty(params, required) {
 
 //#endregion
 
-;// ./node_modules/@adobe/aio-commerce-lib-auth/dist/es/index.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-auth/dist/es/index.mjs
 /**
  * @license
  *
@@ -130238,7 +130626,7 @@ function forwardImsAuthProvider(params) {
 
 //#endregion
 //#region source/lib/ims-auth/provider.ts
-const { context, getToken } = src;
+const { /* context */ "_O": context, /* getToken */ "gf": getToken } = src;
 /**
 * Converts IMS auth configuration properties to snake_case format.
 * @param config The IMS auth configuration with camelCase properties.
@@ -130541,7 +130929,7 @@ function resolveAuthParams(params) {
 
 //#endregion
 
-;// ./node_modules/@adobe/aio-commerce-lib-api/dist/es/hooks-Dc1jLa88.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-api/dist/es/hooks-Dc1jLa88.mjs
 /**
  * @license
  *
@@ -131769,7 +132157,7 @@ const ky = createInstance();
 // Intentionally not exporting this for now as it's just an implementation detail and we don't want to commit to a certain API yet at least.
 // export {NonError} from './errors/NonError.js';
 //# sourceMappingURL=index.js.map
-;// ./node_modules/@adobe/aio-commerce-lib-api/dist/es/index.mjs
+;// ./node_modules/@adobe/aio-commerce-lib-app/node_modules/@adobe/aio-commerce-lib-api/dist/es/index.mjs
 /* unused harmony import specifier */ var es_forwardImsAuthProvider;
 /* unused harmony import specifier */ var es_resolveAuthParams;
 /**
@@ -132439,7 +132827,7 @@ async function getSharedState() {
 * @returns Promise resolving to the shared Files instance
 */
 async function getSharedFiles() {
-	if (!__sharedFiles) __sharedFiles = await (0,init.init)();
+	if (!__sharedFiles) __sharedFiles = await (0,init/* init */.Ts)();
 	return __sharedFiles;
 }
 

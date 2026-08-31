@@ -1,4 +1,16 @@
 {
+  "adminUi": {
+    "menu": {
+      "label": "Digital Magazine",
+      "src": "src/commerce-extensibility-1/admin/main.jsx"
+    },
+    "routes": [
+      {
+        "path": "/digital-magazine",
+        "src": "src/commerce-extensibility-1/admin/main.jsx"
+      }
+    ]
+  },
   "businessConfig": {
     "schema": [
       {
