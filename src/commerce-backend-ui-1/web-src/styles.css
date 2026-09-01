@@ -31,6 +31,25 @@ header {
   margin-bottom: 24px;
 }
 
+.toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.toolbar input,
+.toolbar select {
+  border: 1px solid #d4d4d4;
+  border-radius: 6px;
+  padding: 8px 10px;
+  min-width: 180px;
+}
+
+.select-row {
+  float: right;
+}
+
 h1 {
   margin: 0;
   font-size: 1.5rem;

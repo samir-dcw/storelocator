@@ -2,9 +2,10 @@ import { defineConfig } from '@adobe/aio-commerce-lib-app/config';
 
 export default defineConfig({
   metadata: {
-    id: 'proj-5a3228b8-c9f3-4684-895b-480e4de85cc7',
-    displayName: 'Store Locator',
-    description: 'Store locator application for Adobe Commerce',
+    id: 'digital-magazine-editorial-hub',
+    displayName: 'Digital Magazine Editorial Hub',
+    description:
+      'Commerce-connected editorial platform aggregating ACCS Page Builder magazine content with live product data, admin management, and storefront delivery.',
     version: '1.0.0',
   },
   businessConfig: {
@@ -26,6 +27,7 @@ export default defineConfig({
         type: 'text',
         label: 'IO State Key',
         description: 'Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.',
+        default: 'magazine',
       },
       {
         name: 'enable_store_locator',
@@ -57,6 +59,41 @@ export default defineConfig({
       },
     ],
   },
+  eventing: {
+    commerce: [
+      {
+        provider: {
+          label: 'Digital Magazine Commerce Events',
+          description: 'Commerce catalog events used to refresh magazine product cache.',
+        },
+        events: [
+          {
+            name: 'observer.catalog_product_save_commit_after',
+            label: 'Product Save Commit After',
+            description: 'Invalidate magazine product cache when a catalog product is saved.',
+            fields: [
+              { name: 'id' },
+              { name: 'sku' },
+              { name: 'name' },
+              { name: 'price' },
+              { name: 'status' },
+              { name: 'qty' },
+              { name: 'updated_at' },
+            ],
+            runtimeActions: ['magazine-actions/cache-invalidate-on-product-save'],
+          },
+        ],
+      },
+    ],
+  },
+  installation: {
+    messages: {
+      preInstallation:
+        'Install Digital Magazine Editorial Hub to register the Commerce Admin menu and product-save event subscription.',
+      postInstallation:
+        'Open Apps > Digital Magazine to manage articles. Configure the Commerce GraphQL and Magazine CMS endpoints in Business Configuration.',
+    },
+  },
   adminUiSdk: {
     registration: {
       menuItems: [
@@ -69,6 +106,17 @@ export default defineConfig({
           id: 'store_locator::store_locator',
           title: 'Store Locator',
           parent: 'store_locator::apps',
+          sortOrder: 1,
+        },
+        {
+          id: 'digital_magazine::apps',
+          title: 'Digital Magazine',
+          isSection: true,
+        },
+        {
+          id: 'digital_magazine::editorial_hub',
+          title: 'Editorial Hub',
+          parent: 'digital_magazine::apps',
           sortOrder: 1,
         },
       ],

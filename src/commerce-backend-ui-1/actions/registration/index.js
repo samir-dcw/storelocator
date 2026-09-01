@@ -20,6 +20,17 @@ function buildRegistration(namespace) {
         parent: `${extensionId}::apps`,
         sortOrder: 1,
       },
+      {
+        id: 'digital_magazine::apps',
+        title: 'Digital Magazine',
+        isSection: true,
+      },
+      {
+        id: 'digital_magazine::editorial_hub',
+        title: 'Editorial Hub',
+        parent: 'digital_magazine::apps',
+        sortOrder: 1,
+      },
     ],
   };
 }
