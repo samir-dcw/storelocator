@@ -1,4 +1,5 @@
 import { createLogger } from '../utils/logger.js';
+import { createStoreRepository } from '../utils/store-repository.js';
 import { createIOStateClient } from '../utils/io-state-client.js';
 
 function json(statusCode, body) {
@@ -57,6 +58,9 @@ export async function main(params) {
     }
 
     const { valid, failures } = normalizeStores(stores);
+    const repo = createStoreRepository(params, logger);
+    await repo.setAll(valid.map((store) => ({ ...store, enabled: true })));
+    // Keep legacy io-state key for backwards compatibility with older readers.
     await state.put('stores', valid, 3600);
     if (failures.length) {
       await state.appendLog('sync-failures', { mode, failures }, 86400);

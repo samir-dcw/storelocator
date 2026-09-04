@@ -25,7 +25,8 @@ export default defineConfig({
         name: 'IO_STATE_KEY',
         type: 'text',
         label: 'IO State Key',
-        description: 'Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.',
+        description: 'Stable prefix for store-location state keys. Keep this unchanged or saved stores will appear empty. Default: store-locator.',
+        default: 'store-locator',
       },
       {
         name: 'enable_store_locator',

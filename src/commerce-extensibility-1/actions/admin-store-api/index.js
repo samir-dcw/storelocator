@@ -1,3 +1,4 @@
+import { resolveActionParams } from '../utils/business-config-loader.js';
 import { createLogger } from '../utils/logger.js';
 import { createStoreRepository, normalizeStore } from '../utils/store-repository.js';
 
@@ -44,8 +45,9 @@ function asArray(value) {
 export async function main(params) {
   const logger = createLogger({ action: 'admin-store-api', requestId: params.requestId });
   try {
-    const input = parseInput(params);
-    const repo = createStoreRepository(params, logger);
+    const runtimeParams = await resolveActionParams(params, logger);
+    const input = parseInput(runtimeParams);
+    const repo = createStoreRepository(runtimeParams, logger);
     const method = (params.__ow_method || input.method || 'get').toLowerCase();
 
     if (method === 'get') {
@@ -83,7 +85,7 @@ export async function main(params) {
 
     return json(405, { error: 'Method not allowed' });
   } catch (error) {
-    logger.error('admin-store-api.failed', { error: error.message });
+    logger.error('admin-store-api.failed', { error: error.message, stack: error.stack });
     return json(500, { error: 'Unable to process store API request' });
   }
 }

@@ -14,8 +14,8 @@
     "type": "url"
   },
   {
-    "default": "",
-    "description": "Prefix used for aio-lib-state cache entries across magazine reads and invalidation flows.",
+    "default": "store-locator",
+    "description": "Stable prefix for store-location state keys. Keep this unchanged or saved stores will appear empty. Default: store-locator.",
     "label": "IO State Key",
     "name": "IO_STATE_KEY",
     "type": "text"

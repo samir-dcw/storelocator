@@ -1,3 +1,4 @@
+import { resolveActionParams } from '../utils/business-config-loader.js';
 import { createLogger } from '../utils/logger.js';
 import { createStoreRepository } from '../utils/store-repository.js';
 
@@ -12,7 +13,8 @@ function json(statusCode, body) {
 export async function main(params) {
   const logger = createLogger({ action: 'list-enabled-stores', requestId: params.requestId });
   try {
-    const repo = createStoreRepository(params, logger);
+    const runtimeParams = await resolveActionParams(params, logger);
+    const repo = createStoreRepository(runtimeParams, logger);
     const items = await repo.getEnabled();
     return json(200, { items });
   } catch (error) {
