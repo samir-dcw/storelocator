@@ -1,32 +1,103 @@
-function memoryStore() {
-  if (!globalThis.__storeLocatorMemoryState) {
-    globalThis.__storeLocatorMemoryState = new Map();
+import filesLib from '@adobe/aio-lib-files';
+import libState from '@adobe/aio-lib-state';
+
+// Files = durable App Builder storage (no TTL). State = optional fast cache.
+const CACHE_TTL_SECONDS = Math.min(libState.MAX_TTL || 31536000, 86400 * 30); // 30 days cache
+
+let filesClientPromise = null;
+let stateClientPromise = null;
+
+async function getFilesClient() {
+  if (!filesClientPromise) {
+    filesClientPromise = filesLib.init();
   }
-  return globalThis.__storeLocatorMemoryState;
+  return filesClientPromise;
 }
 
-function stateKey(namespace, collection) {
-  return `${namespace}:${collection}`;
+async function getStateClient() {
+  if (!stateClientPromise) {
+    stateClientPromise = libState.init();
+  }
+  return stateClientPromise;
 }
 
-function now() {
-  return Date.now();
+function normalizeNamespace(namespace) {
+  const normalized = String(namespace || 'store-locator')
+    .trim()
+    .replace(/[^a-zA-Z0-9-_.]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^[-_.]+|[-_.]+$/g, '');
+
+  return normalized || 'store-locator';
+}
+
+function filePath(namespace, collection) {
+  return `${normalizeNamespace(namespace)}/${collection}.json`;
+}
+
+function cacheKey(namespace, collection) {
+  return `${normalizeNamespace(namespace)}-${collection}`;
 }
 
 function cloneStore(store) {
   return store ? JSON.parse(JSON.stringify(store)) : store;
 }
 
-function readCollection(key) {
-  const item = memoryStore().get(key);
-  if (!item) {
+function parseStoredValue(value) {
+  if (value === undefined || value === null || value === '') {
     return [];
   }
-  if (item.expiresAt && item.expiresAt <= now()) {
-    memoryStore().delete(key);
+
+  let payload = value;
+  if (typeof payload === 'string') {
+    try {
+      payload = JSON.parse(payload);
+    } catch {
+      return [];
+    }
+  }
+
+  return Array.isArray(payload) ? payload : [];
+}
+
+async function readFromFiles(path) {
+  const files = await getFilesClient();
+  try {
+    const content = await files.read(path);
+    if (!content) {
+      return [];
+    }
+    return parseStoredValue(content.toString('utf8'));
+  } catch {
     return [];
   }
-  return Array.isArray(item.value) ? item.value : [];
+}
+
+async function writeToFiles(path, items) {
+  const files = await getFilesClient();
+  await files.write(path, JSON.stringify(items, null, 2));
+}
+
+async function readFromCache(key) {
+  try {
+    const state = await getStateClient();
+    const cached = await state.get(key);
+    if (!cached || cached.value === undefined) {
+      return null;
+    }
+    return parseStoredValue(cached.value);
+  } catch {
+    return null;
+  }
+}
+
+async function writeToCache(key, items) {
+  try {
+    const state = await getStateClient();
+    await state.put(key, JSON.stringify(items), { ttl: CACHE_TTL_SECONDS });
+  } catch {
+    // Cache write failures must not block durable persistence.
+  }
 }
 
 function normalizeStore(store) {
@@ -57,21 +128,38 @@ function normalizeStore(store) {
 }
 
 export function createStoreRepository(params = {}, logger = console) {
-  const namespace = params.IO_STATE_KEY || process.env.IO_STATE_KEY || 'store-locator';
+  const namespace = normalizeNamespace(params.IO_STATE_KEY || process.env.IO_STATE_KEY || 'store-locator');
   const collection = 'store-locations';
-  const key = stateKey(namespace, collection);
+  const path = filePath(namespace, collection);
+  const key = cacheKey(namespace, collection);
 
-  async function getAll() {
-    return readCollection(key).map(cloneStore);
+  async function setAll(items) {
+    const value = items.map(cloneStore);
+    await writeToFiles(path, value);
+    await writeToCache(key, value);
+    logger.info?.('store-repository.setAll', { namespace, path, key, count: value.length, storage: 'files' });
+    return value.map(cloneStore);
   }
 
-  async function setAll(items, ttlSeconds = 3600) {
-    memoryStore().set(key, {
-      value: items.map(cloneStore),
-      expiresAt: ttlSeconds ? now() + ttlSeconds * 1000 : null,
-    });
-    logger.info?.('store-repository.setAll', { namespace, count: items.length });
-    return getAll();
+  async function getAll() {
+    // Prefer durable Files storage.
+    let items = await readFromFiles(path);
+
+    // One-time migration: older installs stored stores only in State (TTL cache).
+    if (items.length === 0) {
+      const legacy = await readFromCache(key);
+      if (legacy && legacy.length > 0) {
+        logger.info?.('store-repository.migrateFromState', { namespace, path, count: legacy.length });
+        items = legacy;
+        await writeToFiles(path, items);
+      }
+    }
+
+    if (items.length > 0) {
+      await writeToCache(key, items);
+    }
+
+    return items.map(cloneStore);
   }
 
   async function upsert(store) {
@@ -107,7 +195,7 @@ export function createStoreRepository(params = {}, logger = console) {
     return (await getAll()).find((item) => item.id === targetId) || null;
   }
 
-  return { getAll, setAll, upsert, remove, getEnabled, getById };
+  return { getAll, setAll, upsert, remove, getEnabled, getById, path, key, namespace };
 }
 
 export { normalizeStore };

@@ -55,6 +55,7 @@ runtimeManifest:
             IO_STATE_KEY: $IO_STATE_KEY
             MAPS_API_KEY: $MAPS_API_KEY
             enable_store_locator: $enable_store_locator
+            AIO_COMMERCE_CONFIG_ENCRYPTION_KEY: $AIO_COMMERCE_CONFIG_ENCRYPTION_KEY
           annotations:
             require-adobe-auth: false
             final: true

@@ -176,7 +176,10 @@ function normalizeBoolean(value, fallback = false) {
 }
 
 function isStoreLocatorEnabled(params = {}) {
-  const raw = params.enable_store_locator ?? process.env.ENABLE_STORE_LOCATOR ?? true;
+  const raw = params.enable_store_locator ?? process.env.ENABLE_STORE_LOCATOR;
+  if (raw === undefined || raw === null || raw === '') {
+    return true;
+  }
   return normalizeBoolean(raw, true);
 }
 
